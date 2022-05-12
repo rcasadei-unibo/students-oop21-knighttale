@@ -37,6 +37,8 @@ dependencies {
         }
     }
 
+    implementation("io.github.palexdev:materialfx:11.13.5")
+
     // JUnit API and testing engine
     testImplementation("org.junit.jupiter:junit-jupiter-api:$jUnitVersion")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$jUnitVersion")
