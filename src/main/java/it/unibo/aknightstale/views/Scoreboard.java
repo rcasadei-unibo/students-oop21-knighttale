@@ -11,24 +11,25 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 
 import java.util.List;
-import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 public class Scoreboard extends BaseView<ScoreboardController> implements ScoreboardView {
     @FXML
-    private MFXTableView<Map.Entry<String, Integer>> scoreboardTableView;
+    private MFXTableView<Entry<String, Integer>> scoreboardTableView;
 
     @FXML
     private void initialize() {
-        var playerColumn = new MFXTableColumn<Map.Entry<String, Integer>>("Player");
-        var scoreColumn = new MFXTableColumn<Map.Entry<String, Integer>>("Score");
+        var playerColumn = new MFXTableColumn<Entry<String, Integer>>("Player");
+        var scoreColumn = new MFXTableColumn<Entry<String, Integer>>("Score");
 
-        playerColumn.setRowCellFactory(entry -> new MFXTableRowCell<>(Map.Entry::getKey));
-        scoreColumn.setRowCellFactory(entry -> new MFXTableRowCell<>(Map.Entry::getValue));
+        playerColumn.setRowCellFactory(entry -> new MFXTableRowCell<>(Entry::getKey));
+        scoreColumn.setRowCellFactory(entry -> new MFXTableRowCell<>(Entry::getValue));
 
         scoreboardTableView.getTableColumns().addAll(List.of(playerColumn, scoreColumn));
         var filters = scoreboardTableView.getFilters();
-        filters.add(new StringFilter<>("Player", Map.Entry::getKey));
-        filters.add(new IntegerFilter<>("Score", Map.Entry::getValue));
+        filters.add(new StringFilter<>("Player", Entry::getKey));
+        filters.add(new IntegerFilter<>("Score", Entry::getValue));
     }
 
     /**
@@ -40,13 +41,13 @@ public class Scoreboard extends BaseView<ScoreboardController> implements Scoreb
     }
 
     /**
-     * {@inheritDoc} and updates the scoreboard table view.
+     * Updates the scoreboard table view.
+     *
+     * @param scoreboard the scoreboard set to update the scoreboard table
      */
-    @Override
-    public void show() {
-        var list = FXCollections.observableList(List.copyOf(this.getController().getScoreboard()));
+    public void updateScoreboard(final Set<Entry<String, Integer>> scoreboard) {
+        var list = FXCollections.observableList(List.copyOf(scoreboard));
         this.scoreboardTableView.setItems(list);
-        super.show();
     }
 
     /**

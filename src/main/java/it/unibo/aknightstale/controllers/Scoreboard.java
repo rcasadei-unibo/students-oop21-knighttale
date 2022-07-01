@@ -24,4 +24,14 @@ public class Scoreboard extends BaseController<ScoreboardView> implements Scoreb
     public void returnToMainMenu() {
         ControllerFactory.createController(MainMenuController.class).showView();
     }
+
+    /**
+     * {@inheritDoc}
+     * Also updates the view scoreboard.
+     */
+    @Override
+    public void showView() {
+        getView().updateScoreboard(this.getScoreboard());
+        super.showView();
+    }
 }
