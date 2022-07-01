@@ -37,6 +37,11 @@ dependencies {
         }
     }
 
+    implementation("net.harawata:appdirs:1.2.1")
+    implementation("com.simtechdata:SceneOneFX:1.2.2")
+    implementation("io.github.classgraph:classgraph:4.8.147")
+    implementation("com.google.guava:guava:31.1-jre")
+
     // JUnit API and testing engine
     testImplementation("org.junit.jupiter:junit-jupiter-api:$jUnitVersion")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$jUnitVersion")
