@@ -42,6 +42,7 @@ dependencies {
     implementation("com.simtechdata:SceneOneFX:1.2.2")
     implementation("io.github.classgraph:classgraph:4.8.147")
     implementation("com.google.guava:guava:31.1-jre")
+    implementation("io.github.palexdev:materialfx:11.13.5")
 
     // JUnit API and testing engine
     testImplementation("org.junit.jupiter:junit-jupiter-api:$jUnitVersion")
