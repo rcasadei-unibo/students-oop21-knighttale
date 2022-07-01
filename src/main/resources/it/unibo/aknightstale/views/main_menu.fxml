@@ -7,37 +7,34 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="it.unibo.aknightstale.controllers.MainMenuController">
-   <VBox alignment="CENTER" layoutX="250.0" layoutY="100.0" prefHeight="400.0" prefWidth="600.0" spacing="10.0"
-         AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-         AnchorPane.topAnchor="0.0">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.aknightstale.views.MainMenu">
+   <VBox alignment="CENTER" layoutX="250.0" layoutY="100.0" prefHeight="400.0" prefWidth="600.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <Label text="A KNIGHT'S TALE">
          <VBox.margin>
-            <Insets bottom="50.0"/>
+            <Insets bottom="50.0" />
          </VBox.margin>
          <font>
-            <Font name="Copperplate Gothic Bold" size="39.0"/>
+            <Font name="Copperplate Gothic Bold" size="39.0" />
          </font>
       </Label>
       <MFXButton fx:id="newGameButton" rippleAnimateShadow="true" text="New game">
          <font>
-            <Font size="18.0"/>
+            <Font size="18.0" />
          </font>
       </MFXButton>
       <MFXButton fx:id="loadGameButton" rippleAnimateShadow="true" text="Load game">
          <font>
-            <Font size="18.0"/>
+            <Font size="18.0" />
          </font>
       </MFXButton>
-      <MFXButton fx:id="scoreboardButton" text="Scoreboard">
+      <MFXButton fx:id="scoreboardButton" onAction="#onScoreboardButtonClicked" text="Scoreboard">
          <font>
-            <Font size="18.0"/>
+            <Font size="18.0" />
          </font>
       </MFXButton>
       <MFXButton fx:id="exitButton" onAction="#onExitButtonClicked" rippleAnimateShadow="true" text="Exit">
          <font>
-            <Font size="18.0"/>
+            <Font size="18.0" />
          </font>
       </MFXButton>
    </VBox>
