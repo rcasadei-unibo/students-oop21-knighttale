@@ -9,14 +9,23 @@ import it.unibo.aknightstale.views.interfaces.View;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
+import lombok.experimental.UtilityClass;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+@UtilityClass
 public class ViewFactory {
     private static final Map<Class<? extends View<?>>, View<?>> VIEWS = new HashMap<>();
-    public static <V extends View<? extends Controller<V>>> V loadView(final Class<V> viewInterface) {
+
+    /**
+     * Creates an instance of the view class implementing the given interface.
+     * @param viewInterface View interface to search implementing class to instantiate.
+     * @return An instance of the view class implementing the interface.
+     * @param <V> View interface type.
+     */
+    public <V extends View<? extends Controller<V>>> V loadView(final Class<V> viewInterface) {
         if (VIEWS.containsKey(viewInterface)) {
             return viewInterface.cast(VIEWS.get(viewInterface));
         }

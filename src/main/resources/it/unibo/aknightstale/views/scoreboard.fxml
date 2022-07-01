@@ -8,21 +8,19 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.aknightstale.views.Scoreboard">
-   <children>
-      <VBox alignment="CENTER" layoutX="250.0" layoutY="100.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <Label text="SCOREBOARD">
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-               <font>
-                  <Font name="Copperplate Gothic Bold" size="24.0" />
-               </font>
-            </Label>
-            <MFXTableView fx:id="scoreboardTableView" prefHeight="286.0" prefWidth="474.0" />
-            <MFXButton onAction="#onMainMenuButtonClicked" text="MAIN MENU" />
-         </children>
-      </VBox>
-   </children>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="it.unibo.aknightstale.views.Scoreboard">
+   <VBox alignment="CENTER" layoutX="250.0" layoutY="100.0" spacing="10.0" AnchorPane.bottomAnchor="0.0"
+         AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Label text="SCOREBOARD">
+         <VBox.margin>
+            <Insets/>
+         </VBox.margin>
+         <font>
+            <Font name="Copperplate Gothic Bold" size="24.0"/>
+         </font>
+      </Label>
+      <MFXTableView fx:id="scoreboardTableView" prefHeight="286.0" prefWidth="474.0"/>
+      <MFXButton onAction="#onMainMenuButtonClicked" text="MAIN MENU"/>
+   </VBox>
 </AnchorPane>

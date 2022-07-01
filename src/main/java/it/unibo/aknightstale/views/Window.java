@@ -30,38 +30,68 @@ public class Window {
         this.view = view;
     }
 
+    /**
+     * Open the window.
+     */
     public void open() {
         SceneOne.show(this.windowId);
     }
 
+    /**
+     * Close the window.
+     */
     public void close() {
         SceneOne.close(this.windowId);
     }
 
+    /**
+     * Close the window only if the view showing is the given one.
+     *
+     * @param view View to check if it's showing in the window.
+     */
     public void close(final @NotNull View<?> view) {
         if (view.getViewName().equals(this.getCurrentViewName())) {
             this.close();
         }
     }
 
+    /**
+     * Hide the window.
+     */
     public void hide() {
         SceneOne.hide(this.windowId);
     }
 
+    /**
+     * Hide the window only if the view showing is the given one.
+     *
+     * @param view View to check if it's showing in the window.
+     */
     public void hide(final @NotNull View<?> view) {
         if (view.getViewName().equals(this.getCurrentViewName())) {
             this.hide();
         }
     }
 
+    /**
+     * Unhide the window.
+     */
     public void unhide() {
         SceneOne.unHide(this.windowId);
     }
 
+    /**
+     * Get the current view showing in the window.
+     * @return Current view.
+     */
     public View<?> getCurrentView() {
         return view;
     }
 
+    /**
+     * Get the name of the current view showing in the window.
+     * @return Current view name.
+     */
     public String getCurrentViewName() {
         return view.getViewName();
     }

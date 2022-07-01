@@ -6,9 +6,11 @@ import io.github.classgraph.ScanResult;
 import it.unibo.aknightstale.App;
 import it.unibo.aknightstale.views.AlertType;
 import it.unibo.aknightstale.views.utils.Alert;
+import lombok.experimental.UtilityClass;
 
 import java.util.Arrays;
 
+@UtilityClass
 public class ClassFactory {
     /**
      * Creates an instance of the class implementing the interface.
@@ -18,7 +20,7 @@ public class ClassFactory {
      * @return An instance of the class implementing the interface.
      * @param <T> Interface type.
      */
-    public static <T> T createInstanceFromInterface(final Class<T> interfaceClass, final String... acceptedPackages) {
+    public <T> T createInstanceFromInterface(final Class<T> interfaceClass, final String... acceptedPackages) {
         String className;
         try (ScanResult scanResult = new ClassGraph()
                 .enableAllInfo()
@@ -43,7 +45,7 @@ public class ClassFactory {
         }
     }
 
-    private static String[] absolutizePackageNames(final String[] packageNames) {
+    private String[] absolutizePackageNames(final String[] packageNames) {
         return Arrays.stream(packageNames)
                 .map((packageName) -> packageName.contains(App.APP_PACKAGE) ? packageName : App.APP_PACKAGE + "." + packageName)
                 .toArray(String[]::new);

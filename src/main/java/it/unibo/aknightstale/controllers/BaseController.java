@@ -2,12 +2,14 @@ package it.unibo.aknightstale.controllers;
 
 import it.unibo.aknightstale.controllers.interfaces.Controller;
 import it.unibo.aknightstale.views.interfaces.View;
+import lombok.AccessLevel;
+import lombok.Getter;
 
 public abstract class BaseController<V extends View<? extends Controller<V>>> implements Controller<V> {
     /**
-     * Registered view.
+     * The view associated to this controller.
      */
-    private V view;
+    private @Getter(AccessLevel.PROTECTED) V view;
 
     /**
      * Registers a view with this controller.
@@ -24,14 +26,6 @@ public abstract class BaseController<V extends View<? extends Controller<V>>> im
     @Override
     public void unregisterView() {
         this.view = null;
-    }
-
-    /**
-     * Gets the view associated with this controller.
-     * @return the view associated with this controller.
-     */
-    protected V getView() {
-        return view;
     }
 
     /**

@@ -31,11 +31,17 @@ public class Scoreboard extends BaseView<ScoreboardController> implements Scoreb
         filters.add(new IntegerFilter<>("Score", Map.Entry::getValue));
     }
 
+    /**
+     * Event handler for the {@code MFXButton#onAction} event.
+     */
     @FXML
     public void onMainMenuButtonClicked() {
         getController().returnToMainMenu();
     }
 
+    /**
+     * {@inheritDoc} and updates the scoreboard table view.
+     */
     @Override
     public void show() {
         var list = FXCollections.observableList(List.copyOf(this.getController().getScoreboard()));
