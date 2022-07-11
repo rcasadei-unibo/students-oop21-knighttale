@@ -31,6 +31,7 @@ public class Scoreboard extends BaseController<ScoreboardView> implements Scoreb
      */
     @Override
     public void showView() {
+        this.scoreboard.load();
         getView().updateScoreboard(this.getScoreboard());
         super.showView();
     }

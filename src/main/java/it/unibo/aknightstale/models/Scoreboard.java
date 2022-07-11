@@ -20,9 +20,6 @@ public class Scoreboard {
     private static final String SCOREBOARD_FILE_NAME = "scoreboard.json";
     private final Json json = new Json();
     private Scores scoreboard = new Scores();
-    public Scoreboard() {
-        this.load();
-    }
 
     /**
      * Get scoreboard values.
