@@ -6,6 +6,10 @@ jobs:
   build:
     uses: ./.github/workflows/gradle.yml
   junit:
-    uses: jwgmeligmeyling/spotbugs-github-action@master
-    with:
-      path: '**/spotbugsXml.xml'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Publish Test Report
+        uses: mikepenz/action-junit-report@v3
+        if: always() # always run even if the previous step fails
+        with:
+          report_paths: '**/build/test-results/test/TEST-*.xml'

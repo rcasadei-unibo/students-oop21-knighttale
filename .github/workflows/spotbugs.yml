@@ -5,6 +5,8 @@ on:
 
 jobs:
   spotbugs:
-    uses: jwgmeligmeyling/spotbugs-github-action@master
-    with:
-      path: '**/spotbugs/excludes.xml'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: jwgmeligmeyling/spotbugs-github-action@v1.2
+        with:
+          path: '**/spotbugs/excludes.xml'

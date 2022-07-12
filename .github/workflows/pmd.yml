@@ -5,6 +5,8 @@ on:
 
 jobs:
   pmd:
-    uses: jwgmeligmeyling/pmd-github-action@master
-    with:
-      path: '**/pmd.xml'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: jwgmeligmeyling/pmd-github-action@master
+        with:
+          path: '**/pmd.xml'
