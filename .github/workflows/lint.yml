@@ -9,9 +9,5 @@ jobs:
     uses: ./.github/workflows/checkstyle.yml
   pmd:
     uses: ./.github/workflows/pmd.yml
-    with:
-      path: '**/checkstyle.xml'
   spotbugs:
     uses: ./.github/workflows/spotbugs.yml
-    with:
-      path: '**/spotbugs/excludes.xml'
