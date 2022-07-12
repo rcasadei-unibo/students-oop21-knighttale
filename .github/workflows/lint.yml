@@ -1,0 +1,17 @@
+name: Lint
+
+on: push
+
+jobs:
+  build:
+    uses: ./.github/workflows/gradle.yml
+  checkstyle:
+    uses: ./.github/workflows/checkstyle.yml
+  pmd:
+    uses: ./.github/workflows/pmd.yml
+    with:
+      path: '**/checkstyle.xml'
+  spotbugs:
+    uses: ./.github/workflows/spotbugs.yml
+    with:
+      path: '**/spotbugs/excludes.xml'

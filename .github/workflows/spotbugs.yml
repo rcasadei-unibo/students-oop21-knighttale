@@ -1,0 +1,10 @@
+name: Spotbugs
+
+on:
+  workflow_call:
+
+jobs:
+  spotbugs:
+    uses: jwgmeligmeyling/spotbugs-github-action@master
+    with:
+      path: '**/spotbugs/excludes.xml'

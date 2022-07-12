@@ -1,0 +1,10 @@
+name: PMD
+
+on:
+  workflow_call:
+
+jobs:
+  pmd:
+    uses: jwgmeligmeyling/pmd-github-action@master
+    with:
+      path: '**/pmd.xml'

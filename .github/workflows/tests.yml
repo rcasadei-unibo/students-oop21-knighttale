@@ -1,0 +1,11 @@
+name: JUnit tests
+
+on: push
+
+jobs:
+  build:
+    uses: ./.github/workflows/gradle.yml
+  junit:
+    uses: jwgmeligmeyling/spotbugs-github-action@master
+    with:
+      path: '**/spotbugsXml.xml'

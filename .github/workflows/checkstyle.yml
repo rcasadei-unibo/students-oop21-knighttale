@@ -1,0 +1,9 @@
+name: Checkstyle
+on:
+  workflow_call:
+
+jobs:
+  checkstyle:
+    uses: jwgmeligmeyling/checkstyle-github-action@master
+    with:
+      path: '**/checkstyle.xml'
