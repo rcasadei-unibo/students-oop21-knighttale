@@ -3,8 +3,8 @@ name: Lint
 on: push
 
 jobs:
-  build:
-    uses: ./.github/workflows/gradle.yml
+#  build:
+  #    uses: ./.github/workflows/gradle.yml
   checkstyle:
     uses: ./.github/workflows/checkstyle.yml
   pmd:

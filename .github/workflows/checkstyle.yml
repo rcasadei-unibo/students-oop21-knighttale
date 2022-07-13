@@ -6,6 +6,10 @@ jobs:
   checkstyle:
     runs-on: ubuntu-latest
     steps:
-      - uses: jwgmeligmeyling/checkstyle-github-action@master
+      - uses: actions/checkout@v2
+      - uses: dbelyaev/action-checkstyle@v0.5.1
         with:
-          path: '**/checkstyle.xml'
+          github_token: ${{ secrets.github_token }}
+          reporter: github-pr-review
+          level: warning
+          checkstyle_config: config/checkstyle/checkstyle.xml
