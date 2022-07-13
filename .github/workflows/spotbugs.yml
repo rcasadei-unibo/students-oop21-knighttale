@@ -2,11 +2,22 @@ name: Spotbugs
 
 on:
   workflow_call:
+    inputs:
+      tests:
+        required: true
+        default: false
+        type: boolean
 
 jobs:
   spotbugs:
     runs-on: ubuntu-latest
     steps:
+      - name: Run Spotbugs
+        if: { { inputs.tests } } == false
+        run: ./gradlew spotbugsMain
+      - name: Run Spotbugs on tests
+        if: { { inputs.tests } } == true
+        run: ./gradlew spotbugsTests
       - uses: jwgmeligmeyling/spotbugs-github-action@master
         with:
-          path: '**/spotbugs/excludes.xml'
+          path: 'build/reports/spotbugs/excludes.xml'

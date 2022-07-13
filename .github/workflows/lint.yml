@@ -3,11 +3,33 @@ name: Lint
 on: push
 
 jobs:
-#  build:
-  #    uses: ./.github/workflows/gradle.yml
-  checkstyle:
-    uses: ./.github/workflows/checkstyle.yml
-  pmd:
-    uses: ./.github/workflows/pmd.yml
-  spotbugs:
-    uses: ./.github/workflows/spotbugs.yml
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup gradle
+        uses: ./.github/workflows/gradle.yml
+      - name: Checkstyle
+        uses: ./.github/workflows/checkstyle.yml
+      - name: PMD
+        uses: ./.github/workflows/pmd.yml
+      - name: Spotbugs
+        uses: ./.github/workflows/spotbugs.yml
+  lint_tests:
+    name: Lint tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup gradle
+        uses: ./.github/workflows/gradle.yml
+      - name: Checkstyle tests
+        uses: ./.github/workflows/checkstyle.yml
+        with:
+          tests: true
+      - name: PMD tests
+        uses: ./.github/workflows/pmd.yml
+        with:
+          tests: true
+      - name: Spotbugs tests
+        uses: ./.github/workflows/spotbugs.yml
+        with:
+          tests: true

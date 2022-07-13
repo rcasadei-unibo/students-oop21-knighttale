@@ -2,11 +2,22 @@ name: PMD
 
 on:
   workflow_call:
+    inputs:
+      tests:
+        required: true
+        default: false
+        type: boolean
 
 jobs:
   pmd:
     runs-on: ubuntu-latest
     steps:
+      - name: Run PMD
+        if: { { inputs.tests } } == false
+        run: ./gradlew pmdMain
+      - name: Run PMD on tests
+        if: { { inputs.tests } } == true
+        run: ./gradlew pmdTest
       - uses: jwgmeligmeyling/pmd-github-action@master
         with:
-          path: '**/pmd.xml'
+          path: 'build/reports/pmd/main.xml'
