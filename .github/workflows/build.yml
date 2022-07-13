@@ -3,15 +3,13 @@ name: Build
 on: push
 
 jobs:
-  gradle:
-    uses: ./.github/workflows/gradle.yml
-  junit:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Build with Gradle
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: build --warning-mode all
+      - name: Gradle setup
+        uses: ./.github/workflows/gradle.yml
+      - name: Execute Gradle build
+        run: ./gradlew build
 #      - name: Upload test report
 #        uses: actions/upload-artifact@v3
 #        with:
