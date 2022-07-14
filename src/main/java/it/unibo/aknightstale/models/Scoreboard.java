@@ -8,6 +8,7 @@ import it.unibo.aknightstale.views.utils.Alert;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
@@ -20,9 +21,6 @@ public class Scoreboard {
     private static final String SCOREBOARD_FILE_NAME = "scoreboard.json";
     private final Json json = new Json();
     private Scores scoreboard = new Scores();
-    public Scoreboard() {
-        this.load();
-    }
 
     /**
      * Get scoreboard values.
@@ -32,17 +30,17 @@ public class Scoreboard {
     }
 
     /**
-     * Get scoreboard points of a player.
+     * Get scoreboard score of a player.
      */
-    public Integer getPoints(final String name) {
+    public Integer getScore(final String name) {
         return this.scoreboard.get(name);
     }
 
     /**
-     * Set scoreboard points for a player.
+     * Set scoreboard score for a player.
      */
-    public void setPoints(final String name, final Integer points) {
-        this.scoreboard.put(name, points);
+    public void setScore(final String name, final Integer score) {
+        this.scoreboard.put(name, score);
     }
 
     /**
@@ -52,14 +50,17 @@ public class Scoreboard {
         var path = App.getFilePath(SCOREBOARD_FILE_NAME);
         if (!Files.exists(path)) {
             try {
-                Files.createDirectories(path.getParent());
+                var directory = path.getParent();
+                if (directory != null) {
+                    Files.createDirectories(directory);
+                }
                 Files.createFile(path);
             } catch (IOException e) {
                 Alert.showAlert(AlertType.ERROR, "Error creating scoreboard file: " + e.getMessage());
                 e.printStackTrace();
             }
         }
-        try (var file = new FileReader(path.toFile())) {
+        try (var file = new FileReader(path.toFile(), StandardCharsets.UTF_8)) {
             var scoreboard = json.fromJson(this.scoreboard.getClass(), file);
             if (scoreboard != null) {
                 this.scoreboard = scoreboard;
@@ -74,7 +75,7 @@ public class Scoreboard {
      * Save scoreboard to file.
      */
     public void save() {
-        try (FileWriter file = new FileWriter(App.getFilePath(SCOREBOARD_FILE_NAME).toFile())) {
+        try (FileWriter file = new FileWriter(App.getFilePath(SCOREBOARD_FILE_NAME).toFile(), StandardCharsets.UTF_8)) {
             json.toJson(this.scoreboard, file);
         } catch (IOException e) {
             Alert.showAlert(AlertType.ERROR, "Error saving scoreboard file: " + e.getMessage());
