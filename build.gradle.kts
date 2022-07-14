@@ -12,6 +12,11 @@ plugins {
      * The runnable jar will be found in build/libs/projectname-all.jar
      */
     id("com.github.johnrengelman.shadow") version "7.0.0"
+
+    // Lint
+    checkstyle
+    id("com.github.spotbugs") version "5.0.9"
+    pmd
 }
 
 repositories {
@@ -58,15 +63,6 @@ dependencies {
     testAnnotationProcessor("org.projectlombok:lombok:1.18.24")
 }
 
-tasks.withType<JavaCompile> {
-    options.encoding = "UTF-8"
-}
-
-tasks.withType<Test> {
-    // Enables JUnit 5 Jupiter module
-    useJUnitPlatform()
-}
-
 application {
     // Define the main class for the application
     mainClass.set("it.unibo.aknightstale.App")
@@ -76,4 +72,31 @@ java {
     toolchain {
         languageVersion.set(JavaLanguageVersion.of(11))
     }
+}
+
+checkstyle {
+    toolVersion = "10.3"
+}
+
+tasks.spotbugsMain {
+    reports.create("xml") {
+        required.set(true)
+        outputLocation.set(file("$buildDir/reports/spotbugs/main.xml"))
+    }
+}
+
+tasks.spotbugsTest {
+    reports.create("xml") {
+        required.set(true)
+        outputLocation.set(file("$buildDir/reports/spotbugs/test.xml"))
+    }
+}
+
+tasks.withType<JavaCompile> {
+    options.encoding = "UTF-8"
+}
+
+tasks.withType<Test> {
+    // Enables JUnit 5 Jupiter module
+    useJUnitPlatform()
 }
