@@ -22,8 +22,6 @@ jobs:
         run: chmod +x ./gradlew
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
-        with:
-          gradle_version: current
 
       # Checkstyle
       - name: Run Checkstyle
@@ -38,3 +36,5 @@ jobs:
       - uses: jwgmeligmeyling/checkstyle-github-action@master
         with:
           path: 'build/reports/checkstyle/main.xml'
+
+      # TODO: Add Spotbugs and PMD
