@@ -25,15 +25,21 @@ jobs:
 
       # Checkstyle
       - name: Run Checkstyle
-        run: ./gradlew checkstyleMain
+        uses: burrunan/gradle-cache-action@v1
+        with:
+          job-id: jdk11
+          arguments: checkstyleMain
       - uses: jwgmeligmeyling/checkstyle-github-action@master
         if: always() # always run even if the previous step fails
         with:
           path: 'build/reports/checkstyle/main.xml'
       # Checkstyle tests
       - name: Run Checkstyle on tests
-        run: ./gradlew checkstyleTest
         if: always()
+        uses: burrunan/gradle-cache-action@v1
+        with:
+          job-id: jdk11
+          arguments: checkstyleTest
       - uses: jwgmeligmeyling/checkstyle-github-action@master
         if: always()
         with:
@@ -42,7 +48,10 @@ jobs:
       # PMD
       - name: Run PMD
         if: always()
-        run: ./gradlew pmdMain
+        uses: burrunan/gradle-cache-action@v1
+        with:
+          job-id: jdk11
+          arguments: pmdMain
       - uses: jwgmeligmeyling/pmd-github-action@master
         if: always()
         with:
@@ -50,7 +59,10 @@ jobs:
       # PMD tests
       - name: Run PMD on tests
         if: always()
-        run: ./gradlew pmdTest
+        uses: burrunan/gradle-cache-action@v1
+        with:
+          job-id: jdk11
+          arguments: pmdTest
       - uses: jwgmeligmeyling/pmd-github-action@master
         if: always()
         with:
@@ -59,7 +71,10 @@ jobs:
       # Spotbugs
       - name: Run Spotbugs
         if: always()
-        run: ./gradlew spotbugsMain
+        uses: burrunan/gradle-cache-action@v1
+        with:
+          job-id: jdk11
+          arguments: spotbugsMain
       - uses: jwgmeligmeyling/spotbugs-github-action@master
         if: always()
         with:
@@ -67,7 +82,10 @@ jobs:
       # Spotbugs tests
       - name: Run Spotbugs on tests
         if: always()
-        run: ./gradlew spotbugsTest
+        uses: burrunan/gradle-cache-action@v1
+        with:
+          job-id: jdk11
+          arguments: spotbugsTest
       - uses: jwgmeligmeyling/spotbugs-github-action@master
         if: always()
         with:
