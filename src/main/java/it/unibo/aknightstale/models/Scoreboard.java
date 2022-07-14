@@ -8,6 +8,7 @@ import it.unibo.aknightstale.views.utils.Alert;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
@@ -56,7 +57,7 @@ public class Scoreboard {
                 e.printStackTrace();
             }
         }
-        try (var file = new FileReader(path.toFile())) {
+        try (var file = new FileReader(path.toFile(), StandardCharsets.UTF_8)) {
             var scoreboard = json.fromJson(this.scoreboard.getClass(), file);
             if (scoreboard != null) {
                 this.scoreboard = scoreboard;
@@ -71,7 +72,7 @@ public class Scoreboard {
      * Save scoreboard to file.
      */
     public void save() {
-        try (FileWriter file = new FileWriter(App.getFilePath(SCOREBOARD_FILE_NAME).toFile())) {
+        try (FileWriter file = new FileWriter(App.getFilePath(SCOREBOARD_FILE_NAME).toFile(), StandardCharsets.UTF_8)) {
             json.toJson(this.scoreboard, file);
         } catch (IOException e) {
             Alert.showAlert(AlertType.ERROR, "Error saving scoreboard file: " + e.getMessage());
