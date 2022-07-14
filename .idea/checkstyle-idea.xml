@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CheckStyle-IDEA" serialisationVersion="2">
-    <checkstyleVersion>9.2.1</checkstyleVersion>
-    <scanScope>JavaOnlyWithTests</scanScope>
+    <checkstyleVersion>10.3</checkstyleVersion>
+    <scanScope>AllSourcesWithTests</scanScope>
     <suppressErrors>true</suppressErrors>
     <copyLibs>true</copyLibs>
+    <scanBeforeCheckin>true</scanBeforeCheckin>
     <option name="thirdPartyClasspath" />
     <option name="activeLocationIds">
       <option value="a6d912d4-32b4-4f20-8955-073d1493470c" />

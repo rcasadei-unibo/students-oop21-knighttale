@@ -16,6 +16,7 @@
         <entry key="Target JDK" value="11" />
       </map>
     </option>
+    <option name="scanFilesBeforeCheckin" value="true" />
     <option name="skipTestSources" value="false" />
   </component>
   <component name="PWA">

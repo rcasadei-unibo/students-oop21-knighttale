@@ -10,6 +10,7 @@ import java.util.UUID;
 public class Window {
     private final String windowId;
     private View<?> view;
+    private Boolean isOpen = false;
 
     public Window() {
         this(UUID.randomUUID().toString());
@@ -35,6 +36,7 @@ public class Window {
      */
     public void open() {
         SceneOne.show(this.windowId);
+        this.isOpen = true;
     }
 
     /**
@@ -42,6 +44,7 @@ public class Window {
      */
     public void close() {
         SceneOne.close(this.windowId);
+        this.isOpen = false;
     }
 
     /**
@@ -60,6 +63,7 @@ public class Window {
      */
     public void hide() {
         SceneOne.hide(this.windowId);
+        this.isOpen = false;
     }
 
     /**
@@ -78,6 +82,7 @@ public class Window {
      */
     public void unhide() {
         SceneOne.unHide(this.windowId);
+        this.isOpen = true;
     }
 
     /**
@@ -94,5 +99,13 @@ public class Window {
      */
     public String getCurrentViewName() {
         return view.getViewName();
+    }
+
+    /**
+     * Checks if the window is open.
+     * @return true if the window is open, false otherwise.
+     */
+    public Boolean isOpened() {
+        return isOpen;
     }
 }

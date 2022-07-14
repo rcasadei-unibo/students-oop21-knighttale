@@ -12,6 +12,11 @@ plugins {
      * The runnable jar will be found in build/libs/projectname-all.jar
      */
     id("com.github.johnrengelman.shadow") version "7.0.0"
+
+    // Lint
+    checkstyle
+    id("com.github.spotbugs") version "5.0.9"
+    pmd
 }
 
 repositories {
@@ -48,20 +53,14 @@ dependencies {
     // JUnit API and testing engine
     testImplementation("org.junit.jupiter:junit-jupiter-api:$jUnitVersion")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$jUnitVersion")
+    testImplementation("org.assertj:assertj-core:3.23.1")
+    testImplementation("org.testfx:testfx-junit5:4.0.16-alpha")
+    testCompileOnly("org.testfx:openjfx-monocle:jdk-11+26")
 
     compileOnly("org.projectlombok:lombok:1.18.24")
     annotationProcessor("org.projectlombok:lombok:1.18.24")
     testCompileOnly("org.projectlombok:lombok:1.18.24")
     testAnnotationProcessor("org.projectlombok:lombok:1.18.24")
-}
-
-tasks.withType<JavaCompile> {
-    options.encoding = "UTF-8"
-}
-
-tasks.withType<Test> {
-    // Enables JUnit 5 Jupiter module
-    useJUnitPlatform()
 }
 
 application {
@@ -73,4 +72,31 @@ java {
     toolchain {
         languageVersion.set(JavaLanguageVersion.of(11))
     }
+}
+
+checkstyle {
+    toolVersion = "10.3"
+}
+
+tasks.spotbugsMain {
+    reports.create("xml") {
+        required.set(true)
+        outputLocation.set(file("$buildDir/reports/spotbugs/main.xml"))
+    }
+}
+
+tasks.spotbugsTest {
+    reports.create("xml") {
+        required.set(true)
+        outputLocation.set(file("$buildDir/reports/spotbugs/test.xml"))
+    }
+}
+
+tasks.withType<JavaCompile> {
+    options.encoding = "UTF-8"
+}
+
+tasks.withType<Test> {
+    // Enables JUnit 5 Jupiter module
+    useJUnitPlatform()
 }
