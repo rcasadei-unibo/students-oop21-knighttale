@@ -29,7 +29,6 @@ jobs:
       - uses: jwgmeligmeyling/checkstyle-github-action@master
         with:
           path: 'build/reports/checkstyle/main.xml'
-
       # Checkstyle tests
       - name: Run Checkstyle on tests
         run: ./gradlew checkstyleTest
@@ -37,4 +36,28 @@ jobs:
         with:
           path: 'build/reports/checkstyle/main.xml'
 
-      # TODO: Add Spotbugs and PMD
+      # PMD
+      - name: Run PMD
+        run: ./gradlew pmdMain
+      - uses: jwgmeligmeyling/pmd-github-action@master
+        with:
+          path: 'build/reports/pmd/main.xml'
+      # PMD tests
+      - name: Run PMD on tests
+        run: ./gradlew pmdTest
+      - uses: jwgmeligmeyling/pmd-github-action@master
+        with:
+          path: 'build/reports/pmd/main.xml'
+
+      # Spotbugs
+      - name: Run Spotbugs
+        run: ./gradlew spotbugsMain
+      - uses: jwgmeligmeyling/spotbugs-github-action@master
+        with:
+          path: 'build/reports/spotbugs/excludes.xml'
+      # Spotbugs tests
+      - name: Run Spotbugs on tests
+        run: ./gradlew spotbugsTests
+      - uses: jwgmeligmeyling/spotbugs-github-action@master
+        with:
+          path: 'build/reports/spotbugs/excludes.xml'
