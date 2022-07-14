@@ -15,42 +15,39 @@ import java.util.Map;
 import java.util.Set;
 
 public class Scoreboard {
-    private static class Scores extends HashMap<String, Integer> {
-    }
-
     private static final String SCOREBOARD_FILE_NAME = "scoreboard.json";
     private final Json json = new Json();
-    private Scores scoreboard = new Scores();
+    private Scores scores = new Scores();
 
     /**
      * Get scoreboard values.
      */
     public Set<Map.Entry<String, Integer>> getEntries() {
-        return this.scoreboard.entrySet();
+        return this.scores.entrySet();
     }
 
     /**
      * Get scoreboard score of a player.
      */
     public Integer getScore(final String name) {
-        return this.scoreboard.get(name);
+        return this.scores.get(name);
     }
 
     /**
      * Set scoreboard score for a player.
      */
     public void setScore(final String name, final Integer score) {
-        this.scoreboard.put(name, score);
+        this.scores.put(name, score);
     }
 
     /**
      * Load scoreboard from file.
      */
     public void load() {
-        var path = App.getFilePath(SCOREBOARD_FILE_NAME);
+        final var path = App.getFilePath(SCOREBOARD_FILE_NAME);
         if (!Files.exists(path)) {
             try {
-                var directory = path.getParent();
+                final var directory = path.getParent();
                 if (directory != null) {
                     Files.createDirectories(directory);
                 }
@@ -61,9 +58,9 @@ public class Scoreboard {
             }
         }
         try (var file = new FileReader(path.toFile(), StandardCharsets.UTF_8)) {
-            var scoreboard = json.fromJson(this.scoreboard.getClass(), file);
+            final var scoreboard = json.fromJson(this.scores.getClass(), file);
             if (scoreboard != null) {
-                this.scoreboard = scoreboard;
+                this.scores = scoreboard;
             }
         } catch (IOException e) {
             Alert.showAlert(AlertType.ERROR, "Error loading scoreboard file: " + e.getMessage());
@@ -76,10 +73,14 @@ public class Scoreboard {
      */
     public void save() {
         try (FileWriter file = new FileWriter(App.getFilePath(SCOREBOARD_FILE_NAME).toFile(), StandardCharsets.UTF_8)) {
-            json.toJson(this.scoreboard, file);
+            json.toJson(this.scores, file);
         } catch (IOException e) {
             Alert.showAlert(AlertType.ERROR, "Error saving scoreboard file: " + e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    private static class Scores extends HashMap<String, Integer> {
+        private static final long serialVersionUID = 1L;
     }
 }
