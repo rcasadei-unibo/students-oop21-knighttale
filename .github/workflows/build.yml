@@ -24,7 +24,13 @@ jobs:
       - name: Execute Gradle build
         run: ./gradlew shadowJar
 
+      - name: Get Timestamp
+        id: time
+        uses: nanzm/get-time-action@v1.1
+        with:
+          format: 'YYYY-MM-DD-HH-mm-ss'
       - name: Upload JAR
         uses: actions/upload-artifact@v3
         with:
+          name: ${{ format('AKnightsTale-nightly-{0}', steps.time.outputs.time) }}
           path: build/libs/AKnightsTale-all.jar
