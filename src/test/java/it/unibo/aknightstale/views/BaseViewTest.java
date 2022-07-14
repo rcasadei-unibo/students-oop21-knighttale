@@ -1,5 +1,6 @@
 package it.unibo.aknightstale.views;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.aknightstale.controllers.interfaces.Controller;
 import it.unibo.aknightstale.controllers.utils.ControllerFactory;
 import it.unibo.aknightstale.views.interfaces.View;
@@ -9,6 +10,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 
+@SuppressFBWarnings("EI_EXPOSE_REP") // View must be passed as reference to allow view loader caching.
 @ExtendWith(ApplicationExtension.class)
 public abstract class BaseViewTest<C extends Controller<V>, V extends View<C>> {
     private V view;

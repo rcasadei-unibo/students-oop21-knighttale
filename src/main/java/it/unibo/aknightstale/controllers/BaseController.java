@@ -5,6 +5,8 @@ import it.unibo.aknightstale.views.interfaces.View;
 import lombok.AccessLevel;
 import lombok.Getter;
 
+@edu.umd.cs.findbugs.annotations.SuppressFBWarnings("EI_EXPOSE_REP2")
+// View must be passed as reference to allow view loader caching.
 public abstract class BaseController<V extends View<? extends Controller<V>>> implements Controller<V> {
     /**
      * The view associated to this controller.
@@ -31,6 +33,7 @@ public abstract class BaseController<V extends View<? extends Controller<V>>> im
     /**
      * Shows the view.
      */
+    @Override
     public void showView() {
         this.getView().show();
     }
@@ -38,6 +41,7 @@ public abstract class BaseController<V extends View<? extends Controller<V>>> im
     /**
      * Hides the view.
      */
+    @Override
     public void hideView() {
         this.getView().hide();
     }
@@ -45,6 +49,7 @@ public abstract class BaseController<V extends View<? extends Controller<V>>> im
     /**
      * Closes the view.
      */
+    @Override
     public void closeView() {
         this.getView().close();
     }

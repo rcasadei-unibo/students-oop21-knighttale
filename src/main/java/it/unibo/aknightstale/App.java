@@ -3,7 +3,6 @@ package it.unibo.aknightstale;
 import it.unibo.aknightstale.views.JavaFXApp;
 import javafx.application.Application;
 import net.harawata.appdirs.AppDirsFactory;
-import org.jetbrains.annotations.NotNull;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -27,11 +26,11 @@ public final class App {
         Application.launch(JavaFXApp.class, args);
     }
 
-    public static @NotNull Path getFilePath(final String... pathsToAppend) {
+    public static Path getFilePath(final String... pathsToAppend) {
         return Paths.get(AppDirsFactory.getInstance().getUserDataDir(APP_NAME, APP_VERSION, "unibo", true), pathsToAppend);
     }
 
-    public static @NotNull Path getFilePath(final Path pathToAppend) {
+    public static Path getFilePath(final Path pathToAppend) {
         return getFilePath().resolve(pathToAppend);
     }
 }

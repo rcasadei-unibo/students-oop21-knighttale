@@ -1,12 +1,14 @@
 package it.unibo.aknightstale.views;
 
 import com.simtechdata.sceneonefx.SceneOne;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.aknightstale.views.interfaces.View;
 import javafx.scene.layout.VBox;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
 
+@SuppressFBWarnings("EI_EXPOSE_REP2") // View must be passed as reference to allow view loader caching.
 public class Window {
     private final String windowId;
     private View<?> view;
@@ -25,7 +27,7 @@ public class Window {
      * Switch the scene in the window.
      */
     public void switchTo(final @NotNull View<?> view) {
-        var scene = SceneOne.getScene(view.getClass().getSimpleName());
+        final var scene = SceneOne.getScene(view.getClass().getSimpleName());
         SceneOne.swapScene(this.windowId, scene);
         SceneOne.setTitle(this.windowId, view.getWindowTitle());
         this.view = view;
@@ -89,6 +91,7 @@ public class Window {
      * Get the current view showing in the window.
      * @return Current view.
      */
+    @SuppressFBWarnings("EI_EXPOSE_REP")
     public View<?> getCurrentView() {
         return view;
     }
