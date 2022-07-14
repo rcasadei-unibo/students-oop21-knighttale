@@ -29,17 +29,17 @@ public class Scoreboard {
     }
 
     /**
-     * Get scoreboard points of a player.
+     * Get scoreboard score of a player.
      */
-    public Integer getPoints(final String name) {
+    public Integer getScore(final String name) {
         return this.scoreboard.get(name);
     }
 
     /**
-     * Set scoreboard points for a player.
+     * Set scoreboard score for a player.
      */
-    public void setPoints(final String name, final Integer points) {
-        this.scoreboard.put(name, points);
+    public void setScore(final String name, final Integer score) {
+        this.scoreboard.put(name, score);
     }
 
     /**
