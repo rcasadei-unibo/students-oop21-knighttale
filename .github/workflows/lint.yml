@@ -54,7 +54,7 @@ jobs:
       - uses: jwgmeligmeyling/pmd-github-action@master
         if: always()
         with:
-          path: 'build/reports/pmd/main.xml'
+          path: 'build/reports/pmd/test.xml'
 
       # Spotbugs
       - name: Run Spotbugs
@@ -63,12 +63,12 @@ jobs:
       - uses: jwgmeligmeyling/spotbugs-github-action@master
         if: always()
         with:
-          path: 'build/reports/spotbugs/excludes.xml'
+          path: 'build/reports/spotbugs/main.xml'
       # Spotbugs tests
       - name: Run Spotbugs on tests
         if: always()
-        run: ./gradlew spotbugsTests
+        run: ./gradlew spotbugsTest
       - uses: jwgmeligmeyling/spotbugs-github-action@master
         if: always()
         with:
-          path: 'build/reports/spotbugs/excludes.xml'
+          path: 'build/reports/spotbugs/test.xml'

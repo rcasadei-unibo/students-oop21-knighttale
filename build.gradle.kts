@@ -85,6 +85,13 @@ tasks.spotbugsMain {
     }
 }
 
+tasks.spotbugsTest {
+    reports.create("xml") {
+        required.set(true)
+        outputLocation.set(file("$buildDir/reports/spotbugs/test.xml"))
+    }
+}
+
 tasks.withType<JavaCompile> {
     options.encoding = "UTF-8"
 }
