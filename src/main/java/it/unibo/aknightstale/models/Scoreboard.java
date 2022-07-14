@@ -50,7 +50,10 @@ public class Scoreboard {
         var path = App.getFilePath(SCOREBOARD_FILE_NAME);
         if (!Files.exists(path)) {
             try {
-                Files.createDirectories(path.getParent());
+                var directory = path.getParent();
+                if (directory != null) {
+                    Files.createDirectories(directory);
+                }
                 Files.createFile(path);
             } catch (IOException e) {
                 Alert.showAlert(AlertType.ERROR, "Error creating scoreboard file: " + e.getMessage());
