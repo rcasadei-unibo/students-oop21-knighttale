@@ -25,21 +25,15 @@ jobs:
 
       # Checkstyle
       - name: Run Checkstyle
-        uses: burrunan/gradle-cache-action@v1
-        with:
-          job-id: jdk11
-          arguments: checkstyleMain
+        run: ./gradlew checkstyleMain
       - uses: jwgmeligmeyling/checkstyle-github-action@master
         if: always() # always run even if the previous step fails
         with:
           path: 'build/reports/checkstyle/main.xml'
       # Checkstyle tests
       - name: Run Checkstyle on tests
+        run: ./gradlew checkstyleTest
         if: always()
-        uses: burrunan/gradle-cache-action@v1
-        with:
-          job-id: jdk11
-          arguments: checkstyleTest
       - uses: jwgmeligmeyling/checkstyle-github-action@master
         if: always()
         with:
@@ -48,10 +42,7 @@ jobs:
       # PMD
       - name: Run PMD
         if: always()
-        uses: burrunan/gradle-cache-action@v1
-        with:
-          job-id: jdk11
-          arguments: pmdMain
+        run: ./gradlew pmdMain
       - uses: jwgmeligmeyling/pmd-github-action@master
         if: always()
         with:
@@ -59,10 +50,7 @@ jobs:
       # PMD tests
       - name: Run PMD on tests
         if: always()
-        uses: burrunan/gradle-cache-action@v1
-        with:
-          job-id: jdk11
-          arguments: pmdTest
+        run: ./gradlew pmdTest
       - uses: jwgmeligmeyling/pmd-github-action@master
         if: always()
         with:
@@ -71,10 +59,7 @@ jobs:
       # Spotbugs
       - name: Run Spotbugs
         if: always()
-        uses: burrunan/gradle-cache-action@v1
-        with:
-          job-id: jdk11
-          arguments: spotbugsMain
+        run: ./gradlew spotbugsMain
       - uses: jwgmeligmeyling/spotbugs-github-action@master
         if: always()
         with:
@@ -82,10 +67,7 @@ jobs:
       # Spotbugs tests
       - name: Run Spotbugs on tests
         if: always()
-        uses: burrunan/gradle-cache-action@v1
-        with:
-          job-id: jdk11
-          arguments: spotbugsTest
+        run: ./gradlew spotbugsTest
       - uses: jwgmeligmeyling/spotbugs-github-action@master
         if: always()
         with:
