@@ -9,31 +9,32 @@ jobs:
     steps:
       - name: "Checkout repo"
         uses: actions/checkout@v3
-      - name: Setup gradle
-        uses: ./.github/workflows/gradle.yml
-      - name: Checkstyle
-        uses: ./.github/workflows/checkstyle.yml
-      - name: PMD
-        uses: ./.github/workflows/pmd.yml
-      - name: Spotbugs
-        uses: ./.github/workflows/spotbugs.yml
-  lint_tests:
-    name: Lint tests
-    runs-on: ubuntu-latest
-    steps:
-      - name: "Checkout repo"
-        uses: actions/checkout@v3
-      - name: Setup gradle
-        uses: ./.github/workflows/gradle.yml
-      - name: Checkstyle tests
-        uses: ./.github/workflows/checkstyle.yml
+
+      # Gradle
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
         with:
-          tests: true
-      - name: PMD tests
-        uses: ./.github/workflows/pmd.yml
+          java-version: '11'
+          distribution: 'temurin'
+      - name: Validate Gradle wrapper
+        uses: gradle/wrapper-validation-action@v1
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
         with:
-          tests: true
-      - name: Spotbugs tests
-        uses: ./.github/workflows/spotbugs.yml
+          gradle_version: current
+
+      # Checkstyle
+      - name: Run Checkstyle
+        run: ./gradlew checkstyleMain
+      - uses: jwgmeligmeyling/checkstyle-github-action@master
         with:
-          tests: true
+          path: 'build/reports/checkstyle/main.xml'
+
+      # Checkstyle tests
+      - name: Run Checkstyle on tests
+        run: ./gradlew checkstyleTest
+      - uses: jwgmeligmeyling/checkstyle-github-action@master
+        with:
+          path: 'build/reports/checkstyle/main.xml'
