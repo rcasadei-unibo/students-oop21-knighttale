@@ -27,37 +27,48 @@ jobs:
       - name: Run Checkstyle
         run: ./gradlew checkstyleMain
       - uses: jwgmeligmeyling/checkstyle-github-action@master
+        if: always() # always run even if the previous step fails
         with:
           path: 'build/reports/checkstyle/main.xml'
       # Checkstyle tests
       - name: Run Checkstyle on tests
         run: ./gradlew checkstyleTest
+        if: always()
       - uses: jwgmeligmeyling/checkstyle-github-action@master
+        if: always()
         with:
           path: 'build/reports/checkstyle/main.xml'
 
       # PMD
       - name: Run PMD
+        if: always()
         run: ./gradlew pmdMain
       - uses: jwgmeligmeyling/pmd-github-action@master
+        if: always()
         with:
           path: 'build/reports/pmd/main.xml'
       # PMD tests
       - name: Run PMD on tests
+        if: always()
         run: ./gradlew pmdTest
       - uses: jwgmeligmeyling/pmd-github-action@master
+        if: always()
         with:
           path: 'build/reports/pmd/main.xml'
 
       # Spotbugs
       - name: Run Spotbugs
+        if: always()
         run: ./gradlew spotbugsMain
       - uses: jwgmeligmeyling/spotbugs-github-action@master
+        if: always()
         with:
           path: 'build/reports/spotbugs/excludes.xml'
       # Spotbugs tests
       - name: Run Spotbugs on tests
+        if: always()
         run: ./gradlew spotbugsTests
       - uses: jwgmeligmeyling/spotbugs-github-action@master
+        if: always()
         with:
           path: 'build/reports/spotbugs/excludes.xml'
