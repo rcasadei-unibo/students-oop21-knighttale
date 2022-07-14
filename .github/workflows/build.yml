@@ -6,6 +6,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: "Checkout repo"
+        uses: actions/checkout@v3
       - name: Gradle setup
         uses: ./.github/workflows/gradle.yml
       - name: Execute Gradle build
