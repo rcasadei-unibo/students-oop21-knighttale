@@ -74,6 +74,10 @@ java {
     }
 }
 
+checkstyle {
+    toolVersion = "10.3"
+}
+
 tasks.spotbugsMain {
     reports.create("xml") {
         required.set(true)
