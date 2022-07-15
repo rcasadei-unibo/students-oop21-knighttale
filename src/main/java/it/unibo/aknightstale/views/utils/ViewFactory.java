@@ -21,12 +21,25 @@ public class ViewFactory {
 
     /**
      * Creates an instance of the view class implementing the given interface.
+     *
      * @param viewInterface View interface to search implementing class to instantiate.
+     * @param <V>           View interface type.
      * @return An instance of the view class implementing the interface.
-     * @param <V> View interface type.
      */
     public <V extends View<? extends Controller<V>>> V loadView(final Class<V> viewInterface) {
-        if (VIEWS.containsKey(viewInterface)) {
+        return loadView(viewInterface, false);
+    }
+
+    /**
+     * Creates an instance of the view class implementing the given interface.
+     *
+     * @param viewInterface View interface to search implementing class to instantiate.
+     * @param forceCreation If true, the view is created instead of getting it from cache, if already created previously.
+     * @param <V>           View interface type.
+     * @return An instance of the view class implementing the interface.
+     */
+    public <V extends View<? extends Controller<V>>> V loadView(final Class<V> viewInterface, final boolean forceCreation) {
+        if (!forceCreation && VIEWS.containsKey(viewInterface)) {
             return viewInterface.cast(VIEWS.get(viewInterface));
         }
 
@@ -55,5 +68,12 @@ public class ViewFactory {
         final var viewInstance = fxmlLoader.<V>getController();
         VIEWS.put(viewInterface, viewInstance);
         return viewInstance;
+    }
+
+    /**
+     * Clears the cache of instantiated views.
+     */
+    public void clearCache() {
+        VIEWS.clear();
     }
 }
