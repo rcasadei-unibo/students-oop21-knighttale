@@ -6,7 +6,7 @@ import it.unibo.aknightstale.controllers.utils.ControllerFactory;
 import it.unibo.aknightstale.views.interfaces.MainMenuView;
 import it.unibo.aknightstale.views.interfaces.ScoreboardView;
 
-public class MainMenu extends BaseController<MainMenuView> implements MainMenuController {
+public class MainMenuControllerImpl extends BaseController<MainMenuView> implements MainMenuController {
     /**
      * Show scoreboard view.
      */

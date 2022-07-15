@@ -5,7 +5,7 @@ import it.unibo.aknightstale.controllers.interfaces.MainMenuController;
 import it.unibo.aknightstale.views.interfaces.MainMenuView;
 import javafx.fxml.FXML;
 
-public class MainMenu extends BaseView<MainMenuController> implements MainMenuView {
+public class MainMenuViewImpl extends BaseView<MainMenuController> implements MainMenuView {
     @FXML
     private MFXButton exitButton;
 

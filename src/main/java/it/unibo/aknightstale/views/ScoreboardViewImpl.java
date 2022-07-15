@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 
-public class Scoreboard extends BaseView<ScoreboardController> implements ScoreboardView {
+public class ScoreboardViewImpl extends BaseView<ScoreboardController> implements ScoreboardView {
     @FXML
     private MFXTableView<Entry<String, Integer>> scoreboardTableView;
 

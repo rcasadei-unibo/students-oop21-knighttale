@@ -1,7 +1,6 @@
 package it.unibo.aknightstale.controllers;
 
 import it.unibo.aknightstale.controllers.interfaces.MainMenuController;
-import it.unibo.aknightstale.controllers.interfaces.ScoreboardController;
 import it.unibo.aknightstale.controllers.utils.ControllerFactory;
 import it.unibo.aknightstale.views.interfaces.MainMenuView;
 import it.unibo.aknightstale.views.interfaces.ScoreboardView;
@@ -9,7 +8,7 @@ import it.unibo.aknightstale.views.interfaces.ScoreboardView;
 import java.util.Map;
 import java.util.Set;
 
-public class Scoreboard extends BaseController<ScoreboardView> implements ScoreboardController {
+public class ScoreboardControllerImpl extends BaseController<ScoreboardView> implements it.unibo.aknightstale.controllers.interfaces.ScoreboardController {
     private final it.unibo.aknightstale.models.Scoreboard scoreboard = new it.unibo.aknightstale.models.Scoreboard(); //NOPMD - suppressed AvoidFieldNameMatchingTypeName - To remove when renaming MVC
 
     /**
