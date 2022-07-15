@@ -2,6 +2,7 @@ package it.unibo.aknightstale.views;
 
 import it.unibo.aknightstale.controllers.interfaces.MainMenuController;
 import it.unibo.aknightstale.views.interfaces.MainMenuView;
+import it.unibo.aknightstale.views.interfaces.ScoreboardView;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -30,7 +31,7 @@ class MainMenuTest extends BaseViewTest<MainMenuController, MainMenuView> {
     @DisplayName("Open the scoreboard with the scoreboard button")
     void onScoreboardButtonClicked(final FxRobot robot) {
         robot.clickOn("#scoreboardButton");
-        Assertions.assertThat("Scoreboard".equals(getWindow().getCurrentView().getViewName())).isTrue();
+        Assertions.assertThat(getWindow().getCurrentView()).isInstanceOf(ScoreboardView.class);
     }
 
     @Override
