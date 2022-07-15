@@ -32,7 +32,13 @@ public class ViewFactory {
 
         final var view = ClassFactory.createInstanceFromInterface(viewInterface, "views");
         final var viewName = view.getClass().getSimpleName();
-        final var fxmlFileName = CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, viewName) + ".fxml";
+
+        // Get fxml file name from view class name (remove the ViewImpl suffix, make it upper camelcase and
+        // add the file extension).
+        final var fxmlFileName = CaseFormat.UPPER_CAMEL.to(
+                CaseFormat.LOWER_UNDERSCORE,
+                viewName.replace("ViewImpl", "")
+        ) + ".fxml";
 
         // Load FXML file
         final FXMLLoader fxmlLoader = new FXMLLoader(JavaFXApp.class.getResource(fxmlFileName));
