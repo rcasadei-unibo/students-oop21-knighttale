@@ -45,6 +45,7 @@ public class ScoreboardViewImpl extends BaseView<ScoreboardController> implement
      *
      * @param scoreboard the scoreboard set to update the scoreboard table
      */
+    @Override
     public void updateScoreboard(final Set<Entry<String, Integer>> scoreboard) {
         final var list = FXCollections.observableList(List.copyOf(scoreboard));
         this.scoreboardTableView.setItems(list);
@@ -54,6 +55,7 @@ public class ScoreboardViewImpl extends BaseView<ScoreboardController> implement
      * Gets the window title.
      * @return the window title.
      */
+    @Override
     public String getWindowTitle() {
         return "Scoreboard";
     }

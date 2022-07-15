@@ -10,6 +10,7 @@ public class MainMenuControllerImpl extends BaseController<MainMenuView> impleme
     /**
      * Show scoreboard view.
      */
+    @Override
     public void showScoreboard() {
         final var scoreboardController = ControllerFactory.createController(ScoreboardController.class, ScoreboardView.class);
         scoreboardController.showView();

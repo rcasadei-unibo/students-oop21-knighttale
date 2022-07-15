@@ -23,6 +23,7 @@ public class MainMenuViewImpl extends BaseView<MainMenuController> implements Ma
      * Gets the window title.
      * @return the window title.
      */
+    @Override
     public String getWindowTitle() {
         return "Main menu";
     }
