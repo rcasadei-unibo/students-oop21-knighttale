@@ -17,6 +17,7 @@ import org.testfx.framework.junit5.Start;
 @ExtendWith(ApplicationExtension.class)
 class ViewFactoryTest extends BaseViewTest<MainMenuController, MainMenuView> {
     @Start
+    @Override
     public void start(final Stage stage) {
         super.start(stage);
     }
@@ -37,7 +38,7 @@ class ViewFactoryTest extends BaseViewTest<MainMenuController, MainMenuView> {
     @Test
     @DisplayName("Test loadView()")
     void loadView() {
-        var view = ViewFactory.loadView(MainMenuView.class);
+        final var view = ViewFactory.loadView(MainMenuView.class);
         Assertions.assertThat(view).isInstanceOf(MainMenuView.class);
     }
 }

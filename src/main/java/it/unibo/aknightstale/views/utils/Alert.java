@@ -14,7 +14,7 @@ public class Alert {
      * @param content Alert message.
      */
     public void showAlert(final AlertType type, final String title, final String header, final String content) {
-        var alert = new javafx.scene.control.Alert(type.getAlertType(), content);
+        final var alert = new javafx.scene.control.Alert(type.getAlertType(), content);
         alert.setTitle(title);
         alert.setHeaderText(header);
         alert.showAndWait();

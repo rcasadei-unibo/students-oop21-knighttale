@@ -34,23 +34,23 @@ class ScoreboardTest extends BaseViewTest<ScoreboardController, ScoreboardView> 
     @DisplayName("Update scoreboard table")
     void updateScoreboard(final FxRobot robot) {
         // Create scoreboard
-        var scoreboard = new Scoreboard();
+        final var scoreboard = new Scoreboard();
         scoreboard.setScore("player1", 1);
         scoreboard.setScore("player2", 2);
         scoreboard.setScore("player3", 3);
         scoreboard.setScore("player4", 4);
-        var scores = scoreboard.getEntries();
+        final var scores = scoreboard.getEntries();
 
         // Update scoreboard table and check assertions when the GUI is ready
         Platform.runLater(() -> {
             getView().updateScoreboard(scores);
 
-            var table = robot.lookup("#scoreboardTableView").queryAs(MFXTableView.class);
+            final var table = robot.lookup("#scoreboardTableView").queryAs(MFXTableView.class);
             // Check columns number
-            var tableColumns = table.getTableColumns();
+            final var tableColumns = table.getTableColumns();
             Assertions.assertThat(tableColumns.size()).isEqualTo(2);
             // Check if scores are correct
-            var tableItems = table.getItems().toArray();
+            final var tableItems = table.getItems().toArray();
             Assertions.assertThat(tableItems).isEqualTo(scores.toArray());
         });
     }

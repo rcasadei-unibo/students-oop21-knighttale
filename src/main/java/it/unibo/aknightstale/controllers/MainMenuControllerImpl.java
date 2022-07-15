@@ -11,7 +11,7 @@ public class MainMenuControllerImpl extends BaseController<MainMenuView> impleme
      * Show scoreboard view.
      */
     public void showScoreboard() {
-        var scoreboardController = ControllerFactory.createController(ScoreboardController.class, ScoreboardView.class);
+        final var scoreboardController = ControllerFactory.createController(ScoreboardController.class, ScoreboardView.class);
         scoreboardController.showView();
     }
 }

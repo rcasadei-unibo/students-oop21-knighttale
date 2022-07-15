@@ -1,68 +1,68 @@
 package it.unibo.aknightstale.models;
 
 import it.unibo.aknightstale.App;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.nio.file.Files;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.util.Map;
 
 class ScoreboardTest {
+    private final Map<String, Integer> scores = Map.of(
+            "player1", 1,
+            "player2", 2,
+            "player3", 3
+    );
+
     @Test
     @DisplayName("Get scoreboard entries")
-    void getEntries() {
-        var scoreboard = new Scoreboard();
-        scoreboard.setScore("player1", 1);
-        scoreboard.setScore("player2", 2);
-        scoreboard.setScore("player3", 3);
-        var entries = scoreboard.getEntries();
-        assertEquals(3, entries.size());
-        assertEquals("player1", entries.iterator().next().getKey());
+    void checkEntries() {
+        final var scoreboard = this.getSampleScoreboard();
+        final var entries = scoreboard.getEntries();
+        Assertions.assertThat(entries).isEqualTo(scores.entrySet());
     }
 
     @Test
     @DisplayName("Get scoreboard points of a player")
     void setPoints() {
-        var scoreboard = new Scoreboard();
-        scoreboard.setScore("player1", 1);
-        scoreboard.setScore("player2", 2);
-        scoreboard.setScore("player3", 3);
-        assertEquals(1, scoreboard.getScore("player1"));
-        assertEquals(2, scoreboard.getScore("player2"));
-        assertEquals(3, scoreboard.getScore("player3"));
+        final var scoreboard = this.getSampleScoreboard();
+        this.checkScoreboard(scoreboard);
     }
 
     @Test
     @DisplayName("Load scoreboard from file")
     void load() {
-        var scoreboard = new Scoreboard();
-        scoreboard.setScore("player1", 1);
-        scoreboard.setScore("player2", 2);
-        scoreboard.setScore("player3", 3);
+        final var scoreboard = this.getSampleScoreboard();
         scoreboard.save();
-        var scoreboard2 = new Scoreboard();
+        final var scoreboard2 = new Scoreboard();
         scoreboard2.load();
-        assertEquals(1, scoreboard2.getScore("player1"));
-        assertEquals(2, scoreboard2.getScore("player2"));
-        assertEquals(3, scoreboard2.getScore("player3"));
+        this.checkScoreboard(scoreboard2);
     }
 
     @Test
     @DisplayName("Save scoreboard to file")
     void save() {
-        var scoreboard = new Scoreboard();
-        scoreboard.setScore("player1", 1);
-        scoreboard.setScore("player2", 2);
-        scoreboard.setScore("player3", 3);
+        final var scoreboard = this.getSampleScoreboard();
         scoreboard.save();
-        var path = App.getFilePath("scoreboard.json");
-        assertTrue(Files.exists(path));
-        var scoreboard2 = new Scoreboard();
+        final var path = App.getFilePath("scoreboard.json");
+        Assertions.assertThat(Files.exists(path)).isTrue();
+        final var scoreboard2 = new Scoreboard();
         scoreboard2.load();
-        assertEquals(1, scoreboard2.getScore("player1"));
-        assertEquals(2, scoreboard2.getScore("player2"));
-        assertEquals(3, scoreboard2.getScore("player3"));
+        this.checkScoreboard(scoreboard2);
+    }
+
+    private Scoreboard getSampleScoreboard() {
+        final var scoreboard = new Scoreboard();
+        for (final var entry : scores.entrySet()) {
+            scoreboard.setScore(entry.getKey(), entry.getValue());
+        }
+        return scoreboard;
+    }
+
+    private void checkScoreboard(final Scoreboard scoreboard) {
+        Assertions.assertThat(scoreboard.getScore("player1")).isEqualTo(1);
+        Assertions.assertThat(scoreboard.getScore("player2")).isEqualTo(2);
+        Assertions.assertThat(scoreboard.getScore("player3")).isEqualTo(3);
     }
 }

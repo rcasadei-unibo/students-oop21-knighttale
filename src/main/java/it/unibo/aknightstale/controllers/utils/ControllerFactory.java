@@ -27,9 +27,9 @@ public class ControllerFactory {
             return controllerInterface.cast(CONTROLLERS.get(controllerInterface));
         }
 
-        var controller = ClassFactory.createInstanceFromInterface(controllerInterface, "controllers");
+        final var controller = ClassFactory.createInstanceFromInterface(controllerInterface, "controllers");
         if (viewInterface != null) {
-            var view = ViewFactory.loadView(viewInterface);
+            final var view = ViewFactory.loadView(viewInterface);
             controller.registerView(view);
             view.setController(controller);
         }

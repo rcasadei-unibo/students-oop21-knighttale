@@ -12,14 +12,14 @@ class ControllerFactoryTest {
     @Test
     @DisplayName("Test createController()")
     void createController() {
-        var controller = ControllerFactory.createController(MainMenuController.class);
+        final var controller = ControllerFactory.createController(MainMenuController.class);
         assertInstanceOf(MainMenuController.class, controller);
     }
 
     @Test
     @DisplayName("Test createController() with view")
     void createControllerWithView() {
-        var controller = ControllerFactory.createController(MainMenuController.class, MainMenuView.class);
+        final var controller = ControllerFactory.createController(MainMenuController.class, MainMenuView.class);
         assertInstanceOf(MainMenuController.class, controller);
     }
 }

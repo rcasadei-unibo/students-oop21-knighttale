@@ -19,15 +19,15 @@ public class ScoreboardViewImpl extends BaseView<ScoreboardController> implement
     private MFXTableView<Entry<String, Integer>> scoreboardTableView;
 
     @FXML
-    private void initialize() {
-        var playerColumn = new MFXTableColumn<Entry<String, Integer>>("Player");
-        var scoreColumn = new MFXTableColumn<Entry<String, Integer>>("Score");
+    private void initialize() { //NOPMD - suppressed UnusedPrivateMethod - False positive (used by JavaFX)
+        final var playerColumn = new MFXTableColumn<Entry<String, Integer>>("Player");
+        final var scoreColumn = new MFXTableColumn<Entry<String, Integer>>("Score");
 
         playerColumn.setRowCellFactory(entry -> new MFXTableRowCell<>(Entry::getKey));
         scoreColumn.setRowCellFactory(entry -> new MFXTableRowCell<>(Entry::getValue));
 
         scoreboardTableView.getTableColumns().addAll(List.of(playerColumn, scoreColumn));
-        var filters = scoreboardTableView.getFilters();
+        final var filters = scoreboardTableView.getFilters();
         filters.add(new StringFilter<>("Player", Entry::getKey));
         filters.add(new IntegerFilter<>("Score", Entry::getValue));
     }
@@ -46,7 +46,7 @@ public class ScoreboardViewImpl extends BaseView<ScoreboardController> implement
      * @param scoreboard the scoreboard set to update the scoreboard table
      */
     public void updateScoreboard(final Set<Entry<String, Integer>> scoreboard) {
-        var list = FXCollections.observableList(List.copyOf(scoreboard));
+        final var list = FXCollections.observableList(List.copyOf(scoreboard));
         this.scoreboardTableView.setItems(list);
     }
 

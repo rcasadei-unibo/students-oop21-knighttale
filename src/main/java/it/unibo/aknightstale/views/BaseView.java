@@ -20,6 +20,7 @@ public abstract class BaseView<C extends Controller<? extends View<C>>> implemen
      * Sets the controller associated with this view.
      * @param controller the controller to associate with this view.
      */
+    @Override
     public void setController(final C controller) {
         this.controller = controller;
     }
@@ -27,6 +28,7 @@ public abstract class BaseView<C extends Controller<? extends View<C>>> implemen
     /**
      * Shows the view.
      */
+    @Override
     public void show() {
         this.getWindow().switchTo(this);
         this.getWindow().open();
@@ -35,6 +37,7 @@ public abstract class BaseView<C extends Controller<? extends View<C>>> implemen
     /**
      * Hides the view.
      */
+    @Override
     public void hide() {
         this.getWindow().hide(this);
     }
@@ -67,6 +70,7 @@ public abstract class BaseView<C extends Controller<? extends View<C>>> implemen
      * Gets the name of the view.
      * @return the name of the view.
      */
+    @Override
     public String getViewName() {
         return this.getClass().getSimpleName();
     }

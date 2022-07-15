@@ -12,7 +12,7 @@ public final class JavaFXApp extends Application {
 
     @Override
     public void start(final Stage stage) {
-        var mainMenuController = ControllerFactory.createController(MainMenuController.class, MainMenuView.class);
+        final var mainMenuController = ControllerFactory.createController(MainMenuController.class, MainMenuView.class);
         mainMenuController.showView();
     }
 }
