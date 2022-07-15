@@ -79,6 +79,16 @@ checkstyle {
     toolVersion = "10.3"
 }
 
+pmd {
+    ruleSetFiles(files("config/pmd/pmd.xml"))
+    ruleSets.clear()
+}
+
+spotbugs {
+    reportsDir.set(file("$buildDir/reports/spotbugs"))
+    excludeFilter.set(file("config/spotbugs/excludes.xml"))
+}
+
 tasks.spotbugsMain {
     reports.create("xml") {
         required.set(true)
