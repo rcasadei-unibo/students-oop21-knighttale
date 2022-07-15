@@ -23,6 +23,8 @@ public abstract class BaseViewTest<C extends Controller<V>, V extends View<C>> {
      */
     @Start
     public void start(final Stage stage) {
+        // Clear cache when starting a new test set.
+        this.clearCache();
         this.controller = ControllerFactory.createController(getControllerInterface(), getViewInterface());
         this.controller.showView();
         this.view = ViewFactory.loadView(getViewInterface());
@@ -66,5 +68,13 @@ public abstract class BaseViewTest<C extends Controller<V>, V extends View<C>> {
      */
     public Window getWindow() {
         return ((BaseView<?>) getView()).getWindow();
+    }
+
+    /**
+     * Clears the cache of instantiated controllers and views.
+     */
+    protected void clearCache() {
+        ViewFactory.clearCache();
+        ControllerFactory.clearCache();
     }
 }
