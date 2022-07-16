@@ -4,12 +4,23 @@ import it.unibo.aknightstale.controllers.interfaces.Controller;
 import it.unibo.aknightstale.views.interfaces.View;
 
 public abstract class BaseView<C extends Controller<? extends View<C>>> implements View<C> {
-    /** Controller that is associated with this view. */
+    /**
+     * Controller that is associated with this view.
+     */
     private C controller;
-    private Window window = JavaFXApp.MAIN_WINDOW;
+    private Window window;
+
+    BaseView() {
+        this(Window.getOrCreate("main_window"));
+    }
+
+    BaseView(final Window window) {
+        this.window = window;
+    }
 
     /**
      * Gets the controller associated with this view.
+     *
      * @return the controller associated with this view.
      */
     protected C getController() {
