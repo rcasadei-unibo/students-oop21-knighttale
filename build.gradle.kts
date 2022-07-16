@@ -56,7 +56,7 @@ dependencies {
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$jUnitVersion")
     testImplementation("org.assertj:assertj-core:3.23.1")
     testImplementation("org.testfx:testfx-junit5:4.0.16-alpha")
-    testCompileOnly("org.testfx:openjfx-monocle:jdk-11+26")
+    testImplementation("org.testfx:openjfx-monocle:jdk-11+26")
 
     compileOnly("org.projectlombok:lombok:1.18.24")
     annotationProcessor("org.projectlombok:lombok:1.18.24")
@@ -110,4 +110,7 @@ tasks.withType<JavaCompile> {
 tasks.withType<Test> {
     // Enables JUnit 5 Jupiter module
     useJUnitPlatform()
+    if (project.hasProperty("headless")) {
+        jvmArgs("-Dheadless=true")
+    }
 }

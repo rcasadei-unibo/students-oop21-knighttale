@@ -1,6 +1,6 @@
 name: JUnit tests
 
-on: push
+on: workflow_call # TODO: Temporary disabled while waiting for https://github.com/EasyG0ing1/SceneOneFX/issues/3
 
 jobs:
   junit:
@@ -22,12 +22,8 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
 
-      #      - name: Execute Gradle tests
-      #        run: xvfb-run ./gradlew test
-      - name: Run headless test
-        uses: GabrielBB/xvfb-action@v1
-        with:
-          run: ./gradlew test
+      - name: Execute Gradle tests
+        run: ./gradlew test -Pheadless
       - name: Publish Test Report
         uses: mikepenz/action-junit-report@v3
         if: always() # always run even if the previous step fails

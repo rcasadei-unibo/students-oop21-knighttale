@@ -28,6 +28,14 @@ public class Window {
         WINDOWS.put(this.windowId, this);
     }
 
+    /*
+    TODO: Wait https://github.com/EasyG0ing1/SceneOneFX/issues/3 to be added to SceneOneFX.
+    public Window(final String windowId, final Stage stage) {
+        this.windowId = windowId;
+        SceneOne.set(this.windowId, new Scene(new VBox())).build();
+        WINDOWS.put(this.windowId, this);
+    }*/
+
     /**
      * Switch the scene in the window.
      */
@@ -111,6 +119,7 @@ public class Window {
 
     /**
      * Checks if the window is open.
+     *
      * @return true if the window is open, false otherwise.
      */
     public Boolean isOpened() {

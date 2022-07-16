@@ -6,15 +6,34 @@ import it.unibo.aknightstale.controllers.utils.ControllerFactory;
 import it.unibo.aknightstale.views.interfaces.View;
 import it.unibo.aknightstale.views.utils.ViewFactory;
 import javafx.stage.Stage;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
+import org.testfx.util.WaitForAsyncUtils;
+
+import java.util.concurrent.TimeoutException;
+
+import static org.testfx.api.FxToolkit.registerPrimaryStage;
 
 @SuppressFBWarnings("EI_EXPOSE_REP") // View must be passed as reference to allow view loader caching.
 @ExtendWith(ApplicationExtension.class)
 public abstract class BaseViewTest<C extends Controller<V>, V extends View<C>> {
     private V view;
     private C controller;
+
+    @BeforeAll
+    public static void setupSpec() throws TimeoutException {
+        if (Boolean.getBoolean("headless")) {
+            System.setProperty("testfx.robot", "glass");
+            System.setProperty("testfx.headless", "true");
+            System.setProperty("prism.order", "sw");
+            System.setProperty("prism.text", "t2k");
+            System.setProperty("java.awt.headless", "true");
+            System.setProperty("testfx.setup.timeout", "2500");
+        }
+        registerPrimaryStage();
+    }
 
     /**
      * Starts the JavaFX application.
@@ -25,6 +44,7 @@ public abstract class BaseViewTest<C extends Controller<V>, V extends View<C>> {
     public void start(final Stage stage) {
         // Clear cache when starting a new test set.
         this.clearCache();
+        WaitForAsyncUtils.waitForFxEvents();
         this.controller = ControllerFactory.createController(getControllerInterface(), getViewInterface());
         this.controller.showView();
         this.view = ViewFactory.loadView(getViewInterface());
