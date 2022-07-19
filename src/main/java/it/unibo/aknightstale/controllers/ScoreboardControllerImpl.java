@@ -1,7 +1,7 @@
 package it.unibo.aknightstale.controllers;
 
+import it.unibo.aknightstale.controllers.interfaces.Controller;
 import it.unibo.aknightstale.controllers.interfaces.MainMenuController;
-import it.unibo.aknightstale.controllers.utils.ControllerFactory;
 import it.unibo.aknightstale.views.interfaces.MainMenuView;
 import it.unibo.aknightstale.views.interfaces.ScoreboardView;
 
@@ -24,7 +24,7 @@ public class ScoreboardControllerImpl extends BaseController<ScoreboardView> imp
      */
     @Override
     public void returnToMainMenu() {
-        ControllerFactory.createController(MainMenuController.class, MainMenuView.class).showView();
+        Controller.of(MainMenuController.class, MainMenuView.class).get().showView();
     }
 
     /**

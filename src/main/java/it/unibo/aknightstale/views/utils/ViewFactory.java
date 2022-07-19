@@ -8,37 +8,65 @@ import it.unibo.aknightstale.views.AlertType;
 import it.unibo.aknightstale.views.JavaFXApp;
 import it.unibo.aknightstale.views.interfaces.View;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import lombok.experimental.UtilityClass;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@UtilityClass
-public class ViewFactory {
+public class ViewFactory<V extends View<? extends Controller<V>>> {
     private static final Map<Class<? extends View<?>>, View<?>> VIEWS = new HashMap<>();
 
+    private Class<V> viewInterface;
+    private boolean forceCreation = false;
+    private Stage stage;
+
     /**
-     * Creates an instance of the view class implementing the given interface.
-     *
-     * @param viewInterface View interface to search implementing class to instantiate.
-     * @param <V>           View interface type.
-     * @return An instance of the view class implementing the interface.
+     * Clears the cache of instantiated views.
      */
-    public <V extends View<? extends Controller<V>>> V loadView(final Class<V> viewInterface) {
-        return loadView(viewInterface, false);
+    public static void clearCache() {
+        VIEWS.clear();
     }
 
     /**
-     * Creates an instance of the view class implementing the given interface.
+     * Set the view interface to search implementing class to instantiate.
      *
      * @param viewInterface View interface to search implementing class to instantiate.
-     * @param forceCreation If true, the view is created instead of getting it from cache, if already created previously.
-     * @param <V>           View interface type.
+     * @return This instance of the factory.
+     */
+    public ViewFactory<V> fromInterface(final Class<V> viewInterface) {
+        this.viewInterface = viewInterface;
+        return this;
+    }
+
+    /**
+     * Set the factory to always create a new view instance, even if it is already created.
+     *
+     * @return This instance of the factory.
+     */
+    public ViewFactory<V> forceCreation() {
+        forceCreation = true;
+        return this;
+    }
+
+    /**
+     * Set the stage to use to create the view associated with the controller created by the factory.
+     *
+     * @param stage The stage to use to create the view associated with the controller created by the factory.
+     * @return This instance of the factory.
+     */
+    public ViewFactory<V> stage(final Stage stage) {
+        this.stage = stage;
+        return this;
+    }
+
+    /**
+     * Get the view instance.
+     *
      * @return An instance of the view class implementing the interface.
      */
-    public <V extends View<? extends Controller<V>>> V loadView(final Class<V> viewInterface, final boolean forceCreation) {
+    public V get() {
         if (!forceCreation && VIEWS.containsKey(viewInterface)) {
             return viewInterface.cast(VIEWS.get(viewInterface));
         }
@@ -56,7 +84,7 @@ public class ViewFactory {
         // Load FXML file
         final FXMLLoader fxmlLoader = new FXMLLoader(JavaFXApp.class.getResource(fxmlFileName));
         try {
-            SceneOne.set(viewName, fxmlLoader.<Parent>load())
+            SceneOne.set(viewName, fxmlLoader.<AnchorPane>load())
                     .title(view.getWindowTitle())
                     .build();
         } catch (IOException | IllegalStateException e) {
@@ -66,14 +94,9 @@ public class ViewFactory {
         }
 
         final var viewInstance = fxmlLoader.<V>getController();
-        VIEWS.put(viewInterface, viewInstance);
-        return viewInstance;
-    }
 
-    /**
-     * Clears the cache of instantiated views.
-     */
-    public void clearCache() {
-        VIEWS.clear();
+        VIEWS.put(viewInterface, viewInstance);
+
+        return viewInstance;
     }
 }

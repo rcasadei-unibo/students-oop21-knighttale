@@ -4,71 +4,89 @@ import it.unibo.aknightstale.controllers.interfaces.Controller;
 import it.unibo.aknightstale.utils.ClassFactory;
 import it.unibo.aknightstale.views.interfaces.View;
 import it.unibo.aknightstale.views.utils.ViewFactory;
-import lombok.experimental.UtilityClass;
+import javafx.stage.Stage;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@UtilityClass
-public class ControllerFactory {
+public class ControllerFactory<C extends Controller<V>, V extends View<C>> {
     private static final Map<Class<? extends Controller<?>>, Controller<?>> CONTROLLERS = new HashMap<>();
 
+    private Class<C> controllerInterface;
+    private Class<V> viewInterface;
+    private boolean forceCreation = false;
+    private Stage stage;
+
     /**
-     * Creates an instance of the controller and view classes implementing the given interfaces and attaches them (view-controller and controller-view).
+     * Clears the cache of instantiated controllers.
+     */
+    public static void clearCache() {
+        CONTROLLERS.clear();
+    }
+
+    /**
+     * Set the controller interface to search implementing class to instantiate
      *
      * @param controllerInterface Controller interface to search implementing class to instantiate.
-     * @param viewInterface View interface to search implementing class to instantiate and attach to controller and vice-versa.
-     *
-     * @return An instance of the controller class implementing the interface.
-     *
-     * @param <V> View interface type.
-     * @param <C> Controller interface type.
+     * @return This instance of the factory.
      */
-    public <V extends View<C>, C extends Controller<V>> C createController(final Class<C> controllerInterface, final Class<V> viewInterface) {
-        return createController(controllerInterface, viewInterface, false);
+    public ControllerFactory<C, V> fromInterface(final Class<C> controllerInterface) {
+        this.controllerInterface = controllerInterface;
+        return this;
+    }
+
+    /**
+     * Set the view interface to search implementing class to instantiate
+     *
+     * @param viewInterface View interface to search implementing class to instantiate.
+     * @return This instance of the factory.
+     */
+    public ControllerFactory<C, V> viewInterface(final Class<V> viewInterface) {
+        this.viewInterface = viewInterface;
+        return this;
+    }
+
+    /**
+     * Set the factory to always create a new controller instance, even if it is already created.
+     *
+     * @return This instance of the factory.
+     */
+    public ControllerFactory<C, V> forceCreation() {
+        forceCreation = true;
+        return this;
+    }
+
+    /**
+     * Set the stage to use to create the view associated with the controller created by the factory.
+     *
+     * @param stage The stage to use to create the view associated with the controller created by the factory.
+     * @return This instance of the factory.
+     */
+    public ControllerFactory<C, V> stage(final Stage stage) {
+        this.stage = stage;
+        return this;
     }
 
     /**
      * Creates an instance of the controller and view classes implementing the given interfaces and attaches them (view-controller and controller-view).
      *
-     * @param controllerInterface Controller interface to search implementing class to instantiate.
-     * @param viewInterface       View interface to search implementing class to instantiate and attach to controller and vice-versa.
-     * @param forceCreation       If true, the controller is created instead of getting it from cache, if already created previously.
-     * @param <V>                 View interface type.
-     * @param <C>                 Controller interface type.
      * @return An instance of the controller class implementing the interface.
      */
-    public <V extends View<C>, C extends Controller<V>> C createController(final Class<C> controllerInterface, final Class<V> viewInterface, final boolean forceCreation) {
+    public C get() {
         if (!forceCreation && CONTROLLERS.containsKey(controllerInterface)) {
             return controllerInterface.cast(CONTROLLERS.get(controllerInterface));
         }
 
         final var controller = ClassFactory.createInstanceFromInterface(controllerInterface, "controllers");
         if (viewInterface != null) {
-            final var view = ViewFactory.loadView(viewInterface);
+            final var view = new ViewFactory<V>()
+                    .fromInterface(viewInterface)
+                    .stage(stage)
+                    .get();
             controller.registerView(view);
             view.setController(controller);
         }
         CONTROLLERS.put(controllerInterface, controller);
         return controller;
-    }
-
-    /**
-     * Creates an instance of the class implementing the given interface.
-     *
-     * @param controllerInterface Controller interface to search implementing class to instantiate.
-     * @param <V>                 View interface type.
-     * @param <C>                 Controller interface type.
-     * @return An instance of the controller class implementing the interface.
-     */
-    public <V extends View<C>, C extends Controller<V>> C createController(final Class<C> controllerInterface) {
-        return createController(controllerInterface, null);
-    }
-
-    /**
-     * Clears the cache of instantiated controllers.
-     */
-    public void clearCache() {
-        CONTROLLERS.clear();
     }
 }

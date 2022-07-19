@@ -3,6 +3,7 @@ package it.unibo.aknightstale.views.utils;
 import it.unibo.aknightstale.controllers.interfaces.MainMenuController;
 import it.unibo.aknightstale.views.BaseViewTest;
 import it.unibo.aknightstale.views.interfaces.MainMenuView;
+import it.unibo.aknightstale.views.interfaces.View;
 import javafx.stage.Stage;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -38,7 +39,7 @@ class ViewFactoryTest extends BaseViewTest<MainMenuController, MainMenuView> {
     @Test
     @DisplayName("Test loadView()")
     void loadView() {
-        final var view = ViewFactory.loadView(MainMenuView.class);
+        final var view = View.of(MainMenuView.class).get();
         Assertions.assertThat(view).isInstanceOf(MainMenuView.class);
     }
 }

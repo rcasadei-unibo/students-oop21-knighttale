@@ -45,9 +45,11 @@ public abstract class BaseViewTest<C extends Controller<V>, V extends View<C>> {
         // Clear cache when starting a new test set.
         this.clearCache();
         WaitForAsyncUtils.waitForFxEvents();
-        this.controller = ControllerFactory.createController(getControllerInterface(), getViewInterface());
+        this.controller = Controller.of(this.getControllerInterface(), this.getViewInterface())
+                .stage(stage)
+                .get();
         this.controller.showView();
-        this.view = ViewFactory.loadView(getViewInterface());
+        this.view = View.of(this.getViewInterface()).get();
     }
 
     public abstract Class<V> getViewInterface();
