@@ -33,7 +33,7 @@ val javaFXModules = listOf(
 
 val supportedPlatforms = listOf("linux", "mac", "win") // All required for OOP
 val jUnitVersion = "5.8.2"
-val javaFxVersion = 11
+val javaFxVersion = 15
 
 dependencies {
     for (platform in supportedPlatforms) {
@@ -44,7 +44,7 @@ dependencies {
 
     implementation("io.github.palexdev:materialfx:11.13.5")
     implementation("net.harawata:appdirs:1.2.1")
-    implementation("com.simtechdata:SceneOneFX:1.2.2")
+    implementation("com.simtechdata:SceneOneFX:1.2.3")
     implementation("io.github.classgraph:classgraph:4.8.147")
     implementation("com.google.guava:guava:31.1-jre")
     implementation("io.github.palexdev:materialfx:11.13.5")
@@ -57,7 +57,7 @@ dependencies {
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$jUnitVersion")
     testImplementation("org.assertj:assertj-core:3.23.1")
     testImplementation("org.testfx:testfx-junit5:4.0.16-alpha")
-    testImplementation("org.testfx:openjfx-monocle:jdk-11+26")
+    testImplementation("org.testfx:openjfx-monocle:jdk-12.0.1+2")
 
     compileOnly("org.projectlombok:lombok:1.18.24")
     annotationProcessor("org.projectlombok:lombok:1.18.24")
