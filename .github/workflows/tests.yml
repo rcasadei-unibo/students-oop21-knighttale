@@ -1,6 +1,6 @@
 name: JUnit tests
 
-on: workflow_call # TODO: Temporary disabled while waiting for https://github.com/EasyG0ing1/SceneOneFX/issues/3
+on: push
 
 jobs:
   junit:

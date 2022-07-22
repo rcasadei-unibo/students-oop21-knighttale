@@ -5,7 +5,9 @@ import com.simtechdata.sceneonefx.SceneOne;
 import it.unibo.aknightstale.controllers.interfaces.Controller;
 import it.unibo.aknightstale.utils.ClassFactory;
 import it.unibo.aknightstale.views.AlertType;
+import it.unibo.aknightstale.views.BaseView;
 import it.unibo.aknightstale.views.JavaFXApp;
+import it.unibo.aknightstale.views.Window;
 import it.unibo.aknightstale.views.interfaces.View;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
@@ -85,6 +87,7 @@ public class ViewFactory<V extends View<? extends Controller<V>>> {
         final FXMLLoader fxmlLoader = new FXMLLoader(JavaFXApp.class.getResource(fxmlFileName));
         try {
             SceneOne.set(viewName, fxmlLoader.<AnchorPane>load())
+                    .stage(stage)
                     .title(view.getWindowTitle())
                     .build();
         } catch (IOException | IllegalStateException e) {
@@ -94,6 +97,7 @@ public class ViewFactory<V extends View<? extends Controller<V>>> {
         }
 
         final var viewInstance = fxmlLoader.<V>getController();
+        ((BaseView<?>) viewInstance).setWindow(Window.getOrCreate("main_window", stage));
 
         VIEWS.put(viewInterface, viewInstance);
 

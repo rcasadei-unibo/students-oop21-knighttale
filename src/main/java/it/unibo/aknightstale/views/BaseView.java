@@ -10,14 +10,6 @@ public abstract class BaseView<C extends Controller<? extends View<C>>> implemen
     private C controller;
     private Window window;
 
-    BaseView() {
-        this(Window.getOrCreate("main_window"));
-    }
-
-    BaseView(final Window window) {
-        this.window = window;
-    }
-
     /**
      * Gets the controller associated with this view.
      *

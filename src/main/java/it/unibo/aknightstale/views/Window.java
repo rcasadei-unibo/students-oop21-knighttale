@@ -5,6 +5,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.aknightstale.views.interfaces.View;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -28,13 +29,11 @@ public class Window {
         WINDOWS.put(this.windowId, this);
     }
 
-    /*
-    TODO: Wait https://github.com/EasyG0ing1/SceneOneFX/issues/3 to be added to SceneOneFX.
     public Window(final String windowId, final Stage stage) {
         this.windowId = windowId;
-        SceneOne.set(this.windowId, new Scene(new VBox())).build();
+        SceneOne.set(this.windowId, new Scene(new VBox())).stage(stage).build();
         WINDOWS.put(this.windowId, this);
-    }*/
+    }
 
     /**
      * Switch the scene in the window.
@@ -140,15 +139,26 @@ public class Window {
      * Get the window with this id if it exists.
      *
      * @param windowId The id of the window to get.
+     * @param stage    The stage to use to create the window.
      * @return The window with this id if it exists, it will be created otherwise.
      */
-    public static Window getOrCreate(final String windowId) {
+    public static Window getOrCreate(final String windowId, final Stage stage) {
         var window = get(windowId);
 
         if (window == null) {
-            window = new Window(windowId);
+            window = new Window(windowId, stage);
         }
 
         return window;
+    }
+
+    /**
+     * Get the window with this id if it exists.
+     *
+     * @param windowId The id of the window to get.
+     * @return The window with this id if it exists, it will be created otherwise.
+     */
+    public static Window getOrCreate(final String windowId) {
+        return getOrCreate(windowId, null);
     }
 }
