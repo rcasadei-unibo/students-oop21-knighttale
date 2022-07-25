@@ -7,10 +7,9 @@ import javafx.geometry.Point2D;
 
 abstract class AbstractMoveEntity extends MovebleEntityImpl implements LifeEntity, AttackEntity {
 	
-	final static double RANGE = 5;
-	
 	private double damage;
 	private double health;
+	private final double range = 5.0;
 
 	protected AbstractMoveEntity(Point2D position, Bounds bounds, EntityType type, boolean collidable, double speed,
 			Direction dir, double damage, double health) {
@@ -31,7 +30,7 @@ abstract class AbstractMoveEntity extends MovebleEntityImpl implements LifeEntit
 
 	@Override
 	public double getAttackRange() {
-		return this.RANGE;
+		return this.range;
 	}
 
 	@Override
