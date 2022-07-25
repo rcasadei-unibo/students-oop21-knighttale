@@ -3,6 +3,8 @@ package it.unibo.aknightstale.views.utils;
 import it.unibo.aknightstale.views.AlertType;
 import lombok.experimental.UtilityClass;
 
+import java.awt.*;
+
 @UtilityClass
 public class Alert {
     /**
@@ -14,6 +16,9 @@ public class Alert {
      * @param content Alert message.
      */
     public void showAlert(final AlertType type, final String title, final String header, final String content) {
+        if (Boolean.getBoolean("headless") && type == AlertType.ERROR) {
+            throw new HeadlessException(title + " - " + content);
+        }
         final var alert = new javafx.scene.control.Alert(type.getAlertType(), content);
         alert.setTitle(title);
         alert.setHeaderText(header);
