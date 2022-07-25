@@ -27,7 +27,13 @@ public final class App {
     }
 
     public static Path getFilePath(final String... pathsToAppend) {
-        return Paths.get(AppDirsFactory.getInstance().getUserDataDir(APP_NAME, APP_VERSION, "unibo", true), pathsToAppend);
+        var appDir = AppDirsFactory.getInstance().getUserDataDir(APP_NAME, APP_VERSION, "unibo", true);
+
+        if (Boolean.getBoolean("headless")) {
+            appDir = Paths.get("build").toAbsolutePath().toString();
+        }
+
+        return Paths.get(appDir, pathsToAppend);
     }
 
     public static Path getFilePath(final Path pathToAppend) {
