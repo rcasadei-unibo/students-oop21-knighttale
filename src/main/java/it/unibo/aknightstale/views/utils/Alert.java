@@ -3,7 +3,7 @@ package it.unibo.aknightstale.views.utils;
 import it.unibo.aknightstale.views.AlertType;
 import lombok.experimental.UtilityClass;
 
-import java.awt.*;
+import java.awt.HeadlessException;
 
 @UtilityClass
 public class Alert {

@@ -1,5 +1,6 @@
 package it.unibo.aknightstale.controllers.utils;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.aknightstale.controllers.interfaces.Controller;
 import it.unibo.aknightstale.utils.ClassFactory;
 import it.unibo.aknightstale.views.interfaces.View;
@@ -14,7 +15,7 @@ public class ControllerFactory<C extends Controller<V>, V extends View<C>> {
 
     private Class<C> controllerInterface;
     private Class<V> viewInterface;
-    private boolean forceCreation = false;
+    private boolean forceCreation;
     private Stage stage;
 
     /**
@@ -25,7 +26,7 @@ public class ControllerFactory<C extends Controller<V>, V extends View<C>> {
     }
 
     /**
-     * Set the controller interface to search implementing class to instantiate
+     * Set the controller interface to search implementing class to instantiate.
      *
      * @param controllerInterface Controller interface to search implementing class to instantiate.
      * @return This instance of the factory.
@@ -36,7 +37,7 @@ public class ControllerFactory<C extends Controller<V>, V extends View<C>> {
     }
 
     /**
-     * Set the view interface to search implementing class to instantiate
+     * Set the view interface to search implementing class to instantiate.
      *
      * @param viewInterface View interface to search implementing class to instantiate.
      * @return This instance of the factory.
@@ -62,6 +63,7 @@ public class ControllerFactory<C extends Controller<V>, V extends View<C>> {
      * @param stage The stage to use to create the view associated with the controller created by the factory.
      * @return This instance of the factory.
      */
+    @SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "Stage is not exposed, it must be the instance passed.")
     public ControllerFactory<C, V> stage(final Stage stage) {
         this.stage = stage;
         return this;

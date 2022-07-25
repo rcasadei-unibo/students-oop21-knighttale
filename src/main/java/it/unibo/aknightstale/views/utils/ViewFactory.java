@@ -2,7 +2,9 @@ package it.unibo.aknightstale.views.utils;
 
 import com.google.common.base.CaseFormat;
 import com.simtechdata.sceneonefx.SceneOne;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.aknightstale.controllers.interfaces.Controller;
+import it.unibo.aknightstale.exceptions.ViewLoadingException;
 import it.unibo.aknightstale.utils.ClassFactory;
 import it.unibo.aknightstale.views.AlertType;
 import it.unibo.aknightstale.views.BaseView;
@@ -21,7 +23,7 @@ public class ViewFactory<V extends View<? extends Controller<V>>> {
     private static final Map<Class<? extends View<?>>, View<?>> VIEWS = new HashMap<>();
 
     private Class<V> viewInterface;
-    private boolean forceCreation = false;
+    private boolean forceCreation;
     private Stage stage;
 
     /**
@@ -58,6 +60,7 @@ public class ViewFactory<V extends View<? extends Controller<V>>> {
      * @param stage The stage to use to create the view associated with the controller created by the factory.
      * @return This instance of the factory.
      */
+    @SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "Stage is not exposed, it must be the instance passed.")
     public ViewFactory<V> stage(final Stage stage) {
         this.stage = stage;
         return this;
@@ -93,7 +96,7 @@ public class ViewFactory<V extends View<? extends Controller<V>>> {
         } catch (IOException | IllegalStateException e) {
             e.printStackTrace();
             Alert.showAlert(AlertType.ERROR, "Error loading " + fxmlFileName, e.getMessage());
-            System.exit(1);
+            throw new ViewLoadingException(e);
         }
 
         final var viewInstance = fxmlLoader.<V>getController();

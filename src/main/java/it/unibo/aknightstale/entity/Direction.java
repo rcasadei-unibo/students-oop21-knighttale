@@ -1,5 +1,20 @@
 package it.unibo.aknightstale.entity;
 
 public enum Direction {
-    UP, LEFT, RIGHT, DOWN
+    /**
+     * Up direction.
+     */
+    UP,
+    /**
+     * Left direction.
+     */
+    LEFT,
+    /**
+     * Right direction.
+     */
+    RIGHT,
+    /**
+     * West direction.
+     */
+    DOWN
 }
