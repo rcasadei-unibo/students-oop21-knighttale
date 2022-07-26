@@ -5,13 +5,13 @@ import it.unibo.aknightstale.entity.EntityType;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 
-abstract class AbstractMoveEntity extends MovebleEntityImpl implements LifeEntity, AttackEntity {
+public class MoveEntity extends MovebleEntityImpl implements LifeEntity, AttackEntity {
 	
 	private double damage;
 	private double health;
 	private final double range = 5.0;
 
-	protected AbstractMoveEntity(Point2D position, Bounds bounds, EntityType type, boolean collidable, double speed,
+	public MoveEntity(Point2D position, Bounds bounds, EntityType type, boolean collidable, double speed,
 			Direction dir, double damage, double health) {
 		super(position, bounds, type, collidable, speed, dir);
 		this.damage = damage;
