@@ -1,4 +1,6 @@
-package it.unibo.aknightstale.entity;
+package it.unibo.aknightstale.entity.model;
+
+import it.unibo.aknightstale.entity.Direction;
 
 public interface MovableEntity extends EntityModel{
     double getSpeed();
