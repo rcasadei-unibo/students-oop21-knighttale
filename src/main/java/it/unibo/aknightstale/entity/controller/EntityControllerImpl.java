@@ -1,9 +1,12 @@
 package it.unibo.aknightstale.entity.controller;
 
-public class EntityControllerImpl<M, V> implements EntityController<M, V> {
+import it.unibo.aknightstale.entity.model.EntityModel;
+import it.unibo.aknightstale.entity.view.EntityView;
+
+public class EntityControllerImpl<M extends EntityModel, V extends EntityView> implements EntityController<M, V> {
 	
-	private final M model;
-	private final V view;
+	protected final M model;
+	protected final V view;
 	
 	public EntityControllerImpl(M model, V view) {
 		super();

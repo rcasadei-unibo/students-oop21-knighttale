@@ -1,6 +1,9 @@
 package it.unibo.aknightstale.entity.controller;
 
-public interface EntityController<M,V> {
+import it.unibo.aknightstale.entity.model.EntityModel;
+import it.unibo.aknightstale.entity.view.EntityView;
+
+public interface EntityController<M extends EntityModel,V extends EntityView> {
 	
     M getModel();
 
