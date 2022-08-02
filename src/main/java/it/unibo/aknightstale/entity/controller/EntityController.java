@@ -1,11 +1,8 @@
 package it.unibo.aknightstale.entity.controller;
 
-import it.unibo.aknightstale.entity.model.EntityModel;
-import it.unibo.aknightstale.entity.view.EntityView;
-
-public interface EntityController {
+public interface EntityController<M,V> {
 	
-    EntityModel getModel();
+    M getModel();
 
-    EntityView getView();
+    V getView();
 }
