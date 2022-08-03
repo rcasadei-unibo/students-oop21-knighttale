@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.unibo.aknightstale.entity.controller.EntityController;
+import it.unibo.aknightstale.entity.model.Character;
+import it.unibo.aknightstale.entity.view.AnimatedEntityView;
 
 public class EntityManagerImpl implements EntityManager {
 	
-	private List<EntityController> entities;
+	private List<EntityController<? super Character, ? super AnimatedEntityView>> entities;
 	private final CollisionManager collision;
 
 	public EntityManagerImpl() {
@@ -22,19 +24,19 @@ public class EntityManagerImpl implements EntityManager {
 	}
 
 	@Override
-	public void addEntity(EntityController ec) {
+	public void addEntity(EntityController<? super Character, ? super AnimatedEntityView> ec) {
 		if (!this.entities.contains(ec)) {
 			this.entities.add(ec);
 		}
 	}
 
 	@Override
-	public void removeEntity(EntityController ec) {
+	public void removeEntity(EntityController<? super Character, ? super AnimatedEntityView> ec) {
 		this.entities.stream().filter(e -> e.equals(ec)).forEach(e -> this.entities.remove(e));
 	}
 
 	@Override
-	public List<EntityController> getEntities() {
+	public List<EntityController<? super Character, ? super AnimatedEntityView>> getEntities() {
 		return this.entities;
 	}
 
