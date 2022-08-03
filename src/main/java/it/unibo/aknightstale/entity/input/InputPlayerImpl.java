@@ -41,10 +41,10 @@ public class InputPlayerImpl implements InputPlayer {
 		if	(keyPressed.contains("D")) {
 			this.player.moveRight();
 		}
-		if		(keyPressed.contains("W")) {
+		if	(keyPressed.contains("W")) {
 			this.player.moveUp(); 
 		}
-		if		(keyPressed.contains("S")) { 
+		if	(keyPressed.contains("S")) { 
 			this.player.moveDown(); 
 		}
 		if (keyPressed.contains("SPACE")) {

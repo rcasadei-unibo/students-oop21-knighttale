@@ -8,11 +8,8 @@ import it.unibo.aknightstale.utility.EntityManager;
 
 public class PlayerController<M extends CharacterModel, V extends AnimatedEntityView> extends AbstractController<M, V> {
 	
-	private final EntityManager manager;
-
 	public PlayerController(M model, V view, EntityManager manager) {
-		super(model, view);
-		this.manager = manager;
+		super(model, view, manager);
 	}
 
 	@Override
