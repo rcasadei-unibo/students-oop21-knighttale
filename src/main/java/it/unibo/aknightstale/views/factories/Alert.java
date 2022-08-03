@@ -1,4 +1,4 @@
-package it.unibo.aknightstale.views.utils;
+package it.unibo.aknightstale.views.factories;
 
 import it.unibo.aknightstale.views.AlertType;
 import lombok.experimental.UtilityClass;

@@ -1,11 +1,11 @@
-package it.unibo.aknightstale.views.utils;
+package it.unibo.aknightstale.views.factories;
 
 import com.google.common.base.CaseFormat;
 import com.simtechdata.sceneonefx.SceneOne;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.aknightstale.controllers.interfaces.Controller;
-import it.unibo.aknightstale.exceptions.ViewLoadingException;
-import it.unibo.aknightstale.utils.ClassFactory;
+import it.unibo.aknightstale.views.exceptions.ViewLoadingException;
+import it.unibo.aknightstale.factories.ClassFactory;
 import it.unibo.aknightstale.views.AlertType;
 import it.unibo.aknightstale.views.BaseView;
 import it.unibo.aknightstale.views.JavaFXApp;

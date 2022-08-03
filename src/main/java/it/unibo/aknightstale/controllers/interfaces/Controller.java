@@ -1,6 +1,6 @@
 package it.unibo.aknightstale.controllers.interfaces;
 
-import it.unibo.aknightstale.controllers.utils.ControllerFactory;
+import it.unibo.aknightstale.controllers.factories.ControllerFactory;
 import it.unibo.aknightstale.views.interfaces.View;
 
 public interface Controller<V extends View<? extends Controller<V>>> {

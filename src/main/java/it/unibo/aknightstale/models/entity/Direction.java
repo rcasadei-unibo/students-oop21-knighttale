@@ -1,4 +1,4 @@
-package it.unibo.aknightstale.entity;
+package it.unibo.aknightstale.models.entity;
 
 public enum Direction {
     /**

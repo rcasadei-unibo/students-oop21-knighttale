@@ -3,7 +3,7 @@ package it.unibo.aknightstale.models;
 import com.esotericsoftware.jsonbeans.Json;
 import it.unibo.aknightstale.App;
 import it.unibo.aknightstale.views.AlertType;
-import it.unibo.aknightstale.views.utils.Alert;
+import it.unibo.aknightstale.views.factories.Alert;
 
 import java.io.FileReader;
 import java.io.FileWriter;

@@ -1,7 +1,7 @@
 package it.unibo.aknightstale.views.interfaces;
 
 import it.unibo.aknightstale.controllers.interfaces.Controller;
-import it.unibo.aknightstale.views.utils.ViewFactory;
+import it.unibo.aknightstale.views.factories.ViewFactory;
 
 public interface View<C extends Controller<? extends View<C>>> {
     void setController(C controller);

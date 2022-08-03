@@ -1,4 +1,4 @@
-package it.unibo.aknightstale.entity;
+package it.unibo.aknightstale.models.entity;
 
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;

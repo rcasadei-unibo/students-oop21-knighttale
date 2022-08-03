@@ -1,4 +1,4 @@
-package it.unibo.aknightstale.utils;
+package it.unibo.aknightstale.factories;
 
 import io.github.classgraph.ClassGraph;
 import io.github.classgraph.ClassInfoList;
@@ -6,7 +6,7 @@ import io.github.classgraph.ScanResult;
 import it.unibo.aknightstale.App;
 import it.unibo.aknightstale.exceptions.ClassInstantiationException;
 import it.unibo.aknightstale.views.AlertType;
-import it.unibo.aknightstale.views.utils.Alert;
+import it.unibo.aknightstale.views.factories.Alert;
 import lombok.experimental.UtilityClass;
 
 import java.lang.reflect.InvocationTargetException;

@@ -1,10 +1,10 @@
-package it.unibo.aknightstale.controllers.utils;
+package it.unibo.aknightstale.controllers.factories;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.aknightstale.controllers.interfaces.Controller;
-import it.unibo.aknightstale.utils.ClassFactory;
+import it.unibo.aknightstale.factories.ClassFactory;
 import it.unibo.aknightstale.views.interfaces.View;
-import it.unibo.aknightstale.views.utils.ViewFactory;
+import it.unibo.aknightstale.views.factories.ViewFactory;
 import javafx.stage.Stage;
 
 import java.util.HashMap;

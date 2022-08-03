@@ -2,9 +2,9 @@ package it.unibo.aknightstale.views;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.aknightstale.controllers.interfaces.Controller;
-import it.unibo.aknightstale.controllers.utils.ControllerFactory;
+import it.unibo.aknightstale.controllers.factories.ControllerFactory;
 import it.unibo.aknightstale.views.interfaces.View;
-import it.unibo.aknightstale.views.utils.ViewFactory;
+import it.unibo.aknightstale.views.factories.ViewFactory;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.extension.ExtendWith;

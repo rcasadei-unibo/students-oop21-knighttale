@@ -1,4 +1,4 @@
-package it.unibo.aknightstale.exceptions;
+package it.unibo.aknightstale.views.exceptions;
 
 public class ViewLoadingException extends RuntimeException {
     private static final long serialVersionUID = 1L;

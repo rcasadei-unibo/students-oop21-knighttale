@@ -1,4 +1,4 @@
-package it.unibo.aknightstale.controllers.utils;
+package it.unibo.aknightstale.controllers.factories;
 
 import it.unibo.aknightstale.controllers.interfaces.Controller;
 import it.unibo.aknightstale.controllers.interfaces.MainMenuController;

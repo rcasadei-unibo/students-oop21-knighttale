@@ -1,4 +1,4 @@
-package it.unibo.aknightstale.views.utils;
+package it.unibo.aknightstale.views.factories;
 
 import it.unibo.aknightstale.controllers.interfaces.MainMenuController;
 import it.unibo.aknightstale.views.BaseViewTest;
