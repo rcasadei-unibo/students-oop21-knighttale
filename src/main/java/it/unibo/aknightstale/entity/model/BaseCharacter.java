@@ -5,16 +5,16 @@ import it.unibo.aknightstale.entity.EntityType;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 
-public abstract class BaseCharacter extends EntityModelImpl implements Character {
+public abstract class BaseCharacter extends EntityModelImpl implements CharacterModel {
 	
 	protected double damage;
 	protected double health;
 	protected double speed;
 	protected Direction direction;
 	
-	public BaseCharacter(Point2D position, Bounds bounds, EntityType type, boolean collidable,
+	public BaseCharacter(Bounds bounds, EntityType type, boolean collidable,
 						Direction dir, double dmg, double health, double speed) {
-		super(position, bounds, type, collidable);
+		super(bounds, type, collidable);
 		this.damage = dmg;
 		this.health = health;
 		this.speed = speed;
@@ -71,17 +71,30 @@ public abstract class BaseCharacter extends EntityModelImpl implements Character
 	public void setDirection(Direction dir) {
 		this.direction = dir;
 	}
+	
+	private void updatePosition(double x, double y) {
+		var pos = super.getPosition();
+		super.setPosition(new Point2D(pos.getX() + x, pos.getY() + y));
+	}
 
 	@Override
-	public abstract void goUp();
+	public void goUp() {
+		this.updatePosition(0, -speed);
+	}
 
 	@Override
-	public abstract void goDown();
+	public void goDown() {
+		this.updatePosition(0, speed);
+	}
 
 	@Override
-	public abstract void goLeft();
+	public void goLeft() {
+		this.updatePosition(-speed, 0);
+	}
 
 	@Override
-	public abstract void goRight();
+	public void goRight() {
+		this.updatePosition(speed, 0);
+	}
 
 }

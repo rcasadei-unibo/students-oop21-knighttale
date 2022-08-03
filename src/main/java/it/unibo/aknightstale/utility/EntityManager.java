@@ -28,4 +28,11 @@ public interface EntityManager {
      * @return The entity list
      */
     List<EntityController> getEntities();
+    
+    /**
+     * Get the collision manager
+     * 
+     * @return	The collision manager
+     */
+    CollisionManager getCollisionManager();
 }

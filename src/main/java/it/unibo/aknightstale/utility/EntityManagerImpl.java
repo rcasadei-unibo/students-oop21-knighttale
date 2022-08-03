@@ -8,10 +8,12 @@ import it.unibo.aknightstale.entity.controller.EntityController;
 public class EntityManagerImpl implements EntityManager {
 	
 	private List<EntityController> entities;
+	private final CollisionManager collision;
 
 	public EntityManagerImpl() {
 		super();
 		this.entities = new ArrayList<>();
+		this.collision = null;
 	}
 
 	@Override
@@ -34,6 +36,11 @@ public class EntityManagerImpl implements EntityManager {
 	@Override
 	public List<EntityController> getEntities() {
 		return this.entities;
+	}
+
+	@Override
+	public CollisionManager getCollisionManager() {
+		return this.collision;
 	}
 
 }
