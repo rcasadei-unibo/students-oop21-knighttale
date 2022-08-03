@@ -1,5 +1,5 @@
 package it.unibo.aknightstale.entity.model;
 
-public interface Character extends EntityModel, AttackEntity, LifeEntity, MovableEntity {
+public interface CharacterModel extends EntityModel, AttackEntity, LifeEntity, MovableEntity {
 
 }
