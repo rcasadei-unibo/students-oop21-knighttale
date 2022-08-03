@@ -5,10 +5,12 @@ import java.util.List;
 
 import it.unibo.aknightstale.entity.Direction;
 import it.unibo.aknightstale.entity.controller.EntityController;
+import it.unibo.aknightstale.entity.model.EntityModel;
+import it.unibo.aknightstale.entity.view.EntityView;
 
 public interface CollisionManager {
 	
-    List<EntityController> checkCollision(EntityController ec);
+    List<EntityController<? extends EntityModel, ? extends EntityView>> checkCollision(EntityController<? extends EntityModel, ? extends EntityView> ec);
 
-    List<Direction> canMove(EntityController ec);
+    List<Direction> canMove(EntityController<? extends EntityModel, ? extends EntityView> ec);
 }
