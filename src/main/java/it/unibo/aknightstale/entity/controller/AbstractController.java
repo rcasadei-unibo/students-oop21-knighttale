@@ -1,10 +1,10 @@
 package it.unibo.aknightstale.entity.controller;
 
 import it.unibo.aknightstale.entity.Direction;
-import it.unibo.aknightstale.entity.model.Character;
+import it.unibo.aknightstale.entity.model.CharacterModel;
 import it.unibo.aknightstale.entity.view.AnimatedEntityView;
 
-public abstract class AbstractController<M extends Character, V extends AnimatedEntityView> extends EntityControllerImpl<M, V> implements CharacterController<M, V> {
+public abstract class AbstractController<M extends CharacterModel, V extends AnimatedEntityView> extends EntityControllerImpl<M, V> implements CharacterController<M, V> {
 	
 	public AbstractController(M model, V view) {
 		super(model, view);
