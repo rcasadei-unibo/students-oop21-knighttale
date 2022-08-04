@@ -7,22 +7,23 @@ import it.unibo.aknightstale.App;
 import it.unibo.aknightstale.exceptions.ClassInstantiationException;
 import it.unibo.aknightstale.views.AlertType;
 import it.unibo.aknightstale.views.factories.Alert;
-import lombok.experimental.UtilityClass;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 
-@UtilityClass
-public class ClassFactory {
+public final class ClassFactory {
+    private ClassFactory() {
+    }
+
     /**
      * Creates an instance of the class implementing the interface.
      *
-     * @param interfaceClass Interface to search implementing classes to instantiate.
+     * @param interfaceClass   Interface to search implementing classes to instantiate.
      * @param acceptedPackages Packages to search implementing classes in.
+     * @param <T>              Interface type.
      * @return An instance of the class implementing the interface.
-     * @param <T> Interface type.
      */
-    public <T> T createInstanceFromInterface(final Class<T> interfaceClass, final String... acceptedPackages) {
+    public static <T> T createInstanceFromInterface(final Class<T> interfaceClass, final String... acceptedPackages) {
         String className;
         try (ScanResult scanResult = new ClassGraph()
                 .enableAllInfo()
@@ -48,7 +49,7 @@ public class ClassFactory {
         }
     }
 
-    private String[] absolutizePackageNames(final String[] packageNames) {
+    private static String[] absolutizePackageNames(final String[] packageNames) {
         return Arrays.stream(packageNames)
                 .map(packageName -> packageName.contains(App.APP_PACKAGE) ? packageName : App.APP_PACKAGE + "." + packageName)
                 .toArray(String[]::new);

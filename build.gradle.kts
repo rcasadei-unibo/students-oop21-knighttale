@@ -58,11 +58,6 @@ dependencies {
     testImplementation("org.assertj:assertj-core:3.23.1")
     testImplementation("org.testfx:testfx-junit5:4.0.16-alpha")
     testImplementation("org.testfx:openjfx-monocle:jdk-12.0.1+2")
-
-    compileOnly("org.projectlombok:lombok:1.18.24")
-    annotationProcessor("org.projectlombok:lombok:1.18.24")
-    testCompileOnly("org.projectlombok:lombok:1.18.24")
-    testAnnotationProcessor("org.projectlombok:lombok:1.18.24")
 }
 
 application {
