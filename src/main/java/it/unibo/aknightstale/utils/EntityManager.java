@@ -1,7 +1,7 @@
-package it.unibo.aknightstale.utility;
+package it.unibo.aknightstale.utils;
 
 
-import it.unibo.aknightstale.entity.EntityController;
+import it.unibo.aknightstale.models.entity.EntityController;
 
 public interface EntityManager {
     void update();

@@ -86,8 +86,8 @@
         <exclude name="AvoidLiteralsInIfCondition"/>
         <exclude name="BeanMembersShouldSerialize"/>
         <exclude name="DataflowAnomalyAnalysis"/>
-        <exclude name="DoNotCallSystemExit"/>
-        <exclude name="MissingBreakInSwitch"/>
+        <exclude name="DoNotTerminateVM"/>
+        <exclude name="ImplicitSwitchFallThrough"/>
         <exclude name="NonStaticInitializer"/>
         <exclude name="NullAssignment"/>
         <exclude name="ReturnEmptyArrayRatherThanNull"/>
