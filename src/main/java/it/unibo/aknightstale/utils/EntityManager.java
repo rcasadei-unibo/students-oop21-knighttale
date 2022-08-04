@@ -1,8 +1,12 @@
-package it.unibo.aknightstale.utility;
+package it.unibo.aknightstale.utils;
 
 import java.util.List;
 
+<<<<<<< HEAD:src/main/java/it/unibo/aknightstale/utility/EntityManager.java
 import it.unibo.aknightstale.entity.controller.EntityController;
+=======
+import it.unibo.aknightstale.models.entity.EntityController;
+>>>>>>> main:src/main/java/it/unibo/aknightstale/utils/EntityManager.java
 
 public interface EntityManager {
 	
