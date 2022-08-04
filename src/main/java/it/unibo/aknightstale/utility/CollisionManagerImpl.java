@@ -26,6 +26,7 @@ public class CollisionManagerImpl implements CollisionManager {
 	public List<EntityController<? extends EntityModel, ? extends EntityView>> checkCollision(EntityController<? extends EntityModel, ? extends EntityView> ec) {
 		return this.entities
 					.stream()
+					.filter(e -> !e.getModel().isCollidable())
 					.filter(e -> ec.getModel().getBounds().intersects(e.getModel().getBounds()))
 					.collect(Collectors.toList());
 	}
