@@ -1,22 +1,20 @@
 package it.unibo.aknightstale.controllers;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.aknightstale.controllers.interfaces.Controller;
 import it.unibo.aknightstale.views.interfaces.View;
-import lombok.AccessLevel;
-import lombok.Getter;
 
-@edu.umd.cs.findbugs.annotations.SuppressFBWarnings("EI_EXPOSE_REP2")
-// View must be passed as reference to allow view loader caching.
 public abstract class BaseController<V extends View<? extends Controller<V>>> implements Controller<V> {
     /**
      * The view associated to this controller.
      */
-    private @Getter(AccessLevel.PROTECTED) V view;
+    private V view;
 
     /**
      * Registers a view with this controller.
      * @param view the view to register.
      */
+    @SuppressFBWarnings("EI_EXPOSE_REP") // View must be passed as reference to allow view loader caching.
     @Override
     public void registerView(final V view) {
         this.view = view;
@@ -52,5 +50,15 @@ public abstract class BaseController<V extends View<? extends Controller<V>>> im
     @Override
     public void closeView() {
         this.getView().close();
+    }
+
+    /**
+     * Returns the view.
+     *
+     * @return the view.
+     */
+    @SuppressFBWarnings("EI_EXPOSE_REP") // View must be returned as reference to edit it.
+    public V getView() {
+        return this.view;
     }
 }

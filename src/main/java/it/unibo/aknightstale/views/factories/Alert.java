@@ -1,21 +1,22 @@
 package it.unibo.aknightstale.views.factories;
 
 import it.unibo.aknightstale.views.AlertType;
-import lombok.experimental.UtilityClass;
 
 import java.awt.HeadlessException;
 
-@UtilityClass
-public class Alert {
+public final class Alert {
+    private Alert() {
+    }
+
     /**
      * Shows an alert.
      *
-     * @param type Alert type.
-     * @param title Alert dialog title.
-     * @param header Alert header text.
+     * @param type    Alert type.
+     * @param title   Alert dialog title.
+     * @param header  Alert header text.
      * @param content Alert message.
      */
-    public void showAlert(final AlertType type, final String title, final String header, final String content) {
+    public static void showAlert(final AlertType type, final String title, final String header, final String content) {
         if (Boolean.getBoolean("headless") && type == AlertType.ERROR) {
             throw new HeadlessException(title + " - " + content);
         }
@@ -27,20 +28,22 @@ public class Alert {
 
     /**
      * Shows an alert with the given type, title, header and content.
-     * @param type Alert type.
+     *
+     * @param type    Alert type.
      * @param content Alert message.
      */
-    public void showAlert(final AlertType type, final String content) {
+    public static void showAlert(final AlertType type, final String content) {
         showAlert(type, "", "", content);
     }
 
     /**
      * Shows an alert with the given type, title, header and content.
-     * @param type Alert type.
-     * @param title Alert dialog title.
+     *
+     * @param type    Alert type.
+     * @param title   Alert dialog title.
      * @param content Alert text.
      */
-    public void showAlert(final AlertType type, final String title, final String content) {
+    public static void showAlert(final AlertType type, final String title, final String content) {
         showAlert(type, title, "", content);
     }
 }
