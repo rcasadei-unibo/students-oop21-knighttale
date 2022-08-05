@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import it.unibo.aknightstale.controllers.entity.EntityController;
-import it.unibo.aknightstale.entity.Direction;
-import it.unibo.aknightstale.entity.model.EntityModel;
-import it.unibo.aknightstale.entity.view.EntityView;
+import it.unibo.aknightstale.models.entity.Direction;
+import it.unibo.aknightstale.models.entity.EntityModel;
+import it.unibo.aknightstale.views.entity.EntityView;
 
 public class CollisionManagerImpl implements CollisionManager {
 	

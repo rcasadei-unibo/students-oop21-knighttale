@@ -1,11 +1,17 @@
 package it.unibo.aknightstale.utils;
 
 
+import java.util.List;
+
+import it.unibo.aknightstale.controllers.entity.EntityController;
 import it.unibo.aknightstale.models.entity.Direction;
-import it.unibo.aknightstale.models.entity.EntityController;
+import it.unibo.aknightstale.models.entity.EntityModel;
+import it.unibo.aknightstale.views.entity.EntityView;
 
 public interface CollisionManager {
-    EntityController[] checkCollision(EntityController ec);
+	
+	List<EntityController<? extends EntityModel, ? extends EntityView>> checkCollision(EntityController<? extends EntityModel, ? extends EntityView> ec);
 
-    Direction[] canMove(EntityController ec); //NOPMD - suppressed LinguisticNaming - Temporary - TODO: find a better name for this method
+	List<Direction> canMove(EntityController<? extends EntityModel, ? extends EntityView> ec);
+	
 }
