@@ -1,11 +1,11 @@
-package it.unibo.aknightstale.utility;
+package it.unibo.aknightstale.utils;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import it.unibo.aknightstale.controllers.entity.EntityController;
 import it.unibo.aknightstale.entity.Direction;
-import it.unibo.aknightstale.entity.controller.EntityController;
 import it.unibo.aknightstale.entity.model.EntityModel;
 import it.unibo.aknightstale.entity.view.EntityView;
 

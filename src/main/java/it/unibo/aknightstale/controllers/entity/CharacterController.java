@@ -1,7 +1,7 @@
-package it.unibo.aknightstale.entity.controller;
+package it.unibo.aknightstale.controllers.entity;
 
-import it.unibo.aknightstale.entity.model.CharacterModel;
-import it.unibo.aknightstale.entity.view.AnimatedEntityView;
+import it.unibo.aknightstale.models.entity.CharacterModel;
+import it.unibo.aknightstale.views.entity.AnimatedEntityView;
 
 public interface CharacterController<M extends CharacterModel, V extends AnimatedEntityView> extends EntityController<M, V> {
 	

@@ -1,11 +1,11 @@
-package it.unibo.aknightstale.entity.input;
+package it.unibo.aknightstale.models.entity.input;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import it.unibo.aknightstale.entity.controller.CharacterController;
-import it.unibo.aknightstale.entity.model.CharacterModel;
-import it.unibo.aknightstale.entity.view.AnimatedEntityView;
+import it.unibo.aknightstale.controllers.entity.CharacterController;
+import it.unibo.aknightstale.models.entity.CharacterModel;
+import it.unibo.aknightstale.views.entity.AnimatedEntityView;
 import javafx.scene.layout.Pane;
 
 public class InputPlayerImpl implements InputPlayer {

@@ -3,7 +3,7 @@ package it.unibo.aknightstale.utility;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.unibo.aknightstale.entity.controller.EntityController;
+import it.unibo.aknightstale.controllers.entity.EntityController;
 
 public class EntityManagerImpl implements EntityManager {
 	

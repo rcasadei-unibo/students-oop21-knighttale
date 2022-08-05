@@ -1,9 +1,9 @@
-package it.unibo.aknightstale.entity.controller;
+package it.unibo.aknightstale.controllers.entity;
 
-import it.unibo.aknightstale.entity.Direction;
-import it.unibo.aknightstale.entity.model.CharacterModel;
-import it.unibo.aknightstale.entity.view.AnimatedEntityView;
-import it.unibo.aknightstale.utility.EntityManager;
+import it.unibo.aknightstale.models.entity.CharacterModel;
+import it.unibo.aknightstale.models.entity.Direction;
+import it.unibo.aknightstale.utils.EntityManager;
+import it.unibo.aknightstale.views.entity.AnimatedEntityView;
 
 public abstract class AbstractController<M extends CharacterModel, V extends AnimatedEntityView> extends EntityControllerImpl<M, V> implements CharacterController<M, V> {
 	

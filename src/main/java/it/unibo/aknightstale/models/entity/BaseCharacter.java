@@ -1,7 +1,5 @@
-package it.unibo.aknightstale.entity.model;
+package it.unibo.aknightstale.models.entity;
 
-import it.unibo.aknightstale.entity.Direction;
-import it.unibo.aknightstale.entity.EntityType;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 

@@ -7,5 +7,5 @@ public interface AttackEntity {
 
     double getAttackRange();
 
-    void attack();
+    void attack(LifeEntity e);
 }

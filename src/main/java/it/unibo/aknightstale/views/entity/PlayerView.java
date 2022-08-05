@@ -1,7 +1,6 @@
-package it.unibo.aknightstale.entity.view;
+package it.unibo.aknightstale.views.entity;
 
-import it.unibo.aknightstale.entity.Direction;
-import it.unibo.aknightstale.entity.Status;
+import it.unibo.aknightstale.models.entity.Direction;
 import javafx.scene.image.Image;
 
 public class PlayerView extends CharacterView {

@@ -12,13 +12,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-import it.unibo.aknightstale.entity.controller.CharacterController;
-import it.unibo.aknightstale.entity.controller.PlayerController;
-import it.unibo.aknightstale.entity.model.CharacterModel;
-import it.unibo.aknightstale.entity.model.Player;
-import it.unibo.aknightstale.entity.view.AnimatedEntityView;
-import it.unibo.aknightstale.entity.view.PlayerView;
-import it.unibo.aknightstale.utility.EntityManagerImpl;
+import it.unibo.aknightstale.controllers.entity.CharacterController;
+import it.unibo.aknightstale.controllers.entity.PlayerController;
+import it.unibo.aknightstale.models.entity.CharacterModel;
+import it.unibo.aknightstale.models.entity.Player;
+import it.unibo.aknightstale.views.entity.AnimatedEntityView;
+import it.unibo.aknightstale.views.entity.PlayerView;
 
 public final class JavaFXApp extends Application {
 	

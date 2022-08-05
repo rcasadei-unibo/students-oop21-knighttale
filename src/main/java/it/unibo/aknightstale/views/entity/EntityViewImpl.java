@@ -1,4 +1,4 @@
-package it.unibo.aknightstale.entity.view;
+package it.unibo.aknightstale.views.entity;
 
 import javafx.scene.image.Image;
 

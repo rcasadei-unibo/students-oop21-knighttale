@@ -1,7 +1,7 @@
-package it.unibo.aknightstale.entity.controller;
+package it.unibo.aknightstale.controllers.entity;
 
-import it.unibo.aknightstale.entity.model.EntityModel;
-import it.unibo.aknightstale.entity.view.EntityView;
+import it.unibo.aknightstale.models.entity.EntityModel;
+import it.unibo.aknightstale.views.entity.EntityView;
 
 public class EntityControllerImpl<M extends EntityModel, V extends EntityView> implements EntityController<M, V> {
 	

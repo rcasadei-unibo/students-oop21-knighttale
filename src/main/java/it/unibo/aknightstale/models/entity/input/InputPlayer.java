@@ -1,4 +1,4 @@
-package it.unibo.aknightstale.entity.input;
+package it.unibo.aknightstale.models.entity.input;
 
 public interface InputPlayer {
 	
