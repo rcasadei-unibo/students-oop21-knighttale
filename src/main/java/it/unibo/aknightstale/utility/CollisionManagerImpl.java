@@ -43,7 +43,7 @@ public class CollisionManagerImpl implements CollisionManager {
 				var bounds = entity.getModel().getBounds();
 				return bounds.getMinX() == e.getMinX() + e.getWidth() &&
 						((bounds.getMinY() >= e.getMinY() && bounds.getMinY() < e.getMinY() + e.getHeight()) ||
-						  bounds.getMinY() + bounds.getHeight() > e.getMinY() && bounds.getMinY() + bounds.getHeight() <= e.getMinY());
+						  (bounds.getMinY() + bounds.getHeight() > e.getMinY() && bounds.getMinY() + bounds.getHeight() <= e.getMinY()));
 			})
 			.collect(Collectors.toList()).isEmpty()) {
 			list.add(Direction.RIGHT);
@@ -55,7 +55,7 @@ public class CollisionManagerImpl implements CollisionManager {
 					var bounds = entity.getModel().getBounds();
 					return bounds.getMinX() + bounds.getWidth() == e.getMinX() &&
 							((bounds.getMinY() >= e.getMinY() && bounds.getMinY() < e.getMinY() + e.getHeight()) ||
-							  bounds.getMinY() + bounds.getHeight() > e.getMinY() && bounds.getMinY() + bounds.getHeight() <= e.getMinY());
+							  (bounds.getMinY() + bounds.getHeight() > e.getMinY() && bounds.getMinY() + bounds.getHeight() <= e.getMinY()));
 				})
 				.collect(Collectors.toList()).isEmpty()) {
 			list.add(Direction.LEFT);
@@ -67,7 +67,7 @@ public class CollisionManagerImpl implements CollisionManager {
 					var bounds = entity.getModel().getBounds();
 					return bounds.getMinY() == e.getMinY() + e.getHeight() &&
 							((bounds.getMinX() >= e.getMinX() && bounds.getMinX() < e.getMinX() + e.getWidth()) ||
-							  bounds.getMinX() + bounds.getWidth() > e.getMinX() && bounds.getMinX() + bounds.getWidth() <= e.getMinX());
+							  (bounds.getMinX() + bounds.getWidth() > e.getMinX() && bounds.getMinX() + bounds.getWidth() <= e.getMinX()));
 				})
 				.collect(Collectors.toList()).isEmpty()) {
 			list.add(Direction.DOWN);
@@ -79,7 +79,7 @@ public class CollisionManagerImpl implements CollisionManager {
 					var bounds = entity.getModel().getBounds();
 					return bounds.getMinY() + bounds.getHeight() == e.getMinY() &&
 							((bounds.getMinX() >= e.getMinX() && bounds.getMinX() < e.getMinX() + e.getWidth()) ||
-							  bounds.getMinX() + bounds.getWidth() > e.getMinX() && bounds.getMinX() + bounds.getWidth() <= e.getMinX());
+							  (bounds.getMinX() + bounds.getWidth() > e.getMinX() && bounds.getMinX() + bounds.getWidth() <= e.getMinX()));
 				})
 				.collect(Collectors.toList()).isEmpty()) {
 			list.add(Direction.UP);
