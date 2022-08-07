@@ -6,16 +6,16 @@ import java.util.stream.Collectors;
 
 import it.unibo.aknightstale.entity.Direction;
 import it.unibo.aknightstale.entity.controller.EntityController;
-import it.unibo.aknightstale.entity.model.EntityModel;
-import it.unibo.aknightstale.entity.view.EntityView;
+import it.unibo.aknightstale.entity.model.CharacterModel;
+import it.unibo.aknightstale.entity.view.AnimatedEntityView;
 
 public class CollisionManagerImpl implements CollisionManager {
 	
-	private final List<EntityController<? extends EntityModel, ? extends EntityView>> entities;
+	private final List<EntityController<? super CharacterModel, ? super AnimatedEntityView>> entities;
 	private final double widthScreen;
 	private final double heightScreen;
 
-	public CollisionManagerImpl(List<EntityController<? extends EntityModel, ? extends EntityView>> entities, double wide, double height) {
+	public CollisionManagerImpl(List<EntityController<? super CharacterModel, ? super AnimatedEntityView>> entities, double wide, double height) {
 		super();
 		this.entities = entities;
 		this.widthScreen = wide;
@@ -23,7 +23,7 @@ public class CollisionManagerImpl implements CollisionManager {
 	}
 
 	@Override
-	public List<EntityController<? extends EntityModel, ? extends EntityView>> checkCollision(EntityController<? extends EntityModel, ? extends EntityView> ec) {
+	public List<EntityController<? super CharacterModel, ? super AnimatedEntityView>> checkCollision(EntityController<? super CharacterModel, ? super AnimatedEntityView> ec) {
 		return this.entities
 					.stream()
 					.filter(e -> e.getModel().isCollidable())
@@ -32,7 +32,7 @@ public class CollisionManagerImpl implements CollisionManager {
 	}
 	
 	@Override
-	public List<Direction> canMove(EntityController<? extends EntityModel, ? extends EntityView> ec) {
+	public List<Direction> canMove(EntityController<? super CharacterModel, ? super AnimatedEntityView> ec) {
 		var list = new ArrayList<Direction>();
 		var e = ec.getModel().getBounds();
 		
@@ -88,13 +88,13 @@ public class CollisionManagerImpl implements CollisionManager {
 	}
 
 	@Override
-	public List<List<EntityController<? extends EntityModel, ? extends EntityView>>> update() {
-		List<List<EntityController<? extends EntityModel, ? extends EntityView>>> list = new ArrayList<>();
+	public List<List<EntityController<? super CharacterModel, ? super AnimatedEntityView>>> update() {
+		List<List<EntityController<? super CharacterModel, ? super AnimatedEntityView>>> list = new ArrayList<>();
 		this.entities
 		.stream()
 		.filter(e -> e.getModel().isCollidable())
 		.forEach(e -> {
-			List<EntityController<? extends EntityModel, ? extends EntityView>> l = new ArrayList<>();
+			List<EntityController<? super CharacterModel, ? super AnimatedEntityView>> l = new ArrayList<>();
 			for (var en : this.entities) {
 				if(!e.equals(en) && en.getModel().isCollidable() && 
 					e.getModel().getBounds().intersects(en.getModel().getBounds())) {
