@@ -4,18 +4,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+<<<<<<< HEAD:src/main/java/it/unibo/aknightstale/utils/CollisionManagerImpl.java
 import it.unibo.aknightstale.controllers.entity.EntityController;
 import it.unibo.aknightstale.models.entity.Direction;
 import it.unibo.aknightstale.models.entity.EntityModel;
 import it.unibo.aknightstale.views.entity.EntityView;
+=======
+import it.unibo.aknightstale.entity.Direction;
+import it.unibo.aknightstale.entity.controller.EntityController;
+import it.unibo.aknightstale.entity.model.CharacterModel;
+import it.unibo.aknightstale.entity.view.AnimatedEntityView;
+>>>>>>> entityManager:src/main/java/it/unibo/aknightstale/utility/CollisionManagerImpl.java
 
 public class CollisionManagerImpl implements CollisionManager {
 	
-	private final List<EntityController<? extends EntityModel, ? extends EntityView>> entities;
+	private final List<EntityController<? super CharacterModel, ? super AnimatedEntityView>> entities;
 	private final double widthScreen;
 	private final double heightScreen;
 
-	public CollisionManagerImpl(List<EntityController<? extends EntityModel, ? extends EntityView>> entities, double wide, double height) {
+	public CollisionManagerImpl(List<EntityController<? super CharacterModel, ? super AnimatedEntityView>> entities, double wide, double height) {
 		super();
 		this.entities = entities;
 		this.widthScreen = wide;
@@ -23,22 +30,22 @@ public class CollisionManagerImpl implements CollisionManager {
 	}
 
 	@Override
-	public List<EntityController<? extends EntityModel, ? extends EntityView>> checkCollision(EntityController<? extends EntityModel, ? extends EntityView> ec) {
+	public List<EntityController<? super CharacterModel, ? super AnimatedEntityView>> checkCollision(EntityController<? super CharacterModel, ? super AnimatedEntityView> ec) {
 		return this.entities
 					.stream()
-					.filter(e -> !e.getModel().isCollidable())
+					.filter(e -> e.getModel().isCollidable())
 					.filter(e -> ec.getModel().getBounds().intersects(e.getModel().getBounds()))
 					.collect(Collectors.toList());
 	}
 	
 	@Override
-	public List<Direction> canMove(EntityController<? extends EntityModel, ? extends EntityView> ec) {
+	public List<Direction> canMove(EntityController<? super CharacterModel, ? super AnimatedEntityView> ec) {
 		var list = new ArrayList<Direction>();
 		var e = ec.getModel().getBounds();
 		
 		if((e.getMinX() + e.getWidth()) < this.widthScreen - 1.0 &&
 			this.entities.stream()
-			.filter(entity -> entity.getModel().isCollidable())
+			.filter(entity -> !entity.getModel().isCollidable())
 			.filter(entity -> {
 				var bounds = entity.getModel().getBounds();
 				return bounds.getMinX() == e.getMinX() + e.getWidth() &&
@@ -50,7 +57,7 @@ public class CollisionManagerImpl implements CollisionManager {
 		}
 		if(e.getMinX() > 0 &&
 				this.entities.stream()
-				.filter(entity -> entity.getModel().isCollidable())
+				.filter(entity -> !entity.getModel().isCollidable())
 				.filter(entity -> {
 					var bounds = entity.getModel().getBounds();
 					return bounds.getMinX() + bounds.getWidth() == e.getMinX() &&
@@ -62,7 +69,7 @@ public class CollisionManagerImpl implements CollisionManager {
 		}
 		if((e.getMinY() + e.getHeight()) < this.heightScreen - 1.0 &&
 				this.entities.stream()
-				.filter(entity -> entity.getModel().isCollidable())
+				.filter(entity -> !entity.getModel().isCollidable())
 				.filter(entity -> {
 					var bounds = entity.getModel().getBounds();
 					return bounds.getMinY() == e.getMinY() + e.getHeight() &&
@@ -74,7 +81,7 @@ public class CollisionManagerImpl implements CollisionManager {
 		}
 		if(e.getMinY() > 0 &&
 				this.entities.stream()
-				.filter(entity -> entity.getModel().isCollidable())
+				.filter(entity -> !entity.getModel().isCollidable())
 				.filter(entity -> {
 					var bounds = entity.getModel().getBounds();
 					return bounds.getMinY() + bounds.getHeight() == e.getMinY() &&
@@ -84,6 +91,30 @@ public class CollisionManagerImpl implements CollisionManager {
 				.collect(Collectors.toList()).isEmpty()) {
 			list.add(Direction.UP);
 		}
+		return list;
+	}
+
+	@Override
+	public List<List<EntityController<? super CharacterModel, ? super AnimatedEntityView>>> update() {
+		List<List<EntityController<? super CharacterModel, ? super AnimatedEntityView>>> list = new ArrayList<>();
+		this.entities
+		.stream()
+		.filter(e -> e.getModel().isCollidable())
+		.forEach(e -> {
+			List<EntityController<? super CharacterModel, ? super AnimatedEntityView>> l = new ArrayList<>();
+			for (var en : this.entities) {
+				if(!e.equals(en) && en.getModel().isCollidable() && 
+					e.getModel().getBounds().intersects(en.getModel().getBounds())) {
+					l.add(en);
+					if(!l.contains(e)) {
+						l.add(e);
+					}
+				}
+			}
+			if(!l.isEmpty()) {
+				list.add(l);
+			}
+		});
 		return list;
 	}
 
