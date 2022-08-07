@@ -3,33 +3,37 @@ package it.unibo.aknightstale.utility;
 import java.util.List;
 
 import it.unibo.aknightstale.entity.controller.EntityController;
-import it.unibo.aknightstale.entity.model.Character;
+import it.unibo.aknightstale.entity.model.CharacterModel;
 import it.unibo.aknightstale.entity.view.AnimatedEntityView;
 
 public interface EntityManager {
-	
-    void update();
+	/**
+	 * Check the collisions between all characters
+	 * 
+	 * @return	A list of lists of characters who colliding
+	 */
+	List<List<EntityController<? super CharacterModel, ? super AnimatedEntityView>>> update();
 
     /**
      * Add a new entity in the entity list if it is not already present
      * 
      * @param ec	The new entity that will be added if it is not already present
      */
-    void addEntity(EntityController<? super Character, ? super AnimatedEntityView> ec);
+    void addEntity(EntityController<? super CharacterModel, ? super AnimatedEntityView> ec);
     
     /**
      * Remove a entity from the entity list if it is present
      * 
      * @param ec	The entity will be removed if it is present
      */
-    void removeEntity(EntityController<? super Character, ? super AnimatedEntityView> ec);
+    void removeEntity(EntityController<? super CharacterModel, ? super AnimatedEntityView> ec);
 
     /**
      * Get the entity list
      * 
      * @return The entity list
      */
-    List<EntityController<? super Character, ? super AnimatedEntityView>> getEntities();
+    List<EntityController<? super CharacterModel, ? super AnimatedEntityView>> getEntities();
     
     /**
      * Get the collision manager
@@ -37,4 +41,11 @@ public interface EntityManager {
      * @return	The collision manager
      */
     CollisionManager getCollisionManager();
+    
+    /**
+     * Set the collision manager
+     * 
+     * @param The collision manager
+     */
+    void setCollisionManager(CollisionManager collision);
 }
