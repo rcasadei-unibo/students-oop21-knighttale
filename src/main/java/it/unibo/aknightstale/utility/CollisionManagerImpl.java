@@ -26,7 +26,7 @@ public class CollisionManagerImpl implements CollisionManager {
 	public List<EntityController<? extends EntityModel, ? extends EntityView>> checkCollision(EntityController<? extends EntityModel, ? extends EntityView> ec) {
 		return this.entities
 					.stream()
-					.filter(e -> !e.getModel().isCollidable())
+					.filter(e -> e.getModel().isCollidable())
 					.filter(e -> ec.getModel().getBounds().intersects(e.getModel().getBounds()))
 					.collect(Collectors.toList());
 	}
@@ -38,7 +38,7 @@ public class CollisionManagerImpl implements CollisionManager {
 		
 		if((e.getMinX() + e.getWidth()) < this.widthScreen - 1.0 &&
 			this.entities.stream()
-			.filter(entity -> entity.getModel().isCollidable())
+			.filter(entity -> !entity.getModel().isCollidable())
 			.filter(entity -> {
 				var bounds = entity.getModel().getBounds();
 				return bounds.getMinX() == e.getMinX() + e.getWidth() &&
@@ -50,7 +50,7 @@ public class CollisionManagerImpl implements CollisionManager {
 		}
 		if(e.getMinX() > 0 &&
 				this.entities.stream()
-				.filter(entity -> entity.getModel().isCollidable())
+				.filter(entity -> !entity.getModel().isCollidable())
 				.filter(entity -> {
 					var bounds = entity.getModel().getBounds();
 					return bounds.getMinX() + bounds.getWidth() == e.getMinX() &&
@@ -62,7 +62,7 @@ public class CollisionManagerImpl implements CollisionManager {
 		}
 		if((e.getMinY() + e.getHeight()) < this.heightScreen - 1.0 &&
 				this.entities.stream()
-				.filter(entity -> entity.getModel().isCollidable())
+				.filter(entity -> !entity.getModel().isCollidable())
 				.filter(entity -> {
 					var bounds = entity.getModel().getBounds();
 					return bounds.getMinY() == e.getMinY() + e.getHeight() &&
@@ -74,7 +74,7 @@ public class CollisionManagerImpl implements CollisionManager {
 		}
 		if(e.getMinY() > 0 &&
 				this.entities.stream()
-				.filter(entity -> entity.getModel().isCollidable())
+				.filter(entity -> !entity.getModel().isCollidable())
 				.filter(entity -> {
 					var bounds = entity.getModel().getBounds();
 					return bounds.getMinY() + bounds.getHeight() == e.getMinY() &&
@@ -84,6 +84,30 @@ public class CollisionManagerImpl implements CollisionManager {
 				.collect(Collectors.toList()).isEmpty()) {
 			list.add(Direction.UP);
 		}
+		return list;
+	}
+
+	@Override
+	public List<List<EntityController<? extends EntityModel, ? extends EntityView>>> update() {
+		List<List<EntityController<? extends EntityModel, ? extends EntityView>>> list = new ArrayList<>();
+		this.entities
+		.stream()
+		.filter(e -> e.getModel().isCollidable())
+		.forEach(e -> {
+			List<EntityController<? extends EntityModel, ? extends EntityView>> l = new ArrayList<>();
+			for (var en : this.entities) {
+				if(!e.equals(en) && en.getModel().isCollidable() && 
+					e.getModel().getBounds().intersects(en.getModel().getBounds())) {
+					l.add(en);
+					if(!l.contains(e)) {
+						l.add(e);
+					}
+				}
+			}
+			if(!l.isEmpty()) {
+				list.add(l);
+			}
+		});
 		return list;
 	}
 

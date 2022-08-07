@@ -13,4 +13,6 @@ public interface CollisionManager {
     List<EntityController<? extends EntityModel, ? extends EntityView>> checkCollision(EntityController<? extends EntityModel, ? extends EntityView> ec);
 
     List<Direction> canMove(EntityController<? extends EntityModel, ? extends EntityView> ec);
+    
+    List<List<EntityController<? extends EntityModel, ? extends EntityView>>> update();
 }
