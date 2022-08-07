@@ -1,9 +1,9 @@
 package it.unibo.aknightstale.entity.controller;
 
-import it.unibo.aknightstale.entity.model.Character;
+import it.unibo.aknightstale.entity.model.CharacterModel;
 import it.unibo.aknightstale.entity.view.AnimatedEntityView;
 
-public interface CharacterController<M extends Character, V extends AnimatedEntityView> extends EntityController<M, V> {
+public interface CharacterController<M extends CharacterModel, V extends AnimatedEntityView> extends EntityController<M, V> {
 	
 	void moveRight();
 	
