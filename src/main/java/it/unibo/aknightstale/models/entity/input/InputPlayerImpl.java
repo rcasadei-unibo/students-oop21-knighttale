@@ -6,14 +6,14 @@ import java.util.List;
 import it.unibo.aknightstale.controllers.entity.CharacterController;
 import it.unibo.aknightstale.models.entity.CharacterModel;
 import it.unibo.aknightstale.views.entity.AnimatedEntityView;
-import javafx.scene.layout.Pane;
+import javafx.scene.Scene;
 
 public class InputPlayerImpl implements InputPlayer {
 	
 	private final CharacterController<CharacterModel, AnimatedEntityView> player;
 	private List<String> keyPressed;
 
-	public InputPlayerImpl(CharacterController<CharacterModel, AnimatedEntityView> player, Pane scene) {
+	public InputPlayerImpl(CharacterController<CharacterModel, AnimatedEntityView> player, Scene scene) {
 		super();
 		this.player = player;
 		this.keyPressed = new ArrayList<>();

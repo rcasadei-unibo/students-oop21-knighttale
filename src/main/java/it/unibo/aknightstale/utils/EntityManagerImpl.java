@@ -1,15 +1,11 @@
-package it.unibo.aknightstale.utility;
+package it.unibo.aknightstale.utils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-<<<<<<< HEAD:src/main/java/it/unibo/aknightstale/utils/EntityManagerImpl.java
 import it.unibo.aknightstale.controllers.entity.EntityController;
-=======
-import it.unibo.aknightstale.entity.controller.EntityController;
-import it.unibo.aknightstale.entity.model.CharacterModel;
-import it.unibo.aknightstale.entity.view.AnimatedEntityView;
->>>>>>> entityManager:src/main/java/it/unibo/aknightstale/utility/EntityManagerImpl.java
+import it.unibo.aknightstale.models.entity.CharacterModel;
+import it.unibo.aknightstale.views.entity.AnimatedEntityView;
 
 public class EntityManagerImpl implements EntityManager {
 	

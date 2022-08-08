@@ -1,6 +1,6 @@
 package it.unibo.aknightstale;
 
-import it.unibo.aknightstale.views.JavaFXApp;
+//import it.unibo.aknightstale.views.JavaFXApp;
 import javafx.application.Application;
 import net.harawata.appdirs.AppDirsFactory;
 

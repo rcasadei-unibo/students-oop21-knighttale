@@ -4,17 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-<<<<<<< HEAD:src/main/java/it/unibo/aknightstale/utils/CollisionManagerImpl.java
 import it.unibo.aknightstale.controllers.entity.EntityController;
 import it.unibo.aknightstale.models.entity.Direction;
-import it.unibo.aknightstale.models.entity.EntityModel;
-import it.unibo.aknightstale.views.entity.EntityView;
-=======
-import it.unibo.aknightstale.entity.Direction;
-import it.unibo.aknightstale.entity.controller.EntityController;
-import it.unibo.aknightstale.entity.model.CharacterModel;
-import it.unibo.aknightstale.entity.view.AnimatedEntityView;
->>>>>>> entityManager:src/main/java/it/unibo/aknightstale/utility/CollisionManagerImpl.java
+import it.unibo.aknightstale.models.entity.CharacterModel;
+import it.unibo.aknightstale.views.entity.AnimatedEntityView;
 
 public class CollisionManagerImpl implements CollisionManager {
 	
@@ -39,7 +32,7 @@ public class CollisionManagerImpl implements CollisionManager {
 	}
 	
 	@Override
-	public List<Direction> canMove(EntityController<? super CharacterModel, ? super AnimatedEntityView> ec) {
+	public List<Direction> canMove(EntityController<? extends CharacterModel, ? extends AnimatedEntityView> ec) {
 		var list = new ArrayList<Direction>();
 		var e = ec.getModel().getBounds();
 		

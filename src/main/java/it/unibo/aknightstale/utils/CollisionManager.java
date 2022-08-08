@@ -5,13 +5,15 @@ import java.util.List;
 
 import it.unibo.aknightstale.controllers.entity.EntityController;
 import it.unibo.aknightstale.models.entity.Direction;
-import it.unibo.aknightstale.models.entity.EntityModel;
-import it.unibo.aknightstale.views.entity.EntityView;
+import it.unibo.aknightstale.models.entity.CharacterModel;
+import it.unibo.aknightstale.views.entity.AnimatedEntityView;
 
 public interface CollisionManager {
 	
-	List<EntityController<? extends EntityModel, ? extends EntityView>> checkCollision(EntityController<? extends EntityModel, ? extends EntityView> ec);
+	List<EntityController<? super CharacterModel, ? super AnimatedEntityView>> checkCollision(EntityController<? super CharacterModel, ? super AnimatedEntityView> ec);
 
-	List<Direction> canMove(EntityController<? extends EntityModel, ? extends EntityView> ec);
+    List<Direction> canMove(EntityController<? extends CharacterModel, ? extends AnimatedEntityView> ec);
+    
+    List<List<EntityController<? super CharacterModel, ? super AnimatedEntityView>>> update();
 	
 }

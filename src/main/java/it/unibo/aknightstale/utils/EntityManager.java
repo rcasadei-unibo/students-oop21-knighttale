@@ -2,16 +2,9 @@ package it.unibo.aknightstale.utils;
 
 import java.util.List;
 
-<<<<<<< HEAD:src/main/java/it/unibo/aknightstale/utility/EntityManager.java
-import it.unibo.aknightstale.entity.controller.EntityController;
-<<<<<<< HEAD:src/main/java/it/unibo/aknightstale/utils/EntityManager.java
-=======
-import it.unibo.aknightstale.models.entity.EntityController;
->>>>>>> main:src/main/java/it/unibo/aknightstale/utils/EntityManager.java
-=======
-import it.unibo.aknightstale.entity.model.CharacterModel;
-import it.unibo.aknightstale.entity.view.AnimatedEntityView;
->>>>>>> entityManager:src/main/java/it/unibo/aknightstale/utility/EntityManager.java
+import it.unibo.aknightstale.controllers.entity.EntityController;
+import it.unibo.aknightstale.models.entity.CharacterModel;
+import it.unibo.aknightstale.views.entity.AnimatedEntityView;
 
 public interface EntityManager {
 	/**

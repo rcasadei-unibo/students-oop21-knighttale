@@ -47,7 +47,7 @@ public class PlayerView extends CharacterView {
 	            this.frameNum = 0; 
 	        }
 		} else {
-			super.image = new Image(url + this.status + "_" + dir + ".png");
+			super.image = new Image(url + "player_" + this.status + "_" + dir + ".png");
 		}
 	}
 
