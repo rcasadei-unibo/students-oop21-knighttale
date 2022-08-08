@@ -10,10 +10,10 @@ import javafx.scene.Scene;
 
 public class InputPlayerImpl implements InputPlayer {
 	
-	private final CharacterController<CharacterModel, AnimatedEntityView> player;
+	private final CharacterController<? extends CharacterModel, ? extends AnimatedEntityView> player;
 	private List<String> keyPressed;
 
-	public InputPlayerImpl(CharacterController<CharacterModel, AnimatedEntityView> player, Scene scene) {
+	public InputPlayerImpl(CharacterController<? extends CharacterModel, ? extends AnimatedEntityView> player, Scene scene) {
 		super();
 		this.player = player;
 		this.keyPressed = new ArrayList<>();

@@ -16,6 +16,11 @@ public class EntityManagerImpl implements EntityManager {
 		super();
 		this.entities = new ArrayList<>();
 	}
+	
+	public EntityManagerImpl(List<EntityController<? super CharacterModel, ? super AnimatedEntityView>> l) {
+		super();
+		this.entities = l;
+	}
 
 	@Override
 	public List<List<EntityController<? super CharacterModel, ? super AnimatedEntityView>>> update() {
