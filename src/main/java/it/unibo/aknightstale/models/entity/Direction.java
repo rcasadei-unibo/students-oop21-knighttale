@@ -17,9 +17,10 @@ public enum Direction {
      * West direction.
      */
     DOWN;
-    
+
     @Override
     public String toString() {
-    	return this.name().toLowerCase();
+        var str = this.name().toLowerCase();
+    	return str;
     }
 }

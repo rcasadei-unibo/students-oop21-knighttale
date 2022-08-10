@@ -1,5 +1,23 @@
 package it.unibo.aknightstale.views.entity;
 
+/**
+ *
+ * The entity status.
+ *
+ */
 public enum Status {
-	IDLE, WALK, ATTACK, DIED;
+    /**
+     * Idle status.
+     */
+    IDLE,
+
+    /**
+     * Walk status.
+     */
+    WALK,
+
+    /**
+     * Attack status.
+     */
+    ATTACK;
 }

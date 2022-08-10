@@ -8,44 +8,44 @@ import it.unibo.aknightstale.views.entity.AnimatedEntityView;
 
 public interface EntityManager {
 	/**
-	 * Check the collisions between all characters
+	 * Checks the collisions between all characters.
 	 * 
-	 * @return	A list of lists of characters who colliding
+	 * @return	A list of lists of characters who colliding with each other.
 	 */
 	List<List<EntityController<? super CharacterModel, ? super AnimatedEntityView>>> update();
 
     /**
-     * Add a new entity in the entity list if it is not already present
+     * Adds a new entity in the list of entities if it is not already present.
      * 
-     * @param ec	The new entity that will be added if it is not already present
+     * @param ec	the new entity that will be added if it is not already present.
      */
     void addEntity(EntityController<? super CharacterModel, ? super AnimatedEntityView> ec);
-    
+
     /**
-     * Remove a entity from the entity list if it is present
+     * Removes a entity from the entity list if it is present.
      * 
-     * @param ec	The entity will be removed if it is present
+     * @param ec	the entity will be removed if it is present.
      */
     void removeEntity(EntityController<? super CharacterModel, ? super AnimatedEntityView> ec);
 
     /**
-     * Get the entity list
+     * Gets the entity list.
      * 
-     * @return The entity list
+     * @return the entity list.
      */
     List<EntityController<? super CharacterModel, ? super AnimatedEntityView>> getEntities();
-    
+
     /**
-     * Get the collision manager
+     * Gets the collision manager.
      * 
-     * @return	The collision manager
+     * @return	the collision manager.
      */
     CollisionManager getCollisionManager();
-    
+
     /**
-     * Set the collision manager
+     * Sets the collision manager.
      * 
-     * @param The collision manager
+     * @param the collision manager.
      */
     void setCollisionManager(CollisionManager collision);
 }

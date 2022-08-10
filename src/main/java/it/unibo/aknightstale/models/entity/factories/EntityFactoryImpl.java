@@ -11,12 +11,9 @@ import it.unibo.aknightstale.views.entity.PlayerView;
 import javafx.geometry.Point2D;
 
 public class EntityFactoryImpl implements EntityFactory {
-	
-	private final static Point2D spawn_player = new Point2D(100, 100);
-	private final static double damage = 50.0;
-	private final static double health = 100.0;
-	private final static double speed = 1.0;
-	
+
+	final static Point2D SPAWN_PLAYER = new Point2D(100, 100);
+
 	private final EntityManager manager;
 
 	public EntityFactoryImpl() {
@@ -31,8 +28,8 @@ public class EntityFactoryImpl implements EntityFactory {
 
 	@Override
 	public CharacterController<? extends CharacterModel, ? extends AnimatedEntityView> getPlayer() {
-		var player = new PlayerController<CharacterModel, AnimatedEntityView>(
-					new Player(spawn_player, damage, health, speed),
+		final var player = new PlayerController<CharacterModel, AnimatedEntityView>(
+					new Player(SPAWN_PLAYER),
 					new PlayerView(),
 					getEntityManager());
 		this.manager.addEntity(player);

@@ -4,11 +4,12 @@ import it.unibo.aknightstale.models.entity.EntityModel;
 import it.unibo.aknightstale.views.entity.EntityView;
 
 public class EntityControllerImpl<M extends EntityModel, V extends EntityView> implements EntityController<M, V> {
-	
+
 	protected final M model;
+
 	protected final V view;
-	
-	public EntityControllerImpl(M model, V view) {
+
+	public EntityControllerImpl(final M model, final V view) {
 		super();
 		this.model = model;
 		this.view = view;

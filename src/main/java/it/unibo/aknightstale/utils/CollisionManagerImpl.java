@@ -10,12 +10,12 @@ import it.unibo.aknightstale.models.entity.CharacterModel;
 import it.unibo.aknightstale.views.entity.AnimatedEntityView;
 
 public class CollisionManagerImpl implements CollisionManager {
-	
+
 	private final List<EntityController<? super CharacterModel, ? super AnimatedEntityView>> entities;
 	private final double widthScreen;
 	private final double heightScreen;
 
-	public CollisionManagerImpl(List<EntityController<? super CharacterModel, ? super AnimatedEntityView>> entities, double wide, double height) {
+	public CollisionManagerImpl(final List<EntityController<? super CharacterModel, ? super AnimatedEntityView>> entities, final double wide, final double height) {
 		super();
 		this.entities = entities;
 		this.widthScreen = wide;
@@ -23,63 +23,63 @@ public class CollisionManagerImpl implements CollisionManager {
 	}
 
 	@Override
-	public List<EntityController<? super CharacterModel, ? super AnimatedEntityView>> checkCollision(EntityController<? super CharacterModel, ? super AnimatedEntityView> ec) {
+	public List<EntityController<? super CharacterModel, ? super AnimatedEntityView>> checkCollision(final EntityController<? super CharacterModel, ? super AnimatedEntityView> ec) {
 		return this.entities
-					.stream()
-					.filter(e -> e.getModel().isCollidable())
-					.filter(e -> ec.getModel().getBounds().intersects(e.getModel().getBounds()))
-					.collect(Collectors.toList());
+				.stream()
+				.filter(e -> e.getModel().isCollidable())
+				.filter(e -> ec.getModel().getBounds().intersects(e.getModel().getBounds()))
+				.collect(Collectors.toList());
 	}
-	
+
 	@Override
-	public List<Direction> canMove(EntityController<? extends CharacterModel, ? extends AnimatedEntityView> ec) {
-		var list = new ArrayList<Direction>();
-		var e = ec.getModel().getBounds();
-		
-		if((e.getMinX() + e.getWidth()) < this.widthScreen - 1.0 &&
-			this.entities.stream()
-			.filter(entity -> !entity.getModel().isCollidable())
-			.filter(entity -> {
-				var bounds = entity.getModel().getBounds();
-				return bounds.getMinX() == e.getMinX() + e.getWidth() &&
-						((bounds.getMinY() >= e.getMinY() && bounds.getMinY() < e.getMinY() + e.getHeight()) ||
-						  (bounds.getMinY() + bounds.getHeight() > e.getMinY() && bounds.getMinY() + bounds.getHeight() <= e.getMinY()));
-			})
-			.collect(Collectors.toList()).isEmpty()) {
-			list.add(Direction.RIGHT);
-		}
-		if(e.getMinX() > 0 &&
-				this.entities.stream()
+	public List<Direction> checkDirections(final EntityController<? extends CharacterModel, ? extends AnimatedEntityView> ec) {
+		final var list = new ArrayList<Direction>();
+		final var e = ec.getModel().getBounds();
+
+		if ((e.getMinX() + e.getWidth()) < this.widthScreen - 1.0 
+				&& this.entities.stream()
 				.filter(entity -> !entity.getModel().isCollidable())
 				.filter(entity -> {
-					var bounds = entity.getModel().getBounds();
-					return bounds.getMinX() + bounds.getWidth() == e.getMinX() &&
-							((bounds.getMinY() >= e.getMinY() && bounds.getMinY() < e.getMinY() + e.getHeight()) ||
-							  (bounds.getMinY() + bounds.getHeight() > e.getMinY() && bounds.getMinY() + bounds.getHeight() <= e.getMinY()));
+					final var bounds = entity.getModel().getBounds();
+					return bounds.getMinX() == e.getMinX() + e.getWidth() 
+					&& ((bounds.getMinY() >= e.getMinY() && bounds.getMinY() < e.getMinY() + e.getHeight()) 
+							|| (bounds.getMinY() + bounds.getHeight() > e.getMinY() && bounds.getMinY() + bounds.getHeight() <= e.getMinY()));
+				})
+				.collect(Collectors.toList()).isEmpty()) {
+			list.add(Direction.RIGHT);
+		}
+		if (e.getMinX() > 0 
+				&& this.entities.stream()
+				.filter(entity -> !entity.getModel().isCollidable())
+				.filter(entity -> {
+					final var bounds = entity.getModel().getBounds();
+					return bounds.getMinX() + bounds.getWidth() == e.getMinX() 
+							&& ((bounds.getMinY() >= e.getMinY() && bounds.getMinY() < e.getMinY() + e.getHeight()) 
+									|| (bounds.getMinY() + bounds.getHeight() > e.getMinY() && bounds.getMinY() + bounds.getHeight() <= e.getMinY()));
 				})
 				.collect(Collectors.toList()).isEmpty()) {
 			list.add(Direction.LEFT);
 		}
-		if((e.getMinY() + e.getHeight()) < this.heightScreen - 1.0 &&
-				this.entities.stream()
+		if ((e.getMinY() + e.getHeight()) < this.heightScreen - 1.0 
+				&& this.entities.stream()
 				.filter(entity -> !entity.getModel().isCollidable())
 				.filter(entity -> {
-					var bounds = entity.getModel().getBounds();
-					return bounds.getMinY() == e.getMinY() + e.getHeight() &&
-							((bounds.getMinX() >= e.getMinX() && bounds.getMinX() < e.getMinX() + e.getWidth()) ||
-							  (bounds.getMinX() + bounds.getWidth() > e.getMinX() && bounds.getMinX() + bounds.getWidth() <= e.getMinX()));
+					final var bounds = entity.getModel().getBounds();
+					return bounds.getMinY() == e.getMinY() + e.getHeight() 
+					&& ((bounds.getMinX() >= e.getMinX() && bounds.getMinX() < e.getMinX() + e.getWidth()) 
+							|| (bounds.getMinX() + bounds.getWidth() > e.getMinX() && bounds.getMinX() + bounds.getWidth() <= e.getMinX()));
 				})
 				.collect(Collectors.toList()).isEmpty()) {
 			list.add(Direction.DOWN);
 		}
-		if(e.getMinY() > 0 &&
-				this.entities.stream()
+		if (e.getMinY() > 0 
+				&& this.entities.stream()
 				.filter(entity -> !entity.getModel().isCollidable())
 				.filter(entity -> {
-					var bounds = entity.getModel().getBounds();
-					return bounds.getMinY() + bounds.getHeight() == e.getMinY() &&
-							((bounds.getMinX() >= e.getMinX() && bounds.getMinX() < e.getMinX() + e.getWidth()) ||
-							  (bounds.getMinX() + bounds.getWidth() > e.getMinX() && bounds.getMinX() + bounds.getWidth() <= e.getMinX()));
+					final var bounds = entity.getModel().getBounds();
+					return bounds.getMinY() + bounds.getHeight() == e.getMinY() 
+							&& ((bounds.getMinX() >= e.getMinX() && bounds.getMinX() < e.getMinX() + e.getWidth()) 
+									|| (bounds.getMinX() + bounds.getWidth() > e.getMinX() && bounds.getMinX() + bounds.getWidth() <= e.getMinX()));
 				})
 				.collect(Collectors.toList()).isEmpty()) {
 			list.add(Direction.UP);
@@ -89,22 +89,22 @@ public class CollisionManagerImpl implements CollisionManager {
 
 	@Override
 	public List<List<EntityController<? super CharacterModel, ? super AnimatedEntityView>>> update() {
-		List<List<EntityController<? super CharacterModel, ? super AnimatedEntityView>>> list = new ArrayList<>();
+		final List<List<EntityController<? super CharacterModel, ? super AnimatedEntityView>>> list = new ArrayList<>();
 		this.entities
 		.stream()
 		.filter(e -> e.getModel().isCollidable())
 		.forEach(e -> {
-			List<EntityController<? super CharacterModel, ? super AnimatedEntityView>> l = new ArrayList<>();
-			for (var en : this.entities) {
-				if(!e.equals(en) && en.getModel().isCollidable() && 
-					e.getModel().getBounds().intersects(en.getModel().getBounds())) {
+			final List<EntityController<? super CharacterModel, ? super AnimatedEntityView>> l = new ArrayList<>();
+			for (final var en : this.entities) {
+				if(!e.equals(en) && en.getModel().isCollidable()
+						&& e.getModel().getBounds().intersects(en.getModel().getBounds())) {
 					l.add(en);
-					if(!l.contains(e)) {
+					if (!l.contains(e)) {
 						l.add(e);
 					}
 				}
 			}
-			if(!l.isEmpty()) {
+			if (!l.isEmpty()) {
 				list.add(l);
 			}
 		});

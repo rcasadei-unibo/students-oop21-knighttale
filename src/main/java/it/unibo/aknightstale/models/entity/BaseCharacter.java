@@ -4,14 +4,14 @@ import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 
 public abstract class BaseCharacter extends EntityModelImpl implements CharacterModel {
-	
+
 	protected double damage;
 	protected double health;
 	protected double speed;
 	protected Direction direction;
 	
-	public BaseCharacter(Bounds bounds, EntityType type, boolean collidable,
-						Direction dir, double dmg, double health, double speed) {
+	public BaseCharacter(final Bounds bounds, final EntityType type, final boolean collidable,
+						final Direction dir, final double dmg, final double health, final double speed) {
 		super(bounds, type, collidable);
 		this.damage = dmg;
 		this.health = health;
@@ -25,7 +25,7 @@ public abstract class BaseCharacter extends EntityModelImpl implements Character
 	}
 
 	@Override
-	public void setDamage(double dmg) {
+	public void setDamage(final double dmg) {
 		this.damage = dmg;
 	}
 
@@ -33,10 +33,10 @@ public abstract class BaseCharacter extends EntityModelImpl implements Character
 	public abstract double getAttackRange();
 
 	@Override
-	public abstract void attack(LifeEntity e);
+	public abstract void attack(final LifeEntity e);
 
 	@Override
-	public void setHealth(double health) {
+	public void setHealth(final double health) {
 		this.health = health;
 	}
 
@@ -56,7 +56,7 @@ public abstract class BaseCharacter extends EntityModelImpl implements Character
 	}
 
 	@Override
-	public void setSpeed(double speed) {
+	public void setSpeed(final double speed) {
 		this.speed = speed;
 	}
 
@@ -66,11 +66,11 @@ public abstract class BaseCharacter extends EntityModelImpl implements Character
 	}
 	
 	@Override
-	public void setDirection(Direction dir) {
+	public void setDirection(final Direction dir) {
 		this.direction = dir;
 	}
 	
-	private void updatePosition(double x, double y) {
+	private void updatePosition(final double x, final double y) {
 		var pos = super.getPosition();
 		super.setPosition(new Point2D(pos.getX() + x, pos.getY() + y));
 	}

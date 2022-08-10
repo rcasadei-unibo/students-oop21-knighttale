@@ -5,12 +5,12 @@ import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 
 public class EntityModelImpl implements EntityModel {
-	
+
 	private Bounds bounds;
 	private final EntityType type;
 	private final boolean collidable;
 
-	public EntityModelImpl(Bounds bounds, EntityType type, boolean collidable) {
+	public EntityModelImpl(final Bounds bounds, final EntityType type, final boolean collidable) {
 		super();
 		this.bounds = bounds;
 		this.type = type;
@@ -23,7 +23,7 @@ public class EntityModelImpl implements EntityModel {
 	}
 
 	@Override
-	public void setPosition(Point2D p) {
+	public void setPosition(final Point2D p) {
 		this.bounds = new BoundingBox(p.getX(), p.getY(), this.bounds.getWidth(), this.bounds.getHeight());
 	}
 
