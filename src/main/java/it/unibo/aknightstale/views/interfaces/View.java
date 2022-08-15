@@ -23,7 +23,7 @@ public interface View<C extends Controller<? extends View<C>>> {
      * @param <V>           The view interface.
      * @return The factory for the view.
      */
-    static <V extends View<? extends Controller<V>>> ViewFactory<V> of(final Class<V> viewInterface) {
+    static <V extends View<C>, C extends Controller<V>> ViewFactory<V> of(final Class<V> viewInterface) {
         return new ViewFactory<V>().fromInterface(viewInterface);
     }
 }
