@@ -5,24 +5,35 @@ import it.unibo.aknightstale.views.entity.EntityView;
 
 public class EntityControllerImpl<M extends EntityModel, V extends EntityView> implements EntityController<M, V> {
 
-	protected final M model;
+    /**
+     * The entity model.
+     */
+    private final M model;
+    /**
+     * The entity view.
+     */
+    private final V view;
 
-	protected final V view;
+    public EntityControllerImpl(final M model, final V view) {
+        super();
+        this.model = model;
+        this.view = view;
+    }
 
-	public EntityControllerImpl(final M model, final V view) {
-		super();
-		this.model = model;
-		this.view = view;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public M getModel() {
+        return this.model;
+    }
 
-	@Override
-	public M getModel() {
-		return this.model;
-	}
-
-	@Override
-	public V getView() {
-		return this.view;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public V getView() {
+        return this.view;
+    }
 
 }

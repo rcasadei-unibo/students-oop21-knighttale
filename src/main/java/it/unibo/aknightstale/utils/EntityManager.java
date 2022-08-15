@@ -7,24 +7,24 @@ import it.unibo.aknightstale.models.entity.CharacterModel;
 import it.unibo.aknightstale.views.entity.AnimatedEntityView;
 
 public interface EntityManager {
-	/**
-	 * Checks the collisions between all characters.
-	 * 
-	 * @return	A list of lists of characters who colliding with each other.
-	 */
-	List<List<EntityController<? super CharacterModel, ? super AnimatedEntityView>>> update();
+    /**
+     * Checks the collisions between all characters.
+     * 
+     * @return A list of lists of characters who colliding with each other.
+     */
+    List<List<EntityController<? super CharacterModel, ? super AnimatedEntityView>>> update();
 
     /**
      * Adds a new entity in the list of entities if it is not already present.
      * 
-     * @param ec	the new entity that will be added if it is not already present.
+     * @param ec the new entity that will be added if it is not already present.
      */
     void addEntity(EntityController<? super CharacterModel, ? super AnimatedEntityView> ec);
 
     /**
      * Removes a entity from the entity list if it is present.
      * 
-     * @param ec	the entity will be removed if it is present.
+     * @param ec the entity will be removed if it is present.
      */
     void removeEntity(EntityController<? super CharacterModel, ? super AnimatedEntityView> ec);
 
@@ -38,7 +38,7 @@ public interface EntityManager {
     /**
      * Gets the collision manager.
      * 
-     * @return	the collision manager.
+     * @return the collision manager.
      */
     CollisionManager getCollisionManager();
 

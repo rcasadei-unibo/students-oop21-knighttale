@@ -5,59 +5,84 @@ import it.unibo.aknightstale.models.entity.Direction;
 import it.unibo.aknightstale.utils.EntityManager;
 import it.unibo.aknightstale.views.entity.AnimatedEntityView;
 
-public abstract class AbstractController<M extends CharacterModel, V extends AnimatedEntityView> extends EntityControllerImpl<M, V> implements CharacterController<M, V> {
+public abstract class AbstractController<M extends CharacterModel, V extends AnimatedEntityView>
+        extends EntityControllerImpl<M, V> implements CharacterController<M, V> {
 
-	protected final EntityManager manager;
+    /**
+     * The entity manager.
+     */
+    private final EntityManager manager;
 
-	public AbstractController(final M model, final V view, final EntityManager manager) {
-		super(model, view);
-		this.manager = manager;
-	}
 
-	/**
-	 * Updates the direction and the view of entity.
-	 * 
-	 * @param dir	the entity direction.
-	 */
-	protected abstract void move(final Direction dir);
+    public AbstractController(final M model, final V view, final EntityManager manager) {
+        super(model, view);
+        this.manager = manager;
+    }
 
-	private boolean canMove(final Direction d) {
-		return this.manager.getCollisionManager().checkDirections(this).contains(d);
-	}
+    /**
+     * Updates the direction and the view of entity.
+     * 
+     * @param dir the entity direction.
+     */
+    protected abstract void move(Direction dir);
 
-	@Override
-	public void moveRight() {
-		if (canMove(Direction.RIGHT)) {
-			this.model.goRight();
-			move(Direction.RIGHT);
-		}
-	}
+    private boolean canMove(final Direction d) {
+        return this.manager.getCollisionManager().checkDirections(this).contains(d);
+    }
 
-	@Override
-	public void moveLeft() {
-		if (canMove(Direction.LEFT)) {
-			this.model.goLeft();
-			move(Direction.LEFT);
-		}
-	}
+    /**
+     * {@inheritDoc}i
+     */
+    @Override
+    public void moveRight() {
+        if (canMove(Direction.RIGHT)) {
+            super.getModel().goRight();
+            move(Direction.RIGHT);
+        }
+    }
 
-	@Override
-	public void moveUp() {
-		if (canMove(Direction.UP)) {
-			this.model.goUp();
-			move(Direction.UP);
-		}
-	}
+    /**
+     * {@inheritDoc}i
+     */
+    @Override
+    public void moveLeft() {
+        if (canMove(Direction.LEFT)) {
+            super.getModel().goLeft();
+            move(Direction.LEFT);
+        }
+    }
 
-	@Override
-	public void moveDown() {
-		if (canMove(Direction.DOWN)) {
-			this.model.goDown();
-			move(Direction.DOWN);
-		}
-	}
+    /**
+     * {@inheritDoc}i
+     */
+    @Override
+    public void moveUp() {
+        if (canMove(Direction.UP)) {
+            super.getModel().goUp();
+            move(Direction.UP);
+        }
+    }
 
-	@Override
-	public abstract void attack();
+    /**
+     * {@inheritDoc}i
+     */
+    @Override
+    public void moveDown() {
+        if (canMove(Direction.DOWN)) {
+            super.getModel().goDown();
+            move(Direction.DOWN);
+        }
+    }
 
+    @Override
+    public abstract void attack();
+
+    /**
+     * Get the entity manager.
+     * 
+     * @return  The entity manager.
+     */
+    public EntityManager getManager() {
+        return manager;
+    }
 }

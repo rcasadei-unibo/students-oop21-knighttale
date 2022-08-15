@@ -1,5 +1,7 @@
 package it.unibo.aknightstale.models.entity;
 
+import java.util.Locale;
+
 public enum Direction {
     /**
      * Up direction.
@@ -20,7 +22,6 @@ public enum Direction {
 
     @Override
     public String toString() {
-        var str = this.name().toLowerCase();
-    	return str;
+        return this.name().toLowerCase(Locale.getDefault());
     }
 }

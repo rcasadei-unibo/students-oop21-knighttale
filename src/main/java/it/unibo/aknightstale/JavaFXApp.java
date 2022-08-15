@@ -21,10 +21,10 @@ import it.unibo.aknightstale.views.entity.AnimatedEntityView;
 
 public final class JavaFXApp extends Application {
 
-	final static double WIDTH_WINDOW = 600.0;
-	final static double HEIGHT_WINDOW = 600.0;
+    static final double WIDTH_WINDOW = 600.0;
+    static final double HEIGHT_WINDOW = 600.0;
 
-	private final EntityFactory factory = new EntityFactoryImpl();	//final
+    private final EntityFactory factory = new EntityFactoryImpl(); // final
 
     @Override
     public void start(final Stage stage) throws IOException {
@@ -41,25 +41,27 @@ public final class JavaFXApp extends Application {
 
         final GraphicsContext context = canvas.getGraphicsContext2D();
 
-        final CharacterController<? extends CharacterModel, ? extends AnimatedEntityView> player = factory.getPlayer();    
-        final var collision = new CollisionManagerImpl(factory.getEntityManager().getEntities(), WIDTH_WINDOW, HEIGHT_WINDOW);
+        final CharacterController<? extends CharacterModel, ? extends AnimatedEntityView> player = factory.getPlayer();
+        final var collision = new CollisionManagerImpl(factory.getEntityManager().getEntities(), WIDTH_WINDOW,
+                HEIGHT_WINDOW);
         factory.getEntityManager().setCollisionManager(collision);
         final InputPlayer input = new InputPlayerImpl(player, gameScene);
 
         final var gameloop = new AnimationTimer() {
 
-			@Override
-			public void handle(final long now) {
-				context.save();
-				context.clearRect(0, 0, WIDTH_WINDOW, HEIGHT_WINDOW);
-				//context.drawImage()	//background
-				input.update();
-				context.drawImage(player.getView().getImage(), player.getModel().getPosition().getX(), player.getModel().getPosition().getY());
-				//context.drawImage()	//entities
-				context.restore();
-			}
-		};
-		gameloop.start();
-		stage.show();
+            @Override
+            public void handle(final long now) {
+                context.save();
+                context.clearRect(0, 0, WIDTH_WINDOW, HEIGHT_WINDOW);
+                // context.drawImage() //background
+                input.update();
+                context.drawImage(player.getView().getImage(), player.getModel().getPosition().getX(),
+                        player.getModel().getPosition().getY());
+                // context.drawImage() //entities
+                context.restore();
+            }
+        };
+        gameloop.start();
+        stage.show();
     }
 }

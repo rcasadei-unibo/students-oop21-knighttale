@@ -6,7 +6,7 @@ public interface EntityView {
     /**
      * Gets the entity image.
      * 
-     * @return	the entity image.
+     * @return the entity image.
      */
-	Image getImage();
+    Image getImage();
 }

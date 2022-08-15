@@ -9,49 +9,67 @@ import it.unibo.aknightstale.views.entity.AnimatedEntityView;
 
 public class EntityManagerImpl implements EntityManager {
 
-	private final List<EntityController<? super CharacterModel, ? super AnimatedEntityView>> entities;
-	private CollisionManager collision;
+    private final List<EntityController<? super CharacterModel, ? super AnimatedEntityView>> entities;
+    private CollisionManager collision;
 
-	public EntityManagerImpl() {
-		super();
-		this.entities = new ArrayList<>();
-	}
-	
-	public EntityManagerImpl(final List<EntityController<? super CharacterModel, ? super AnimatedEntityView>> l) {
-		super();
-		this.entities = l;
-	}
+    public EntityManagerImpl() {
+        super();
+        this.entities = new ArrayList<>();
+    }
 
-	@Override
-	public List<List<EntityController<? super CharacterModel, ? super AnimatedEntityView>>> update() {
-		return this.collision.update();
-	}
+    public EntityManagerImpl(final List<EntityController<? super CharacterModel, ? super AnimatedEntityView>> l) {
+        super();
+        this.entities = l;
+    }
 
-	@Override
-	public void addEntity(final EntityController<? super CharacterModel, ? super AnimatedEntityView> ec) {
-		if (!this.entities.contains(ec)) {
-			this.entities.add(ec);
-		}
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<List<EntityController<? super CharacterModel, ? super AnimatedEntityView>>> update() {
+        return this.collision.update();
+    }
 
-	@Override
-	public void removeEntity(final EntityController<? super CharacterModel, ? super AnimatedEntityView> ec) {
-		this.entities.stream().filter(e -> e.equals(ec)).forEach(e -> this.entities.remove(e));
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void addEntity(final EntityController<? super CharacterModel, ? super AnimatedEntityView> ec) {
+        if (!this.entities.contains(ec)) {
+            this.entities.add(ec);
+        }
+    }
 
-	@Override
-	public List<EntityController<? super CharacterModel, ? super AnimatedEntityView>> getEntities() {
-		return this.entities;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void removeEntity(final EntityController<? super CharacterModel, ? super AnimatedEntityView> ec) {
+        this.entities.stream().filter(e -> e.equals(ec)).forEach(e -> this.entities.remove(e));
+    }
 
-	@Override
-	public CollisionManager getCollisionManager() {
-		return this.collision;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<EntityController<? super CharacterModel, ? super AnimatedEntityView>> getEntities() {
+        return this.entities;
+    }
 
-	@Override
-	public void setCollisionManager(final CollisionManager collision) {
-        this.collision = collision;		
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public CollisionManager getCollisionManager() {
+        return this.collision;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setCollisionManager(final CollisionManager collision) {
+        this.collision = collision;
+    }
 
 }

@@ -5,19 +5,31 @@ import javafx.scene.image.Image;
 
 public abstract class CharacterView extends EntityViewImpl implements AnimatedEntityView {
 
-	protected Status status;
+    private Status status;
 
-	public CharacterView(final Image image, final Status s) {
-		super(image);
-		this.status = s;
-	}
+    public CharacterView(final Image image, final Status s) {
+        super(image);
+        this.status = s;
+    }
 
-	@Override
-	public void setStatus(final Status s) {
-		this.status = s;
-	}
+    /**
+     * Get the entity status.
+     * 
+     * @return The entity status.
+     */
+    public Status getStatus() {
+        return this.status;
+    }
 
-	@Override
-	public abstract void update(Direction d);
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setStatus(final Status s) {
+        this.status = s;
+    }
+
+    @Override
+    public abstract void update(Direction d);
 
 }

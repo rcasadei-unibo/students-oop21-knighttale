@@ -1,11 +1,11 @@
 package it.unibo.aknightstale.models.entity;
 
 public interface AttackEntity {
-	/**
-	 * Gets the entity damage.
-	 * 
-	 * @return	the entity damage.
-	 */
+    /**
+     * Gets the entity damage.
+     * 
+     * @return the entity damage.
+     */
     double getDamage();
 
     /**
@@ -18,14 +18,14 @@ public interface AttackEntity {
     /**
      * Gets the attack range of entity.
      * 
-     * @return	the attack range.
+     * @return the attack range.
      */
     double getAttackRange();
 
     /**
      * Attacks another entity and deals damage to him.
      * 
-     * @param e	the other entity.
+     * @param e the other entity.
      */
     void attack(LifeEntity e);
 }

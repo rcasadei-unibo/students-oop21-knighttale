@@ -12,28 +12,32 @@ import javafx.geometry.Point2D;
 
 public class EntityFactoryImpl implements EntityFactory {
 
-	final static Point2D SPAWN_PLAYER = new Point2D(100, 100);
+    static final Point2D SPAWN_PLAYER = new Point2D(100, 100);
 
-	private final EntityManager manager;
+    private final EntityManager manager;
 
-	public EntityFactoryImpl() {
-		super();
-		this.manager = new EntityManagerImpl();
-	}
+    public EntityFactoryImpl() {
+        super();
+        this.manager = new EntityManagerImpl();
+    }
 
-	@Override
-	public EntityManager getEntityManager() {
-		return this.manager;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public EntityManager getEntityManager() {
+        return this.manager;
+    }
 
-	@Override
-	public CharacterController<? extends CharacterModel, ? extends AnimatedEntityView> getPlayer() {
-		final var player = new PlayerController<CharacterModel, AnimatedEntityView>(
-					new Player(SPAWN_PLAYER),
-					new PlayerView(),
-					getEntityManager());
-		this.manager.addEntity(player);
-		return player;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public CharacterController<? extends CharacterModel, ? extends AnimatedEntityView> getPlayer() {
+        final var player = new PlayerController<CharacterModel, AnimatedEntityView>(new Player(SPAWN_PLAYER),
+                new PlayerView(), getEntityManager());
+        this.manager.addEntity(player);
+        return player;
+    }
 
 }
