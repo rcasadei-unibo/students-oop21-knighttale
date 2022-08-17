@@ -2,7 +2,7 @@ package it.unibo.aknightstale.models.entity.factories;
 
 import it.unibo.aknightstale.controllers.entity.CharacterController;
 import it.unibo.aknightstale.controllers.entity.PlayerController;
-import it.unibo.aknightstale.models.entity.CharacterModel;
+import it.unibo.aknightstale.models.entity.Character;
 import it.unibo.aknightstale.models.entity.Player;
 import it.unibo.aknightstale.utils.EntityManager;
 import it.unibo.aknightstale.utils.EntityManagerImpl;
@@ -33,8 +33,8 @@ public class EntityFactoryImpl implements EntityFactory {
      * {@inheritDoc}
      */
     @Override
-    public CharacterController<? extends CharacterModel, ? extends AnimatedEntityView> getPlayer() {
-        final var player = new PlayerController<CharacterModel, AnimatedEntityView>(new Player(SPAWN_PLAYER),
+    public CharacterController<? extends Character, ? extends AnimatedEntityView> getPlayer() {
+        final var player = new PlayerController<Character, AnimatedEntityView>(new Player(SPAWN_PLAYER),
                 new PlayerView(), getEntityManager());
         this.manager.addEntity(player);
         return player;

@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 import it.unibo.aknightstale.controllers.entity.CharacterController;
-import it.unibo.aknightstale.models.entity.CharacterModel;
+import it.unibo.aknightstale.models.entity.Character;
 import it.unibo.aknightstale.models.entity.factories.EntityFactory;
 import it.unibo.aknightstale.models.entity.factories.EntityFactoryImpl;
 import it.unibo.aknightstale.models.entity.input.InputPlayer;
@@ -47,7 +47,7 @@ public final class JavaFXApp extends Application {
 
         final GraphicsContext context = canvas.getGraphicsContext2D();
 
-        final CharacterController<? extends CharacterModel, ? extends AnimatedEntityView> player = factory.getPlayer();
+        final CharacterController<? extends Character, ? extends AnimatedEntityView> player = factory.getPlayer();
 
         final var collision = new CollisionManagerImpl(factory.getEntityManager().getEntities(), widthWindow,
                 heightWindow);

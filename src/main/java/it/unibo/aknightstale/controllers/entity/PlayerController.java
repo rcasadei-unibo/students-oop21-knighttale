@@ -1,12 +1,12 @@
 package it.unibo.aknightstale.controllers.entity;
 
-import it.unibo.aknightstale.models.entity.CharacterModel;
+import it.unibo.aknightstale.models.entity.Character;
 import it.unibo.aknightstale.models.entity.Direction;
 import it.unibo.aknightstale.utils.EntityManager;
 import it.unibo.aknightstale.views.entity.AnimatedEntityView;
 import it.unibo.aknightstale.views.entity.Status;
 
-public class PlayerController<M extends CharacterModel, V extends AnimatedEntityView> extends AbstractController<M, V> {
+public class PlayerController<M extends Character, V extends AnimatedEntityView> extends AbstractController<M, V> {
 
     public PlayerController(final M model, final V view, final EntityManager manager) {
         super(model, view, manager);
@@ -45,8 +45,8 @@ public class PlayerController<M extends CharacterModel, V extends AnimatedEntity
             default:
             }
             return true;
-        }).filter(ec -> ec.getModel() instanceof CharacterModel).forEach(e -> {
-            final var model = (CharacterModel) e.getModel();
+        }).filter(ec -> ec.getModel() instanceof Character).forEach(e -> {
+            final var model = (Character) e.getModel();
             super.getModel().attack(model);
         });
         super.getView().setStatus(Status.ATTACK);

@@ -4,13 +4,13 @@ import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 
-public class EntityModelImpl implements EntityModel {
+public class EntityImpl implements Entity {
 
     private Bounds bounds;
     private final EntityType type;
     private final boolean collidable;
 
-    public EntityModelImpl(final Bounds bounds, final EntityType type, final boolean collidable) {
+    public EntityImpl(final Bounds bounds, final EntityType type, final boolean collidable) {
         super();
         this.bounds = bounds;
         this.type = type;

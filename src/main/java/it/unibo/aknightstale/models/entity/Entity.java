@@ -3,7 +3,7 @@ package it.unibo.aknightstale.models.entity;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 
-public interface EntityModel {
+public interface Entity {
     /**
      * Gets the entity position.
      * 

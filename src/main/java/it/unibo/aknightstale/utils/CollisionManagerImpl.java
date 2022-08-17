@@ -6,18 +6,18 @@ import java.util.stream.Collectors;
 
 import it.unibo.aknightstale.controllers.entity.EntityController;
 import it.unibo.aknightstale.models.entity.Direction;
-import it.unibo.aknightstale.models.entity.CharacterModel;
+import it.unibo.aknightstale.models.entity.Character;
 import it.unibo.aknightstale.views.entity.AnimatedEntityView;
 import javafx.geometry.Bounds;
 
 public class CollisionManagerImpl implements CollisionManager {
 
-    private final List<EntityController<? super CharacterModel, ? super AnimatedEntityView>> entities;
+    private final List<EntityController<? super Character, ? super AnimatedEntityView>> entities;
     private double widthScreen;
     private double heightScreen;
 
     public CollisionManagerImpl(
-            final List<EntityController<? super CharacterModel, ? super AnimatedEntityView>> entities,
+            final List<EntityController<? super Character, ? super AnimatedEntityView>> entities,
             final double width, final double height) {
         super();
         this.entities = entities;
@@ -29,8 +29,8 @@ public class CollisionManagerImpl implements CollisionManager {
      * {@inheritDoc}
      */
     @Override
-    public List<EntityController<? super CharacterModel, ? super AnimatedEntityView>> checkCollision(
-            final EntityController<? super CharacterModel, ? super AnimatedEntityView> ec) {
+    public List<EntityController<? super Character, ? super AnimatedEntityView>> checkCollision(
+            final EntityController<? super Character, ? super AnimatedEntityView> ec) {
         return this.entities.stream().filter(e -> e.getModel().isCollidable())
                 .filter(e -> ec.getModel().getBounds().intersects(e.getModel().getBounds()))
                 .collect(Collectors.toList());
@@ -94,7 +94,7 @@ public class CollisionManagerImpl implements CollisionManager {
      */
     @Override
     public List<Direction> checkDirections(
-            final EntityController<? extends CharacterModel, ? extends AnimatedEntityView> ec) {
+            final EntityController<? extends Character, ? extends AnimatedEntityView> ec) {
         final var list = new ArrayList<Direction>();
         this.entityCollisions(ec.getModel().getBounds(), list);
         return List.copyOf(list);
@@ -104,10 +104,10 @@ public class CollisionManagerImpl implements CollisionManager {
      * {@inheritDoc}
      */
     @Override
-    public List<List<EntityController<? super CharacterModel, ? super AnimatedEntityView>>> update() {
-        final List<List<EntityController<? super CharacterModel, ? super AnimatedEntityView>>> list = new ArrayList<>();
+    public List<List<EntityController<? super Character, ? super AnimatedEntityView>>> update() {
+        final List<List<EntityController<? super Character, ? super AnimatedEntityView>>> list = new ArrayList<>();
         this.entities.stream().filter(e -> e.getModel().isCollidable()).forEach(e -> {
-            final List<EntityController<? super CharacterModel, ? super AnimatedEntityView>> l = new ArrayList<>();
+            final List<EntityController<? super Character, ? super AnimatedEntityView>> l = new ArrayList<>();
             for (final var en : this.entities) {
                 if (!e.equals(en) && en.getModel().isCollidable()
                         && e.getModel().getBounds().intersects(en.getModel().getBounds())) {

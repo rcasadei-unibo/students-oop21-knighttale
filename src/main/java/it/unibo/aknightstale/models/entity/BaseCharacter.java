@@ -3,7 +3,7 @@ package it.unibo.aknightstale.models.entity;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 
-public abstract class BaseCharacter extends EntityModelImpl implements CharacterModel {
+public abstract class BaseCharacter extends EntityImpl implements Character {
     /**
      * The entity damage.
      */

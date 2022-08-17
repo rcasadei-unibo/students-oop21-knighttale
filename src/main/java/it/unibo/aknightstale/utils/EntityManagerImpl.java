@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.unibo.aknightstale.controllers.entity.EntityController;
-import it.unibo.aknightstale.models.entity.CharacterModel;
+import it.unibo.aknightstale.models.entity.Character;
 import it.unibo.aknightstale.views.entity.AnimatedEntityView;
 
 public class EntityManagerImpl implements EntityManager {
 
-    private final List<EntityController<? super CharacterModel, ? super AnimatedEntityView>> entities;
+    private final List<EntityController<? super Character, ? super AnimatedEntityView>> entities;
     private CollisionManager collision;
 
     public EntityManagerImpl() {
@@ -17,7 +17,7 @@ public class EntityManagerImpl implements EntityManager {
         this.entities = new ArrayList<>();
     }
 
-    public EntityManagerImpl(final List<EntityController<? super CharacterModel, ? super AnimatedEntityView>> l) {
+    public EntityManagerImpl(final List<EntityController<? super Character, ? super AnimatedEntityView>> l) {
         super();
         this.entities = l;
     }
@@ -26,7 +26,7 @@ public class EntityManagerImpl implements EntityManager {
      * {@inheritDoc}
      */
     @Override
-    public List<List<EntityController<? super CharacterModel, ? super AnimatedEntityView>>> update() {
+    public List<List<EntityController<? super Character, ? super AnimatedEntityView>>> update() {
         return this.collision.update();
     }
 
@@ -34,7 +34,7 @@ public class EntityManagerImpl implements EntityManager {
      * {@inheritDoc}
      */
     @Override
-    public void addEntity(final EntityController<? super CharacterModel, ? super AnimatedEntityView> ec) {
+    public void addEntity(final EntityController<? super Character, ? super AnimatedEntityView> ec) {
         if (!this.entities.contains(ec)) {
             this.entities.add(ec);
         }
@@ -44,7 +44,7 @@ public class EntityManagerImpl implements EntityManager {
      * {@inheritDoc}
      */
     @Override
-    public void removeEntity(final EntityController<? super CharacterModel, ? super AnimatedEntityView> ec) {
+    public void removeEntity(final EntityController<? super Character, ? super AnimatedEntityView> ec) {
         this.entities.stream().filter(e -> e.equals(ec)).forEach(e -> this.entities.remove(e));
     }
 
@@ -52,7 +52,7 @@ public class EntityManagerImpl implements EntityManager {
      * {@inheritDoc}
      */
     @Override
-    public List<EntityController<? super CharacterModel, ? super AnimatedEntityView>> getEntities() {
+    public List<EntityController<? super Character, ? super AnimatedEntityView>> getEntities() {
         return this.entities;
     }
 

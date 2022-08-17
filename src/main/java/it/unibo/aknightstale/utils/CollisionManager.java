@@ -4,7 +4,7 @@ import java.util.List;
 
 import it.unibo.aknightstale.controllers.entity.EntityController;
 import it.unibo.aknightstale.models.entity.Direction;
-import it.unibo.aknightstale.models.entity.CharacterModel;
+import it.unibo.aknightstale.models.entity.Character;
 import it.unibo.aknightstale.views.entity.AnimatedEntityView;
 
 public interface CollisionManager {
@@ -14,8 +14,8 @@ public interface CollisionManager {
      * @param ec the character to control.
      * @return a list of characters with whom he has collisions.
      */
-    List<EntityController<? super CharacterModel, ? super AnimatedEntityView>> checkCollision(
-            EntityController<? super CharacterModel, ? super AnimatedEntityView> ec);
+    List<EntityController<? super Character, ? super AnimatedEntityView>> checkCollision(
+            EntityController<? super Character, ? super AnimatedEntityView> ec);
 
     /**
      * Controls in which directions the character can move.
@@ -23,14 +23,14 @@ public interface CollisionManager {
      * @param ec the character to control.
      * @return a list of directions in which it can move
      */
-    List<Direction> checkDirections(EntityController<? extends CharacterModel, ? extends AnimatedEntityView> ec);
+    List<Direction> checkDirections(EntityController<? extends Character, ? extends AnimatedEntityView> ec);
 
     /**
      * Controls the collisions of each character.
      * 
      * @return a list of lists of characters colliding with each other.
      */
-    List<List<EntityController<? super CharacterModel, ? super AnimatedEntityView>>> update();
+    List<List<EntityController<? super Character, ? super AnimatedEntityView>>> update();
 
     /**
      * Set the width of screen.

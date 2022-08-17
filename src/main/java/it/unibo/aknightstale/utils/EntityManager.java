@@ -3,7 +3,7 @@ package it.unibo.aknightstale.utils;
 import java.util.List;
 
 import it.unibo.aknightstale.controllers.entity.EntityController;
-import it.unibo.aknightstale.models.entity.CharacterModel;
+import it.unibo.aknightstale.models.entity.Character;
 import it.unibo.aknightstale.views.entity.AnimatedEntityView;
 
 public interface EntityManager {
@@ -12,28 +12,28 @@ public interface EntityManager {
      * 
      * @return A list of lists of characters who colliding with each other.
      */
-    List<List<EntityController<? super CharacterModel, ? super AnimatedEntityView>>> update();
+    List<List<EntityController<? super Character, ? super AnimatedEntityView>>> update();
 
     /**
      * Adds a new entity in the list of entities if it is not already present.
      * 
      * @param ec the new entity that will be added if it is not already present.
      */
-    void addEntity(EntityController<? super CharacterModel, ? super AnimatedEntityView> ec);
+    void addEntity(EntityController<? super Character, ? super AnimatedEntityView> ec);
 
     /**
      * Removes a entity from the entity list if it is present.
      * 
      * @param ec the entity will be removed if it is present.
      */
-    void removeEntity(EntityController<? super CharacterModel, ? super AnimatedEntityView> ec);
+    void removeEntity(EntityController<? super Character, ? super AnimatedEntityView> ec);
 
     /**
      * Gets the entity list.
      * 
      * @return the entity list.
      */
-    List<EntityController<? super CharacterModel, ? super AnimatedEntityView>> getEntities();
+    List<EntityController<? super Character, ? super AnimatedEntityView>> getEntities();
 
     /**
      * Gets the collision manager.

@@ -1,6 +1,6 @@
 package it.unibo.aknightstale.models.entity;
 
-public interface MovableEntity extends EntityModel {
+public interface MovableEntity extends Entity {
     /**
      * Gets the entity speed.
      * 
