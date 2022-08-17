@@ -23,8 +23,8 @@ class PlayerTest extends BaseViewTest<MainMenuController, MainMenuView> {
     @DisplayName("Check player image")
     void checkImage() {
         final var player = this.factory.getPlayer().getView();
-        final var path = "it" + SEPARATOR + "unibo" + SEPARATOR + "aknightstale" + SEPARATOR + "player" + SEPARATOR
-                + "player_idle_right.png";
+        final var path = "it" + SEPARATOR + "unibo" + SEPARATOR + "aknightstale" + SEPARATOR + "entity" + SEPARATOR
+                + "player" + SEPARATOR + "player_idle_right.png";
         Assertions.assertThat(this.isImageEqual(player.getImage(), new Image(path))).isTrue();
     }
 
@@ -35,8 +35,8 @@ class PlayerTest extends BaseViewTest<MainMenuController, MainMenuView> {
         this.factory.getEntityManager().setCollisionManager(
                 new CollisionManagerImpl(factory.getEntityManager().getEntities(), WIDTH_WINDOW, HEIGHT_WINDOW));
         player.attack();
-        final var path = "it" + SEPARATOR + "unibo" + SEPARATOR + "aknightstale" + SEPARATOR + "player" + SEPARATOR
-                + "player_attack_right.png";
+        final var path = "it" + SEPARATOR + "unibo" + SEPARATOR + "aknightstale" + SEPARATOR + "entity" + SEPARATOR
+                + "player" + SEPARATOR + "player_attack_right.png";
         Assertions.assertThat(isImageEqual(player.getView().getImage(), new Image(path))).isTrue();
     }
 
