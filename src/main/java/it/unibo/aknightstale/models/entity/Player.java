@@ -14,7 +14,7 @@ public class Player extends BaseCharacter {
     static final double ATTACK_RANGE = 5.0;
 
     public Player(final Point2D position) {
-        super(new BoundingBox(position.getX(), position.getY(), WIDTH_BOUNDS, HEIGHT_BOUNDS), EntityType.PLAYER, false,
+        super(new BoundingBox(position.getX(), position.getY(), WIDTH_BOUNDS, HEIGHT_BOUNDS), EntityType.PLAYER, true,
                 Direction.RIGHT, DAMAGE, MAX_HEALTH, SPEED);
     }
 
