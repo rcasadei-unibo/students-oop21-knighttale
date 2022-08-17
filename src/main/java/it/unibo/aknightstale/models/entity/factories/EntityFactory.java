@@ -18,5 +18,5 @@ public interface EntityFactory {
      * 
      * @return the player.
      */
-    CharacterController<? extends Character, ? extends AnimatedEntityView> getPlayer();
+    CharacterController<Character, AnimatedEntityView> getPlayer();
 }

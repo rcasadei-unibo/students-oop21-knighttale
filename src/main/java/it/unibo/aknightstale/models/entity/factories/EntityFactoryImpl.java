@@ -33,7 +33,7 @@ public class EntityFactoryImpl implements EntityFactory {
      * {@inheritDoc}
      */
     @Override
-    public CharacterController<? extends Character, ? extends AnimatedEntityView> getPlayer() {
+    public CharacterController<Character, AnimatedEntityView> getPlayer() {
         final var player = new PlayerController<Character, AnimatedEntityView>(new Player(SPAWN_PLAYER),
                 new PlayerView(), getEntityManager());
         this.manager.addEntity(player);
