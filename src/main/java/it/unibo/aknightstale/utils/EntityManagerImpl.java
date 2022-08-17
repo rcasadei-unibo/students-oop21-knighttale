@@ -45,7 +45,9 @@ public class EntityManagerImpl implements EntityManager {
      */
     @Override
     public void removeEntity(final EntityController<? super Character, ? super AnimatedEntityView> ec) {
-        this.entities.stream().filter(e -> e.equals(ec)).forEach(e -> this.entities.remove(e));
+        if (this.entities.contains(ec)) {
+            this.entities.remove(ec);
+        }
     }
 
     /**
