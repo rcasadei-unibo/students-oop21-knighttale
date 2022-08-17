@@ -7,7 +7,7 @@ public class PlayerView extends CharacterView {
 
     static final String SEPARATOR = System.getProperty("file.separator");
     static final String URL = "it" + SEPARATOR + "unibo" + SEPARATOR + "aknightstale"
-                                + SEPARATOR + "player" + SEPARATOR;
+                                + SEPARATOR + "entity" + SEPARATOR + "player" + SEPARATOR;
 
     static final Image PLAYER_IDLE_RIGHT = new Image(URL + "player_idle_right.png");
     static final Image PLAYER_IDLE_LEFT = new Image(URL + "player_idle_left.png");
