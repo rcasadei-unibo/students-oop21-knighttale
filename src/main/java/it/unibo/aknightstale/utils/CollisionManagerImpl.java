@@ -13,15 +13,15 @@ import javafx.geometry.Bounds;
 public class CollisionManagerImpl implements CollisionManager {
 
     private final List<EntityController<? super CharacterModel, ? super AnimatedEntityView>> entities;
-    private final double widthScreen;
-    private final double heightScreen;
+    private double widthScreen;
+    private double heightScreen;
 
     public CollisionManagerImpl(
             final List<EntityController<? super CharacterModel, ? super AnimatedEntityView>> entities,
-            final double wide, final double height) {
+            final double width, final double height) {
         super();
         this.entities = entities;
-        this.widthScreen = wide;
+        this.widthScreen = width;
         this.heightScreen = height;
     }
 
@@ -65,7 +65,7 @@ public class CollisionManagerImpl implements CollisionManager {
     }
 
     private void entityCollisions(final Bounds e, final List<Direction> list) {
-        if ((e.getMinX() + e.getWidth()) < this.widthScreen - 1.0
+        if ((e.getMinX() + e.getWidth()) < this.widthScreen
                 && this.entities.stream().filter(entity -> !entity.getModel().isCollidable())
                         .filter(entity -> this.rightDirection(e, entity.getModel().getBounds()))
                         .collect(Collectors.toList()).isEmpty()) {
@@ -76,7 +76,7 @@ public class CollisionManagerImpl implements CollisionManager {
                 .isEmpty()) {
             list.add(Direction.LEFT);
         }
-        if ((e.getMinY() + e.getHeight()) < this.heightScreen - 1.0
+        if ((e.getMinY() + e.getHeight()) < this.heightScreen
                 && this.entities.stream().filter(entity -> !entity.getModel().isCollidable())
                         .filter(entity -> this.downDirection(e, entity.getModel().getBounds()))
                         .collect(Collectors.toList()).isEmpty()) {
@@ -121,7 +121,23 @@ public class CollisionManagerImpl implements CollisionManager {
                 list.add(l);
             }
         });
-        return list;
+        return List.copyOf(list);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setWidthScreen(final double widthScreen) {
+        this.widthScreen = widthScreen;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setHeightScreen(final double heightScreen) {
+        this.heightScreen = heightScreen;
     }
 
 }

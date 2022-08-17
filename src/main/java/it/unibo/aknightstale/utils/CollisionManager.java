@@ -32,4 +32,18 @@ public interface CollisionManager {
      */
     List<List<EntityController<? super CharacterModel, ? super AnimatedEntityView>>> update();
 
+    /**
+     * Set the width of screen.
+     * 
+     * @param widthScreen
+     */
+    void setWidthScreen(double widthScreen);
+
+    /**
+     * Set the height of screen.
+     * 
+     * @param heightScreen
+     */
+    void setHeightScreen(double heightScreen);
+
 }
