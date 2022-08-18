@@ -31,7 +31,7 @@ public abstract class AbstractController<M extends Character, V extends Animated
     }
 
     /**
-     * {@inheritDoc}i
+     * {@inheritDoc}
      */
     @Override
     public void moveRight() {
@@ -42,7 +42,7 @@ public abstract class AbstractController<M extends Character, V extends Animated
     }
 
     /**
-     * {@inheritDoc}i
+     * {@inheritDoc}
      */
     @Override
     public void moveLeft() {
@@ -53,7 +53,7 @@ public abstract class AbstractController<M extends Character, V extends Animated
     }
 
     /**
-     * {@inheritDoc}i
+     * {@inheritDoc}
      */
     @Override
     public void moveUp() {
@@ -64,7 +64,7 @@ public abstract class AbstractController<M extends Character, V extends Animated
     }
 
     /**
-     * {@inheritDoc}i
+     * {@inheritDoc}
      */
     @Override
     public void moveDown() {

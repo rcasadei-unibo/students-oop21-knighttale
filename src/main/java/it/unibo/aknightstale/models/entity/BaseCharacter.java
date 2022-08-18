@@ -31,7 +31,7 @@ public abstract class BaseCharacter extends EntityImpl implements Character {
     }
 
     /**
-     * {@inheritDoc}i
+     * {@inheritDoc}
      */
     @Override
     public double getDamage() {
@@ -39,7 +39,7 @@ public abstract class BaseCharacter extends EntityImpl implements Character {
     }
 
     /**
-     * {@inheritDoc}i
+     * {@inheritDoc}
      */
     @Override
     public void setDamage(final double dmg) {
@@ -61,7 +61,7 @@ public abstract class BaseCharacter extends EntityImpl implements Character {
     }
 
     /**
-     * {@inheritDoc}i
+     * {@inheritDoc}
      */
     @Override
     public double getHealth() {
@@ -69,7 +69,7 @@ public abstract class BaseCharacter extends EntityImpl implements Character {
     }
 
     /**
-     * {@inheritDoc}i
+     * {@inheritDoc}
      */
     @Override
     public boolean isDead() {
@@ -77,7 +77,7 @@ public abstract class BaseCharacter extends EntityImpl implements Character {
     }
 
     /**
-     * {@inheritDoc}i
+     * {@inheritDoc}
      */
     @Override
     public double getSpeed() {
@@ -85,7 +85,7 @@ public abstract class BaseCharacter extends EntityImpl implements Character {
     }
 
     /**
-     * {@inheritDoc}i
+     * {@inheritDoc}
      */
     @Override
     public void setSpeed(final double speed) {
@@ -93,7 +93,7 @@ public abstract class BaseCharacter extends EntityImpl implements Character {
     }
 
     /**
-     * {@inheritDoc}i
+     * {@inheritDoc}
      */
     @Override
     public Direction getDirection() {
@@ -101,7 +101,7 @@ public abstract class BaseCharacter extends EntityImpl implements Character {
     }
 
     /**
-     * {@inheritDoc}i
+     * {@inheritDoc}
      */
     @Override
     public void setDirection(final Direction dir) {
@@ -114,7 +114,7 @@ public abstract class BaseCharacter extends EntityImpl implements Character {
     }
 
     /**
-     * {@inheritDoc}i
+     * {@inheritDoc}
      */
     @Override
     public void goUp() {
@@ -122,7 +122,7 @@ public abstract class BaseCharacter extends EntityImpl implements Character {
     }
 
     /**
-     * {@inheritDoc}i
+     * {@inheritDoc}
      */
     @Override
     public void goDown() {
@@ -130,7 +130,7 @@ public abstract class BaseCharacter extends EntityImpl implements Character {
     }
 
     /**
-     * {@inheritDoc}i
+     * {@inheritDoc}
      */
     @Override
     public void goLeft() {
@@ -138,7 +138,7 @@ public abstract class BaseCharacter extends EntityImpl implements Character {
     }
 
     /**
-     * {@inheritDoc}i
+     * {@inheritDoc}
      */
     @Override
     public void goRight() {

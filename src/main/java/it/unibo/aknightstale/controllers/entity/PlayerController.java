@@ -13,7 +13,7 @@ public class PlayerController<M extends Character, V extends AnimatedEntityView>
     }
 
     /**
-     * {@inheritDoc}i
+     * {@inheritDoc}
      */
     @Override
     protected void move(final Direction dir) {
@@ -23,7 +23,7 @@ public class PlayerController<M extends Character, V extends AnimatedEntityView>
     }
 
     /**
-     * {@inheritDoc}i
+     * {@inheritDoc}
      */
     @Override
     public void attack() {
