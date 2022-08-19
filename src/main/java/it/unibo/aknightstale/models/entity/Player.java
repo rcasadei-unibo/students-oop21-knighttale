@@ -26,12 +26,4 @@ public class Player extends BaseCharacter {
         return ATTACK_RANGE;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void attack(final LifeEntity e) {
-        e.setHealth(e.getHealth() - this.getDamage());
-    }
-
 }

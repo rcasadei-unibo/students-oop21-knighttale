@@ -49,11 +49,16 @@ public abstract class BaseCharacter extends EntityImpl implements Character {
     @Override
     public abstract double getAttackRange();
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public abstract void attack(LifeEntity e);
+    public void attack(final LifeEntity e) {
+        e.setHealth(e.getHealth() - this.getDamage());
+    }
 
     /**
-     * {@inheritDoc}i
+     * {@inheritDoc}
      */
     @Override
     public void setHealth(final double health) {
