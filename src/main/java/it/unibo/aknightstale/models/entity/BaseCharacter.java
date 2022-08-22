@@ -23,7 +23,7 @@ public abstract class BaseCharacter extends EntityImpl implements Character {
     /**
      * The entity maximum health.
      */
-    private double max_health;
+    private final double maxHealth;
     /**
      * The entity speed.
      */
@@ -38,7 +38,7 @@ public abstract class BaseCharacter extends EntityImpl implements Character {
         super(bounds, type, collidable);
         this.damage = dmg;
         this.health = health;
-        this.max_health = health;
+        this.maxHealth = health;
         this.speed = speed;
         this.direction = dir;
     }
@@ -91,7 +91,7 @@ public abstract class BaseCharacter extends EntityImpl implements Character {
      */
     @Override
     public double getMaxHealth() {
-        return this.max_health;
+        return this.maxHealth;
     }
 
     /**
