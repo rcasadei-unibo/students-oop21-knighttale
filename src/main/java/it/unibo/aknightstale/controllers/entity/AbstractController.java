@@ -1,5 +1,6 @@
 package it.unibo.aknightstale.controllers.entity;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.aknightstale.models.entity.Character;
 import it.unibo.aknightstale.models.entity.Direction;
 import it.unibo.aknightstale.utils.EntityManager;
@@ -13,7 +14,7 @@ public abstract class AbstractController<M extends Character, V extends Animated
      */
     private final EntityManager manager;
 
-
+    @SuppressFBWarnings("EI_EXPOSE_REP2")       //must return a reference because it can be modified later
     public AbstractController(final M model, final V view, final EntityManager manager) {
         super(model, view);
         this.manager = manager;
@@ -82,6 +83,7 @@ public abstract class AbstractController<M extends Character, V extends Animated
      * 
      * @return  The entity manager.
      */
+    @SuppressFBWarnings("EI_EXPOSE_REP")        //must return a reference because it will be modified
     public EntityManager getManager() {
         return manager;
     }

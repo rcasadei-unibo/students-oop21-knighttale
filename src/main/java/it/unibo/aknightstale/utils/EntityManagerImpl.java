@@ -3,6 +3,7 @@ package it.unibo.aknightstale.utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.aknightstale.controllers.entity.EntityController;
 import it.unibo.aknightstale.models.entity.Character;
 import it.unibo.aknightstale.views.entity.AnimatedEntityView;
@@ -19,7 +20,7 @@ public class EntityManagerImpl implements EntityManager {
 
     public EntityManagerImpl(final List<EntityController<? super Character, ? super AnimatedEntityView>> l) {
         super();
-        this.entities = l;
+        this.entities = new ArrayList<>(l);
     }
 
     /**
@@ -55,12 +56,13 @@ public class EntityManagerImpl implements EntityManager {
      */
     @Override
     public List<EntityController<? super Character, ? super AnimatedEntityView>> getEntities() {
-        return this.entities;
+        return List.copyOf(this.entities);
     }
 
     /**
      * {@inheritDoc}
      */
+    @SuppressFBWarnings("EI_EXPOSE_REP") // must return a reference because it will be modified
     @Override
     public CollisionManager getCollisionManager() {
         return this.collision;
@@ -69,6 +71,7 @@ public class EntityManagerImpl implements EntityManager {
     /**
      * {@inheritDoc}
      */
+    @SuppressFBWarnings("EI_EXPOSE_REP2") // must return a reference because it will be modified
     @Override
     public void setCollisionManager(final CollisionManager collision) {
         this.collision = collision;

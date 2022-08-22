@@ -1,5 +1,6 @@
 package it.unibo.aknightstale.models.entity.factories;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.aknightstale.controllers.entity.CharacterController;
 import it.unibo.aknightstale.controllers.entity.PlayerController;
 import it.unibo.aknightstale.models.entity.Character;
@@ -24,6 +25,7 @@ public class EntityFactoryImpl implements EntityFactory {
     /**
      * {@inheritDoc}
      */
+    @SuppressFBWarnings("EI_EXPOSE_REP")       //must return a reference because it will be modified
     @Override
     public EntityManager getEntityManager() {
         return this.manager;

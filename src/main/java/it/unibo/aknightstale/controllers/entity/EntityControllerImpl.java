@@ -1,5 +1,6 @@
 package it.unibo.aknightstale.controllers.entity;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.aknightstale.models.entity.Entity;
 import it.unibo.aknightstale.views.entity.EntityView;
 
@@ -14,6 +15,7 @@ public class EntityControllerImpl<M extends Entity, V extends EntityView> implem
      */
     private final V view;
 
+    @SuppressFBWarnings("EI_EXPOSE_REP2")       //impossible clone the arguments because of generic typing
     public EntityControllerImpl(final M model, final V view) {
         super();
         this.model = model;
@@ -23,6 +25,7 @@ public class EntityControllerImpl<M extends Entity, V extends EntityView> implem
     /**
      * {@inheritDoc}
      */
+    @SuppressFBWarnings("EI_EXPOSE_REP")       //impossible clone the model because of generic typing
     @Override
     public M getModel() {
         return this.model;

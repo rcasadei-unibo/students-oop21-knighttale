@@ -20,7 +20,7 @@ public class CollisionManagerImpl implements CollisionManager {
     public CollisionManagerImpl(final List<EntityController<? super Character, ? super AnimatedEntityView>> entities,
             final double width, final double height) {
         super();
-        this.entities = entities;
+        this.entities = List.copyOf(entities);
         this.widthScreen = width;
         this.heightScreen = height;
     }
