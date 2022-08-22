@@ -1,9 +1,9 @@
 package it.unibo.aknightstale.models.entity;
 
-public interface LifeEntity {
+public interface LifeEntity extends DefenseEntity {
     /**
      * Sets the entity health.
-     * 
+     *
      * @param health the new entity health.
      */
     void setHealth(double health);

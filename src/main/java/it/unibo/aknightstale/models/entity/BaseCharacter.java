@@ -13,6 +13,11 @@ public abstract class BaseCharacter extends EntityImpl implements Character {
      */
     private double health;
     /**
+     * The entity defense percentage.
+     * This value is used to calculate the damage received by the entity: the damage received will be reduced by this percentage.
+     */
+    private double defense;
+    /**
      * The entity speed.
      */
     private double speed;
@@ -22,7 +27,7 @@ public abstract class BaseCharacter extends EntityImpl implements Character {
     private Direction direction;
 
     public BaseCharacter(final Bounds bounds, final EntityType type, final boolean collidable, final Direction dir,
-            final double dmg, final double health, final double speed) {
+                         final double dmg, final double health, final double speed) {
         super(bounds, type, collidable);
         this.damage = dmg;
         this.health = health;
@@ -54,7 +59,7 @@ public abstract class BaseCharacter extends EntityImpl implements Character {
      */
     @Override
     public void attack(final LifeEntity e) {
-        e.setHealth(e.getHealth() - this.getDamage());
+        e.setHealth(e.getHealth() - (this.getDamage() * (e.getDefense() / 100)));
     }
 
     /**
@@ -95,6 +100,22 @@ public abstract class BaseCharacter extends EntityImpl implements Character {
     @Override
     public void setSpeed(final double speed) {
         this.speed = speed;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double getDefense() {
+        return defense;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setDefense(final double defense) {
+        this.defense = defense;
     }
 
     /**

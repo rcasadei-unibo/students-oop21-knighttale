@@ -41,6 +41,7 @@ class PlayerTest extends BaseViewTest<MainMenuController, MainMenuView> {
             player.attack(entity);
         }
         Assertions.assertThat(entity.isDead()).isTrue();
+        // TODO: test defense when calculating damage
     }
 
     @Test
