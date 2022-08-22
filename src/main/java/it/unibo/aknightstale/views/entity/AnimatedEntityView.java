@@ -11,6 +11,15 @@ public interface AnimatedEntityView extends EntityView {
      */
     void setStatus(Status s);
 
+    /**
+     * Draws the entity health bar on JavaFX Canvas.
+     *
+     * @param gc        the JavaFX Canvas.
+     * @param x         the x coordinate of the top left corner of the health bar.
+     * @param y         the y coordinate of the top left corner of the health bar.
+     * @param health    the current health of the entity.
+     * @param maxHealth the maximum health of the entity.
+     */
     void drawHealthBar(GraphicsContext gc, double x, double y, double health, double maxHealth);
 
     /**

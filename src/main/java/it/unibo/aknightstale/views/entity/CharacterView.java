@@ -36,6 +36,9 @@ public abstract class CharacterView extends EntityViewImpl implements AnimatedEn
         this.status = s;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void drawHealthBar(final GraphicsContext gc, final double x, final double y, final double health, final double maxHealth) {
         gc.setFill(LIGHTGREEN);
