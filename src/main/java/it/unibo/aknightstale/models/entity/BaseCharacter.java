@@ -4,6 +4,9 @@ import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 
 public abstract class BaseCharacter extends EntityImpl implements Character {
+
+    @SuppressWarnings("unused")
+    private static final long serialVersionUID = 1L;    //required to serialize the class
     /**
      * The entity damage.
      */
