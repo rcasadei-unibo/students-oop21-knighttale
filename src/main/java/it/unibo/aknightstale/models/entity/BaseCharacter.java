@@ -9,7 +9,7 @@ public abstract class BaseCharacter extends EntityImpl implements Character {
      */
     private double damage;
     /**
-     * The entity health.
+     * The entity current health.
      */
     private double health;
     /**
@@ -17,6 +17,10 @@ public abstract class BaseCharacter extends EntityImpl implements Character {
      * This value is used to calculate the damage received by the entity: the damage received will be reduced by this percentage.
      */
     private double defense;
+    /**
+     * The entity maximum health.
+     */
+    private double max_health;
     /**
      * The entity speed.
      */
@@ -31,6 +35,7 @@ public abstract class BaseCharacter extends EntityImpl implements Character {
         super(bounds, type, collidable);
         this.damage = dmg;
         this.health = health;
+        this.max_health = health;
         this.speed = speed;
         this.direction = dir;
     }
@@ -76,6 +81,14 @@ public abstract class BaseCharacter extends EntityImpl implements Character {
     @Override
     public double getHealth() {
         return this.health;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double getMaxHealth() {
+        return this.max_health;
     }
 
     /**

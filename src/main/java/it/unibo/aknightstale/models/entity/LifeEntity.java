@@ -9,15 +9,22 @@ public interface LifeEntity extends DefenseEntity {
     void setHealth(double health);
 
     /**
-     * Gets the entity health.
-     * 
-     * @return the entity health.
+     * Gets the entity current health.
+     *
+     * @return the entity current health.
      */
     double getHealth();
 
     /**
+     * Gets the entity maximum health.
+     *
+     * @return the entity maximum health.
+     */
+    double getMaxHealth();
+
+    /**
      * Checks if the entity is died or not.
-     * 
+     *
      * @return true if it's died, false if it's alive.
      */
     boolean isDead();

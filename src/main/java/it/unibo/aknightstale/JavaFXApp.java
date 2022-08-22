@@ -1,5 +1,13 @@
 package it.unibo.aknightstale;
 
+import it.unibo.aknightstale.controllers.entity.CharacterController;
+import it.unibo.aknightstale.models.entity.Character;
+import it.unibo.aknightstale.models.entity.factories.EntityFactory;
+import it.unibo.aknightstale.models.entity.factories.EntityFactoryImpl;
+import it.unibo.aknightstale.models.entity.input.InputPlayer;
+import it.unibo.aknightstale.models.entity.input.InputPlayerImpl;
+import it.unibo.aknightstale.utils.CollisionManagerImpl;
+import it.unibo.aknightstale.views.entity.AnimatedEntityView;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -9,15 +17,6 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-
-import it.unibo.aknightstale.controllers.entity.CharacterController;
-import it.unibo.aknightstale.models.entity.Character;
-import it.unibo.aknightstale.models.entity.factories.EntityFactory;
-import it.unibo.aknightstale.models.entity.factories.EntityFactoryImpl;
-import it.unibo.aknightstale.models.entity.input.InputPlayer;
-import it.unibo.aknightstale.models.entity.input.InputPlayerImpl;
-import it.unibo.aknightstale.utils.CollisionManagerImpl;
-import it.unibo.aknightstale.views.entity.AnimatedEntityView;
 
 public final class JavaFXApp extends Application {
 
@@ -74,8 +73,17 @@ public final class JavaFXApp extends Application {
                 context.save();
                 context.clearRect(0, 0, widthWindow, heightWindow);
                 input.update();
-                context.drawImage(player.getView().getImage(), player.getModel().getPosition().getX(),
-                        player.getModel().getPosition().getY());
+                var playerModel = player.getModel();
+                var playerPosition = playerModel.getPosition();
+                context.drawImage(player.getView().getImage(), playerPosition.getX(),
+                        playerPosition.getY());
+                player.getView().drawHealthBar(
+                        context,
+                        playerPosition.getX(),
+                        playerPosition.getY() - 10,
+                        playerModel.getHealth(),
+                        playerModel.getMaxHealth()
+                );
                 context.restore();
             }
         };
