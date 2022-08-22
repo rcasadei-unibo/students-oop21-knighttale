@@ -39,7 +39,7 @@ public class CollisionManagerImpl implements CollisionManager {
     }
 
     private boolean rightDirection(final Bounds e, final Bounds bounds) {
-        return bounds.getMinX() == e.getMinX() + e.getWidth() && bounds.getMinX() == e.getMinX() + e.getWidth()
+        return bounds.getMinX() == e.getMinX() + e.getWidth()
                 && (bounds.getMinY() >= e.getMinY() && bounds.getMinY() < e.getMinY() + e.getHeight()
                         || bounds.getMinY() + bounds.getHeight() > e.getMinY()
                                 && bounds.getMinY() + bounds.getHeight() <= e.getMinY());
