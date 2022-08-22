@@ -53,6 +53,16 @@ class PlayerTest extends BaseViewTest<MainMenuController, MainMenuView> {
         Assertions.assertThat(entity.getHealth()).isEqualTo(life - player.getDamage());
     }
 
+    @Test
+    @DisplayName("Check maximum health of entity")
+    void checkMaximumHealth() {
+        final var player = this.factory.getPlayer().getModel();
+        final LifeEntity entity = new Player(player.getPosition()); // cambiare con nemico
+        final var initialHealth = entity.getHealth();
+        player.attack(entity);
+        Assertions.assertThat(entity.getMaxHealth()).isEqualTo(initialHealth);
+    }
+
     @Override
     public Class<MainMenuView> getViewInterface() {
         return MainMenuView.class;
