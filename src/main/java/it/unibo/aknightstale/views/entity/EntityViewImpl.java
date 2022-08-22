@@ -10,9 +10,10 @@ public class EntityViewImpl implements EntityView {
      */
     private Image image;
 
+    @SuppressFBWarnings("EI_EXPOSE_REP2")       //impossible clone the image
     public EntityViewImpl(final Image image) {
         super();
-        this.setImage(image);
+        this.image = image;
     }
 
     /**
