@@ -46,6 +46,8 @@ dependencies {
     implementation("net.harawata:appdirs:1.2.1")
     implementation("com.simtechdata:SceneOneFX:1.2.3")
     implementation("io.github.classgraph:classgraph:4.8.147")
+    implementation("com.google.guava:guava:31.1-jre")
+    implementation("io.github.palexdev:materialfx:11.13.5")
     implementation("io.vacco.jsonbeans:jsonbeans:1.0.0")
     implementation("com.github.spotbugs:spotbugs-annotations:4.6.0")
     implementation("org.jetbrains:annotations:23.0.0")
