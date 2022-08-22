@@ -6,6 +6,7 @@ import java.util.List;
 import it.unibo.aknightstale.controllers.entity.CharacterController;
 import it.unibo.aknightstale.models.entity.Character;
 import it.unibo.aknightstale.views.entity.AnimatedEntityView;
+import it.unibo.aknightstale.views.entity.Status;
 import javafx.scene.Scene;
 
 public class InputPlayerImpl implements InputPlayer {
@@ -39,21 +40,27 @@ public class InputPlayerImpl implements InputPlayer {
      */
     @Override
     public void update() {
-        if (keyPressed.contains("A")) {
-            this.player.moveLeft();
+        if (keyPressed.isEmpty()) {
+            this.player.getView().setStatus(Status.IDLE);
+            this.player.getView().update(this.player.getModel().getDirection());
+        } else {
+            if (keyPressed.contains("A")) {
+                this.player.moveLeft();
+            }
+            if (keyPressed.contains("D")) {
+                this.player.moveRight();
+            }
+            if (keyPressed.contains("W")) {
+                this.player.moveUp();
+            }
+            if (keyPressed.contains("S")) {
+                this.player.moveDown();
+            }
+            if (keyPressed.contains("SPACE")) {
+                this.player.attack();
+            }
         }
-        if (keyPressed.contains("D")) {
-            this.player.moveRight();
-        }
-        if (keyPressed.contains("W")) {
-            this.player.moveUp();
-        }
-        if (keyPressed.contains("S")) {
-            this.player.moveDown();
-        }
-        if (keyPressed.contains("SPACE")) {
-            this.player.attack();
-        }
+
     }
 
 }
