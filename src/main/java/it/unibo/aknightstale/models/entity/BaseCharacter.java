@@ -9,9 +9,13 @@ public abstract class BaseCharacter extends EntityImpl implements Character {
      */
     private double damage;
     /**
-     * The entity health.
+     * The entity current health.
      */
     private double health;
+    /**
+     * The entity maximum health.
+     */
+    private double max_health;
     /**
      * The entity speed.
      */
@@ -22,10 +26,11 @@ public abstract class BaseCharacter extends EntityImpl implements Character {
     private Direction direction;
 
     public BaseCharacter(final Bounds bounds, final EntityType type, final boolean collidable, final Direction dir,
-            final double dmg, final double health, final double speed) {
+                         final double dmg, final double health, final double speed) {
         super(bounds, type, collidable);
         this.damage = dmg;
         this.health = health;
+        this.max_health = health;
         this.speed = speed;
         this.direction = dir;
     }
@@ -71,6 +76,14 @@ public abstract class BaseCharacter extends EntityImpl implements Character {
     @Override
     public double getHealth() {
         return this.health;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double getMaxHealth() {
+        return this.max_health;
     }
 
     /**
