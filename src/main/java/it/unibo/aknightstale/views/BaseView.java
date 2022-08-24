@@ -8,6 +8,9 @@ public abstract class BaseView<C extends Controller<? extends View<C>>> implemen
      * Controller that is associated with this view.
      */
     private C controller;
+    /**
+     * Window associated to this view.
+     */
     private Window window;
 
     /**
@@ -20,8 +23,7 @@ public abstract class BaseView<C extends Controller<? extends View<C>>> implemen
     }
 
     /**
-     * Sets the controller associated with this view.
-     * @param controller the controller to associate with this view.
+     * {@inheritDoc}
      */
     @Override
     public void setController(final C controller) {
@@ -29,7 +31,7 @@ public abstract class BaseView<C extends Controller<? extends View<C>>> implemen
     }
 
     /**
-     * Shows the view.
+     * {@inheritDoc}
      */
     @Override
     public void show() {
@@ -38,7 +40,7 @@ public abstract class BaseView<C extends Controller<? extends View<C>>> implemen
     }
 
     /**
-     * Hides the view.
+     * {@inheritDoc}
      */
     @Override
     public void hide() {
@@ -46,7 +48,7 @@ public abstract class BaseView<C extends Controller<? extends View<C>>> implemen
     }
 
     /**
-     * Closes the view.
+     * {@inheritDoc}
      */
     @Override
     public void close() {
@@ -70,8 +72,7 @@ public abstract class BaseView<C extends Controller<? extends View<C>>> implemen
     }
 
     /**
-     * Gets the name of the view.
-     * @return the name of the view.
+     * {@inheritDoc}
      */
     @Override
     public String getViewName() {
