@@ -7,7 +7,10 @@ import it.unibo.aknightstale.views.interfaces.View;
 import it.unibo.aknightstale.views.factories.ViewFactory;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.testfx.assertions.api.Assertions;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 import org.testfx.util.WaitForAsyncUtils;
@@ -35,6 +38,12 @@ public abstract class BaseViewTest<C extends Controller<V>, V extends View<C>> {
         registerPrimaryStage();
     }
 
+    @Test
+    @DisplayName("Game finished view should be displayed")
+    void checkIfViewIsOpened() {
+        Assertions.assertThat(this.getWindow().isOpened()).isTrue();
+    }
+
     /**
      * Starts the JavaFX application.
      *
@@ -48,8 +57,15 @@ public abstract class BaseViewTest<C extends Controller<V>, V extends View<C>> {
         this.controller = Controller.of(this.getControllerInterface(), this.getViewInterface())
                 .stage(stage)
                 .get();
-        this.controller.showView();
+        this.showView();
         this.view = View.of(this.getViewInterface()).get();
+    }
+
+    /**
+     * Show the view.
+     */
+    protected void showView() {
+        this.controller.showView();
     }
 
     public abstract Class<V> getViewInterface();
