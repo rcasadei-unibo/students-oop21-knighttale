@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test;
 import it.unibo.aknightstale.controllers.interfaces.MainMenuController;
 import it.unibo.aknightstale.models.entity.factories.EntityFactory;
 import it.unibo.aknightstale.models.entity.factories.EntityFactoryImpl;
+import it.unibo.aknightstale.utils.Point2D;
 import it.unibo.aknightstale.views.BaseViewTest;
 import it.unibo.aknightstale.views.interfaces.MainMenuView;
-import javafx.geometry.Point2D;
 
 class PlayerTest extends BaseViewTest<MainMenuController, MainMenuView> {
 
