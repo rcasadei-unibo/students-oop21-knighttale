@@ -38,6 +38,9 @@ public class GameFinishedControllerImpl extends BaseController<GameFinishedView>
         Controller.of(ScoreboardController.class, ScoreboardView.class).get().showView();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void showView() {
         this.getView().setScoreLabel(this.score);
