@@ -1,18 +1,18 @@
 package it.unibo.aknightstale.models.entity;
 
-import javafx.geometry.BoundingBox;
-import javafx.geometry.Bounds;
-import javafx.geometry.Point2D;
+import it.unibo.aknightstale.utils.Borders;
+import it.unibo.aknightstale.utils.BordersImpl;
+import it.unibo.aknightstale.utils.Point2D;
 
 public class EntityImpl implements Entity {
 
-    private Bounds bounds;
+    private Borders borders;
     private final EntityType type;
     private final boolean collidable;
 
-    public EntityImpl(final Bounds bounds, final EntityType type, final boolean collidable) {
+    public EntityImpl(final Borders borders, final EntityType type, final boolean collidable) {
         super();
-        this.bounds = bounds;
+        this.borders = borders;
         this.type = type;
         this.collidable = collidable;
     }
@@ -22,7 +22,7 @@ public class EntityImpl implements Entity {
      */
     @Override
     public Point2D getPosition() {
-        return new Point2D(this.bounds.getMinX(), this.bounds.getMinY());
+        return new Point2D(this.borders.getX(), this.borders.getY());
     }
 
     /**
@@ -30,15 +30,15 @@ public class EntityImpl implements Entity {
      */
     @Override
     public void setPosition(final Point2D p) {
-        this.bounds = new BoundingBox(p.getX(), p.getY(), this.bounds.getWidth(), this.bounds.getHeight());
+        this.borders = new BordersImpl(p.getX(), p.getY(), this.borders.getWidth(), this.borders.getHeight());
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Bounds getBounds() {
-        return this.bounds;
+    public Borders getBorders() {
+        return this.borders;
     }
 
     /**

@@ -3,10 +3,10 @@ package it.unibo.aknightstale.controllers.entity;
 import it.unibo.aknightstale.models.entity.Character;
 import it.unibo.aknightstale.models.entity.Direction;
 import it.unibo.aknightstale.models.entity.EntityType;
+import it.unibo.aknightstale.utils.BordersImpl;
 import it.unibo.aknightstale.utils.EntityManager;
 import it.unibo.aknightstale.views.entity.AnimatedEntityView;
 import it.unibo.aknightstale.views.entity.Status;
-import javafx.geometry.BoundingBox;
 
 public class PlayerController<M extends Character, V extends AnimatedEntityView> extends AbstractController<M, V> {
 
@@ -31,13 +31,12 @@ public class PlayerController<M extends Character, V extends AnimatedEntityView>
     public void attack() {
         final var playerModel = super.getModel();
         final double attackRange = playerModel.getAttackRange();
-        final var playerBounds = new BoundingBox(playerModel.getPosition().getX() - attackRange,
-                playerModel.getPosition().getY() - attackRange, playerModel.getBounds().getWidth() + attackRange,
-                playerModel.getBounds().getHeight() + attackRange);
-        this.getManager().getEntities().stream()
-                .filter(ec -> playerBounds.intersects(ec.getModel().getBounds()))
-                .filter(ec -> ec.getModel() instanceof Character)
-                .forEach(ec -> {
+        final var playerBounds = new BordersImpl(playerModel.getPosition().getX() - attackRange,
+                playerModel.getPosition().getY() - attackRange, playerModel.getBorders().getWidth() + attackRange,
+                playerModel.getBorders().getHeight() + attackRange);
+
+        this.getManager().getEntities().stream().filter(ec -> playerBounds.intersects(ec.getModel().getBorders()))
+                .filter(ec -> ec.getModel() instanceof Character).forEach(ec -> {
                     if (!ec.getModel().getType().equals(EntityType.PLAYER)) {
                         final var model = (Character) ec.getModel();
                         super.getModel().attack(model);

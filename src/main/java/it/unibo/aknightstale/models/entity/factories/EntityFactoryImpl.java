@@ -7,9 +7,9 @@ import it.unibo.aknightstale.models.entity.Character;
 import it.unibo.aknightstale.models.entity.Player;
 import it.unibo.aknightstale.utils.EntityManager;
 import it.unibo.aknightstale.utils.EntityManagerImpl;
+import it.unibo.aknightstale.utils.Point2D;
 import it.unibo.aknightstale.views.entity.AnimatedEntityView;
 import it.unibo.aknightstale.views.entity.PlayerView;
-import javafx.geometry.Point2D;
 
 public class EntityFactoryImpl implements EntityFactory {
 

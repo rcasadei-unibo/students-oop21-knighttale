@@ -1,7 +1,7 @@
 package it.unibo.aknightstale.models.entity;
 
-import javafx.geometry.Bounds;
-import javafx.geometry.Point2D;
+import it.unibo.aknightstale.utils.Borders;
+import it.unibo.aknightstale.utils.Point2D;
 
 public interface Entity {
     /**
@@ -23,7 +23,7 @@ public interface Entity {
      * 
      * @return the entity bounds.
      */
-    Bounds getBounds();
+    Borders getBorders();
 
     /**
      * Gets the entity type.
