@@ -4,7 +4,7 @@ import it.unibo.aknightstale.controllers.interfaces.Controller;
 import it.unibo.aknightstale.controllers.interfaces.GameFinishedController;
 import it.unibo.aknightstale.controllers.interfaces.MainMenuController;
 import it.unibo.aknightstale.controllers.interfaces.ScoreboardController;
-import it.unibo.aknightstale.models.Scoreboard;
+import it.unibo.aknightstale.models.ScoreboardImpl;
 import it.unibo.aknightstale.views.interfaces.GameFinishedView;
 import it.unibo.aknightstale.views.interfaces.MainMenuView;
 import it.unibo.aknightstale.views.interfaces.ScoreboardView;
@@ -17,7 +17,7 @@ public class GameFinishedControllerImpl extends BaseController<GameFinishedView>
      */
     @Override
     public void saveScore(final String name) {
-        final var scoreboard = new Scoreboard();
+        final var scoreboard = new ScoreboardImpl();
         scoreboard.setScore(name, score);
         scoreboard.save();
     }

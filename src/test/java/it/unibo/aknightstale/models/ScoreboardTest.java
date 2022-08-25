@@ -35,7 +35,7 @@ class ScoreboardTest {
     void load() {
         final var scoreboard = this.getSampleScoreboard();
         scoreboard.save();
-        final var scoreboard2 = new Scoreboard();
+        final var scoreboard2 = new ScoreboardImpl();
         scoreboard2.load();
         this.checkScoreboard(scoreboard2);
     }
@@ -47,13 +47,13 @@ class ScoreboardTest {
         scoreboard.save();
         final var path = App.getFilePath("scoreboard.json");
         Assertions.assertThat(Files.exists(path)).isTrue();
-        final var scoreboard2 = new Scoreboard();
+        final var scoreboard2 = new ScoreboardImpl();
         scoreboard2.load();
         this.checkScoreboard(scoreboard2);
     }
 
     private Scoreboard getSampleScoreboard() {
-        final var scoreboard = new Scoreboard();
+        final var scoreboard = new ScoreboardImpl();
         for (final var entry : scores.entrySet()) {
             scoreboard.setScore(entry.getKey(), entry.getValue());
         }

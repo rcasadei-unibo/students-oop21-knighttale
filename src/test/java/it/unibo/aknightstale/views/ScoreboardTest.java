@@ -2,7 +2,7 @@ package it.unibo.aknightstale.views;
 
 import io.github.palexdev.materialfx.controls.MFXTableView;
 import it.unibo.aknightstale.controllers.interfaces.ScoreboardController;
-import it.unibo.aknightstale.models.Scoreboard;
+import it.unibo.aknightstale.models.ScoreboardImpl;
 import it.unibo.aknightstale.views.interfaces.MainMenuView;
 import it.unibo.aknightstale.views.interfaces.ScoreboardView;
 import javafx.application.Platform;
@@ -39,7 +39,7 @@ class ScoreboardTest extends BaseViewTest<ScoreboardController, ScoreboardView> 
     @DisplayName("Update scoreboard table")
     void updateScoreboard(final FxRobot robot) {
         // Create scoreboard
-        final var scoreboard = new Scoreboard();
+        final var scoreboard = new ScoreboardImpl();
         scoreboard.setScore("player1", 1);
         scoreboard.setScore("player2", 2);
         scoreboard.setScore("player3", 3);
