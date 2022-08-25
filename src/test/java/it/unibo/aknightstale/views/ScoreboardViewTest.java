@@ -16,9 +16,9 @@ import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 
 @ExtendWith(ApplicationExtension.class)
-class ScoreboardTest extends BaseViewTest<ScoreboardController, ScoreboardView> {
+class ScoreboardViewTest extends BaseViewTest<ScoreboardController, ScoreboardView> {
 
-    ScoreboardTest() {
+    ScoreboardViewTest() {
         super(ScoreboardView.class, ScoreboardController.class);
     }
 
