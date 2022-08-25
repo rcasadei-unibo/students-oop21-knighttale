@@ -12,6 +12,24 @@ public abstract class CharacterView extends EntityViewImpl implements AnimatedEn
      */
     protected static final int HEALTH_BAR_MAX_WIDTH = 50;
 
+    protected static final String SEPARATOR = System.getProperty("file.separator");
+    protected static final String URL = "it" + SEPARATOR + "unibo" + SEPARATOR + "aknightstale" + SEPARATOR + "entity"
+            + SEPARATOR + "player" + SEPARATOR;
+
+    protected String idle_right;
+    protected String idle_left;
+    protected String idle_up;
+    protected String idle_down;
+
+    protected String walk_right;
+    protected String walk_left;
+    protected String walk_up;
+    protected String walk_down;
+
+    static final int MAX_NUM_FRAME = 50;
+
+    private int frameNum;
+
     private Status status;
 
     public CharacterView(final Image image, final Status s) {
@@ -40,12 +58,52 @@ public abstract class CharacterView extends EntityViewImpl implements AnimatedEn
      * {@inheritDoc}
      */
     @Override
-    public void drawHealthBar(final GraphicsContext gc, final double x, final double y, final double health, final double maxHealth) {
+    public void drawHealthBar(final GraphicsContext gc, final double x, final double y, final double health,
+            final double maxHealth) {
         gc.setFill(LIGHTGREEN);
         gc.fillRect(x, y, health / maxHealth * HEALTH_BAR_MAX_WIDTH, 2);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public abstract void update(Direction d);
+    public void update(final Direction dir) {
+        if (this.getStatus() == Status.WALK) {
+            switch (dir) {
+            case RIGHT:
+                setImage(new Image(idle_right), new Image(walk_right));
+                break;
+            case LEFT:
+                setImage(new Image(idle_left), new Image(walk_left));
+                break;
+            case DOWN:
+                setImage(new Image(idle_down), new Image(walk_down));
+                break;
+            case UP:
+                setImage(new Image(idle_up), new Image(walk_up));
+                break;
+            default:
+            }
+            this.frameNum++;
+            if (!checkSpriteNum(MAX_NUM_FRAME * 2)) {
+                this.frameNum = 0;
+            }
+        } else {
+            super.setImage(new Image(URL + "player_" + this.getStatus() + "_" + dir + ".png"));
+        }
+    }
+
+    private void setImage(final Image a, final Image b) {
+        if (checkSpriteNum(MAX_NUM_FRAME)) {
+            super.setImage(a);
+        } else {
+            super.setImage(b);
+        }
+    }
+
+    private boolean checkSpriteNum(final int n) {
+        return this.frameNum < n;
+    }
 
 }
