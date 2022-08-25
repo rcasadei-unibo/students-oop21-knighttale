@@ -17,6 +17,11 @@ import org.testfx.framework.junit5.Start;
 
 @ExtendWith(ApplicationExtension.class)
 class ScoreboardTest extends BaseViewTest<ScoreboardController, ScoreboardView> {
+
+    ScoreboardTest() {
+        super(ScoreboardView.class, ScoreboardController.class);
+    }
+
     @Start
     @Override
     public void start(final Stage stage) {
@@ -53,15 +58,5 @@ class ScoreboardTest extends BaseViewTest<ScoreboardController, ScoreboardView> 
             final var tableItems = table.getItems().toArray();
             Assertions.assertThat(tableItems).isEqualTo(scores.toArray());
         });
-    }
-
-    @Override
-    public Class<ScoreboardView> getViewInterface() {
-        return ScoreboardView.class;
-    }
-
-    @Override
-    public Class<ScoreboardController> getControllerInterface() {
-        return ScoreboardController.class;
     }
 }

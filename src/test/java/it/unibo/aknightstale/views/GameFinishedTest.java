@@ -19,6 +19,10 @@ import org.testfx.framework.junit5.Start;
 class GameFinishedTest extends BaseViewTest<GameFinishedController, GameFinishedView> {
     private static final Integer SCORE = 4;
 
+    GameFinishedTest() {
+        super(GameFinishedView.class, GameFinishedController.class);
+    }
+
     @Override
     @Start
     public void start(final Stage stage) {
@@ -41,7 +45,7 @@ class GameFinishedTest extends BaseViewTest<GameFinishedController, GameFinished
     @Test
     @DisplayName("Open the game with the exit button")
     void checkScoreLabel(final FxRobot robot) {
-        var score = Integer.parseInt(robot.lookup("#scoreLabel").queryAs(Labeled.class).getText());
+        final var score = Integer.parseInt(robot.lookup("#scoreLabel").queryAs(Labeled.class).getText());
         Assertions.assertThat(score).isEqualTo(SCORE);
     }
 
@@ -58,15 +62,5 @@ class GameFinishedTest extends BaseViewTest<GameFinishedController, GameFinished
     void onScoreboardButtonClicked(final FxRobot robot) {
         robot.clickOn("#scoreboardButton");
         Assertions.assertThat(getWindow().getCurrentView()).isInstanceOf(ScoreboardView.class);
-    }
-
-    @Override
-    public Class<GameFinishedView> getViewInterface() {
-        return GameFinishedView.class;
-    }
-
-    @Override
-    public Class<GameFinishedController> getControllerInterface() {
-        return GameFinishedController.class;
     }
 }
