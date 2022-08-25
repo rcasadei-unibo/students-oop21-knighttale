@@ -2,7 +2,7 @@ package it.unibo.aknightstale.views;
 
 import io.github.palexdev.materialfx.controls.MFXTableView;
 import it.unibo.aknightstale.controllers.interfaces.ScoreboardController;
-import it.unibo.aknightstale.models.Scoreboard;
+import it.unibo.aknightstale.models.ScoreboardImpl;
 import it.unibo.aknightstale.views.interfaces.MainMenuView;
 import it.unibo.aknightstale.views.interfaces.ScoreboardView;
 import javafx.application.Platform;
@@ -16,7 +16,12 @@ import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 
 @ExtendWith(ApplicationExtension.class)
-class ScoreboardTest extends BaseViewTest<ScoreboardController, ScoreboardView> {
+class ScoreboardViewTest extends BaseViewTest<ScoreboardController, ScoreboardView> {
+
+    ScoreboardViewTest() {
+        super(ScoreboardView.class, ScoreboardController.class);
+    }
+
     @Start
     @Override
     public void start(final Stage stage) {
@@ -34,7 +39,7 @@ class ScoreboardTest extends BaseViewTest<ScoreboardController, ScoreboardView> 
     @DisplayName("Update scoreboard table")
     void updateScoreboard(final FxRobot robot) {
         // Create scoreboard
-        final var scoreboard = new Scoreboard();
+        final var scoreboard = new ScoreboardImpl();
         scoreboard.setScore("player1", 1);
         scoreboard.setScore("player2", 2);
         scoreboard.setScore("player3", 3);
@@ -53,15 +58,5 @@ class ScoreboardTest extends BaseViewTest<ScoreboardController, ScoreboardView> 
             final var tableItems = table.getItems().toArray();
             Assertions.assertThat(tableItems).isEqualTo(scores.toArray());
         });
-    }
-
-    @Override
-    public Class<ScoreboardView> getViewInterface() {
-        return ScoreboardView.class;
-    }
-
-    @Override
-    public Class<ScoreboardController> getControllerInterface() {
-        return ScoreboardController.class;
     }
 }

@@ -18,6 +18,10 @@ public class ScoreboardViewImpl extends BaseView<ScoreboardController> implement
     @FXML
     private MFXTableView<Entry<String, Integer>> scoreboardTableView;
 
+    public ScoreboardViewImpl() {
+        super("Scoreboard");
+    }
+
     @FXML
     private void initialize() { //NOPMD - suppressed UnusedPrivateMethod - False positive (used by JavaFX)
         final var playerColumn = new MFXTableColumn<Entry<String, Integer>>("Player");
@@ -49,14 +53,5 @@ public class ScoreboardViewImpl extends BaseView<ScoreboardController> implement
     public void updateScoreboard(final Set<Entry<String, Integer>> scoreboard) {
         final var list = FXCollections.observableList(List.copyOf(scoreboard));
         this.scoreboardTableView.setItems(list);
-    }
-
-    /**
-     * Gets the window title.
-     * @return the window title.
-     */
-    @Override
-    public String getWindowTitle() {
-        return "Scoreboard";
     }
 }

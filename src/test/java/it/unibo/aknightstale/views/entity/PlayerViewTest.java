@@ -1,5 +1,6 @@
 package it.unibo.aknightstale.views.entity;
 
+import javafx.stage.Stage;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,13 +12,25 @@ import it.unibo.aknightstale.utils.CollisionManagerImpl;
 import it.unibo.aknightstale.views.BaseViewTest;
 import it.unibo.aknightstale.views.interfaces.MainMenuView;
 import javafx.scene.image.Image;
+import org.testfx.framework.junit5.Start;
 
-class PlayerTest extends BaseViewTest<MainMenuController, MainMenuView> {
+// TODO: Replace with World view
+class PlayerViewTest extends BaseViewTest<MainMenuController, MainMenuView> {
 
     private final EntityFactory factory = new EntityFactoryImpl();
     static final String SEPARATOR = System.getProperty("file.separator");
     static final double WIDTH_WINDOW = 600.0;
     static final double HEIGHT_WINDOW = 600.0;
+
+    PlayerViewTest() {
+        super(MainMenuView.class, MainMenuController.class);
+    }
+
+    @Start
+    @Override
+    public void start(final Stage stage) {
+        super.start(stage);
+    }
 
     @Test
     @DisplayName("Check player image")
@@ -38,16 +51,6 @@ class PlayerTest extends BaseViewTest<MainMenuController, MainMenuView> {
         final var path = "it" + SEPARATOR + "unibo" + SEPARATOR + "aknightstale" + SEPARATOR + "entity" + SEPARATOR
                 + "player" + SEPARATOR + "player_attack_right.png";
         Assertions.assertThat(isImageEqual(player.getView().getImage(), new Image(path))).isTrue();
-    }
-
-    @Override
-    public Class<MainMenuView> getViewInterface() {
-        return MainMenuView.class;
-    }
-
-    @Override
-    public Class<MainMenuController> getControllerInterface() {
-        return MainMenuController.class;
     }
 
     private boolean isImageEqual(final Image firstImage, final Image secondImage) {

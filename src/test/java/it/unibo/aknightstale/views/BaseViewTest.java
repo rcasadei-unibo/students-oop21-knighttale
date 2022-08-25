@@ -1,13 +1,16 @@
 package it.unibo.aknightstale.views;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import it.unibo.aknightstale.controllers.interfaces.Controller;
 import it.unibo.aknightstale.controllers.factories.ControllerFactory;
-import it.unibo.aknightstale.views.interfaces.View;
+import it.unibo.aknightstale.controllers.interfaces.Controller;
 import it.unibo.aknightstale.views.factories.ViewFactory;
+import it.unibo.aknightstale.views.interfaces.View;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.testfx.assertions.api.Assertions;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 import org.testfx.util.WaitForAsyncUtils;
@@ -18,9 +21,17 @@ import static org.testfx.api.FxToolkit.registerPrimaryStage;
 
 @SuppressFBWarnings("EI_EXPOSE_REP") // View must be passed as reference to allow view loader caching.
 @ExtendWith(ApplicationExtension.class)
-public abstract class BaseViewTest<C extends Controller<V>, V extends View<C>> {
+public abstract class BaseViewTest<C extends Controller<V>, V extends View<C>> { //NOPMD - suppressed AbstractClassWithoutAbstractMethod - Without abstract the test method runs (since it would be a real class that JUnit recognizes as a test class).
     private V view;
+    private final Class<V> viewInterface;
     private C controller;
+    private final Class<C> controllerInterface;
+
+    protected BaseViewTest(final Class<V> viewInterface, final Class<C> controllerInterface) {
+        super();
+        this.viewInterface = viewInterface;
+        this.controllerInterface = controllerInterface;
+    }
 
     @BeforeAll
     public static void setupSpec() throws TimeoutException {
@@ -35,6 +46,12 @@ public abstract class BaseViewTest<C extends Controller<V>, V extends View<C>> {
         registerPrimaryStage();
     }
 
+    @Test
+    @DisplayName("Check if view is displayed")
+    void checkIfViewIsOpened() {
+        Assertions.assertThat(this.getWindow().isOpened()).isTrue();
+    }
+
     /**
      * Starts the JavaFX application.
      *
@@ -45,16 +62,19 @@ public abstract class BaseViewTest<C extends Controller<V>, V extends View<C>> {
         // Clear cache when starting a new test set.
         this.clearCache();
         WaitForAsyncUtils.waitForFxEvents();
-        this.controller = Controller.of(this.getControllerInterface(), this.getViewInterface())
+        this.controller = Controller.of(this.controllerInterface, this.viewInterface)
                 .stage(stage)
                 .get();
-        this.controller.showView();
-        this.view = View.of(this.getViewInterface()).get();
+        this.showView();
+        this.view = View.of(this.viewInterface).get();
     }
 
-    public abstract Class<V> getViewInterface();
-
-    public abstract Class<C> getControllerInterface();
+    /**
+     * Show the view.
+     */
+    protected void showView() {
+        this.controller.showView();
+    }
 
     /**
      * Get the view.
