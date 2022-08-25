@@ -5,7 +5,7 @@ import it.unibo.aknightstale.views.interfaces.MainMenuView;
 import javafx.fxml.FXML;
 
 public class MainMenuViewImpl extends BaseView<MainMenuController> implements MainMenuView {
-    MainMenuViewImpl() {
+    public MainMenuViewImpl() {
         super("Main Menu");
     }
 

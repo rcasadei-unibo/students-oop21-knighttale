@@ -18,7 +18,7 @@ public class ScoreboardViewImpl extends BaseView<ScoreboardController> implement
     @FXML
     private MFXTableView<Entry<String, Integer>> scoreboardTableView;
 
-    ScoreboardViewImpl() {
+    public ScoreboardViewImpl() {
         super("Scoreboard");
     }
 

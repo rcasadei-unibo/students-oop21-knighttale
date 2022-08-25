@@ -14,7 +14,7 @@ public class GameFinishedViewImpl extends BaseView<GameFinishedController> imple
     @FXML
     private MFXTextField nameTextField;
 
-    GameFinishedViewImpl() {
+    public GameFinishedViewImpl() {
         super("Game finished");
     }
 
