@@ -5,6 +5,10 @@ import it.unibo.aknightstale.views.interfaces.MainMenuView;
 import javafx.fxml.FXML;
 
 public class MainMenuViewImpl extends BaseView<MainMenuController> implements MainMenuView {
+    MainMenuViewImpl() {
+        super("Main Menu");
+    }
+
     /**
      * Action when exit button is clicked. Closes the window when clicked.
      */
@@ -19,15 +23,5 @@ public class MainMenuViewImpl extends BaseView<MainMenuController> implements Ma
     @FXML
     protected final void onScoreboardButtonClicked() {
         this.getController().showScoreboard();
-    }
-
-    /**
-     * Gets the window title.
-     *
-     * @return the window title.
-     */
-    @Override
-    public String getWindowTitle() {
-        return "Main menu";
     }
 }

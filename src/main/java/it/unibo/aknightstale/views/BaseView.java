@@ -12,6 +12,11 @@ public abstract class BaseView<C extends Controller<? extends View<C>>> implemen
      * Window associated to this view.
      */
     private Window window;
+    private final String windowTitle;
+
+    protected BaseView(final String windowTitle) {
+        this.windowTitle = windowTitle;
+    }
 
     /**
      * Gets the controller associated with this view.
@@ -77,5 +82,15 @@ public abstract class BaseView<C extends Controller<? extends View<C>>> implemen
     @Override
     public String getViewName() {
         return this.getClass().getSimpleName();
+    }
+
+    /**
+     * Gets the window title.
+     *
+     * @return the window title.
+     */
+    @Override
+    public String getWindowTitle() {
+        return this.windowTitle;
     }
 }

@@ -14,6 +14,10 @@ public class GameFinishedViewImpl extends BaseView<GameFinishedController> imple
     @FXML
     private MFXTextField nameTextField;
 
+    GameFinishedViewImpl() {
+        super("Game finished");
+    }
+
     /**
      * Action when save button is clicked. Saves the score.
      */
@@ -47,14 +51,6 @@ public class GameFinishedViewImpl extends BaseView<GameFinishedController> imple
      */
     public void onNewGameButtonClicked() {
         // TODO: Wait world to be finished
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getWindowTitle() {
-        return "Game finished!";
     }
 
     /**
