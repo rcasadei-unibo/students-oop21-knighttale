@@ -126,6 +126,15 @@ public class Window {
     }
 
     /**
+     * Get the JavaFX scene associated with this window.
+     *
+     * @return The JavaFX scene associated with this window.
+     */
+    public Scene getScene() {
+        return SceneOne.getScene(this.windowId);
+    }
+
+    /**
      * Get the window with this id if it exists.
      *
      * @param windowId The id of the window to get.
