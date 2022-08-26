@@ -24,9 +24,7 @@ public class Window {
     }
 
     public Window(final String windowId) {
-        this.windowId = windowId;
-        SceneOne.set(this.windowId, new Scene(new VBox())).build();
-        WINDOWS.put(this.windowId, this);
+        this(windowId, null);
     }
 
     public Window(final String windowId, final Stage stage) {
