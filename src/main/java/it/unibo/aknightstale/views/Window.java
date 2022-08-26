@@ -130,8 +130,8 @@ public class Window {
      *
      * @return The JavaFX scene associated with this window.
      */
-    public Scene getScene() {
-        return SceneOne.getScene(this.windowId);
+    public static Scene getScene(final String viewName) {
+        return SceneOne.getScene(viewName);
     }
 
     /**
@@ -169,5 +169,14 @@ public class Window {
      */
     public static Window getOrCreate(final String windowId) {
         return getOrCreate(windowId, null);
+    }
+
+    /**
+     * Get the JavaFX stage associated with the current view of this window.
+     *
+     * @return The JavaFX stage associated with the current view of this window.
+     */
+    public Scene getCurrentScene() {
+        return getScene(this.getCurrentViewName());
     }
 }
