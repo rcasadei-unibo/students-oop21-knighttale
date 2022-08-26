@@ -1,8 +1,7 @@
 package it.unibo.aknightstale.controllers;
 
-import it.unibo.aknightstale.models.map.Spawner;
+import it.unibo.aknightstale.models.map.SpawnerImpl;
 import it.unibo.aknightstale.views.map.MapView;
-import it.unibo.aknightstale.views.map.Tile;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -61,7 +60,7 @@ public class MapController {
         // converting map
         readTextMap();
         //adding trees
-        Spawner treeSpawner = new Spawner(mapView.getTree(), 30, this.mapTileNum);
+        SpawnerImpl treeSpawner = new SpawnerImpl(mapView.getTree(), 30, this.mapTileNum);
         this.mapTileNum = treeSpawner.getMap();
     }
 
