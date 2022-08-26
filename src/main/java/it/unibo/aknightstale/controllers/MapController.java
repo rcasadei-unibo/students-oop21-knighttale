@@ -1,5 +1,8 @@
 package it.unibo.aknightstale.controllers;
 
+import it.unibo.aknightstale.models.map.Spawner;
+import it.unibo.aknightstale.views.map.MapView;
+import it.unibo.aknightstale.views.map.Tile;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -13,7 +16,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.*;
 
-public class Mapcontroller {
+public class MapController {
     @FXML
     Canvas canvas;
     @FXML
@@ -22,7 +25,7 @@ public class Mapcontroller {
     private GraphicsContext gc;
 
     Map<Pair<Integer, Integer>, Integer> mapTileNum = new HashMap<>();
-    Map<Tile, ObstacleEntity> tilesEntities = new HashMap<>();
+    //Map<Tile, ObstacleEntity> tilesEntities = new HashMap<>();
 
     private static final int NUM_COL = 48;
     private static final int NUM_ROW = 27;
