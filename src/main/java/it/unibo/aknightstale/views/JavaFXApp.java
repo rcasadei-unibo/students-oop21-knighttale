@@ -9,8 +9,9 @@ import javafx.stage.Stage;
 public final class JavaFXApp extends Application {
     @Override
     public void start(final Stage stage) {
-        final var mainMenuController = Controller.of(MainMenuController.class, MainMenuView.class)
-                .get();
+        final var controllerFactory = Controller.of(MainMenuController.class, MainMenuView.class);
+        controllerFactory.getViewFactory().stage(stage);
+        final var mainMenuController = controllerFactory.get();
         mainMenuController.showView();
     }
 }

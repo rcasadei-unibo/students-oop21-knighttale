@@ -1,11 +1,9 @@
 package it.unibo.aknightstale.controllers.factories;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.aknightstale.controllers.interfaces.Controller;
 import it.unibo.aknightstale.factories.ClassFactory;
-import it.unibo.aknightstale.views.interfaces.View;
 import it.unibo.aknightstale.views.factories.ViewFactory;
-import javafx.stage.Stage;
+import it.unibo.aknightstale.views.interfaces.View;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +14,8 @@ public class ControllerFactory<C extends Controller<V>, V extends View<C>> {
     private Class<C> controllerInterface;
     private Class<V> viewInterface;
     private boolean forceCreation;
-    private Stage stage;
+
+    private final ViewFactory<V> viewFactory = new ViewFactory<>();
 
     /**
      * Clears the cache of instantiated controllers.
@@ -58,15 +57,12 @@ public class ControllerFactory<C extends Controller<V>, V extends View<C>> {
     }
 
     /**
-     * Set the stage to use to create the view associated with the controller created by the factory.
+     * Get the view factory instance.
      *
-     * @param stage The stage to use to create the view associated with the controller created by the factory.
-     * @return This instance of the factory.
+     * @return An instance of the view factory class.
      */
-    @SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "Stage is not exposed, it must be the instance passed.")
-    public ControllerFactory<C, V> stage(final Stage stage) {
-        this.stage = stage;
-        return this;
+    public ViewFactory<V> getViewFactory() {
+        return this.viewFactory.fromInterface(this.viewInterface);
     }
 
     /**
@@ -81,10 +77,7 @@ public class ControllerFactory<C extends Controller<V>, V extends View<C>> {
 
         final var controller = ClassFactory.createInstanceFromInterface(controllerInterface, "controllers");
         if (viewInterface != null) {
-            final var view = new ViewFactory<V>()
-                    .fromInterface(viewInterface)
-                    .stage(stage)
-                    .get();
+            final var view = this.getViewFactory().get();
             controller.registerView(view);
             view.setController(controller);
         }
