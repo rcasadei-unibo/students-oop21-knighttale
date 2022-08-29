@@ -32,7 +32,7 @@ val javaFXModules = listOf(
 )
 
 val supportedPlatforms = listOf("linux", "mac", "win") // All required for OOP
-val jUnitVersion = "5.8.2"
+val jUnitVersion = "5.9.0"
 val javaFxVersion = 15
 
 dependencies {
@@ -44,11 +44,11 @@ dependencies {
 
     implementation("io.github.palexdev:materialfx:11.13.5")
     implementation("net.harawata:appdirs:1.2.1")
-    implementation("com.simtechdata:SceneOneFX:1.2.3")
-    implementation("io.github.classgraph:classgraph:4.8.147")
+    implementation("com.simtechdata:SceneOneFX:1.3.2")
+    implementation("io.github.classgraph:classgraph:4.8.149")
     implementation("com.google.guava:guava:31.1-jre")
     implementation("io.vacco.jsonbeans:jsonbeans:1.0.0")
-    implementation("com.github.spotbugs:spotbugs-annotations:4.6.0")
+    implementation("com.github.spotbugs:spotbugs-annotations:4.7.1")
     implementation("org.jetbrains:annotations:23.0.0")
 
     // JUnit API and testing engine
