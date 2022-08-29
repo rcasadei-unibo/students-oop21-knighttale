@@ -3,8 +3,10 @@ package it.unibo.aknightstale.controllers.entity;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.aknightstale.models.entity.Character;
 import it.unibo.aknightstale.models.entity.Direction;
+import it.unibo.aknightstale.utils.BordersImpl;
 import it.unibo.aknightstale.utils.EntityManager;
 import it.unibo.aknightstale.views.entity.AnimatedEntityView;
+import it.unibo.aknightstale.views.entity.Status;
 
 public abstract class AbstractController<M extends Character, V extends AnimatedEntityView>
         extends EntityControllerImpl<M, V> implements CharacterController<M, V> {
@@ -75,8 +77,29 @@ public abstract class AbstractController<M extends Character, V extends Animated
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public abstract void attack();
+    public void attack() {
+        final var entityModel = super.getModel();
+        final double attackRange = entityModel.getAttackRange();
+        final var entityBounds = new BordersImpl(entityModel.getPosition().getX() - attackRange,
+                entityModel.getPosition().getY() - attackRange, entityModel.getBorders().getWidth() + attackRange,
+                entityModel.getBorders().getHeight() + attackRange);
+
+        this.getManager().getEntities().stream()
+                .filter(ec -> entityBounds.intersects(ec.getModel().getBorders()))
+                .filter(ec -> ec.getModel() instanceof Character)
+                .forEach(ec -> {
+                    if (!ec.getModel().getType().equals(super.getModel().getType())) {
+                        final var model = (Character) ec.getModel();
+                        super.getModel().attack(model);
+                    }
+                });
+        super.getView().setStatus(Status.ATTACK);
+        super.getView().update(super.getModel().getDirection());
+    }
 
     /**
      * Get the entity manager.
