@@ -22,7 +22,7 @@ public final class JavaFXApp extends Application {
 
     static final double PREF_WIDTH = 600.0;
     static final double PREF_HEIGHT = 600.0;
-    static final double BHO = 37.6;
+    static final double BUG = 37.6;
 
     private double widthWindow;
     private double heightWindow;
@@ -63,7 +63,7 @@ public final class JavaFXApp extends Application {
         stage.heightProperty().addListener((obs, oldval, newval) -> {
             canvas.setHeight(newval.doubleValue());
             this.setHeightWindow(newval.doubleValue());
-            collision.setHeightScreen(newval.doubleValue() - BHO);      //modificare BHO
+            collision.setHeightScreen(newval.doubleValue() - BUG);      //modificare BHO
         });
 
         final var gameloop = new AnimationTimer() {
