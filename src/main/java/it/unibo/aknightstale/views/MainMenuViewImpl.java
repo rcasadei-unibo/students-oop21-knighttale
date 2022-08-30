@@ -10,6 +10,14 @@ public class MainMenuViewImpl extends BaseView<MainMenuController> implements Ma
     }
 
     /**
+     * Action when new game button is clicked. Opens the game map view.
+     */
+    @FXML
+    protected final void onNewGameClicked() {
+        this.getController().showMapView();
+    }
+
+    /**
      * Action when exit button is clicked. Closes the window when clicked.
      */
     @FXML
