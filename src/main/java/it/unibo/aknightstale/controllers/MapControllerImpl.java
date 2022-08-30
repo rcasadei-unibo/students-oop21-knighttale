@@ -1,29 +1,25 @@
 package it.unibo.aknightstale.controllers;
 
 import it.unibo.aknightstale.controllers.entity.ObstacleController;
+import it.unibo.aknightstale.models.entity.BaseCharacter;
 import it.unibo.aknightstale.models.entity.EntityType;
 import it.unibo.aknightstale.models.entity.ObstacleEntity;
 import it.unibo.aknightstale.models.map.Spawner;
 import it.unibo.aknightstale.models.map.SpawnerImpl;
-import it.unibo.aknightstale.views.map.MapView;
+import it.unibo.aknightstale.views.interfaces.MapController;
+import it.unibo.aknightstale.views.interfaces.MapView;
+import it.unibo.aknightstale.views.map.MapViewImpl;
 import it.unibo.aknightstale.views.map.SolidTile;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.geometry.Point2D;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.layout.AnchorPane;
 import javafx.util.Pair;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.URL;
 import java.util.*;
 
-public class MapController {
-
+public class MapControllerImpl extends BaseController<MapView> implements MapController {
 
 
     Map<Pair<Integer, Integer>, Integer> mapTileNum = new HashMap<>();
@@ -34,11 +30,11 @@ public class MapController {
     private double screenWidth;
     private double screenHeight;
 
-    private MapView mapView;
+    private MapViewImpl mapView;
 
     //private static final int TILE_SIZE = 16;    // size of a single tile
 
-    public MapController(final MapView mapView){
+    public MapControllerImpl(final MapViewImpl mapView){
         this.mapView = mapView;
         mapView.setMapController(this);
         updateScreenSize();

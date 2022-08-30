@@ -1,7 +1,6 @@
 package it.unibo.aknightstale.models.map;
 
-import it.unibo.aknightstale.controllers.MapController;
-import it.unibo.aknightstale.views.map.AbstractTile;
+import it.unibo.aknightstale.controllers.MapControllerImpl;
 import it.unibo.aknightstale.views.map.Tile;
 import javafx.util.Pair;
 
@@ -25,8 +24,8 @@ public class SpawnerImpl implements Spawner{
         Random random = new Random();
         int i = 0;
         while(i < this.num){
-            int row = random.nextInt(MapController.getNumRow());
-            int col = random.nextInt(MapController.getNumCol());
+            int row = random.nextInt(MapControllerImpl.getNumRow());
+            int col = random.nextInt(MapControllerImpl.getNumCol());
 
             // don't spawn tiles near map's limit or collidable entity like wall
             if(this.tileMap.get(new Pair(row, col)) == 0 && this.tileMap.get(new Pair(row-1, col)) == 0

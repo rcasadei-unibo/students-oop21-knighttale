@@ -1,8 +1,10 @@
 package it.unibo.aknightstale.views.map;
 
-import it.unibo.aknightstale.controllers.MapController;
+import it.unibo.aknightstale.controllers.MapControllerImpl;
 import it.unibo.aknightstale.models.entity.EntityType;
+import it.unibo.aknightstale.views.BaseView;
 import it.unibo.aknightstale.views.entity.EntityView;
+import it.unibo.aknightstale.views.interfaces.MapView;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
@@ -14,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class MapView implements Initializable {
+public class MapViewImpl extends BaseView implements Initializable, MapView  {
 
     @FXML
     Canvas canvas;
@@ -22,13 +24,13 @@ public class MapView implements Initializable {
     AnchorPane pane;
 
 
-    private MapController mapController;
+    private MapControllerImpl mapController;
 
     private GraphicsContext gc;
 
     List<Tile> tiles = new ArrayList<>();
 
-    public MapView(){
+    public MapViewImpl(){
         // adding tiles
         tiles.add(new CrossableTile("/tiles/grass01.png", 0, EntityType.TILE));  //passo l'url perchè altrimenti dato che uso un inputStream per leggere l'indirizzo, chiamando getUrl tornerà null
         tiles.add(new SolidTile("/tiles/tree.png", 1, EntityType.OBSTACLE));
@@ -53,7 +55,7 @@ public class MapView implements Initializable {
     }
 
 
-    public void setMapController(MapController mapController) {
+    public void setMapController(MapControllerImpl mapController) {
         this.mapController = mapController;
         canvas.widthProperty().addListener(evt -> {mapController.updateScreenSize();mapController.drawMap();});
         canvas.heightProperty().addListener(evt -> {mapController.updateScreenSize();mapController.drawMap();});

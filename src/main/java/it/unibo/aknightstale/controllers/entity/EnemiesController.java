@@ -3,7 +3,7 @@ package it.unibo.aknightstale.controllers.entity;
 import it.unibo.aknightstale.models.Enemy;
 import it.unibo.aknightstale.utils.EntityManagerImpl;
 import it.unibo.aknightstale.views.entity.EnemyView;
-import it.unibo.aknightstale.views.map.MapView;
+import it.unibo.aknightstale.views.map.MapViewImpl;
 import javafx.geometry.Point2D;
 
 import java.util.LinkedList;
@@ -17,8 +17,8 @@ public class EnemiesController {
     //final private GraphicsContext gc;
     private List<EnemyController> enemiesControllers;
 
-    private MapView mapView;
-    public EnemiesController(final int numEnemies/*, final GraphicsContext gc*/, final MapView mapView/*, final Enemy model, final V view, final EntityManager manager*/){
+    private MapViewImpl mapView;
+    public EnemiesController(final int numEnemies/*, final GraphicsContext gc*/, final MapViewImpl mapView/*, final Enemy model, final V view, final EntityManager manager*/){
         this.numEnemies = numEnemies;
         enemiesControllers = new LinkedList<>();
         //this.gc = gc;
