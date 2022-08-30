@@ -1,7 +1,12 @@
 package it.unibo.aknightstale.controllers;
 
+import it.unibo.aknightstale.controllers.entity.ObstacleController;
+import it.unibo.aknightstale.models.entity.EntityType;
+import it.unibo.aknightstale.models.entity.ObstacleEntity;
+import it.unibo.aknightstale.models.map.Spawner;
 import it.unibo.aknightstale.models.map.SpawnerImpl;
 import it.unibo.aknightstale.views.map.MapView;
+import it.unibo.aknightstale.views.map.SolidTile;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Point2D;
@@ -17,12 +22,9 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.*;
 
-public class MapController /*implements Initializable*/ {
+public class MapController {
 
-    /*@FXML Canvas canvas;
-    @FXML AnchorPane pane;
 
-    private GraphicsContext gc;*/
 
     Map<Pair<Integer, Integer>, Integer> mapTileNum = new HashMap<>();
     List<ObstacleController> obstacleControllers = new LinkedList<>();
@@ -43,30 +45,10 @@ public class MapController /*implements Initializable*/ {
         // converting map
         readTextMap();
         //adding trees
-        Spawner treeSpawner = new Spawner(mapView.getTree(), 30, this.mapTileNum);
+        Spawner treeSpawner = new SpawnerImpl(mapView.getTree(), 30, this.mapTileNum);
         this.mapTileNum = treeSpawner.getMap();
     }
 
-   /* @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        /*canvas.widthProperty().bind(pane.widthProperty());
-        canvas.heightProperty().bind(pane.heightProperty());
-
-        canvas.widthProperty().addListener(evt -> {updateScreenSize();drawMap();});
-        canvas.heightProperty().addListener(evt -> {updateScreenSize();drawMap();});
-        this.gc = this.canvas.getGraphicsContext2D();*/
-    //this.mapView = new MapView(this.gc);
-        /*updateScreenSize();
-        // converting map
-        readTextMap();
-        //adding trees
-        Spawner treeSpawner = new Spawner(mapView.getTree(), 30, this.mapTileNum);
-        this.mapTileNum = treeSpawner.getMap();
-    }*/
-
-    /*public double getScreenWidth() { return screenWidth; }
-
-    public double getScreenHeight() { return screenHeight; }*/
 
     public static int getNumCol() {
         return NUM_COL;
@@ -75,10 +57,6 @@ public class MapController /*implements Initializable*/ {
     public static int getNumRow() {
         return NUM_ROW;
     }
-
-    /*public GraphicsContext getGraphic(){
-        return this.canvas.getGraphicsContext2D();
-    }*/
 
     public void drawMap() {
 

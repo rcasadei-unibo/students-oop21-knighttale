@@ -2,6 +2,7 @@ package it.unibo.aknightstale.models.map;
 
 import it.unibo.aknightstale.controllers.MapController;
 import it.unibo.aknightstale.views.map.AbstractTile;
+import it.unibo.aknightstale.views.map.Tile;
 import javafx.util.Pair;
 
 import java.util.Map;
@@ -10,11 +11,11 @@ import java.util.Random;
 public class SpawnerImpl implements Spawner{
 
 
-    final private AbstractTile tile;
+    final private Tile tile;
     final private int num;
     Map<Pair<Integer, Integer>, Integer> tileMap;
 
-    public SpawnerImpl(final AbstractTile tile, final int num, final Map<Pair<Integer, Integer>, Integer> tileMap){
+    public SpawnerImpl(final Tile tile, final int num, final Map<Pair<Integer, Integer>, Integer> tileMap){
         this.tile = tile;
         this.num = num;
         this.tileMap = tileMap;
