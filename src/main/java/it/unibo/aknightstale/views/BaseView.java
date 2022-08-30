@@ -8,7 +8,15 @@ public abstract class BaseView<C extends Controller<? extends View<C>>> implemen
      * Controller that is associated with this view.
      */
     private C controller;
+    /**
+     * Window associated to this view.
+     */
     private Window window;
+    private final String windowTitle;
+
+    protected BaseView(final String windowTitle) {
+        this.windowTitle = windowTitle;
+    }
 
     /**
      * Gets the controller associated with this view.
@@ -20,8 +28,7 @@ public abstract class BaseView<C extends Controller<? extends View<C>>> implemen
     }
 
     /**
-     * Sets the controller associated with this view.
-     * @param controller the controller to associate with this view.
+     * {@inheritDoc}
      */
     @Override
     public void setController(final C controller) {
@@ -29,7 +36,7 @@ public abstract class BaseView<C extends Controller<? extends View<C>>> implemen
     }
 
     /**
-     * Shows the view.
+     * {@inheritDoc}
      */
     @Override
     public void show() {
@@ -38,7 +45,7 @@ public abstract class BaseView<C extends Controller<? extends View<C>>> implemen
     }
 
     /**
-     * Hides the view.
+     * {@inheritDoc}
      */
     @Override
     public void hide() {
@@ -46,7 +53,7 @@ public abstract class BaseView<C extends Controller<? extends View<C>>> implemen
     }
 
     /**
-     * Closes the view.
+     * {@inheritDoc}
      */
     @Override
     public void close() {
@@ -70,11 +77,20 @@ public abstract class BaseView<C extends Controller<? extends View<C>>> implemen
     }
 
     /**
-     * Gets the name of the view.
-     * @return the name of the view.
+     * {@inheritDoc}
      */
     @Override
     public String getViewName() {
         return this.getClass().getSimpleName();
+    }
+
+    /**
+     * Gets the window title.
+     *
+     * @return the window title.
+     */
+    @Override
+    public String getWindowTitle() {
+        return this.windowTitle;
     }
 }

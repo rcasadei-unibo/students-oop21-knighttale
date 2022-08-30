@@ -17,20 +17,15 @@ import org.testfx.framework.junit5.Start;
  */
 @ExtendWith(ApplicationExtension.class)
 class ViewFactoryTest extends BaseViewTest<MainMenuController, MainMenuView> {
+
+    ViewFactoryTest() {
+        super(MainMenuView.class, MainMenuController.class);
+    }
+
     @Start
     @Override
     public void start(final Stage stage) {
         super.start(stage);
-    }
-
-    @Override
-    public Class<MainMenuView> getViewInterface() {
-        return MainMenuView.class;
-    }
-
-    @Override
-    public Class<MainMenuController> getControllerInterface() {
-        return MainMenuController.class;
     }
 
     /**

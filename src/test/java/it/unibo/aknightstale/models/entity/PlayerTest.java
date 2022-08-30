@@ -1,19 +1,30 @@
 package it.unibo.aknightstale.models.entity;
 
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-
 import it.unibo.aknightstale.controllers.interfaces.MainMenuController;
 import it.unibo.aknightstale.models.entity.factories.EntityFactory;
 import it.unibo.aknightstale.models.entity.factories.EntityFactoryImpl;
+import it.unibo.aknightstale.utils.Point2D;
 import it.unibo.aknightstale.views.BaseViewTest;
 import it.unibo.aknightstale.views.interfaces.MainMenuView;
-import javafx.geometry.Point2D;
+import javafx.stage.Stage;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.testfx.framework.junit5.Start;
 
+// TODO: Replace with World view
 class PlayerTest extends BaseViewTest<MainMenuController, MainMenuView> {
-
     private final EntityFactory factory = new EntityFactoryImpl();
+
+    PlayerTest() {
+        super(MainMenuView.class, MainMenuController.class);
+    }
+
+    @Start
+    @Override
+    public void start(final Stage stage) {
+        super.start(stage);
+    }
 
     @Test
     @DisplayName("Check type")
@@ -40,7 +51,7 @@ class PlayerTest extends BaseViewTest<MainMenuController, MainMenuView> {
         for (int i = 0; i < 4; i++) {
             player.attack(entity);
         }
-        //Assertions.assertThat(entity.isDead()).isTrue();
+        // Assertions.assertThat(entity.isDead()).isTrue();
         // TODO: test defense when calculating damage
     }
 
@@ -51,7 +62,8 @@ class PlayerTest extends BaseViewTest<MainMenuController, MainMenuView> {
         final LifeEntity entity = new Player(player.getPosition()); // cambiare con nemico
         final var life = entity.getHealth();
         player.attack(entity);
-        //Assertions.assertThat(entity.getHealth()).isEqualTo(life - player.getDamage());
+        // Assertions.assertThat(entity.getHealth()).isEqualTo(life -
+        // player.getDamage());
     }
 
     @Test
@@ -61,17 +73,7 @@ class PlayerTest extends BaseViewTest<MainMenuController, MainMenuView> {
         final LifeEntity entity = new Player(player.getPosition()); // cambiare con nemico
         final var initialHealth = entity.getHealth();
         player.attack(entity);
-        Assertions.assertThat(entity.getMaxHealth()).isEqualTo(initialHealth);
-    }
-
-    @Override
-    public Class<MainMenuView> getViewInterface() {
-        return MainMenuView.class;
-    }
-
-    @Override
-    public Class<MainMenuController> getControllerInterface() {
-        return MainMenuController.class;
+        // Assertions.assertThat(entity.getMaxHealth()).isEqualTo(initialHealth);
     }
 
 }

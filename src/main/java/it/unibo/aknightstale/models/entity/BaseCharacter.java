@@ -1,7 +1,7 @@
 package it.unibo.aknightstale.models.entity;
 
-import javafx.geometry.Bounds;
-import javafx.geometry.Point2D;
+import it.unibo.aknightstale.utils.Borders;
+import it.unibo.aknightstale.utils.Point2D;
 
 public abstract class BaseCharacter extends EntityImpl implements Character {
 
@@ -33,9 +33,9 @@ public abstract class BaseCharacter extends EntityImpl implements Character {
      */
     private Direction direction;
 
-    public BaseCharacter(final Bounds bounds, final EntityType type, final boolean collidable, final Direction dir,
+    public BaseCharacter(final Borders borders, final EntityType type, final boolean collidable, final Direction dir,
                          final double dmg, final double health, final double speed) {
-        super(bounds, type, collidable);
+        super(borders, type, collidable);
         this.damage = dmg;
         this.health = health;
         this.maxHealth = health;

@@ -40,10 +40,10 @@ public final class ClassFactory {
         }
 
         try {
-            return interfaceClass.cast(Class.forName(className).getConstructor().newInstance());
+            return interfaceClass.cast(Class.forName(className).getDeclaredConstructor().newInstance());
         } catch (ClassCastException | ClassNotFoundException | NoSuchMethodException | InvocationTargetException
                  | InstantiationException | IllegalAccessException e) {
-            final var message = "Error instantiating " + interfaceClass.getName() + ": " + e.getMessage();
+            final var message = "Error instantiating " + interfaceClass.getName() + " - " + e.getClass().getSimpleName() + ": " + e.getMessage();
             Alert.showAlert(AlertType.ERROR, "Error", "Error instantiating", message);
             throw new ClassInstantiationException(message, e);
         }

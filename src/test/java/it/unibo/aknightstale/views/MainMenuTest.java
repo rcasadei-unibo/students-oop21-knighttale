@@ -14,6 +14,10 @@ import org.testfx.framework.junit5.Start;
 
 @ExtendWith(ApplicationExtension.class)
 class MainMenuTest extends BaseViewTest<MainMenuController, MainMenuView> {
+    MainMenuTest() {
+        super(MainMenuView.class, MainMenuController.class);
+    }
+
     @Override
     @Start
     public void start(final Stage stage) {
@@ -32,15 +36,5 @@ class MainMenuTest extends BaseViewTest<MainMenuController, MainMenuView> {
     void onScoreboardButtonClicked(final FxRobot robot) {
         robot.clickOn("#scoreboardButton");
         Assertions.assertThat(getWindow().getCurrentView()).isInstanceOf(ScoreboardView.class);
-    }
-
-    @Override
-    public Class<MainMenuView> getViewInterface() {
-        return MainMenuView.class;
-    }
-
-    @Override
-    public Class<MainMenuController> getControllerInterface() {
-        return MainMenuController.class;
     }
 }

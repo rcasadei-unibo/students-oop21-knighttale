@@ -24,9 +24,7 @@ public class Window {
     }
 
     public Window(final String windowId) {
-        this.windowId = windowId;
-        SceneOne.set(this.windowId, new Scene(new VBox())).build();
-        WINDOWS.put(this.windowId, this);
+        this(windowId, null);
     }
 
     public Window(final String windowId, final Stage stage) {
@@ -126,6 +124,15 @@ public class Window {
     }
 
     /**
+     * Get the JavaFX scene associated with this window.
+     *
+     * @return The JavaFX scene associated with this window.
+     */
+    public static Scene getScene(final String viewName) {
+        return SceneOne.getScene(viewName);
+    }
+
+    /**
      * Get the window with this id if it exists.
      *
      * @param windowId The id of the window to get.
@@ -160,5 +167,14 @@ public class Window {
      */
     public static Window getOrCreate(final String windowId) {
         return getOrCreate(windowId, null);
+    }
+
+    /**
+     * Get the JavaFX stage associated with the current view of this window.
+     *
+     * @return The JavaFX stage associated with the current view of this window.
+     */
+    public Scene getCurrentScene() {
+        return getScene(this.getCurrentViewName());
     }
 }
