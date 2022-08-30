@@ -1,35 +1,29 @@
 package it.unibo.aknightstale.views.map;
 
-import javafx.scene.image.Image;
+import it.unibo.aknightstale.models.entity.EntityType;
+import it.unibo.aknightstale.views.entity.EntityView;
 
-public class Tile {
+public interface Tile extends EntityView {
 
+    //Image getImage();
 
-    private String url;
-    private Image img;
-    final private int index;
+    int getIndex();
 
-    public Tile(final String url, final int index){
-        this.url = url;
-        this.img = new Image(getClass().getResourceAsStream(url));
-        this.index = index;
-        //this.imageView.setFitHeight(100);
-    }
+    EntityType getEntityType();
 
-    public int getIndex(){
-        return this.index;
-    }
+    void setWidth(final double width);
 
-    public Image getImage() {
-        return img;
-    }
+    void setHeight(final double height);
 
-    public void setWidth(final double width){
-        this.img = new Image(getClass().getResourceAsStream(this.url), width, this.img.getHeight(), false, false);
-    }
+    void setCollidable(final boolean collidable);
 
-    public void setHeight(final double height){
-        this.img = new Image(getClass().getResourceAsStream(this.url), this.img.getWidth(), height, false, false);
-    }
+    boolean isCollidable();
 
+    double getWidth();
+
+    double getHeight();
+
+    void resize();
+
+    void reposition();
 }
