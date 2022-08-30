@@ -1,27 +1,41 @@
 package it.unibo.aknightstale.models.entity;
 
+import it.unibo.aknightstale.utils.Borders;
+import it.unibo.aknightstale.utils.Point2D;
 import javafx.geometry.Bounds;
-import javafx.geometry.Point2D;
 
-public class ObstacleEntity implements Entity{
 
-    private Point2D position;
+public class ObstacleEntity extends EntityImpl{
 
-    public ObstacleEntity(final Point2D position){
-        this.position = position;
+    //private Point2D position;
+
+    public ObstacleEntity(/*final Point2D position, */final Borders borders){
+        super(borders, EntityType.OBSTACLE, true);
+        //super.setPosition(position);
+        //this.position = position;
     }
 
-    @Override
+    /*@Override
     public Point2D getPosition() {
         return this.position;
     }
 
     @Override
-    public void setPosition(final Point2D p) {
+    public void setPosition(Point2D p) {
         this.position = p;
     }
 
     @Override
+    public Borders getBorders() {
+        return null;
+    }
+
+    /*@Override
+    public void setPosition(final Point2D p) {
+        this.position = p;
+    }*/
+
+    /*@Override
     public Bounds getBounds() {
         return null;
     }
@@ -34,5 +48,5 @@ public class ObstacleEntity implements Entity{
     @Override
     public Boolean isCollidable() {
         return true;
-    }
+    }*/
 }

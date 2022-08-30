@@ -1,16 +1,21 @@
 package it.unibo.aknightstale.controllers;
 
 import it.unibo.aknightstale.controllers.entity.ObstacleController;
+import it.unibo.aknightstale.controllers.interfaces.Controller;
+import it.unibo.aknightstale.controllers.interfaces.GameFinishedController;
 import it.unibo.aknightstale.models.entity.BaseCharacter;
 import it.unibo.aknightstale.models.entity.EntityType;
 import it.unibo.aknightstale.models.entity.ObstacleEntity;
 import it.unibo.aknightstale.models.map.Spawner;
 import it.unibo.aknightstale.models.map.SpawnerImpl;
+import it.unibo.aknightstale.utils.Borders;
+import it.unibo.aknightstale.utils.BordersImpl;
+import it.unibo.aknightstale.utils.Point2D;
+import it.unibo.aknightstale.views.interfaces.GameFinishedView;
 import it.unibo.aknightstale.views.interfaces.MapController;
 import it.unibo.aknightstale.views.interfaces.MapView;
 import it.unibo.aknightstale.views.map.MapViewImpl;
 import it.unibo.aknightstale.views.map.SolidTile;
-import javafx.geometry.Point2D;
 import javafx.util.Pair;
 
 import java.io.BufferedReader;
@@ -32,6 +37,8 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
 
     private MapViewImpl mapView;
 
+    private int killedEnemies; /*num killed enemies */
+
     //private static final int TILE_SIZE = 16;    // size of a single tile
 
     public MapControllerImpl(final MapViewImpl mapView){
@@ -43,6 +50,12 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
         //adding trees
         Spawner treeSpawner = new SpawnerImpl(mapView.getTree(), 30, this.mapTileNum);
         this.mapTileNum = treeSpawner.getMap();
+    }
+
+    public void openGameFinishedScreen(){
+        var controllerView =  Controller.of(GameFinishedController.class, GameFinishedView.class).get();
+        controllerView.setScore(killedEnemies);
+        controllerView.showView();
     }
 
 
@@ -92,7 +105,7 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
 
                 while (col < NUM_COL) {
                     List<String> numLine = Arrays.asList(line.split(" "));
-                    assert(numLine.size() == NUM_COL);
+                    //assert(numLine.size() == NUM_COL);
                     int num = Integer.parseInt(numLine.get(col));
                     mapTileNum.put(new Pair<>(row, col), num);
                     // If I have to draw a tile that represent an obstacle, then I'll create an obstacle entity
@@ -101,7 +114,7 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
                         double x = col * mapView.getTiles().get(num).getWidth();
                         double y = col * mapView.getTiles().get(num).getHeight();
 
-                        this.obstacleControllers.add(new ObstacleController(new ObstacleEntity(new Point2D(x,y)), (SolidTile) mapView.getTiles().get(num)));
+                        this.obstacleControllers.add(new ObstacleController(new ObstacleEntity(new BordersImpl(x, y, mapView.getTiles().get(num).getWidth(), mapView.getTiles().get(num).getHeight())/*,new Point2D(x,y)*/), (SolidTile) mapView.getTiles().get(num)));
                     }
                     col++;
                 }
