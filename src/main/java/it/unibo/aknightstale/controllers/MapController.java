@@ -3,6 +3,8 @@ package it.unibo.aknightstale.controllers;
 import it.unibo.aknightstale.models.map.SpawnerImpl;
 import it.unibo.aknightstale.views.map.MapView;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.AnchorPane;
@@ -15,16 +17,15 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.*;
 
-public class MapController {
-    @FXML
-    Canvas canvas;
-    @FXML
-    AnchorPane pane;
+public class MapController /*implements Initializable*/ {
 
-    private GraphicsContext gc;
+    /*@FXML Canvas canvas;
+    @FXML AnchorPane pane;
+
+    private GraphicsContext gc;*/
 
     Map<Pair<Integer, Integer>, Integer> mapTileNum = new HashMap<>();
-    //Map<Tile, ObstacleEntity> tilesEntities = new HashMap<>();
+    List<ObstacleController> obstacleControllers = new LinkedList<>();
 
     private static final int NUM_COL = 48;
     private static final int NUM_ROW = 27;
@@ -32,41 +33,40 @@ public class MapController {
     private double screenHeight;
 
     private MapView mapView;
+
     //private static final int TILE_SIZE = 16;    // size of a single tile
 
-    public MapController(){
-        // binding tiles with entities
-        /*tiles.forEach( t -> {
-            this.tilesEntities.put(t ,new ObstacleEntity(t.);
-        });*/
-
-        // converting map
-        //readTextMap();
-        //adding the trees
-        /*Spawner treeSpawner = new Spawner(mapView.getTree(), 30, this.mapTileNum);
-        this.mapTileNum = treeSpawner.getMap();*/
-
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        canvas.widthProperty().bind(pane.widthProperty());
-        canvas.heightProperty().bind(pane.heightProperty());
+    public MapController(final MapView mapView){
+        this.mapView = mapView;
+        mapView.setMapController(this);
         updateScreenSize();
-        canvas.widthProperty().addListener(evt -> {updateScreenSize();drawMap();});
-        canvas.heightProperty().addListener(evt -> {updateScreenSize();drawMap();});
-        this.gc = this.canvas.getGraphicsContext2D();
-        this.mapView = new MapView(this.gc);
         // converting map
         readTextMap();
         //adding trees
-        SpawnerImpl treeSpawner = new SpawnerImpl(mapView.getTree(), 30, this.mapTileNum);
+        Spawner treeSpawner = new Spawner(mapView.getTree(), 30, this.mapTileNum);
         this.mapTileNum = treeSpawner.getMap();
     }
 
-    public double getScreenWidth() { return screenWidth; }
+   /* @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        /*canvas.widthProperty().bind(pane.widthProperty());
+        canvas.heightProperty().bind(pane.heightProperty());
 
-    public double getScreenHeight() { return screenHeight; }
+        canvas.widthProperty().addListener(evt -> {updateScreenSize();drawMap();});
+        canvas.heightProperty().addListener(evt -> {updateScreenSize();drawMap();});
+        this.gc = this.canvas.getGraphicsContext2D();*/
+    //this.mapView = new MapView(this.gc);
+        /*updateScreenSize();
+        // converting map
+        readTextMap();
+        //adding trees
+        Spawner treeSpawner = new Spawner(mapView.getTree(), 30, this.mapTileNum);
+        this.mapTileNum = treeSpawner.getMap();
+    }*/
+
+    /*public double getScreenWidth() { return screenWidth; }
+
+    public double getScreenHeight() { return screenHeight; }*/
 
     public static int getNumCol() {
         return NUM_COL;
@@ -76,23 +76,18 @@ public class MapController {
         return NUM_ROW;
     }
 
-    public GraphicsContext getGraphic(){
+    /*public GraphicsContext getGraphic(){
         return this.canvas.getGraphicsContext2D();
-    }
+    }*/
 
     public void drawMap() {
-        double tileWidth = Math.ceil (this.screenWidth/NUM_COL);
-        double tileHeight = Math.ceil (this.screenHeight/NUM_ROW);
-
-        mapView.resize(tileWidth, tileHeight);
 
         int row = 0;
         int col = 0;
         int x = 0;
         int y = 0;
 
-        //gc.clearRect(0, 0, this.screenWidth, this.screenHeight);
-        mapView.clearMap(/*this.screenWidth, this.screenHeight*/);
+        mapView.clearMap();
         int num;
         while (col < NUM_COL && row < NUM_ROW) {
             num = mapTileNum.get(new Pair<Integer, Integer>(row, col));
@@ -100,10 +95,10 @@ public class MapController {
             //gc.drawImage(mapView.getTiles().get(num).getImage(), x, y);
             mapView.drawTile(mapView.getTiles().get(num), x, y);
             col++;
-            x += tileWidth;  //16 is the tile's size
+            x += this.mapView.getTiles().get(num).getWidth();
             if (col == NUM_COL) {
                 x = 0;
-                y += tileHeight;
+                y += this.mapView.getTiles().get(num).getHeight();;
                 col = 0;
                 row++;
             }
@@ -126,6 +121,14 @@ public class MapController {
                     assert(numLine.size() == NUM_COL);
                     int num = Integer.parseInt(numLine.get(col));
                     mapTileNum.put(new Pair<>(row, col), num);
+                    // If I have to draw a tile that represent an obstacle, then I'll create an obstacle entity
+                    if(mapView.getTiles().get(num).getEntityType() == EntityType.OBSTACLE){
+                        // create obstacle entity and adds it to list
+                        double x = col * mapView.getTiles().get(num).getWidth();
+                        double y = col * mapView.getTiles().get(num).getHeight();
+
+                        this.obstacleControllers.add(new ObstacleController(new ObstacleEntity(new Point2D(x,y)), (SolidTile) mapView.getTiles().get(num)));
+                    }
                     col++;
                 }
 
@@ -140,12 +143,14 @@ public class MapController {
         }
     }
 
-    private void updateScreenSize(){
-        this.screenWidth = canvas.getWidth();
-        this.screenHeight = canvas.getHeight();
+    public void updateScreenSize(){
+        this.screenWidth = mapView.getScreenWidth();
+        this.screenHeight = mapView.getScreenHeight();
+
+        final double tileWidth = Math.ceil (this.screenWidth/NUM_COL);
+        final double tileHeight = Math.ceil (this.screenHeight/NUM_ROW);
+
+        mapView.resize(tileWidth, tileHeight);
     }
-
-
-
 
 }
