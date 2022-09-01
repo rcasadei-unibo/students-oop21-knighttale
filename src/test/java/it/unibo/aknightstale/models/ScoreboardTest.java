@@ -1,6 +1,6 @@
 package it.unibo.aknightstale.models;
 
-import it.unibo.aknightstale.App;
+import it.unibo.aknightstale.utils.AppPaths;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -45,7 +45,7 @@ class ScoreboardTest {
     void save() {
         final var scoreboard = this.getSampleScoreboard();
         scoreboard.save();
-        final var path = App.getFilePath("scoreboard.json");
+        final var path = AppPaths.getFilePath("scoreboard.json");
         Assertions.assertThat(Files.exists(path)).isTrue();
         final var scoreboard2 = new ScoreboardImpl();
         scoreboard2.load();

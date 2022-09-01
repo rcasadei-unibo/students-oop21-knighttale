@@ -1,7 +1,7 @@
 package it.unibo.aknightstale.models;
 
 import com.esotericsoftware.jsonbeans.Json;
-import it.unibo.aknightstale.App;
+import it.unibo.aknightstale.utils.AppPaths;
 import it.unibo.aknightstale.views.AlertType;
 import it.unibo.aknightstale.views.factories.Alert;
 
@@ -48,7 +48,7 @@ public class ScoreboardImpl implements Scoreboard {
      */
     @Override
     public void load() {
-        final var path = App.getFilePath(SCOREBOARD_FILE_NAME);
+        final var path = AppPaths.getFilePath(SCOREBOARD_FILE_NAME);
         if (!Files.exists(path)) {
             try {
                 final var directory = path.getParent();
@@ -77,7 +77,7 @@ public class ScoreboardImpl implements Scoreboard {
      */
     @Override
     public void save() {
-        try (FileWriter file = new FileWriter(App.getFilePath(SCOREBOARD_FILE_NAME).toFile(), StandardCharsets.UTF_8)) {
+        try (FileWriter file = new FileWriter(AppPaths.getFilePath(SCOREBOARD_FILE_NAME).toFile(), StandardCharsets.UTF_8)) {
             json.toJson(this.scores, file);
         } catch (IOException e) {
             Alert.showAlert(AlertType.ERROR, "Error saving scoreboard file: " + e.getMessage());
