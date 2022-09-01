@@ -1,5 +1,6 @@
 package it.unibo.aknightstale.views;
 
+import com.simtechdata.sceneonefx.SceneOne;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.aknightstale.controllers.factories.ControllerFactory;
 import it.unibo.aknightstale.controllers.interfaces.Controller;
@@ -62,6 +63,8 @@ public abstract class BaseViewTest<C extends Controller<V>, V extends View<C>> {
         // Clear cache when starting a new test set.
         this.clearCache();
         WaitForAsyncUtils.waitForFxEvents();
+
+        SceneOne.disableNotice();
 
         final var controllerFactory = Controller.of(this.controllerInterface, this.viewInterface);
         controllerFactory.getViewFactory().stage(stage);
