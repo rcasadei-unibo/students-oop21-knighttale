@@ -28,11 +28,11 @@ public class SpawnerImpl implements Spawner{
             int col = random.nextInt(MapControllerImpl.getNumCol());
 
             // don't spawn tiles near map's limit or collidable entity like wall
-            if(this.tileMap.get(new Pair(row, col)) == 0 && this.tileMap.get(new Pair(row-1, col)) == 0
-                    && this.tileMap.get(new Pair(row+1, col)) == 0
-                    && this.tileMap.get(new Pair(row, col-1)) == 0
-                    && this.tileMap.get(new Pair(row, col+1)) == 0) {
-                this.tileMap.put(new Pair(row, col), this.tile.getIndex());
+            if(this.tileMap.get(new Pair<>(row, col)) == 0 && this.tileMap.get(new Pair<>(row-1, col)) == 0
+                    && this.tileMap.get(new Pair<>(row+1, col)) == 0
+                    && this.tileMap.get(new Pair<>(row, col-1)) == 0
+                    && this.tileMap.get(new Pair<>(row, col+1)) == 0) {
+                this.tileMap.put(new Pair<>(row, col), this.tile.getIndex());
                 i++;
             }
         }
