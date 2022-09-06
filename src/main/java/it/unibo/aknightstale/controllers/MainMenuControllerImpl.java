@@ -4,7 +4,7 @@ import it.unibo.aknightstale.controllers.interfaces.Controller;
 import it.unibo.aknightstale.controllers.interfaces.MainMenuController;
 import it.unibo.aknightstale.controllers.interfaces.ScoreboardController;
 import it.unibo.aknightstale.views.interfaces.MainMenuView;
-import it.unibo.aknightstale.views.interfaces.MapController;
+import it.unibo.aknightstale.controllers.interfaces.MapController;
 import it.unibo.aknightstale.views.interfaces.MapView;
 import it.unibo.aknightstale.views.interfaces.ScoreboardView;
 
