@@ -3,6 +3,8 @@ package it.unibo.aknightstale.views.map;
 import it.unibo.aknightstale.models.entity.EntityType;
 import javafx.scene.image.Image;
 
+import java.util.Objects;
+
 public abstract class AbstractTile implements Tile{
 
     final private EntityType entityType;
@@ -15,7 +17,7 @@ public abstract class AbstractTile implements Tile{
 
     public AbstractTile(final String url, final int index, final EntityType entityType){
         this.url = url;
-        this.img = new Image(getClass().getResourceAsStream(url));
+        this.img = new Image(Objects.requireNonNull(getClass().getResourceAsStream(url)));
         this.index = index;
         this.entityType = entityType;
         //this.imageView.setFitHeight(100);
