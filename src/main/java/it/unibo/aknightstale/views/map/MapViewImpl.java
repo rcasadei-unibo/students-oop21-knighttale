@@ -1,10 +1,11 @@
 package it.unibo.aknightstale.views.map;
 
-import it.unibo.aknightstale.controllers.MapControllerImpl;
 import it.unibo.aknightstale.models.entity.EntityType;
 import it.unibo.aknightstale.views.BaseView;
 import it.unibo.aknightstale.views.entity.EntityView;
+import it.unibo.aknightstale.controllers.interfaces.MapController;
 import it.unibo.aknightstale.views.interfaces.MapView;
+import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
@@ -16,50 +17,63 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class MapViewImpl extends BaseView implements Initializable, MapView  {
+public class MapViewImpl extends BaseView<MapController> implements MapView  {
 
     @FXML
     Canvas canvas;
     @FXML
     AnchorPane pane;
 
-
-    private MapControllerImpl mapController;
-
     private GraphicsContext gc;
 
     List<Tile> tiles = new ArrayList<>();
 
     public MapViewImpl(){
+        super("Game");
         // adding tiles
-        tiles.add(new CrossableTile("/tiles/grass01.png", 0, EntityType.TILE));  //passo l'url perchè altrimenti dato che uso un inputStream per leggere l'indirizzo, chiamando getUrl tornerà null
-        tiles.add(new SolidTile("/tiles/tree.png", 1, EntityType.OBSTACLE));
-        tiles.add(new SolidTile("/tiles/wall.png", 2, EntityType.OBSTACLE));
-        tiles.add(new SolidTile("/tiles/water03.png", 3, EntityType.OBSTACLE));
-        tiles.add(new SolidTile("/tiles/water04.png", 4, EntityType.OBSTACLE));
-        tiles.add(new SolidTile("/tiles/water05.png", 5, EntityType.OBSTACLE));
-        tiles.add(new SolidTile("/tiles/water06.png", 6, EntityType.OBSTACLE));
-        tiles.add(new SolidTile("/tiles/water07.png", 7, EntityType.OBSTACLE));
-        tiles.add(new SolidTile("/tiles/water08.png", 8, EntityType.OBSTACLE));
-        tiles.add(new SolidTile("/tiles/water09.png", 9, EntityType.OBSTACLE));
-        tiles.add(new SolidTile("/tiles/water10.png", 10, EntityType.OBSTACLE));
-        tiles.add(new SolidTile("/tiles/water11.png", 11, EntityType.OBSTACLE));
+        tiles.add(new CrossableTile("grass01.png", 0, EntityType.TILE));  //passo l'url perchè altrimenti dato che uso un inputStream per leggere l'indirizzo, chiamando getUrl tornerà null
+        tiles.add(new SolidTile("tree.png", 1, EntityType.OBSTACLE));
+        tiles.add(new SolidTile("wall.png", 2, EntityType.OBSTACLE));
+        tiles.add(new SolidTile("water03.png", 3, EntityType.OBSTACLE));
+        tiles.add(new SolidTile("water04.png", 4, EntityType.OBSTACLE));
+        tiles.add(new SolidTile("water05.png", 5, EntityType.OBSTACLE));
+        tiles.add(new SolidTile("water06.png", 6, EntityType.OBSTACLE));
+        tiles.add(new SolidTile("water07.png", 7, EntityType.OBSTACLE));
+        tiles.add(new SolidTile("water08.png", 8, EntityType.OBSTACLE));
+        tiles.add(new SolidTile("water09.png", 9, EntityType.OBSTACLE));
+        tiles.add(new SolidTile("water10.png", 10, EntityType.OBSTACLE));
+        tiles.add(new SolidTile("water11.png", 11, EntityType.OBSTACLE));
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void init() {
         canvas.widthProperty().bind(pane.widthProperty());
         canvas.heightProperty().bind(pane.heightProperty());
 
         this.gc = this.canvas.getGraphicsContext2D();
+
+        canvas.widthProperty().addListener(evt -> {getController().repositionEntities(); getController().updateScreenSize();getController().drawMap();});
+        canvas.heightProperty().addListener(evt -> {getController().repositionEntities(); getController().updateScreenSize();getController().drawMap();});
+
+        final var gameloop = new AnimationTimer() {
+
+            @Override
+            public void handle(final long now) {
+                getController().drawMap();
+                getController().update();
+                getController().drawEnemies();
+                getController().drawPlayer();
+                //enemiesController.update();
+
+                //context.drawImage()	//entities
+                //gc.restore();
+
+                //controller.clear();
+            }
+        };
+        gameloop.start();
+
     }
 
-
-    public void setMapController(MapControllerImpl mapController) {
-        this.mapController = mapController;
-        canvas.widthProperty().addListener(evt -> {mapController.updateScreenSize();mapController.drawMap();});
-        canvas.heightProperty().addListener(evt -> {mapController.updateScreenSize();mapController.drawMap();});
-    }
 
     public Tile getFloor(){ return this.tiles.get(0); }
 
