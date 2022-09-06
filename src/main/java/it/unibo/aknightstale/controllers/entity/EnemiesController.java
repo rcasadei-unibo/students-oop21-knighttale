@@ -2,9 +2,11 @@ package it.unibo.aknightstale.controllers.entity;
 
 import it.unibo.aknightstale.models.Enemy;
 import it.unibo.aknightstale.utils.EntityManagerImpl;
+import it.unibo.aknightstale.utils.Point2D;
 import it.unibo.aknightstale.views.entity.EnemyView;
+import it.unibo.aknightstale.views.interfaces.MapView;
 import it.unibo.aknightstale.views.map.MapViewImpl;
-import javafx.geometry.Point2D;
+
 
 import java.util.LinkedList;
 import java.util.List;
@@ -17,8 +19,8 @@ public class EnemiesController {
     //final private GraphicsContext gc;
     private List<EnemyController> enemiesControllers;
 
-    private MapViewImpl mapView;
-    public EnemiesController(final int numEnemies/*, final GraphicsContext gc*/, final MapViewImpl mapView/*, final Enemy model, final V view, final EntityManager manager*/){
+    private MapView mapView;
+    public EnemiesController(final int numEnemies/*, final GraphicsContext gc*/, final MapView mapView/*, final Enemy model, final V view, final EntityManager manager*/){
         this.numEnemies = numEnemies;
         enemiesControllers = new LinkedList<>();
         //this.gc = gc;
@@ -35,6 +37,7 @@ public class EnemiesController {
         //create enemies
         Random random = new Random();
         for(int i = 0; i < this.numEnemies; i++){
+            /*Utilizzare EntityfactoryImpl*/
             Enemy enemy = new Enemy(new Point2D(random.nextInt((int)screenWidth), random.nextInt((int)screenHeight)));
             EnemyView enemyView = new EnemyView();
             enemiesControllers.add(new EnemyController(enemy, enemyView, new EntityManagerImpl()));
@@ -64,16 +67,32 @@ public class EnemiesController {
         });
     }
 
+    public void update(/*final Point2D playerPosition*/){
+        this.enemiesControllers.forEach( c -> {
+            if(c.getModel().getHealth() == 0){
+                enemiesControllers.remove(c);
+            }
+        });
+    }
+
     public void updateDirection(final Point2D playerPosition){
         this.enemiesControllers.forEach( c -> {
             c.getModel().update(playerPosition);
-            //v.setStatus(m.getStatus());
 
             c.move(c.getModel().getDirection());
 
-            //v.update(m.getDirection());
-            //gc.drawImage(v.getImage(), m.getPosition().getX(), m.getPosition().getY());
-            //gc.clearRect(0, 0, TileManager.getScreenWidth(), TileManager.SC);
         });
+    }
+
+    public void adaptPositionToScreenSize(final double traslX, final double traslY) {
+        this.enemiesControllers.forEach(c -> {
+            double newX = c.getModel().getPosition().getX() * traslX;
+            double newY = c.getModel().getPosition().getY() * traslY;
+            c.getModel().setPosition(new Point2D(newX, newY));
+        });
+    }
+
+    public int getNumEnemy() {
+        return this.enemiesControllers.size();
     }
 }
