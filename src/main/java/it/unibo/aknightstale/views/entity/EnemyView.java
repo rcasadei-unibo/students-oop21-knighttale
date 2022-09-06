@@ -8,12 +8,26 @@ public class EnemyView extends CharacterView {
     final static private double width = 24;
     final static private double height = 32;
 
+    public EnemyView() {
+        super(new Image(URL + "player_idle_right.png", width, height, false, false), Status.WALK);
+
+        idle_right = URL + "player_idle_right.png";
+        idle_left = URL + "player_idle_left.png";
+        idle_up = URL + "player_idle_up.png";
+        idle_down = URL + "player_idle_down.png";
+        walk_right = URL + "player_walk_right.png";
+        walk_left = URL + "player_walk_left.png";
+        walk_up = URL + "player_walk_up.png";
+        walk_down = URL + "player_walk_down.png";
+    }
+
+/*
     static final String SEPARATOR = System.getProperty("file.separator");
     static final String URL = "it" + SEPARATOR + "unibo" + SEPARATOR + "aknightstale"
-            + SEPARATOR + "entity" + SEPARATOR + "player" + SEPARATOR;
+            + SEPARATOR + "entity" + SEPARATOR + "enemy" + SEPARATOR;
 
-    final static Image PLAYER_IDLE_RIGHT = new Image(EnemyView.class.getResourceAsStream(URL + "player_idle_right.png"), width, height, false, false);
-    final static Image PLAYER_IDLE_LEFT = new Image(EnemyView.class.getResourceAsStream(URL + "player_idle_left.png"), width, height, false, false);
+    final static Image PLAYER_IDLE_RIGHT = new Image(EnemyView.class.getResourceAsStream(/*URL + *//*"player_idle_right.png"), width, height, false, false);
+  /*  final static Image PLAYER_IDLE_LEFT = new Image(EnemyView.class.getResourceAsStream(URL + "player_idle_left.png"), width, height, false, false);
     final static Image PLAYER_IDLE_UP = new Image(EnemyView.class.getResourceAsStream(URL + "player_idle_up.png"), width, height, false, false);
     final static Image PLAYER_IDLE_DOWN = new Image(EnemyView.class.getResourceAsStream(URL + "player_idle_down.png"), width, height, false, false);
     final static Image PLAYER_WALK_RIGHT = new Image(EnemyView.class.getResourceAsStream(URL + "player_walk_right.png"), width, height, false, false);
@@ -25,9 +39,7 @@ public class EnemyView extends CharacterView {
 
     private int frameNum = 0;
 
-    public EnemyView() {
-        super(PLAYER_IDLE_RIGHT, Status.WALK);
-    }
+
 
     @Override
     public void update(Direction dir) {
@@ -47,7 +59,7 @@ public class EnemyView extends CharacterView {
                     break;
             }
             this.frameNum++;
-            if(!checkSpriteNum(MAX_NUM_FRAME * 2)) {
+            if (!checkSpriteNum(MAX_NUM_FRAME * 2)) {
                 this.frameNum = 0;
             }
         } else {
@@ -65,7 +77,6 @@ public class EnemyView extends CharacterView {
 
     private boolean checkSpriteNum(int n) {
         return this.frameNum < n;
-    }
-
+    }*/
 
 }
