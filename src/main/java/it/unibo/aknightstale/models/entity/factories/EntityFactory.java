@@ -19,4 +19,5 @@ public interface EntityFactory {
      * @return the player.
      */
     CharacterController<Character, AnimatedEntityView> getPlayer();
+    CharacterController<Character, AnimatedEntityView> getEnemy(final int x, final int y);
 }

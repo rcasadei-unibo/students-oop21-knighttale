@@ -15,8 +15,8 @@ public abstract class CharacterView extends EntityViewImpl implements AnimatedEn
     protected static final String SEPARATOR = System.getProperty("file.separator");
     protected static final String URL = "it" + SEPARATOR + "unibo" + SEPARATOR + "aknightstale" + SEPARATOR + "entity"
             + SEPARATOR + "player" + SEPARATOR;
-    private static final int WIDTH_IMAGE = 50;
-    private static final int HEIGHT_IMAGE = 50;
+    private static final int WIDTH_IMAGE = 24;
+    private static final int HEIGHT_IMAGE = 32;
 
     private static final int MAX_NUM_FRAME = 50;
 
