@@ -28,6 +28,9 @@ public class Window {
         this.windowId = windowId;
         SceneOne.set(this.windowId, new Scene(new VBox())).build();
         WINDOWS.put(this.windowId, this);
+
+        // Set window icon
+        SceneOne.getStage(this.windowId).getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("favicon.png"))));
     }
 
     /**
