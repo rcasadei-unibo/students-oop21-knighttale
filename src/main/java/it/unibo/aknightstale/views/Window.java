@@ -4,12 +4,13 @@ import com.simtechdata.sceneonefx.SceneOne;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.aknightstale.views.interfaces.View;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
 
 @SuppressFBWarnings("EI_EXPOSE_REP2") // View must be passed as reference to allow view loader caching.
@@ -24,12 +25,8 @@ public class Window {
     }
 
     public Window(final String windowId) {
-        this(windowId, null);
-    }
-
-    public Window(final String windowId, final Stage stage) {
         this.windowId = windowId;
-        SceneOne.set(this.windowId, new Scene(new VBox())).stage(stage).build();
+        SceneOne.set(this.windowId, new Scene(new VBox())).build();
         WINDOWS.put(this.windowId, this);
     }
 
@@ -146,27 +143,16 @@ public class Window {
      * Get the window with this id if it exists.
      *
      * @param windowId The id of the window to get.
-     * @param stage    The stage to use to create the window.
-     * @return The window with this id if it exists, it will be created otherwise.
-     */
-    public static Window getOrCreate(final String windowId, final Stage stage) {
-        var window = get(windowId);
-
-        if (window == null) {
-            window = new Window(windowId, stage);
-        }
-
-        return window;
-    }
-
-    /**
-     * Get the window with this id if it exists.
-     *
-     * @param windowId The id of the window to get.
      * @return The window with this id if it exists, it will be created otherwise.
      */
     public static Window getOrCreate(final String windowId) {
-        return getOrCreate(windowId, null);
+        var window = get(windowId);
+
+        if (window == null) {
+            window = new Window(windowId);
+        }
+
+        return window;
     }
 
     /**
