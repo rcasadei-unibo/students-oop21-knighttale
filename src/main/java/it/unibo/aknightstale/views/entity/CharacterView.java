@@ -13,15 +13,14 @@ public abstract class CharacterView extends EntityViewImpl implements AnimatedEn
     protected static final int HEALTH_BAR_MAX_WIDTH = 25;
 
     protected static final String SEPARATOR = System.getProperty("file.separator");
-    /*protected static String URL = "it" + SEPARATOR + "unibo" + SEPARATOR + "aknightstale" + SEPARATOR + "entity"
-            + SEPARATOR;*/
+
     private final String nameImage;
     private final String nameEntity;
     private final double widthImage;
     private final double heightImage;
 
 
-    private static final int MAX_NUM_FRAME = 50;
+    private static final int MAX_NUM_FRAME = 12;
 
     protected String idle_right;
     protected String idle_left;
@@ -37,7 +36,7 @@ public abstract class CharacterView extends EntityViewImpl implements AnimatedEn
 
     private int frameNum;
 
-    public CharacterView(final Status s, final String nameImage, final double width, final double height, String nameEntity) {
+    public CharacterView(final Status s, final String nameImage, final double width, final double height, final String nameEntity) {
         super(nameImage, width, height);
         this.nameEntity = nameEntity;
         this.nameImage = nameImage;
