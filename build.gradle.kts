@@ -44,11 +44,11 @@ dependencies {
 
     implementation("io.github.palexdev:materialfx:11.13.5")
     implementation("net.harawata:appdirs:1.2.1")
-    implementation("com.simtechdata:SceneOneFX:1.3.2")
+    implementation("com.simtechdata:SceneOneFX:1.3.5")
     implementation("io.github.classgraph:classgraph:4.8.149")
     implementation("com.google.guava:guava:31.1-jre")
     implementation("io.vacco.jsonbeans:jsonbeans:1.0.0")
-    implementation("com.github.spotbugs:spotbugs-annotations:4.7.1")
+    implementation("com.github.spotbugs:spotbugs-annotations:4.7.2")
     implementation("org.jetbrains:annotations:23.0.0")
 
     // JUnit API and testing engine
