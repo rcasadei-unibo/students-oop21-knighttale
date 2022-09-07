@@ -1,5 +1,7 @@
 package it.unibo.aknightstale.utils;
 
+import java.util.Objects;
+
 public class Point2D implements Point {
 
     private double x;
@@ -41,6 +43,24 @@ public class Point2D implements Point {
     @Override
     public void setY(final double y) {
         this.y = y;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Point2D other = (Point2D) obj;
+        return Double.doubleToLongBits(x) == Double.doubleToLongBits(other.x)
+                && Double.doubleToLongBits(y) == Double.doubleToLongBits(other.y);
     }
 
 }
