@@ -12,7 +12,6 @@ public final class JavaFXApp extends Application {
     public void start(final Stage stage) {
         SceneOne.disableNotice();
         final var controllerFactory = Controller.of(MainMenuController.class, MainMenuView.class);
-        controllerFactory.getViewFactory().stage(stage);
         final var mainMenuController = controllerFactory.get();
         mainMenuController.showView();
     }

@@ -2,18 +2,16 @@ package it.unibo.aknightstale.views.factories;
 
 import com.google.common.base.CaseFormat;
 import com.simtechdata.sceneonefx.SceneOne;
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.aknightstale.controllers.interfaces.Controller;
-import it.unibo.aknightstale.views.exceptions.ViewLoadingException;
 import it.unibo.aknightstale.factories.ClassFactory;
 import it.unibo.aknightstale.views.AlertType;
 import it.unibo.aknightstale.views.BaseView;
 import it.unibo.aknightstale.views.JavaFXApp;
 import it.unibo.aknightstale.views.Window;
+import it.unibo.aknightstale.views.exceptions.ViewLoadingException;
 import it.unibo.aknightstale.views.interfaces.View;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -24,7 +22,6 @@ public class ViewFactory<V extends View<? extends Controller<V>>> {
 
     private Class<V> viewInterface;
     private boolean forceCreation;
-    private Stage stage;
 
     /**
      * Clears the cache of instantiated views.
@@ -55,18 +52,6 @@ public class ViewFactory<V extends View<? extends Controller<V>>> {
     }
 
     /**
-     * Set the stage to use to create the view associated with the controller created by the factory.
-     *
-     * @param stage The stage to use to create the view associated with the controller created by the factory.
-     * @return This instance of the factory.
-     */
-    @SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "Stage is not exposed, it must be the instance passed.")
-    public ViewFactory<V> stage(final Stage stage) {
-        this.stage = stage;
-        return this;
-    }
-
-    /**
      * Get the view instance.
      *
      * @return An instance of the view class implementing the interface.
@@ -90,7 +75,6 @@ public class ViewFactory<V extends View<? extends Controller<V>>> {
         final FXMLLoader fxmlLoader = new FXMLLoader(JavaFXApp.class.getResource(fxmlFileName));
         try {
             SceneOne.set(viewName, fxmlLoader.<AnchorPane>load())
-                    .stage(stage)
                     .title(view.getWindowTitle())
                     .build();
         } catch (IOException | IllegalStateException e) {
@@ -100,7 +84,7 @@ public class ViewFactory<V extends View<? extends Controller<V>>> {
         }
 
         final var viewInstance = fxmlLoader.<V>getController();
-        ((BaseView<?>) viewInstance).setWindow(Window.getOrCreate("main_window", stage));
+        ((BaseView<?>) viewInstance).setWindow(Window.getOrCreate("main_window"));
 
         VIEWS.put(viewInterface, viewInstance);
 
