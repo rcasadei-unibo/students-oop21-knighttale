@@ -3,7 +3,6 @@ package it.unibo.aknightstale.models;
 import it.unibo.aknightstale.models.entity.BaseCharacter;
 import it.unibo.aknightstale.models.entity.Direction;
 import it.unibo.aknightstale.models.entity.EntityType;
-import it.unibo.aknightstale.utils.Borders;
 import it.unibo.aknightstale.utils.BordersImpl;
 import it.unibo.aknightstale.utils.Point2D;
 import it.unibo.aknightstale.views.entity.Status;
@@ -19,7 +18,7 @@ public class Enemy extends BaseCharacter {
     static final double HEIGHT_BOUNDS = 50.0;
     static final double DAMAGE = 25.0;
     static final double MAX_HEALTH = 100.0;
-    static final double SPEED = 0.6;
+    static final double SPEED = 1.0;
     static final double ATTACK_RANGE = 5.0;
 
     static final double CHASING_RANGE = 100;
@@ -59,7 +58,7 @@ public class Enemy extends BaseCharacter {
         double distanceX = this.getPosition().getX() - playerPosition.getX();
         double distanceY = this.getPosition().getY() - playerPosition.getY();
 
-        if(playerPosition.equals(this.getPosition())){
+        if(playerPosition.equals(this.getPosition())) {
             this.status = Status.IDLE;
         } else {
             if (Math.abs(distanceX) < CHASING_RANGE && Math.abs(distanceY) < CHASING_RANGE) {
@@ -91,7 +90,7 @@ public class Enemy extends BaseCharacter {
 
     }
 
-    private Direction getRandomDirection(){
+    private Direction getRandomDirection() {
         int randomDirection = new Random().nextInt(4);
 
         switch (randomDirection) {
