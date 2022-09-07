@@ -1,13 +1,14 @@
 package it.unibo.aknightstale.utils;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import it.unibo.aknightstale.controllers.entity.EntityController;
+import it.unibo.aknightstale.models.entity.Character;
+import it.unibo.aknightstale.models.entity.Direction;
+import it.unibo.aknightstale.views.entity.AnimatedEntityView;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import it.unibo.aknightstale.controllers.entity.EntityController;
-import it.unibo.aknightstale.models.entity.Direction;
-import it.unibo.aknightstale.models.entity.Character;
-import it.unibo.aknightstale.views.entity.AnimatedEntityView;
 
 public class CollisionManagerImpl implements CollisionManager {
 
@@ -15,10 +16,11 @@ public class CollisionManagerImpl implements CollisionManager {
     private double widthScreen;
     private double heightScreen;
 
+    @SuppressFBWarnings("EI_EXPOSE_REP2") // can be modified later
     public CollisionManagerImpl(final List<EntityController<? super Character, ? super AnimatedEntityView>> entities,
-            final double width, final double height) {
+                                final double width, final double height) {
         super();
-        this.entities = List.copyOf(entities);
+        this.entities = entities;
         this.widthScreen = width;
         this.heightScreen = height;
     }

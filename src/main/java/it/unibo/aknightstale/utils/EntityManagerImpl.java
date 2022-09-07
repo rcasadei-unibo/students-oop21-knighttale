@@ -1,12 +1,12 @@
 package it.unibo.aknightstale.utils;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.aknightstale.controllers.entity.EntityController;
 import it.unibo.aknightstale.models.entity.Character;
 import it.unibo.aknightstale.views.entity.AnimatedEntityView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class EntityManagerImpl implements EntityManager {
 
@@ -46,17 +46,16 @@ public class EntityManagerImpl implements EntityManager {
      */
     @Override
     public void removeEntity(final EntityController<? super Character, ? super AnimatedEntityView> ec) {
-        if (this.entities.contains(ec)) {
-            this.entities.remove(ec);
-        }
+        this.entities.remove(ec);
     }
 
     /**
      * {@inheritDoc}
      */
+    @SuppressFBWarnings("EI_EXPOSE_REP") // can be modified later
     @Override
     public List<EntityController<? super Character, ? super AnimatedEntityView>> getEntities() {
-        return List.copyOf(this.entities);
+        return this.entities;
     }
 
     /**
