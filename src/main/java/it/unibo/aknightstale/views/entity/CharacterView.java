@@ -14,7 +14,6 @@ public abstract class CharacterView extends EntityViewImpl implements AnimatedEn
 
     protected static final String SEPARATOR = System.getProperty("file.separator");
 
-    private final String nameImage;
     private final String nameEntity;
     private final double widthImage;
     private final double heightImage;
@@ -39,7 +38,6 @@ public abstract class CharacterView extends EntityViewImpl implements AnimatedEn
     public CharacterView(final Status s, final String nameImage, final double width, final double height, final String nameEntity) {
         super(nameImage, width, height);
         this.nameEntity = nameEntity;
-        this.nameImage = nameImage;
         this.status = s;
         this.widthImage = width;
         this.heightImage = height;
