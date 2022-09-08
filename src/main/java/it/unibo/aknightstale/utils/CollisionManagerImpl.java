@@ -40,27 +40,32 @@ public class CollisionManagerImpl implements CollisionManager {
     }
 
     private boolean rightDirection(final Borders e, final Borders bounds) {
-        return bounds.getX() == e.getX() + e.getWidth() && (bounds.getY() >= e.getY()
-                && bounds.getY() < e.getY() + e.getHeight()
-                || bounds.getY() + bounds.getHeight() > e.getY() && bounds.getY() + bounds.getHeight() <= e.getY());
+        return equalsDouble(bounds.getX() + 5.0, e.getX() + e.getWidth())
+                && (bounds.getY() >= e.getY() && bounds.getY() < e.getY() + e.getHeight()
+                || bounds.getY() + bounds.getHeight() > e.getY() && bounds.getY() + bounds.getHeight() <= e.getY() + e.getHeight());
     }
 
     private boolean leftDirection(final Borders e, final Borders bounds) {
-        return bounds.getX() + bounds.getWidth() == e.getX() && (bounds.getY() >= e.getY()
-                && bounds.getY() < e.getY() + e.getHeight()
-                || bounds.getY() + bounds.getHeight() > e.getY() && bounds.getY() + bounds.getHeight() <= e.getY());
+        return equalsDouble(bounds.getX() + bounds.getWidth() - 5.0, e.getX())
+                && (bounds.getY() >= e.getY() && bounds.getY() < e.getY() + e.getHeight()
+                || bounds.getY() + bounds.getHeight() > e.getY() && bounds.getY() + bounds.getHeight() <= e.getY() + e.getHeight());
     }
 
     private boolean downDirection(final Borders e, final Borders bounds) {
-        return bounds.getY() == e.getY() + e.getHeight() && (bounds.getX() >= e.getX()
-                && bounds.getX() < e.getX() + e.getWidth()
-                || bounds.getX() + bounds.getWidth() > e.getX() && bounds.getX() + bounds.getWidth() <= e.getX());
+        return equalsDouble(bounds.getY() + 5.0, e.getY() + e.getHeight())
+                && (bounds.getX() >= e.getX() && bounds.getX() < e.getX() + e.getWidth()
+                || bounds.getX() + bounds.getWidth() > e.getX() && bounds.getX() + bounds.getWidth() <= e.getX() + e.getWidth());
     }
 
     private boolean upDirection(final Borders e, final Borders bounds) {
-        return bounds.getY() + bounds.getHeight() == e.getY() && (bounds.getX() >= e.getX()
-                && bounds.getX() < e.getX() + e.getWidth()
-                || bounds.getX() + bounds.getWidth() > e.getX() && bounds.getX() + bounds.getWidth() <= e.getX());
+        return equalsDouble(bounds.getY() + bounds.getHeight() - 5.0, e.getY())
+                && (bounds.getX() >= e.getX() && bounds.getX() < e.getX() + e.getWidth()
+                || bounds.getX() + bounds.getWidth() > e.getX() && bounds.getX() + bounds.getWidth() <= e.getX() + e.getWidth());
+    }
+    
+    private boolean equalsDouble(final double a, final double b) {
+        final double delta = 0.0001;
+        return Math.abs(a - b) < delta;
     }
 
     private void entityCollisions(final Borders e, final List<Direction> list) {
