@@ -10,15 +10,17 @@ public abstract class CharacterView extends EntityViewImpl implements AnimatedEn
     /**
      * The max width of the health bar.
      */
-    protected static final int HEALTH_BAR_MAX_WIDTH = 50;
+    protected static final int HEALTH_BAR_MAX_WIDTH = 25;
 
     protected static final String SEPARATOR = System.getProperty("file.separator");
-    protected static final String URL = "it" + SEPARATOR + "unibo" + SEPARATOR + "aknightstale" + SEPARATOR + "entity"
-            + SEPARATOR + "player" + SEPARATOR;
-    private static final int WIDTH_IMAGE = 24;
-    private static final int HEIGHT_IMAGE = 32;
 
-    private static final int MAX_NUM_FRAME = 50;
+    private final String nameImage;
+    private final String nameEntity;
+    private final double widthImage;
+    private final double heightImage;
+
+
+    private static final int MAX_NUM_FRAME = 12;
 
     protected String idle_right;
     protected String idle_left;
@@ -34,9 +36,13 @@ public abstract class CharacterView extends EntityViewImpl implements AnimatedEn
 
     private int frameNum;
 
-    public CharacterView(final Image image, final Status s) {
-        super(image);
+    public CharacterView(final Status s, final String nameImage, final double width, final double height, final String nameEntity) {
+        super(nameImage, width, height);
+        this.nameEntity = nameEntity;
+        this.nameImage = nameImage;
         this.status = s;
+        this.widthImage = width;
+        this.heightImage = height;
     }
 
     /**
@@ -74,20 +80,20 @@ public abstract class CharacterView extends EntityViewImpl implements AnimatedEn
         if (this.getStatus() == Status.WALK) {
             switch (dir) {
             case RIGHT:
-                setImage(new Image(idle_right, WIDTH_IMAGE, HEIGHT_IMAGE, true, false),
-                        new Image(walk_right, WIDTH_IMAGE, HEIGHT_IMAGE, true, false));
+                setImage(new Image(getClass().getResourceAsStream(idle_right), widthImage, heightImage, true, false),
+                        new Image(getClass().getResourceAsStream(walk_right), widthImage, heightImage, true, false));
                 break;
             case LEFT:
-                setImage(new Image(idle_left, WIDTH_IMAGE, HEIGHT_IMAGE, true, false),
-                        new Image(walk_left, WIDTH_IMAGE, HEIGHT_IMAGE, true, false));
+                setImage(new Image(getClass().getResourceAsStream(idle_left), widthImage, heightImage, true, false),
+                        new Image(getClass().getResourceAsStream(walk_left), widthImage, heightImage, true, false));
                 break;
             case DOWN:
-                setImage(new Image(idle_down, WIDTH_IMAGE, HEIGHT_IMAGE, true, false),
-                        new Image(walk_down, WIDTH_IMAGE, HEIGHT_IMAGE, true, false));
+                setImage(new Image(getClass().getResourceAsStream(idle_down), widthImage, heightImage, true, false),
+                        new Image(getClass().getResourceAsStream(walk_down), widthImage, heightImage, true, false));
                 break;
             case UP:
-                setImage(new Image(idle_up, WIDTH_IMAGE, HEIGHT_IMAGE, true, false),
-                        new Image(walk_up, WIDTH_IMAGE, HEIGHT_IMAGE, true, false));
+                setImage(new Image(getClass().getResourceAsStream(idle_up), widthImage, heightImage, true, false),
+                        new Image(getClass().getResourceAsStream(walk_up), widthImage, heightImage, true, false));
                 break;
             default:
             }
@@ -96,7 +102,7 @@ public abstract class CharacterView extends EntityViewImpl implements AnimatedEn
                 this.frameNum = 0;
             }
         } else {
-            super.setImage(new Image(URL + "player_" + this.getStatus() + "_" + dir + ".png", WIDTH_IMAGE, HEIGHT_IMAGE,
+            super.setImage(new Image(getClass().getResourceAsStream(nameEntity + "_" + this.getStatus() + "_" + dir + ".png"), widthImage, heightImage,
                     true, false));
         }
     }

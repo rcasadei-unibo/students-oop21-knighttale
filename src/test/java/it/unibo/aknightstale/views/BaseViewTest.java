@@ -67,7 +67,6 @@ public abstract class BaseViewTest<C extends Controller<V>, V extends View<C>> {
         SceneOne.disableNotice();
 
         final var controllerFactory = Controller.of(this.controllerInterface, this.viewInterface);
-        controllerFactory.getViewFactory().stage(stage);
         this.controller = controllerFactory.get();
 
         this.showView();

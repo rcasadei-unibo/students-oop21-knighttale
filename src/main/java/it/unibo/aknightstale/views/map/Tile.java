@@ -1,9 +1,10 @@
 package it.unibo.aknightstale.views.map;
 
 import it.unibo.aknightstale.models.entity.EntityType;
+import it.unibo.aknightstale.views.entity.AnimatedEntityView;
 import it.unibo.aknightstale.views.entity.EntityView;
 
-public interface Tile extends EntityView {
+public interface Tile extends AnimatedEntityView {
 
     //Image getImage();
 
@@ -11,11 +12,11 @@ public interface Tile extends EntityView {
 
     EntityType getEntityType();
 
-    void setWidth(final double width);
+    void setWidth(double width);
 
-    void setHeight(final double height);
+    void setHeight(double height);
 
-    void setCollidable(final boolean collidable);
+    void setCollidable(boolean collidable);
 
     boolean isCollidable();
 

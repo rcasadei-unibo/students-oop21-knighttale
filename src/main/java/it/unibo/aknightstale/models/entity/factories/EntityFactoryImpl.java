@@ -46,14 +46,14 @@ public class EntityFactoryImpl implements EntityFactory {
     }
 
     @Override
-    public CharacterController<Character, AnimatedEntityView> getEnemy(final int x, final int y) {
+    public CharacterController<Character, AnimatedEntityView> getEnemy(final double x, final double y) {
 
         Enemy enemyModel = new Enemy(new Point2D(x, y));
         EnemyView enemyView = new EnemyView();
-        new EnemyController(enemyModel, enemyView, new EntityManagerImpl());
+        var enemy = new EnemyController<Character, AnimatedEntityView>(enemyModel, enemyView, getEntityManager());
 
-        final var enemy = new PlayerController<Character, AnimatedEntityView>(new Player(SPAWN_PLAYER),
-                new PlayerView(), getEntityManager());
+        /*final var enemy = new EnemyController(new Enemy(new Point2D(x, y)),
+                new En(), getEntityManager());*/
         this.manager.addEntity(enemy);
         return enemy;
     }

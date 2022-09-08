@@ -1,20 +1,10 @@
 package it.unibo.aknightstale.controllers.interfaces;
 
-import it.unibo.aknightstale.controllers.entity.ObstacleController;
-import it.unibo.aknightstale.controllers.interfaces.Controller;
-import it.unibo.aknightstale.models.entity.EntityType;
-import it.unibo.aknightstale.models.entity.ObstacleEntity;
-import it.unibo.aknightstale.utils.BordersImpl;
+import it.unibo.aknightstale.controllers.entity.CharacterController;
+import it.unibo.aknightstale.models.entity.Character;
+import it.unibo.aknightstale.models.entity.Direction;
+import it.unibo.aknightstale.views.entity.AnimatedEntityView;
 import it.unibo.aknightstale.views.interfaces.MapView;
-import it.unibo.aknightstale.views.map.SolidTile;
-import javafx.util.Pair;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.List;
 
 public interface MapController extends Controller<MapView> {
 
@@ -32,4 +22,17 @@ public interface MapController extends Controller<MapView> {
     void drawPlayer();
 
     void update();
+
+    CharacterController<? extends Character, ? extends AnimatedEntityView> getPlayer();
+    
+    void handleInput();
+
+    void idlePlayer();
+
+    void updatePlayer(Direction left);
+
+    void playerAttack();
+
+    void moveEnemies();
 }
+

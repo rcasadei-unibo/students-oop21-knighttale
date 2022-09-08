@@ -21,8 +21,8 @@ public class EnemyTest extends BaseViewTest<MainMenuController, MainMenuView> {
     @Test
     @DisplayName("Check type")
     void checkType() {
-        final var player = this.factory.getEnemy(10, 10).getModel();
-        Assertions.assertThat(player.getType()).isEqualTo(EntityType.ENEMY);
+        final var enemy = this.factory.getEnemy(10, 10).getModel();
+        Assertions.assertThat(enemy.getType()).isEqualTo(EntityType.ENEMY);
     }
 
     @Test

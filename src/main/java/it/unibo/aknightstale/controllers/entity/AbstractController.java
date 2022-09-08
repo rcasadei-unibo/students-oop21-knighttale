@@ -5,6 +5,7 @@ import it.unibo.aknightstale.models.entity.Character;
 import it.unibo.aknightstale.models.entity.Direction;
 import it.unibo.aknightstale.utils.BordersImpl;
 import it.unibo.aknightstale.utils.EntityManager;
+import it.unibo.aknightstale.utils.Point2D;
 import it.unibo.aknightstale.views.entity.AnimatedEntityView;
 import it.unibo.aknightstale.views.entity.Status;
 
@@ -30,6 +31,7 @@ public abstract class AbstractController<M extends Character, V extends Animated
     protected abstract void move(Direction dir);
 
     private boolean canMove(final Direction d) {
+        //return true;
         return this.manager.getCollisionManager().checkDirections(this).contains(d);
     }
 
@@ -110,4 +112,15 @@ public abstract class AbstractController<M extends Character, V extends Animated
     public EntityManager getManager() {
         return manager;
     }
+
+    public void adaptPositionToScreenSize(final double traslX, final double traslY) {
+        //this.enemiesControllers.forEach(c -> {
+            double newX = getModel().getPosition().getX() * traslX;
+            double newY = getModel().getPosition().getY() * traslY;
+            getModel().setPosition(new Point2D(newX, newY));
+        //});
+    }
+
 }
+
+
