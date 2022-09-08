@@ -5,8 +5,8 @@ import it.unibo.aknightstale.utils.Point2D;
 
 public class Player extends BaseCharacter {
 
-    private static final double WIDTH_BOUNDS = 50.0;
-    private static final double HEIGHT_BOUNDS = 50.0;
+    private static final double WIDTH_BOUNDS = 24.0;
+    private static final double HEIGHT_BOUNDS = 32.0;
     private static final double DAMAGE = 25.0;
     private static final double MAX_HEALTH = 100.0;
     private static final double SPEED = 1.0;
