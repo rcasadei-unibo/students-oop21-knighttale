@@ -47,11 +47,12 @@ class PlayerTest extends BaseViewTest<MainMenuController, MainMenuView> {
     @DisplayName("Player attacks entity")
     void attack() {
         final var player = this.factory.getPlayer().getModel();
-        final LifeEntity entity = new Player(player.getPosition()); // cambiare con nemico
+        final LifeEntity entity = this.factory.getEnemy(player.getPosition().getX(), player.getPosition().getY())
+                .getModel();
         for (int i = 0; i < 4; i++) {
             player.attack(entity);
         }
-        // Assertions.assertThat(entity.isDead()).isTrue();
+        Assertions.assertThat(entity.isDead()).isTrue();
         // TODO: test defense when calculating damage
     }
 
@@ -59,21 +60,22 @@ class PlayerTest extends BaseViewTest<MainMenuController, MainMenuView> {
     @DisplayName("Check life of entity")
     void checklife() {
         final var player = this.factory.getPlayer().getModel();
-        final LifeEntity entity = new Player(player.getPosition()); // cambiare con nemico
+        final LifeEntity entity = this.factory.getEnemy(player.getPosition().getX(), player.getPosition().getY())
+                .getModel();
         final var life = entity.getHealth();
         player.attack(entity);
-        // Assertions.assertThat(entity.getHealth()).isEqualTo(life -
-        // player.getDamage());
+        Assertions.assertThat(entity.getHealth()).isEqualTo(life - player.getDamage());
     }
 
     @Test
     @DisplayName("Check maximum health of entity")
     void checkMaximumHealth() {
         final var player = this.factory.getPlayer().getModel();
-        final LifeEntity entity = new Player(player.getPosition()); // cambiare con nemico
+        final LifeEntity entity = this.factory.getEnemy(player.getPosition().getX(), player.getPosition().getY())
+                .getModel();
         final var initialHealth = entity.getHealth();
         player.attack(entity);
-        // Assertions.assertThat(entity.getMaxHealth()).isEqualTo(initialHealth);
+        Assertions.assertThat(entity.getMaxHealth()).isEqualTo(initialHealth);
     }
 
 }
