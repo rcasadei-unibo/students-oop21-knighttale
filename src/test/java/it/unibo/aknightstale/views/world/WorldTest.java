@@ -5,14 +5,25 @@ import it.unibo.aknightstale.views.BaseViewTest;
 import it.unibo.aknightstale.views.interfaces.MapView;
 import it.unibo.aknightstale.views.map.CrossableTile;
 import it.unibo.aknightstale.views.map.SolidTile;
+import javafx.stage.Stage;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.testfx.framework.junit5.ApplicationExtension;
+import org.testfx.framework.junit5.Start;
 
-public class WorldTest extends BaseViewTest<MapController, MapView> {
+@ExtendWith(ApplicationExtension.class)
+class WorldTest extends BaseViewTest<MapController, MapView> {
 
     protected WorldTest() {
         super(MapView.class, MapController.class);
+    }
+
+    @Start
+    @Override
+    public void start(final Stage stage) {
+        super.start(stage);
     }
 
     @Test

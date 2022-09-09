@@ -1,21 +1,22 @@
 package it.unibo.aknightstale.views.entity;
 
-import javafx.stage.Stage;
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-
-import it.unibo.aknightstale.controllers.interfaces.MainMenuController;
+import it.unibo.aknightstale.controllers.interfaces.MapController;
 import it.unibo.aknightstale.models.entity.factories.EntityFactory;
 import it.unibo.aknightstale.models.entity.factories.EntityFactoryImpl;
 import it.unibo.aknightstale.utils.CollisionManagerImpl;
 import it.unibo.aknightstale.views.BaseViewTest;
-import it.unibo.aknightstale.views.interfaces.MainMenuView;
+import it.unibo.aknightstale.views.interfaces.MapView;
 import javafx.scene.image.Image;
+import javafx.stage.Stage;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 
-// TODO: Replace with World view
-class PlayerViewTest extends BaseViewTest<MainMenuController, MainMenuView> {
+@ExtendWith(ApplicationExtension.class)
+class PlayerViewTest extends BaseViewTest<MapController, MapView> {
 
     private final EntityFactory factory = new EntityFactoryImpl();
     static final String SEPARATOR = System.getProperty("file.separator");
@@ -25,7 +26,7 @@ class PlayerViewTest extends BaseViewTest<MainMenuController, MainMenuView> {
     static final double HEIGHT_PLAYER = 32.0;
 
     PlayerViewTest() {
-        super(MainMenuView.class, MainMenuController.class);
+        super(MapView.class, MapController.class);
     }
 
     @Start
