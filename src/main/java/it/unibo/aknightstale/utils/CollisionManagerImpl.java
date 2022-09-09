@@ -31,64 +31,39 @@ public class CollisionManagerImpl implements CollisionManager {
     @Override
     public List<EntityController<? super Character, ? super AnimatedEntityView>> checkCollision(
             final EntityController<? super Character, ? super AnimatedEntityView> ec) {
-        final var entity = new BordersImpl(ec.getModel().getPosition().getX() - 1,
-                ec.getModel().getPosition().getY() - 1, ec.getModel().getBorders().getWidth() + 1,
-                ec.getModel().getBorders().getHeight() + 1);
+        final var entity = new BordersImpl(ec.getModel().getPosition().getX() - 1.0,
+                ec.getModel().getPosition().getY() - 1.0, ec.getModel().getBorders().getWidth() + 1.0,
+                ec.getModel().getBorders().getHeight() + 1.0);
 
         return this.entities.stream().filter(e -> e.getModel().isCollidable())
                 .filter(e -> entity.intersects(e.getModel().getBorders())).collect(Collectors.toList());
     }
-
-    private boolean rightDirection(final Borders e, final Borders bounds) {
-        return equalsDouble(bounds.getX() + 5.0, e.getX() + e.getWidth())
-                && (bounds.getY() >= e.getY() && bounds.getY() < e.getY() + e.getHeight()
-                || bounds.getY() + bounds.getHeight() > e.getY() && bounds.getY() + bounds.getHeight() <= e.getY() + e.getHeight());
-    }
-
-    private boolean leftDirection(final Borders e, final Borders bounds) {
-        return equalsDouble(bounds.getX() + bounds.getWidth() - 5.0, e.getX())
-                && (bounds.getY() >= e.getY() && bounds.getY() < e.getY() + e.getHeight()
-                || bounds.getY() + bounds.getHeight() > e.getY() && bounds.getY() + bounds.getHeight() <= e.getY() + e.getHeight());
-    }
-
-    private boolean downDirection(final Borders e, final Borders bounds) {
-        return equalsDouble(bounds.getY() + 5.0, e.getY() + e.getHeight())
-                && (bounds.getX() >= e.getX() && bounds.getX() < e.getX() + e.getWidth()
-                || bounds.getX() + bounds.getWidth() > e.getX() && bounds.getX() + bounds.getWidth() <= e.getX() + e.getWidth());
-    }
-
-    private boolean upDirection(final Borders e, final Borders bounds) {
-        return equalsDouble(bounds.getY() + bounds.getHeight() - 5.0, e.getY())
-                && (bounds.getX() >= e.getX() && bounds.getX() < e.getX() + e.getWidth()
-                || bounds.getX() + bounds.getWidth() > e.getX() && bounds.getX() + bounds.getWidth() <= e.getX() + e.getWidth());
+    
+    private boolean intersectsBorders(final Character en, final double x, final double y, final double width, final double height) {
+        final var borders = new BordersImpl(x, y, width, height);
+        return this.entities.stream()
+                            .filter(e -> !e.getModel().equals(en) 
+                                    && e.getModel().isCollidable()
+                                    && borders.intersects(e.getModel().getBorders()))
+                            .count() == 0;
     }
     
-    private boolean equalsDouble(final double a, final double b) {
-        final double delta = 0.0001;
-        return Math.abs(a - b) < delta;
-    }
-
-    private void entityCollisions(final Borders e, final List<Direction> list) {
-        if ((e.getX() + e.getWidth()) < this.widthScreen
-                && this.entities.stream().filter(entity -> entity.getModel().isCollidable())
-                        .filter(entity -> this.rightDirection(e, entity.getModel().getBorders()))
-                        .collect(Collectors.toList()).isEmpty()) {
+    private void collisionsMovement(final Character e, final List<Direction> list) {
+        final var borders = e.getBorders();
+        if (borders.getX() + borders.getWidth() < this.widthScreen
+                && intersectsBorders(e, borders.getX(), borders.getY(), borders.getWidth() + 1.0, borders.getHeight())) {
             list.add(Direction.RIGHT);
         }
-        if (e.getX() > 0 && this.entities.stream().filter(entity -> entity.getModel().isCollidable())
-                .filter(entity -> this.leftDirection(e, entity.getModel().getBorders())).collect(Collectors.toList())
-                .isEmpty()) {
+        if (borders.getX() > 0 
+                && intersectsBorders(e, borders.getX() - 1.0, borders.getY(), 1.0, borders.getHeight())) {
             list.add(Direction.LEFT);
         }
-        if ((e.getY() + e.getHeight()) < this.heightScreen
-                && this.entities.stream().filter(entity -> entity.getModel().isCollidable())
-                        .filter(entity -> this.downDirection(e, entity.getModel().getBorders()))
-                        .collect(Collectors.toList()).isEmpty()) {
+        if ((borders.getY() + borders.getHeight()) < this.heightScreen
+                && intersectsBorders(e, borders.getX(), borders.getY(), borders.getWidth(), borders.getHeight() + 1.0)) {
             list.add(Direction.DOWN);
         }
-        if (e.getY() > 0 && this.entities.stream().filter(entity -> entity.getModel().isCollidable())
-                .filter(entity -> this.upDirection(e, entity.getModel().getBorders())).collect(Collectors.toList())
-                .isEmpty()) {
+        if (borders.getY() > 0 
+                && intersectsBorders(e, borders.getX(), borders.getY() - 1.0, borders.getWidth(), 1.0)) {
             list.add(Direction.UP);
         }
     }
@@ -100,7 +75,7 @@ public class CollisionManagerImpl implements CollisionManager {
     public List<Direction> checkDirections(
             final EntityController<? extends Character, ? extends AnimatedEntityView> ec) {
         final var list = new ArrayList<Direction>();
-        this.entityCollisions(ec.getModel().getBorders(), list);
+        collisionsMovement(ec.getModel(), list); 
         return List.copyOf(list);
     }
 

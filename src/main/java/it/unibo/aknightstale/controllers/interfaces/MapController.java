@@ -8,33 +8,78 @@ import it.unibo.aknightstale.views.interfaces.MapView;
 
 import java.util.List;
 
+/**
+ * This interface manages the game world and everything that happens inside it, such as the spawn of entities,
+ * or draw the game world, etc... .
+ */
 public interface MapController extends Controller<MapView> {
 
+    /**
+     * The constant NUM_COL.
+     */
     static final int NUM_COL = 48;
+    /**
+     * The constant NUM_ROW.
+     */
     static final int NUM_ROW = 27;
 
+    /**
+     * Draw map.
+     */
     void drawMap();
 
+    /**
+     * Update the size of the tiles when the size of Windows changes.
+     */
     void updateScreenSize();
 
+    /**
+     * Draw the enemies in the game world.
+     */
     void drawEnemies();
 
+    /**
+     * Reposition all the entities when window's size change.
+     */
     void repositionEntities();
 
+    /**
+     * Draw player in the game world.
+     */
     void drawPlayer();
 
+    /**
+     * Update the entities and check if the game is over.
+     */
     void update();
 
+    /**
+     * Gets the player.
+     *
+     * @return the player
+     */
     CharacterController<? extends Character, ? extends AnimatedEntityView> getPlayer();
 
-    void handleInput();
+    /**
+     * Makes the player stop in the game world.
+     */
+    void setIdlePlayer();
 
-    void idlePlayer();
+    /**
+     * Update player.
+     *
+     * @param direction the new player's direction.
+     */
+    void updatePlayer(Direction direction);
 
-    void updatePlayer(Direction left);
-
+    /**
+     * Makes the player attack.
+     */
     void playerAttack();
 
+    /**
+     * Makes enemies move in a new direction.
+     */
     void moveEnemies();
 
     /**
