@@ -61,16 +61,20 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
 
         updateScreenSize();
 
+        // converting map
+        readTextMap();
+
         //adding trees
         Spawner treeSpawner = new SpawnerImpl(getView().getTree(), 30, this.mapTileNum);
         this.mapTileNum = treeSpawner.getMap();
 
-        // converting map
-        readTextMap();
-
         super.showView();
         getView().init();
         this.drawMap();
+    }
+
+    public EnemiesControllerImpl getEnemiesController() {
+        return enemiesController;
     }
 
     @Override
@@ -153,7 +157,6 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
                         double y = row * getView().getTiles().get(num).getHeight();
                         double width = getView().getTiles().get(num).getWidth();
                         double height = getView().getTiles().get(num).getHeight();
-
                         var borders = new BordersImpl(x, y, width, height);
                         var obstacleModel = new ObstacleEntity(borders);
                         var obstacleView = getView().getTiles().get(num);
