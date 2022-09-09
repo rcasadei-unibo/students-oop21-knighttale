@@ -1,7 +1,7 @@
 package it.unibo.aknightstale.controllers;
 
 import it.unibo.aknightstale.controllers.entity.CharacterController;
-import it.unibo.aknightstale.controllers.entity.EnemiesController;
+import it.unibo.aknightstale.controllers.entity.EnemiesControllerImpl;
 import it.unibo.aknightstale.controllers.entity.ObstacleController;
 import it.unibo.aknightstale.controllers.interfaces.Controller;
 import it.unibo.aknightstale.controllers.interfaces.GameFinishedController;
@@ -29,6 +29,9 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 
+/**
+ * The type Map controller.
+ */
 public class MapControllerImpl extends BaseController<MapView> implements MapController {
 
 
@@ -38,9 +41,7 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
     private double screenWidth;
     private double screenHeight;
 
-    private EnemiesController enemiesController;
-
-
+    private EnemiesControllerImpl enemiesController;
 
 
     private int killedEnemies = 0;
@@ -53,14 +54,10 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
     @Override
     public void showView() {
         player = factory.getPlayer();
-         this.collision = new CollisionManagerImpl(factory.getEntityManager().getEntities(), this.screenWidth,
+        this.enemiesController = new EnemiesControllerImpl(totalEnemies, getView(), factory);
+        this.collision = new CollisionManagerImpl(factory.getEntityManager().getEntities(), this.screenWidth,
                 this.screenHeight);
         factory.getEntityManager().setCollisionManager(collision);
-
-        //final InputPlayer input = new InputPlayerImpl(player, gameScene);
-
-        this.enemiesController = new EnemiesController(totalEnemies, getView(), factory);
-
 
         updateScreenSize();
         // converting map
@@ -73,31 +70,37 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
         this.drawMap();
     }
 
+    @Override
     public CharacterController<? extends Character, ? extends AnimatedEntityView> getPlayer() {
         return player;
     }
 
     @Override
-    public void handleInput() {
-
-    }
-
-    @Override
-    public void idlePlayer() {
+    public void setIdlePlayer() {
         this.player.getView().setStatus(Status.IDLE);
         this.player.getView().update(this.player.getModel().getDirection());
     }
 
-    public void openGameFinishedScreen() {
+    private void openGameFinishedScreen() {
         var controllerView =  Controller.of(GameFinishedController.class, GameFinishedView.class).get();
         controllerView.setScore(killedEnemies);
         controllerView.showView();
     }
 
+    /**
+     * Gets num col of the map.
+     *
+     * @return the num col
+     */
     public static int getNumCol() {
         return NUM_COL;
     }
 
+    /**
+     * Gets num row of the map.
+     *
+     * @return the num row
+     */
     public static int getNumRow() {
         return NUM_ROW;
     }
@@ -112,7 +115,7 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
         int num;
         while (col < NUM_COL && row < NUM_ROW) {
             num = mapTileNum.get(new Pair<>(row, col));
-            getView().drawTile(getView().getTiles().get(num), x, y);
+            getView().draw(getView().getTiles().get(num), x, y);
             col++;
             x += this.getView().getTiles().get(num).getWidth();
             if (col == NUM_COL) {
@@ -169,6 +172,7 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
         }
     }
 
+    @Override
     public void updateScreenSize() {
         this.screenWidth = getView().getScreenWidth();
         this.screenHeight = getView().getScreenHeight();
@@ -179,9 +183,7 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
         final double tileWidth = Math.ceil(this.screenWidth / NUM_COL);
         final double tileHeight = Math.ceil(this.screenHeight / NUM_ROW);
 
-        getView().resize(tileWidth, tileHeight);
-
-
+        getView().resizeTiles(tileWidth, tileHeight);
     }
 
     public void repositionEntities() {
@@ -194,15 +196,16 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
     @Override
     public void drawPlayer() {
         var position = player.getModel().getPosition();
-        getView().drawTile(player.getView(), position.getX(), position.getY());
+        getView().draw(player.getView(), position.getX(), position.getY());
     }
 
     @Override
     public void update() {
-        enemiesController.update(/*player.getposition()*/);
+        enemiesController.removeDeadEnemies();
         this.killedEnemies = totalEnemies - enemiesController.getNumEnemy();
         if (killedEnemies == totalEnemies || this.player.getModel().getHealth() == 0) {
             this.openGameFinishedScreen();
+            getView().stopGame();
         }
     }
 
@@ -211,6 +214,7 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
         enemiesController.drawEnemies();
     }
 
+    @Override
     public void updatePlayer(final Direction direction) {
         switch (direction) {
             case UP:
