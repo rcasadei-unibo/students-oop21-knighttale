@@ -34,13 +34,14 @@ public abstract class BaseCharacter extends EntityImpl implements Character {
     private Direction direction;
 
     public BaseCharacter(final Borders borders, final EntityType type, final boolean collidable, final Direction dir,
-                         final double dmg, final double health, final double speed) {
+                         final double dmg, final double health, final double speed, final double defense) {
         super(borders, type, collidable);
         this.damage = dmg;
         this.health = health;
         this.maxHealth = health;
         this.speed = speed;
         this.direction = dir;
+        this.defense = defense;
     }
 
     /**

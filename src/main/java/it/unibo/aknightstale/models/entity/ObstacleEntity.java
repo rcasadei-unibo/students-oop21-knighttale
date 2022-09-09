@@ -1,9 +1,6 @@
 package it.unibo.aknightstale.models.entity;
 
 import it.unibo.aknightstale.utils.Borders;
-import it.unibo.aknightstale.utils.BordersImpl;
-import it.unibo.aknightstale.utils.Point2D;
-import javafx.geometry.Bounds;
 
 
 public class ObstacleEntity extends BaseCharacter {
@@ -12,7 +9,7 @@ public class ObstacleEntity extends BaseCharacter {
 
     public ObstacleEntity(/*final Point2D position, */final Borders borders) {
         //super(borders, EntityType.OBSTACLE, true);
-        super(borders, EntityType.OBSTACLE, true, Direction.RIGHT, 0, 0, 0);
+        super(borders, EntityType.OBSTACLE, true, Direction.RIGHT, 0, 0, 0, 0);
         //super.setPosition(position);
         //this.position = position;
     }

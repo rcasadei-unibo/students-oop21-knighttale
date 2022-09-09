@@ -19,6 +19,7 @@ public class Enemy extends BaseCharacter {
     static final double DAMAGE = 25.0;
     static final double MAX_HEALTH = 100.0;
     static final double SPEED = 1.0;
+    static final double DEFENSE = 10.0;
     static final double ATTACK_RANGE = 5.0;
 
     static final double CHASING_RANGE = 100;
@@ -35,7 +36,7 @@ public class Enemy extends BaseCharacter {
 
     public Enemy(final Point2D position) {
         super(new BordersImpl(position.getX(), position.getY(), WIDTH_BOUNDS, HEIGHT_BOUNDS), EntityType.ENEMY, true,
-                Direction.RIGHT, DAMAGE, MAX_HEALTH, SPEED);
+                Direction.RIGHT, DAMAGE, MAX_HEALTH, SPEED, DEFENSE);
     }
 
     /**
