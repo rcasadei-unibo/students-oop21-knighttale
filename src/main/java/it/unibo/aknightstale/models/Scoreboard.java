@@ -20,6 +20,18 @@ public interface Scoreboard {
     void setScore(String name, Integer score);
 
     /**
+     * Delete an entry from the scoreboard.
+     *
+     * @param name The name of the player to remove.
+     */
+    void deleteScore(String name);
+
+    /**
+     * Clear the scoreboard by deleting all the entries.
+     */
+    void clear();
+
+    /**
      * Load scoreboard from file.
      */
     void load();
