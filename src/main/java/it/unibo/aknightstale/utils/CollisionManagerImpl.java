@@ -54,14 +54,16 @@ public class CollisionManagerImpl implements CollisionManager {
                 && intersectsBorders(e, borders.getX(), borders.getY(), borders.getWidth() + 1.0, borders.getHeight())) {
             list.add(Direction.RIGHT);
         }
-        if (borders.getX() > 0 && intersectsBorders(e, borders.getX() - 1.0, borders.getY(), 1.0, borders.getHeight())) {
+        if (borders.getX() > 0 
+                && intersectsBorders(e, borders.getX() - 1.0, borders.getY(), 1.0, borders.getHeight())) {
             list.add(Direction.LEFT);
         }
         if ((borders.getY() + borders.getHeight()) < this.heightScreen
-                && intersectsBorders(e, borders.getX(), borders.getY() + borders.getHeight(), borders.getWidth(), 1.0)) {
+                && intersectsBorders(e, borders.getX(), borders.getY(), borders.getWidth(), borders.getHeight() + 1.0)) {
             list.add(Direction.DOWN);
         }
-        if (borders.getY() > 0 && intersectsBorders(e, borders.getX(), borders.getY() - 1.0, borders.getWidth(), 1.0)) {
+        if (borders.getY() > 0 
+                && intersectsBorders(e, borders.getX(), borders.getY() - 1.0, borders.getWidth(), 1.0)) {
             list.add(Direction.UP);
         }
     }
