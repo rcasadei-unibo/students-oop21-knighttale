@@ -66,8 +66,10 @@ public abstract class CharacterView extends EntityViewImpl implements AnimatedEn
     @Override
     public void drawHealthBar(final GraphicsContext gc, final double x, final double y, final double health,
             final double maxHealth) {
-        gc.setFill(LIGHTGREEN);
-        gc.fillRect(x, y, health / maxHealth * HEALTH_BAR_MAX_WIDTH, 2);
+        if (health < maxHealth) {
+            gc.setFill(LIGHTGREEN);
+            gc.fillRect(x, y, (health / maxHealth) * HEALTH_BAR_MAX_WIDTH, 5);
+        }
     }
 
     /**

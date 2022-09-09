@@ -6,6 +6,8 @@ import it.unibo.aknightstale.models.entity.Direction;
 import it.unibo.aknightstale.views.entity.AnimatedEntityView;
 import it.unibo.aknightstale.views.interfaces.MapView;
 
+import java.util.List;
+
 /**
  * This interface manages the game world and everything that happens inside it, such as the spawn of entities,
  * or draw the game world, etc... .
@@ -79,5 +81,10 @@ public interface MapController extends Controller<MapView> {
      * Makes enemies move in a new direction.
      */
     void moveEnemies();
+
+    /**
+     * Get the enemies in the map.
+     */
+    List<CharacterController<Character, AnimatedEntityView>> getEnemies();
 }
 

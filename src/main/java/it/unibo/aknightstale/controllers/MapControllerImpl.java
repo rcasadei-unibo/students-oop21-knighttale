@@ -5,6 +5,7 @@ import it.unibo.aknightstale.controllers.entity.EnemiesControllerImpl;
 import it.unibo.aknightstale.controllers.entity.ObstacleController;
 import it.unibo.aknightstale.controllers.interfaces.Controller;
 import it.unibo.aknightstale.controllers.interfaces.GameFinishedController;
+import it.unibo.aknightstale.controllers.interfaces.MapController;
 import it.unibo.aknightstale.models.entity.Character;
 import it.unibo.aknightstale.models.entity.Direction;
 import it.unibo.aknightstale.models.entity.EntityType;
@@ -18,7 +19,6 @@ import it.unibo.aknightstale.utils.CollisionManagerImpl;
 import it.unibo.aknightstale.views.entity.AnimatedEntityView;
 import it.unibo.aknightstale.views.entity.Status;
 import it.unibo.aknightstale.views.interfaces.GameFinishedView;
-import it.unibo.aknightstale.controllers.interfaces.MapController;
 import it.unibo.aknightstale.views.interfaces.MapView;
 import javafx.util.Pair;
 
@@ -249,6 +249,14 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
     @Override
     public void moveEnemies() {
         this.enemiesController.updateDirection(player.getModel().getPosition());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<CharacterController<Character, AnimatedEntityView>> getEnemies() {
+        return this.enemiesController.getEnemiesControllers();
     }
 
 
