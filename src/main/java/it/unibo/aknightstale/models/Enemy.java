@@ -52,7 +52,9 @@ public class Enemy extends BaseCharacter {
         return super.getDirection();
     }
 
-    /*cambiare parametro Point2D con classe Point che non usa javafx*/
+    /**
+     * This method set the new enemy's direction.
+     * @param playerPosition is the player's position in the game world. */
     public void update(final Point2D playerPosition) {
         Direction dir = null;
 
