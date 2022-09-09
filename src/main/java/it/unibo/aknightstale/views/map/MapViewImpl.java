@@ -27,6 +27,9 @@ public class MapViewImpl extends BaseView<MapController> implements MapView  {
     private final List<Tile> tiles = new ArrayList<>();
     private final List<String> keyPressed = new ArrayList<>();
 
+    private AnimationTimer gameLoop;
+    private boolean gameFinished = false;
+
     public MapViewImpl() {
         super("Game");
         // adding tiles
@@ -44,6 +47,7 @@ public class MapViewImpl extends BaseView<MapController> implements MapView  {
         tiles.add(new SolidTile("water11.png", 11, EntityType.OBSTACLE));
     }
 
+    @Override
     public void init() {
 
         getWindow().getCurrentScene().setOnKeyPressed(event -> {
@@ -78,7 +82,7 @@ public class MapViewImpl extends BaseView<MapController> implements MapView  {
 
         var player = getController().getPlayer();
 
-        final var gameLoop = new AnimationTimer() {
+        this.gameLoop = new AnimationTimer() {
 
             @Override
             public void handle(final long now) {
@@ -113,10 +117,10 @@ public class MapViewImpl extends BaseView<MapController> implements MapView  {
         gameLoop.start();
 
         Runnable myThread = () -> {
-            while (true) {
+            while (!gameFinished) {
                 try {
                     getController().moveEnemies();
-                    Thread.sleep(   1000);
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     System.err.println("Error");
                 }
@@ -127,48 +131,58 @@ public class MapViewImpl extends BaseView<MapController> implements MapView  {
 
         run.start();
     }
+
+    @Override
+    public void stopGame() {
+        this.gameLoop.stop();
+        this.gameFinished = true;
+    }
+
+    @Override
     public Tile getFloor() {
         return this.tiles.get(0);
     }
 
+    @Override
     public Tile getTree() {
         return this.tiles.get(1);
     }
 
+    @Override
     public List<Tile> getTiles() {
         return tiles;
     }
 
-
+    @Override
     public double getScreenWidth() {
         return canvas.getWidth();
     }
 
+    @Override
     public double getScreenHeight() {
         return canvas.getHeight();
     }
 
+    @Override
     public void clearMap() {
         this.gc.clearRect(0, 0, this.gc.getCanvas().getWidth(), this.gc.getCanvas().getHeight());
     }
 
-    public void drawTile(final EntityView tile, final double x, final double y) {
+    @Override
+    public void draw(final EntityView tile, final double x, final double y) {
         gc.drawImage(tile.getImage(), x, y);
     }
-    public void resize(final double tileWidth, final double tileHeight) {
+    @Override
+    public void resizeTiles(final double tileWidth, final double tileHeight) {
         this.tiles.forEach(t -> {
             t.setHeight(tileHeight);
             t.setWidth(tileWidth);
         });
     }
 
-    /*public GraphicsContext getGraphic(){
-        return this.canvas.getGraphicsContext2D();
-    }*/
-
     private void handleInput() {
         if (keyPressed.isEmpty()) {
-            getController().idlePlayer();
+            getController().setIdlePlayer();
         } else {
             if (keyPressed.contains("A")) {
                 getController().updatePlayer(Direction.LEFT);
