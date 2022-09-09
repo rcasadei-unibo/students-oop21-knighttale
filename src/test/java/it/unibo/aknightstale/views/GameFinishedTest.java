@@ -5,7 +5,7 @@ import it.unibo.aknightstale.views.interfaces.GameFinishedView;
 import it.unibo.aknightstale.views.interfaces.MainMenuView;
 import it.unibo.aknightstale.views.interfaces.MapView;
 import it.unibo.aknightstale.views.interfaces.ScoreboardView;
-import javafx.scene.control.Labeled;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -46,7 +46,7 @@ class GameFinishedTest extends BaseViewTest<GameFinishedController, GameFinished
     @Test
     @DisplayName("Open the game with the exit button")
     void checkScoreLabel(final FxRobot robot) {
-        final var score = Integer.parseInt(robot.lookup("#scoreLabel").queryAs(Labeled.class).getText());
+        final var score = Integer.parseInt(robot.lookup("#scoreLabel").queryAs(Label.class).getText());
         Assertions.assertThat(score).isEqualTo(SCORE).isEqualTo(getController().getScore());
     }
 
