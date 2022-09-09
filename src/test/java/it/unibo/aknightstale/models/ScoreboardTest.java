@@ -43,13 +43,20 @@ class ScoreboardTest {
     @Test
     @DisplayName("Save scoreboard to file")
     void save() {
+        final var oldScoreboard = new ScoreboardImpl();
+        oldScoreboard.load();
+
         final var scoreboard = this.getSampleScoreboard();
         scoreboard.save();
+
         final var path = AppPaths.getFilePath("scoreboard.json");
         Assertions.assertThat(Files.exists(path)).isTrue();
+
         final var scoreboard2 = new ScoreboardImpl();
         scoreboard2.load();
         this.checkScoreboard(scoreboard2);
+
+        oldScoreboard.save();
     }
 
     private Scoreboard getSampleScoreboard() {

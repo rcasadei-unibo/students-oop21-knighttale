@@ -62,6 +62,8 @@ class GameFinishedTest extends BaseViewTest<GameFinishedController, GameFinished
         final var scoreboard = new ScoreboardImpl();
         scoreboard.load();
         Assertions.assertThat(scoreboard.getScore("TestFXPlayer")).isEqualTo(score);
+        scoreboard.deleteScore("TestFXPlayer");
+        scoreboard.save();
     }
 
 
