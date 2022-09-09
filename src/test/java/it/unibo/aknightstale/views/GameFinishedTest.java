@@ -3,6 +3,7 @@ package it.unibo.aknightstale.views;
 import it.unibo.aknightstale.controllers.interfaces.GameFinishedController;
 import it.unibo.aknightstale.views.interfaces.GameFinishedView;
 import it.unibo.aknightstale.views.interfaces.MainMenuView;
+import it.unibo.aknightstale.views.interfaces.MapView;
 import it.unibo.aknightstale.views.interfaces.ScoreboardView;
 import javafx.scene.control.Labeled;
 import javafx.stage.Stage;
@@ -35,12 +36,12 @@ class GameFinishedTest extends BaseViewTest<GameFinishedController, GameFinished
         super.showView();
     }
 
-    /*@Test
+    @Test
     @DisplayName("Start a new game when the button is pressed")
-    void onNewGameButtonClicked() {
-        // TODO: implement this test when world is done.
-//        Assertions.assertThat(this.getView().getRoot()).isVisible();
-    }*/
+    void onNewGameButtonClicked(final FxRobot robot) {
+        robot.clickOn("#newGameButton");
+        Assertions.assertThat(getWindow().getCurrentView()).isInstanceOf(MapView.class);
+    }
 
     @Test
     @DisplayName("Open the game with the exit button")

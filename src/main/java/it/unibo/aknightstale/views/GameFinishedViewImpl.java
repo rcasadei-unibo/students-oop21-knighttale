@@ -50,7 +50,7 @@ public class GameFinishedViewImpl extends BaseView<GameFinishedController> imple
      * Action when the new game button is clicked. Starts a new game.
      */
     public void onNewGameButtonClicked() {
-        // TODO: Wait world to be finished
+        this.getController().startNewGame();
     }
 
     /**
