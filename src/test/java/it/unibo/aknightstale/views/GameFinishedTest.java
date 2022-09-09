@@ -47,7 +47,7 @@ class GameFinishedTest extends BaseViewTest<GameFinishedController, GameFinished
     @DisplayName("Open the game with the exit button")
     void checkScoreLabel(final FxRobot robot) {
         final var score = Integer.parseInt(robot.lookup("#scoreLabel").queryAs(Labeled.class).getText());
-        Assertions.assertThat(score).isEqualTo(SCORE);
+        Assertions.assertThat(score).isEqualTo(SCORE).isEqualTo(getController().getScore());
     }
 
 
