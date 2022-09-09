@@ -1,7 +1,5 @@
 package it.unibo.aknightstale.views.entity;
 
-import javafx.scene.image.Image;
-
 public class PlayerView extends CharacterView {
 
     private static final double WIDTH = 24;

@@ -13,7 +13,7 @@ public class EntityViewImpl implements EntityView {
     @SuppressFBWarnings("EI_EXPOSE_REP2")       //impossible clone the image
     public EntityViewImpl(final String name, final double width, final double height) {
         super();
-        this.image = new Image(getClass().getResourceAsStream(name), width, height, false, false);
+        this.image = new Image(getClass().getResourceAsStream(name), width, height, true, false);
     }
 
     /**

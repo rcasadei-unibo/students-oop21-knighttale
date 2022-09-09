@@ -33,4 +33,9 @@ public interface GameFinishedController extends Controller<GameFinishedView> {
      * @param score Score obtained in the game.
      */
     void setScore(int score);
+
+    /**
+     * Starts a new game.
+     */
+    void startNewGame();
 }

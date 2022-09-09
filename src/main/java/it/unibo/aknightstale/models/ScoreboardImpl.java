@@ -47,6 +47,22 @@ public class ScoreboardImpl implements Scoreboard {
      * {@inheritDoc}
      */
     @Override
+    public void deleteScore(final String name) {
+        this.scores.remove(name);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void clear() {
+        this.scores.clear();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void load() {
         final var path = AppPaths.getFilePath(SCOREBOARD_FILE_NAME);
         if (!Files.exists(path)) {

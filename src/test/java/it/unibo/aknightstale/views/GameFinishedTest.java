@@ -1,10 +1,12 @@
 package it.unibo.aknightstale.views;
 
 import it.unibo.aknightstale.controllers.interfaces.GameFinishedController;
+import it.unibo.aknightstale.models.ScoreboardImpl;
 import it.unibo.aknightstale.views.interfaces.GameFinishedView;
 import it.unibo.aknightstale.views.interfaces.MainMenuView;
+import it.unibo.aknightstale.views.interfaces.MapView;
 import it.unibo.aknightstale.views.interfaces.ScoreboardView;
-import javafx.scene.control.Labeled;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -35,18 +37,33 @@ class GameFinishedTest extends BaseViewTest<GameFinishedController, GameFinished
         super.showView();
     }
 
-    /*@Test
+    @Test
     @DisplayName("Start a new game when the button is pressed")
-    void onNewGameButtonClicked() {
-        // TODO: implement this test when world is done.
-//        Assertions.assertThat(this.getView().getRoot()).isVisible();
-    }*/
+    void onNewGameButtonClicked(final FxRobot robot) {
+        robot.clickOn("#newGameButton");
+        Assertions.assertThat(getWindow().getCurrentView()).isInstanceOf(MapView.class);
+    }
 
     @Test
     @DisplayName("Open the game with the exit button")
     void checkScoreLabel(final FxRobot robot) {
-        final var score = Integer.parseInt(robot.lookup("#scoreLabel").queryAs(Labeled.class).getText());
-        Assertions.assertThat(score).isEqualTo(SCORE);
+        final var score = Integer.parseInt(robot.lookup("#scoreLabel").queryAs(Label.class).getText());
+        Assertions.assertThat(score).isEqualTo(SCORE).isEqualTo(getController().getScore());
+    }
+
+    @Test
+    @DisplayName("Checks the scoreboard after saving the score")
+    void checkNewScoreAfterSaving(final FxRobot robot) {
+        final var score = Integer.parseInt(robot.lookup("#scoreLabel").queryAs(Label.class).getText());
+        robot.clickOn("#nameTextField");
+        robot.write("TestFXPlayer");
+        robot.clickOn("#saveScoreButton");
+
+        final var scoreboard = new ScoreboardImpl();
+        scoreboard.load();
+        Assertions.assertThat(scoreboard.getScore("TestFXPlayer")).isEqualTo(score);
+        scoreboard.deleteScore("TestFXPlayer");
+        scoreboard.save();
     }
 
 

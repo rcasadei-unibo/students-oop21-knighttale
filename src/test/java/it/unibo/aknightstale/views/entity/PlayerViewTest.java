@@ -1,29 +1,32 @@
 package it.unibo.aknightstale.views.entity;
 
-import javafx.stage.Stage;
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-
-import it.unibo.aknightstale.controllers.interfaces.MainMenuController;
+import it.unibo.aknightstale.controllers.interfaces.MapController;
 import it.unibo.aknightstale.models.entity.factories.EntityFactory;
 import it.unibo.aknightstale.models.entity.factories.EntityFactoryImpl;
 import it.unibo.aknightstale.utils.CollisionManagerImpl;
 import it.unibo.aknightstale.views.BaseViewTest;
-import it.unibo.aknightstale.views.interfaces.MainMenuView;
+import it.unibo.aknightstale.views.interfaces.MapView;
 import javafx.scene.image.Image;
+import javafx.stage.Stage;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 
-// TODO: Replace with World view
-class PlayerViewTest extends BaseViewTest<MainMenuController, MainMenuView> {
+@ExtendWith(ApplicationExtension.class)
+class PlayerViewTest extends BaseViewTest<MapController, MapView> {
 
     private final EntityFactory factory = new EntityFactoryImpl();
     static final String SEPARATOR = System.getProperty("file.separator");
     static final double WIDTH_WINDOW = 600.0;
     static final double HEIGHT_WINDOW = 600.0;
+    static final double WIDTH_PLAYER = 24.0;
+    static final double HEIGHT_PLAYER = 32.0;
 
     PlayerViewTest() {
-        super(MainMenuView.class, MainMenuController.class);
+        super(MapView.class, MapController.class);
     }
 
     @Start
@@ -36,9 +39,11 @@ class PlayerViewTest extends BaseViewTest<MainMenuController, MainMenuView> {
     @DisplayName("Check player image")
     void checkImage() {
         final var player = this.factory.getPlayer().getView();
-        final var path = "it" + SEPARATOR + "unibo" + SEPARATOR + "aknightstale" + SEPARATOR + "entity" + SEPARATOR
-                + "player" + SEPARATOR + "player_idle_right.png";
-        Assertions.assertThat(this.isImageEqual(player.getImage(), new Image(path))).isTrue();
+        final var path = "it" + SEPARATOR + "unibo" + SEPARATOR + "aknightstale" + SEPARATOR + "views" + SEPARATOR
+                + "entity" + SEPARATOR + "player" + SEPARATOR + "player_idle_right.png";
+        Assertions.assertThat(
+                 isImageEqual(player.getImage(), new Image(path, WIDTH_PLAYER, HEIGHT_PLAYER, true, false)))
+                .isTrue();
     }
 
     @Test
@@ -48,9 +53,12 @@ class PlayerViewTest extends BaseViewTest<MainMenuController, MainMenuView> {
         this.factory.getEntityManager().setCollisionManager(
                 new CollisionManagerImpl(factory.getEntityManager().getEntities(), WIDTH_WINDOW, HEIGHT_WINDOW));
         player.attack();
-        final var path = "it" + SEPARATOR + "unibo" + SEPARATOR + "aknightstale" + SEPARATOR + "entity" + SEPARATOR
-                + "player" + SEPARATOR + "player_attack_right.png";
-        Assertions.assertThat(isImageEqual(player.getView().getImage(), new Image(path))).isTrue();
+        player.getView().update(player.getModel().getDirection());
+        final var path = "it" + SEPARATOR + "unibo" + SEPARATOR + "aknightstale" + SEPARATOR + "views" + SEPARATOR
+                + "entity" + SEPARATOR + "player" + SEPARATOR + "player_attack_right.png";
+        Assertions.assertThat(
+                 isImageEqual(player.getView().getImage(), new Image(path, WIDTH_PLAYER, HEIGHT_PLAYER, true, false)))
+                .isTrue();
     }
 
     private boolean isImageEqual(final Image firstImage, final Image secondImage) {

@@ -31,7 +31,7 @@
         <HBox alignment="CENTER" prefHeight="56.0" prefWidth="600.0" spacing="8.0">
             <children>
                 <Label text="To save your score enter your name and click Save:"/>
-                <MFXTextField fx:id="nameTextField" prefHeight="13.0" prefWidth="197.0"/>
+                <MFXTextField fx:id="nameTextField" minHeight="-Infinity" prefHeight="27.0" prefWidth="197.0"/>
                 <MFXButton fx:id="saveScoreButton" onAction="#onSaveButtonClicked" text="Save"/>
             </children>
         </HBox>

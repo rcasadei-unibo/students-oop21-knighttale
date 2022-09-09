@@ -1,22 +1,15 @@
 package it.unibo.aknightstale.models.entity;
 
-import it.unibo.aknightstale.controllers.interfaces.MainMenuController;
 import it.unibo.aknightstale.models.entity.factories.EntityFactory;
 import it.unibo.aknightstale.models.entity.factories.EntityFactoryImpl;
 import it.unibo.aknightstale.utils.Point2D;
-import it.unibo.aknightstale.views.BaseViewTest;
-import it.unibo.aknightstale.views.interfaces.MainMenuView;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class EnemyTest extends BaseViewTest<MainMenuController, MainMenuView> {
-
+class EnemyTest {
+    private static final int SAMPLE_COORDINATE = 30;
     private final EntityFactory factory = new EntityFactoryImpl();
-
-    EnemyTest() {
-        super(MainMenuView.class, MainMenuController.class);
-    }
 
     @Test
     @DisplayName("Check type")
@@ -28,7 +21,7 @@ public class EnemyTest extends BaseViewTest<MainMenuController, MainMenuView> {
     @Test
     @DisplayName("Move player Axis X")
     void checkMovementAxisX() {
-        final var enemy = this.factory.getEnemy(30, 30).getModel();
+        final var enemy = this.factory.getEnemy(SAMPLE_COORDINATE, SAMPLE_COORDINATE).getModel();
         var position = enemy.getPosition();
         enemy.goLeft();
         position = new Point2D(position.getX() - enemy.getSpeed(), position.getY());
@@ -38,10 +31,10 @@ public class EnemyTest extends BaseViewTest<MainMenuController, MainMenuView> {
     @Test
     @DisplayName("Move player Axis Y")
     void checkMovementAxisY() {
-        final var enemy = this.factory.getEnemy(30, 30).getModel();
+        final var enemy = this.factory.getEnemy(SAMPLE_COORDINATE, SAMPLE_COORDINATE).getModel();
         var position = enemy.getPosition();
         enemy.goUp();
-        position = new Point2D(position.getX(), position.getY() + enemy.getSpeed());
+        position = new Point2D(position.getX(), position.getY() - enemy.getSpeed());
         Assertions.assertThat(position).isEqualTo(enemy.getPosition());
     }
 
