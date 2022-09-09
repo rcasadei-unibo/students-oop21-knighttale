@@ -7,36 +7,37 @@ import it.unibo.aknightstale.utils.BordersImpl;
 import it.unibo.aknightstale.utils.Point2D;
 import it.unibo.aknightstale.views.entity.Status;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class Enemy extends BaseCharacter {
 
 
-    static final double WIDTH_BOUNDS = 50.0;
-    static final double HEIGHT_BOUNDS = 50.0;
+    static final double WIDTH_BOUNDS = 20.0;
+    static final double HEIGHT_BOUNDS = 24.0;
     static final double DAMAGE = 25.0;
     static final double MAX_HEALTH = 100.0;
-    static final double SPEED = 1.0;
+    static final double SPEED = 0.8;
     static final double DEFENSE = 10.0;
     static final double ATTACK_RANGE = 5.0;
 
     static final double CHASING_RANGE = 100;
 
-    private final List<Direction> listDirection = new ArrayList<>();
-
-    public Status getStatus() {
-        return status;
-    }
+    //private final List<Direction> listDirection = new ArrayList<>();
 
     private Status status = Status.WALK;
 
-    private boolean checkAxisX = (new Random().nextInt() % 2 == 0);
+    private boolean checkAxisX = new Random().nextInt() % 2 == 0;
 
     public Enemy(final Point2D position) {
         super(new BordersImpl(position.getX(), position.getY(), WIDTH_BOUNDS, HEIGHT_BOUNDS), EntityType.ENEMY, true,
                 Direction.RIGHT, DAMAGE, MAX_HEALTH, SPEED, DEFENSE);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Status getStatus() {
+        return status;
     }
 
     /**
@@ -47,10 +48,6 @@ public class Enemy extends BaseCharacter {
         return ATTACK_RANGE;
     }
 
-    @Override
-    public Direction getDirection() {
-        return super.getDirection();
-    }
 
     /**
      * This method set the new enemy's direction.
@@ -58,8 +55,8 @@ public class Enemy extends BaseCharacter {
     public void update(final Point2D playerPosition) {
         Direction dir = null;
 
-        double distanceX = this.getPosition().getX() - playerPosition.getX();
-        double distanceY = this.getPosition().getY() - playerPosition.getY();
+        final double distanceX = this.getPosition().getX() - playerPosition.getX();
+        final double distanceY = this.getPosition().getY() - playerPosition.getY();
 
         if(playerPosition.equals(this.getPosition())) {
             this.status = Status.IDLE;
