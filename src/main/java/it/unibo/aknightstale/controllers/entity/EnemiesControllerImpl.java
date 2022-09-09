@@ -42,7 +42,7 @@ public class EnemiesControllerImpl implements EnemiesController {
 
     private void createEnemies(final double screenWidth, final double screenHeight) {
         //create enemies
-        Random random = new Random();
+        final Random random = new Random();
         for (int i = 0; i < this.numEnemies; i++) {
             /*Utilizzare EntityfactoryImpl*/
             /*Enemy enemy = new Enemy(new Point2D(random.nextInt((int)screenWidth), random.nextInt((int)screenHeight)));
@@ -52,6 +52,9 @@ public class EnemiesControllerImpl implements EnemiesController {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void drawEnemies() {
         this.enemiesControllers.forEach((c) -> {
@@ -68,6 +71,8 @@ public class EnemiesControllerImpl implements EnemiesController {
                 case DOWN:
                     c.moveDown();
                     break;
+                default:
+                    break;
             }
             //c.getView().update(c.getModel().getDirection());
 
@@ -76,15 +81,23 @@ public class EnemiesControllerImpl implements EnemiesController {
         });
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void removeDeadEnemies() {
+        //List<EnemyController>
         this.enemiesControllers.forEach(c -> {
             if (c.getModel().getHealth() == 0) {
                 enemiesControllers.remove(c);
             }
         });
+        //enemiesControllers.removeAll();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void updateDirection(final Point2D playerPosition) {
         this.enemiesControllers.forEach(c -> {
@@ -95,6 +108,9 @@ public class EnemiesControllerImpl implements EnemiesController {
         });
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void adaptPositionToScreenSize(final double traslX, final double traslY) {
         this.enemiesControllers.forEach(c -> {
@@ -105,6 +121,9 @@ public class EnemiesControllerImpl implements EnemiesController {
         });
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getNumEnemy() {
         return this.enemiesControllers.size();

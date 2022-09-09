@@ -31,7 +31,6 @@ public abstract class AbstractController<M extends Character, V extends Animated
     protected abstract void move(Direction dir);
 
     private boolean canMove(final Direction d) {
-        //return true;
         return this.manager.getCollisionManager().checkDirections(this).contains(d);
     }
 
@@ -113,12 +112,11 @@ public abstract class AbstractController<M extends Character, V extends Animated
         return manager;
     }
 
+    @Override
     public void adaptPositionToScreenSize(final double traslX, final double traslY) {
-        //this.enemiesControllers.forEach(c -> {
-            double newX = getModel().getPosition().getX() * traslX;
-            double newY = getModel().getPosition().getY() * traslY;
-            getModel().setPosition(new Point2D(newX, newY));
-        //});
+        final double newX = getModel().getPosition().getX() * traslX;
+        final double newY = getModel().getPosition().getY() * traslY;
+        getModel().setPosition(new Point2D(newX, newY));
     }
 
 }

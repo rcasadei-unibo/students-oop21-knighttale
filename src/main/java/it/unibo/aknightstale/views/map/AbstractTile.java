@@ -13,7 +13,6 @@ public abstract class AbstractTile implements Tile {
     private final String url;
     private Image img;
     private final int index;
-
     private boolean collidable;
 
 
@@ -22,7 +21,6 @@ public abstract class AbstractTile implements Tile {
         this.img = new Image(Objects.requireNonNull(getClass().getResourceAsStream(url)));
         this.index = index;
         this.entityType = entityType;
-        //this.imageView.setFitHeight(100);
     }
 
     @Override
@@ -30,6 +28,7 @@ public abstract class AbstractTile implements Tile {
         return entityType;
     }
 
+    @Override
     public int getIndex() {
         return this.index;
     }
