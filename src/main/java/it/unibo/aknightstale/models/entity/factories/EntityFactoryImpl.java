@@ -52,8 +52,6 @@ public class EntityFactoryImpl implements EntityFactory {
         EnemyView enemyView = new EnemyView();
         var enemy = new EnemyController<Character, AnimatedEntityView>(enemyModel, enemyView, getEntityManager());
 
-        /*final var enemy = new EnemyController(new Enemy(new Point2D(x, y)),
-                new En(), getEntityManager());*/
         this.manager.addEntity(enemy);
         return enemy;
     }
