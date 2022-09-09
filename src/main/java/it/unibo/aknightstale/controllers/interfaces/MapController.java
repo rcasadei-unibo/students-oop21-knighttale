@@ -6,6 +6,8 @@ import it.unibo.aknightstale.models.entity.Direction;
 import it.unibo.aknightstale.views.entity.AnimatedEntityView;
 import it.unibo.aknightstale.views.interfaces.MapView;
 
+import java.util.List;
+
 public interface MapController extends Controller<MapView> {
 
     static final int NUM_COL = 48;
@@ -24,7 +26,7 @@ public interface MapController extends Controller<MapView> {
     void update();
 
     CharacterController<? extends Character, ? extends AnimatedEntityView> getPlayer();
-    
+
     void handleInput();
 
     void idlePlayer();
@@ -34,5 +36,10 @@ public interface MapController extends Controller<MapView> {
     void playerAttack();
 
     void moveEnemies();
+
+    /**
+     * Get the enemies in the map.
+     */
+    List<CharacterController<Character, AnimatedEntityView>> getEnemies();
 }
 

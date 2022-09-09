@@ -29,9 +29,9 @@ public class EnemiesController {
         createEnemies(mapView.getScreenWidth(), mapView.getScreenHeight());
     }
 
-    /*public List<CharacterController<Character, AnimatedEntityView>> getEnemiesControllers() {
+    public List<CharacterController<Character, AnimatedEntityView>> getEnemiesControllers() {
         return enemiesControllers;
-    }*/
+    }
 
     private void createEnemies(final double screenWidth, final double screenHeight) {
         //create enemies

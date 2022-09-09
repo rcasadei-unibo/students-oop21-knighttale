@@ -106,6 +106,15 @@ public class MapViewImpl extends BaseView<MapController> implements MapView  {
                         player.getModel().getHealth(),
                         player.getModel().getMaxHealth()
                 );
+                getController().getEnemies().forEach(enemy -> {
+                    enemy.getView().drawHealthBar(
+                            gc,
+                            enemy.getModel().getPosition().getX(),
+                            enemy.getModel().getPosition().getY() - 10,
+                            enemy.getModel().getHealth(),
+                            enemy.getModel().getMaxHealth()
+                    );
+                });
                 gc.restore();
 
             }
