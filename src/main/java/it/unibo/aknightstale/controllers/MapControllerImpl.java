@@ -60,11 +60,14 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
         factory.getEntityManager().setCollisionManager(collision);
 
         updateScreenSize();
-        // converting map
-        readTextMap();
+
         //adding trees
         Spawner treeSpawner = new SpawnerImpl(getView().getTree(), 30, this.mapTileNum);
         this.mapTileNum = treeSpawner.getMap();
+
+        // converting map
+        readTextMap();
+
         super.showView();
         getView().init();
         this.drawMap();
@@ -147,7 +150,7 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
                     if (getView().getTiles().get(num).getEntityType() == EntityType.OBSTACLE) {
                         // create obstacle entity and adds it to list
                         double x = col * getView().getTiles().get(num).getWidth();
-                        double y = col * getView().getTiles().get(num).getHeight();
+                        double y = row * getView().getTiles().get(num).getHeight();
                         double width = getView().getTiles().get(num).getWidth();
                         double height = getView().getTiles().get(num).getHeight();
 
@@ -184,6 +187,7 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
         final double tileHeight = Math.ceil(this.screenHeight / NUM_ROW);
 
         getView().resizeTiles(tileWidth, tileHeight);
+        //this.resizeObstacle();
     }
 
     public void repositionEntities() {
