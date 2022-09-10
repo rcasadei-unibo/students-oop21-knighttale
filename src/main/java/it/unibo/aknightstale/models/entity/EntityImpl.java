@@ -40,6 +40,14 @@ public class EntityImpl implements Entity {
     public Borders getBorders() {
         return this.borders;
     }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setBorders(final Borders b) {
+        this.borders = b;
+    }
 
     /**
      * {@inheritDoc}
