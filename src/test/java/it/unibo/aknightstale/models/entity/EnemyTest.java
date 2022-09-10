@@ -14,14 +14,14 @@ class EnemyTest {
     @Test
     @DisplayName("Check type")
     void checkType() {
-        final var enemy = this.factory.getEnemy(10, 10).getModel();
+        final var enemy = this.factory.getEnemy(new Point2D(10, 10)).getModel();
         Assertions.assertThat(enemy.getType()).isEqualTo(EntityType.ENEMY);
     }
 
     @Test
     @DisplayName("Move player Axis X")
     void checkMovementAxisX() {
-        final var enemy = this.factory.getEnemy(SAMPLE_COORDINATE, SAMPLE_COORDINATE).getModel();
+        final var enemy = this.factory.getEnemy(new Point2D(SAMPLE_COORDINATE,SAMPLE_COORDINATE)).getModel();
         var position = enemy.getPosition();
         enemy.goLeft();
         position = new Point2D(position.getX() - enemy.getSpeed(), position.getY());
@@ -31,7 +31,7 @@ class EnemyTest {
     @Test
     @DisplayName("Move player Axis Y")
     void checkMovementAxisY() {
-        final var enemy = this.factory.getEnemy(SAMPLE_COORDINATE, SAMPLE_COORDINATE).getModel();
+        final var enemy = this.factory.getEnemy(new Point2D(SAMPLE_COORDINATE,SAMPLE_COORDINATE)).getModel();
         var position = enemy.getPosition();
         enemy.goUp();
         position = new Point2D(position.getX(), position.getY() - enemy.getSpeed());
@@ -41,7 +41,7 @@ class EnemyTest {
     @Test
     @DisplayName("Check position")
     void checkPosition() {
-        final var player = this.factory.getEnemy(10, 10).getModel();
+        final var player = this.factory.getEnemy(new Point2D(10, 10)).getModel();
         Assertions.assertThat(player.getPosition()).isEqualTo(new Point2D(10, 10));
     }
 

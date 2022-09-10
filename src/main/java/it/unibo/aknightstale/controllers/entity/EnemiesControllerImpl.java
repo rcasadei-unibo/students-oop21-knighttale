@@ -55,8 +55,7 @@ public class EnemiesControllerImpl implements EnemiesController {
         this.numEnemies += numEnemies;
 
         for (int i = 0; i < this.numEnemies; i++) {
-            final Point2D spawnPosition = this.mapController.getSpawnPosition();
-            enemiesControllers.add(this.factory.getEnemy(spawnPosition.getX(), spawnPosition.getY()));
+            enemiesControllers.add(this.factory.getEnemy(this.mapController.getSpawnPosition()));
         }
     }
 

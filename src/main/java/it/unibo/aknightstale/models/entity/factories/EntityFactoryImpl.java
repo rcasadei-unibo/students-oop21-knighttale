@@ -46,9 +46,9 @@ public class EntityFactoryImpl implements EntityFactory {
     }
 
     @Override
-    public CharacterController<Character, AnimatedEntityView> getEnemy(final double x, final double y) {
+    public CharacterController<Character, AnimatedEntityView> getEnemy(final Point2D spawnPosition) {
 
-        Enemy enemyModel = new Enemy(new Point2D(x, y));
+        Enemy enemyModel = new Enemy(spawnPosition);
         EnemyView enemyView = new EnemyView();
         var enemy = new EnemyController<Character, AnimatedEntityView>(enemyModel, enemyView, getEntityManager());
 

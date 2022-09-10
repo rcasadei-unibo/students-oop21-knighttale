@@ -32,7 +32,7 @@ class PlayerTest {
     @DisplayName("Player attacks entity")
     void attack() {
         final var player = this.factory.getPlayer().getModel();
-        final LifeEntity entity = this.factory.getEnemy(player.getPosition().getX(), player.getPosition().getY())
+        final LifeEntity entity = this.factory.getEnemy(new Point2D(player.getPosition().getX(), player.getPosition().getY()))
                 .getModel();
         for (int i = 0; i < ATTACK_TIMES; i++) {
             player.attack(entity);
@@ -44,7 +44,7 @@ class PlayerTest {
     @DisplayName("Check life of entity")
     void checklife() {
         final var player = this.factory.getPlayer().getModel();
-        final LifeEntity entity = this.factory.getEnemy(player.getPosition().getX(), player.getPosition().getY())
+        final LifeEntity entity = this.factory.getEnemy(new Point2D(player.getPosition().getX(), player.getPosition().getY()))
                 .getModel();
         final var life = entity.getHealth();
         player.attack(entity);
@@ -55,7 +55,7 @@ class PlayerTest {
     @DisplayName("Check maximum health of entity")
     void checkMaximumHealth() {
         final var player = this.factory.getPlayer().getModel();
-        final LifeEntity entity = this.factory.getEnemy(player.getPosition().getX(), player.getPosition().getY())
+        final LifeEntity entity = this.factory.getEnemy(new Point2D(player.getPosition().getX(), player.getPosition().getY()))
                 .getModel();
         final var initialHealth = entity.getHealth();
         player.attack(entity);

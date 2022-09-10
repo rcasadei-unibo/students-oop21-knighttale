@@ -4,6 +4,7 @@ import it.unibo.aknightstale.controllers.entity.CharacterController;
 import it.unibo.aknightstale.models.Enemy;
 import it.unibo.aknightstale.models.entity.Character;
 import it.unibo.aknightstale.utils.EntityManager;
+import it.unibo.aknightstale.utils.Point2D;
 import it.unibo.aknightstale.views.entity.AnimatedEntityView;
 
 public interface EntityFactory {
@@ -20,5 +21,11 @@ public interface EntityFactory {
      * @return the player.
      */
     CharacterController<Character, AnimatedEntityView> getPlayer();
-    CharacterController<Character, AnimatedEntityView> getEnemy(double x, double y);
+
+    /**
+     * Creates the enemy.
+     * @param spawnPosition the enemy's spawn position
+     * @return the enemy.
+     */
+    CharacterController<Character, AnimatedEntityView> getEnemy(Point2D spawnPosition);
 }
