@@ -1,6 +1,8 @@
 package it.unibo.aknightstale.controllers.entity;
 
+import it.unibo.aknightstale.controllers.MapControllerImpl;
 import it.unibo.aknightstale.controllers.interfaces.EnemiesController;
+import it.unibo.aknightstale.controllers.interfaces.MapController;
 import it.unibo.aknightstale.models.Enemy;
 import it.unibo.aknightstale.models.entity.Character;
 import it.unibo.aknightstale.models.entity.factories.EntityFactory;
@@ -19,12 +21,13 @@ import java.util.Random;
  */
 public class EnemiesControllerImpl implements EnemiesController {
 
-    private final int numEnemies;
+    private int numEnemies = 0;
     private final EntityFactory factory;
 
     private final List<CharacterController<Character, AnimatedEntityView>> enemiesControllers;
 
     private final MapView mapView;
+    private final MapController mapController;
 
     /**
      * Instantiates a new Enemies controller.
@@ -33,27 +36,27 @@ public class EnemiesControllerImpl implements EnemiesController {
      * @param mapView    the map view
      * @param factory    the factory
      */
-    public EnemiesControllerImpl(final int numEnemies, final MapView mapView, final EntityFactory factory) {
-        this.numEnemies = numEnemies;
+    public EnemiesControllerImpl(final int numEnemies, final MapView mapView, final EntityFactory factory, final MapController mapController) {
         enemiesControllers = new LinkedList<>();
         this.factory = factory;
         this.mapView = mapView;
-        createEnemies(mapView.getScreenWidth(), mapView.getScreenHeight());
+        this.mapController = mapController;
+        createEnemies(numEnemies);
     }
 
     public List<CharacterController<Character, AnimatedEntityView>> getEnemiesControllers() {
         return enemiesControllers;
     }
 
-    private void createEnemies(final double screenWidth, final double screenHeight) {
-        //create enemies
-        final Random random = new Random();
+    /**
+     * {@inheritDoc}
+     */
+    public void createEnemies(final int numEnemies) {
+        this.numEnemies += numEnemies;
+
         for (int i = 0; i < this.numEnemies; i++) {
-            /*Utilizzare EntityfactoryImpl*/
-            /*Enemy enemy = new Enemy(new Point2D(random.nextInt((int)screenWidth), random.nextInt((int)screenHeight)));
-            EnemyView enemyView = new EnemyView();
-            enemiesControllers.add(new EnemyController(enemy, enemyView, new EntityManagerImpl()));*/
-            enemiesControllers.add(this.factory.getEnemy(random.nextDouble() * screenWidth, random.nextDouble() * screenHeight));
+            final Point2D spawnPosition = this.mapController.getSpawnPosition();
+            enemiesControllers.add(this.factory.getEnemy(spawnPosition.getX(), spawnPosition.getY()));
         }
     }
 
@@ -120,9 +123,6 @@ public class EnemiesControllerImpl implements EnemiesController {
     @Override
     public void adaptPositionToScreenSize(final double traslX, final double traslY) {
         this.enemiesControllers.forEach(c -> {
-            /*double newX = c.getModel().getPosition().getX() * traslX;
-            double newY = c.getModel().getPosition().getY() * traslY;
-            c.getModel().setPosition(new Point2D(newX, newY));*/
             c.adaptPositionToScreenSize(traslX, traslY);
         });
     }

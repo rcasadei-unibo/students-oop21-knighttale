@@ -35,4 +35,11 @@ public interface EnemiesController {
      * @return the num enemy
      */
     int getNumEnemy();
+
+    /**
+     * create some enemies
+     * @param numEnemies the number of enemies to create
+     */
+    void createEnemies(final int numEnemies);
+
 }
