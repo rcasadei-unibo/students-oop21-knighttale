@@ -17,4 +17,6 @@ public interface EntityController<M extends Entity, V extends EntityView> {
      * @return the view.
      */
     V getView();
+
+    void adaptPositionToScreenSize(double traslX, double traslY);
 }

@@ -199,7 +199,7 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
         final double tileHeight = Math.ceil(this.screenHeight / NUM_ROW);
 
         getView().resizeTiles(tileWidth, tileHeight);
-        //this.resizeObstacle();
+        //this.repositionObstacle();
     }
 
     public void repositionEntities() {
@@ -207,6 +207,9 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
         double traslY = getView().getScreenHeight() / this.screenHeight;
         enemiesController.adaptPositionToScreenSize(traslX, traslY);
         this.player.adaptPositionToScreenSize(traslX, traslY);
+        this.obstacleControllers.forEach(c -> {
+            c.adaptPositionToScreenSize(traslX, traslY, getView().getTileWidth(), getView().getTileHeight());
+        });
     }
 
     @Override

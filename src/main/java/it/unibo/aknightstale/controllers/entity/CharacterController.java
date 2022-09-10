@@ -31,6 +31,6 @@ public interface CharacterController<M extends Character, V extends AnimatedEnti
      */
     void attack();
 
-    void adaptPositionToScreenSize(double traslX, double traslY);
+
 
 }

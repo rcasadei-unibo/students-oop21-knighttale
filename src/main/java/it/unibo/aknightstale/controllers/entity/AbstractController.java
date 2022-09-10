@@ -112,12 +112,7 @@ public abstract class AbstractController<M extends Character, V extends Animated
         return manager;
     }
 
-    @Override
-    public void adaptPositionToScreenSize(final double traslX, final double traslY) {
-        final double newX = getModel().getPosition().getX() * traslX;
-        final double newY = getModel().getPosition().getY() * traslY;
-        getModel().setPosition(new Point2D(newX, newY));
-    }
+
 
 }
 
