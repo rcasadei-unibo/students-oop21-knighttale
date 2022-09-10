@@ -6,49 +6,88 @@ import it.unibo.aknightstale.views.map.Tile;
 
 import java.util.List;
 
+/**
+ * The interface Map view.
+ */
 public interface MapView extends View<MapController> {
 
     /**
-     * @return the current width of the game window*/
+     * Gets tile width.
+     *
+     * @return the tile width
+     */
+    public double getTileWidth();
+
+    /**
+     * Gets tile height.
+     *
+     * @return the tile height
+     */
+    public double getTileHeight();
+
+    /**
+     * Gets screen width.
+     *
+     * @return the current width of the game window
+     */
     double getScreenWidth();
 
     /**
-     * @return the current width of the game window*/
+     * Gets screen height.
+     *
+     * @return the current width of the game window
+     */
     double getScreenHeight();
 
     /**
+     * Gets floor.
+     *
      * @return the tile that represent the floor of the game world.
-     * */
+     */
     Tile getFloor();
 
     /**
+     * Gets tree.
+     *
      * @return the tile that represent the tree of the game world.
-     * */
+     */
     Tile getTree();
 
     /**
-     * @return a list that contains all the tiles used in the map*/
-     List<Tile> getTiles();
+     * Gets tiles.
+     *
+     * @return a list that contains all the tiles used in the map
+     */
+    List<Tile> getTiles();
 
-     /**
-      * Delete all the tiles and entities present in the game world.*/
-     void clearMap();
+    /**
+     * Delete all the tiles and entities present in the game world.
+     */
+    void clearMap();
 
-     /**
-      * draw tiles or entities in the game world.*/
-     void draw(final EntityView tile, final double x, final double y);
+    /**
+     * draw tiles or entities in the game world. @param tile the tile
+     *
+     * @param x the x
+     * @param y the y
+     */
+    void draw(final EntityView tile, final double x, final double y);
 
     /**
      * Resize the size of all tiles of the game world.
-     * @param tileWidth the new tile's width
-     * @param tilHeight the new tile's height*/
+     *
+     * @param tileWidth  the new tile's width
+     * @param tileHeight the tile height
+     */
     void resizeTiles(double tileWidth, double tileHeight);
 
     /**
-     * Initialize the game world.*/
+     * Initialize the game world.
+     */
     void init();
 
     /**
-     * Stop the game when it's finished.*/
+     * Stop the game when it's finished.
+     */
     void stopGame();
 }

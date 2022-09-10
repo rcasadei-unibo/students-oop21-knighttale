@@ -27,6 +27,10 @@ public class MapViewImpl extends BaseView<MapController> implements MapView  {
     private final List<Tile> tiles = new ArrayList<>();
     private final List<String> keyPressed = new ArrayList<>();
 
+    private double tileWidth;
+
+    private double tileHeight;
+
     private AnimationTimer gameLoop;
     private boolean gameFinished = false;
 
@@ -158,6 +162,16 @@ public class MapViewImpl extends BaseView<MapController> implements MapView  {
     }
 
     @Override
+    public double getTileWidth() {
+        return tileWidth;
+    }
+
+    @Override
+    public double getTileHeight() {
+        return tileHeight;
+    }
+
+    @Override
     public List<Tile> getTiles() {
         return tiles;
     }
@@ -183,9 +197,11 @@ public class MapViewImpl extends BaseView<MapController> implements MapView  {
     }
     @Override
     public void resizeTiles(final double tileWidth, final double tileHeight) {
+        this.tileWidth = tileWidth;
+        this.tileHeight = tileHeight;
         this.tiles.forEach(t -> {
-            t.setHeight(tileHeight);
-            t.setWidth(tileWidth);
+            t.setHeight(this.tileHeight);
+            t.setWidth(this.tileWidth);
         });
     }
 

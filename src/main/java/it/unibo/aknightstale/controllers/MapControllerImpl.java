@@ -59,6 +59,7 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
                 this.screenHeight);
         factory.getEntityManager().setCollisionManager(collision);
 
+        // check tie screen size and choose the right size tiles
         updateScreenSize();
 
         // converting map
@@ -81,10 +82,10 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
             // If I have to draw a tile that represent an obstacle, then I'll create an obstacle entity
             if (getView().getTiles().get(num).getEntityType() == EntityType.OBSTACLE) {
                 // create obstacle entity and adds it to list
-                double x = position.getValue() * getView().getTiles().get(num).getWidth();
-                double y = position.getKey() * getView().getTiles().get(num).getHeight();
-                double width = getView().getTiles().get(num).getWidth();
-                double height = getView().getTiles().get(num).getHeight();
+                double x = position.getValue() * getView().getTileWidth();
+                double y = position.getKey() * getView().getTileHeight();
+                double width = getView().getTileWidth();
+                double height = getView().getTileHeight();
                 var borders = new BordersImpl(x, y, width, height);
                 var obstacleModel = new ObstacleEntity(borders);
                 var obstacleView = getView().getTiles().get(num);
@@ -146,10 +147,10 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
             num = mapTileNum.get(new Pair<>(row, col));
             getView().draw(getView().getTiles().get(num), x, y);
             col++;
-            x += this.getView().getTiles().get(num).getWidth();
+            x += this.getView().getTileWidth();
             if (col == NUM_COL) {
                 x = 0;
-                y += this.getView().getTiles().get(num).getHeight();
+                y += this.getView().getTileHeight();
                 col = 0;
                 row++;
             }
