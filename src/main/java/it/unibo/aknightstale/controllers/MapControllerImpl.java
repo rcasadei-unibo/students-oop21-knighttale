@@ -64,13 +64,35 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
         // converting map
         readTextMap();
 
-        //adding trees
+        //adding trees to map
         Spawner treeSpawner = new SpawnerImpl(getView().getTree(), 30, this.mapTileNum);
         this.mapTileNum = treeSpawner.getMap();
+
+        //binding tiles to entities
+        this.bindToEntities();
 
         super.showView();
         getView().init();
         this.drawMap();
+    }
+
+    private void bindToEntities() {
+        this.mapTileNum.forEach((position, num) -> {
+            // If I have to draw a tile that represent an obstacle, then I'll create an obstacle entity
+            if (getView().getTiles().get(num).getEntityType() == EntityType.OBSTACLE) {
+                // create obstacle entity and adds it to list
+                double x = position.getValue() * getView().getTiles().get(num).getWidth();
+                double y = position.getKey() * getView().getTiles().get(num).getHeight();
+                double width = getView().getTiles().get(num).getWidth();
+                double height = getView().getTiles().get(num).getHeight();
+                var borders = new BordersImpl(x, y, width, height);
+                var obstacleModel = new ObstacleEntity(borders);
+                var obstacleView = getView().getTiles().get(num);
+                var obstacle = new ObstacleController<Character, AnimatedEntityView>(obstacleModel, obstacleView);
+                this.obstacleControllers.add(obstacle);
+                this.factory.getEntityManager().addEntity(obstacle);
+            }
+        });
     }
 
     public EnemiesControllerImpl getEnemiesController() {
@@ -148,22 +170,8 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
 
                 while (col < NUM_COL) {
                     List<String> numLine = Arrays.asList(line.split(" "));
-                    int num = Integer.parseInt(numLine.get(col));
+                    final int num = Integer.parseInt(numLine.get(col));
                     mapTileNum.put(new Pair<>(row, col), num);
-                    // If I have to draw a tile that represent an obstacle, then I'll create an obstacle entity
-                    if (getView().getTiles().get(num).getEntityType() == EntityType.OBSTACLE) {
-                        // create obstacle entity and adds it to list
-                        double x = col * getView().getTiles().get(num).getWidth();
-                        double y = row * getView().getTiles().get(num).getHeight();
-                        double width = getView().getTiles().get(num).getWidth();
-                        double height = getView().getTiles().get(num).getHeight();
-                        var borders = new BordersImpl(x, y, width, height);
-                        var obstacleModel = new ObstacleEntity(borders);
-                        var obstacleView = getView().getTiles().get(num);
-                        var obstacle = new ObstacleController<Character, AnimatedEntityView>(obstacleModel, obstacleView);
-                        this.obstacleControllers.add(obstacle);
-                        this.factory.getEntityManager().addEntity(obstacle);
-                    }
                     col++;
                 }
 
