@@ -61,16 +61,18 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
         // check tie screen size and choose the right size tiles
         updateScreenSize();
 
-        player = factory.getPlayer();
-
-        this.enemiesController = new EnemiesControllerImpl(totalEnemies, getView(), factory, this);
-
         // converting map
         readTextMap();
 
         //adding trees to map
         Spawner treeSpawner = new SpawnerImpl(getView().getTree(), 30, this.mapTileNum);
         this.mapTileNum = treeSpawner.getMap();
+
+        //create player
+        player = factory.getPlayer(/*this.getSpawnPosition()*/);
+
+        //create enemies
+        this.enemiesController = new EnemiesControllerImpl(totalEnemies, getView(), factory, this);
 
         //binding tiles to entities
         this.bindToEntities();
@@ -277,7 +279,15 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
     @Override
     public Point2D getSpawnPosition() {
         final Random random = new Random();
-        return new Point2D(random.nextDouble() * getView().getScreenWidth(), random.nextDouble() * getView().getScreenHeight());
+
+        var randomRow = random.nextInt(this.NUM_ROW);
+        var randomCol = random.nextInt(this.NUM_COL);
+        while (this.mapTileNum.get(new Pair<>(randomRow, randomCol)) != getView().getFloor().getIndex()) {
+            randomRow = random.nextInt(this.NUM_ROW);
+            randomCol = random.nextInt(this.NUM_COL);
+        }
+
+        return new Point2D(randomCol * getView().getTileWidth(), randomRow * getView().getTileHeight());
     }
 
 
