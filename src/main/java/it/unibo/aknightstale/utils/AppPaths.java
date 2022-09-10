@@ -14,7 +14,7 @@ public final class AppPaths {
     public static Path getFilePath(final String... pathsToAppend) {
         var appDir = AppDirsFactory.getInstance().getUserDataDir(App.APP_NAME, App.APP_VERSION, "unibo", true);
 
-        if (Boolean.getBoolean("headless")) {
+        if (Boolean.getBoolean("headless") || Boolean.getBoolean("gh_action")) {
             appDir = Paths.get("build").toAbsolutePath().toString();
         }
 
