@@ -9,6 +9,7 @@ import it.unibo.aknightstale.views.entity.AnimatedEntityView;
 import it.unibo.aknightstale.views.interfaces.MapView;
 
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -90,13 +91,13 @@ public class EnemiesControllerImpl implements EnemiesController {
      */
     @Override
     public void removeDeadEnemies() {
-        //List<EnemyController>
+        List<CharacterController<Character, AnimatedEntityView>> killedEnemies = new ArrayList<>();
         this.enemiesControllers.forEach(c -> {
             if (c.getModel().getHealth() == 0) {
-                enemiesControllers.remove(c);
+                killedEnemies.add(c);
             }
         });
-        //enemiesControllers.removeAll();
+        enemiesControllers.removeAll(killedEnemies);
     }
 
     /**
