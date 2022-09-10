@@ -73,8 +73,8 @@ public class ScoreboardImpl implements Scoreboard {
                 }
                 Files.createFile(path);
             } catch (IOException e) {
-                Alert.showAlert(AlertType.ERROR, "Error creating scoreboard file: " + e.getMessage());
                 e.printStackTrace();
+                Alert.showAlert(AlertType.ERROR, "Error creating scoreboard file: " + e.getMessage());
             }
         }
         try (var file = new FileReader(path.toFile(), StandardCharsets.UTF_8)) {
@@ -83,8 +83,8 @@ public class ScoreboardImpl implements Scoreboard {
                 this.scores = scoreboard;
             }
         } catch (IOException e) {
-            Alert.showAlert(AlertType.ERROR, "Error loading scoreboard file: " + e.getMessage());
             e.printStackTrace();
+            Alert.showAlert(AlertType.ERROR, "Error loading scoreboard file: " + e.getMessage());
         }
     }
 
@@ -96,8 +96,8 @@ public class ScoreboardImpl implements Scoreboard {
         try (FileWriter file = new FileWriter(AppPaths.getFilePath(SCOREBOARD_FILE_NAME).toFile(), StandardCharsets.UTF_8)) {
             json.toJson(this.scores, file);
         } catch (IOException e) {
-            Alert.showAlert(AlertType.ERROR, "Error saving scoreboard file: " + e.getMessage());
             e.printStackTrace();
+            Alert.showAlert(AlertType.ERROR, "Error saving scoreboard file: " + e.getMessage());
         }
     }
 
