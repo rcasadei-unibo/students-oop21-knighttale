@@ -3,6 +3,7 @@ package it.unibo.aknightstale.controllers.interfaces;
 import it.unibo.aknightstale.controllers.entity.CharacterController;
 import it.unibo.aknightstale.models.entity.Character;
 import it.unibo.aknightstale.models.entity.Direction;
+import it.unibo.aknightstale.utils.Point2D;
 import it.unibo.aknightstale.views.entity.AnimatedEntityView;
 import it.unibo.aknightstale.views.interfaces.MapView;
 
@@ -86,5 +87,9 @@ public interface MapController extends Controller<MapView> {
      * Get the enemies in the map.
      */
     List<CharacterController<Character, AnimatedEntityView>> getEnemies();
+
+    /**
+     * @return a free spawn position*/
+    Point2D getSpawnPosition();
 }
 

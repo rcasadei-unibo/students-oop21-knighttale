@@ -16,6 +16,7 @@ import it.unibo.aknightstale.models.map.Spawner;
 import it.unibo.aknightstale.models.map.SpawnerImpl;
 import it.unibo.aknightstale.utils.BordersImpl;
 import it.unibo.aknightstale.utils.CollisionManagerImpl;
+import it.unibo.aknightstale.utils.Point2D;
 import it.unibo.aknightstale.views.entity.AnimatedEntityView;
 import it.unibo.aknightstale.views.entity.Status;
 import it.unibo.aknightstale.views.interfaces.GameFinishedView;
@@ -53,14 +54,16 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
 
     @Override
     public void showView() {
-        player = factory.getPlayer();
-        this.enemiesController = new EnemiesControllerImpl(totalEnemies, getView(), factory);
         this.collision = new CollisionManagerImpl(factory.getEntityManager().getEntities(), this.screenWidth,
                 this.screenHeight);
         factory.getEntityManager().setCollisionManager(collision);
 
         // check tie screen size and choose the right size tiles
         updateScreenSize();
+
+        player = factory.getPlayer();
+
+        this.enemiesController = new EnemiesControllerImpl(totalEnemies, getView(), factory, this);
 
         // converting map
         readTextMap();
@@ -269,6 +272,12 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
     @Override
     public List<CharacterController<Character, AnimatedEntityView>> getEnemies() {
         return this.enemiesController.getEnemiesControllers();
+    }
+
+    @Override
+    public Point2D getSpawnPosition() {
+        final Random random = new Random();
+        return new Point2D(random.nextDouble() * getView().getScreenWidth(), random.nextDouble() * getView().getScreenHeight());
     }
 
 
