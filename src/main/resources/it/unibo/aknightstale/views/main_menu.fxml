@@ -9,30 +9,30 @@
 
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11"
             fx:controller="it.unibo.aknightstale.views.MainMenuViewImpl">
-   <VBox alignment="CENTER" layoutX="250.0" layoutY="100.0" prefHeight="400.0" prefWidth="600.0" spacing="10.0"
-         AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-         AnchorPane.topAnchor="0.0">
-      <Label text="A KNIGHT'S TALE">
-         <VBox.margin>
-            <Insets bottom="50.0"/>
-         </VBox.margin>
-         <font>
-            <Font name="Copperplate Gothic Bold" size="39.0"/>
-         </font>
-      </Label>
-      <MFXButton fx:id="newGameButton" onAction="#onNewGameClicked" rippleAnimateShadow="true" text="New game">
-         <font>
-            <Font size="18.0"/>
-         </font>
-      </MFXButton>
-      <MFXButton fx:id="scoreboardButton" onAction="#onScoreboardButtonClicked" text="Scoreboard">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </MFXButton>
-      <MFXButton fx:id="exitButton" onAction="#onExitButtonClicked" rippleAnimateShadow="true" text="Exit">
-         <font>
-            <Font size="18.0" />
+    <VBox fx:id="vBox" alignment="CENTER" layoutX="250.0" layoutY="100.0" prefHeight="400.0" prefWidth="600.0"
+          spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+          AnchorPane.topAnchor="0.0">
+        <Label text="A KNIGHT'S TALE">
+            <VBox.margin>
+                <Insets bottom="50.0"/>
+            </VBox.margin>
+            <font>
+                <Font name="Copperplate Gothic Bold" size="39.0"/>
+            </font>
+        </Label>
+        <MFXButton fx:id="newGameButton" onAction="#onNewGameClicked" rippleAnimateShadow="true" text="New game">
+            <font>
+                <Font size="18.0"/>
+            </font>
+        </MFXButton>
+        <MFXButton fx:id="scoreboardButton" onAction="#onScoreboardButtonClicked" text="Scoreboard">
+            <font>
+                <Font size="18.0"/>
+            </font>
+        </MFXButton>
+        <MFXButton fx:id="exitButton" onAction="#onExitButtonClicked" rippleAnimateShadow="true" text="Exit">
+            <font>
+                <Font size="18.0"/>
          </font>
       </MFXButton>
    </VBox>

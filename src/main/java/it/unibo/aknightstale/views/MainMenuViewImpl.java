@@ -3,10 +3,38 @@ package it.unibo.aknightstale.views;
 import it.unibo.aknightstale.controllers.interfaces.MainMenuController;
 import it.unibo.aknightstale.views.interfaces.MainMenuView;
 import javafx.fxml.FXML;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.VBox;
+
+import java.util.Objects;
 
 public class MainMenuViewImpl extends BaseView<MainMenuController> implements MainMenuView {
+    @FXML
+    private VBox vBox;
+
     public MainMenuViewImpl() {
         super("Main Menu");
+    }
+
+    @SuppressWarnings("PMD.UnusedPrivateMethod") // False positive (used by JavaFX)
+    @FXML
+    private void initialize() {
+        vBox.setBackground(
+                new Background(
+                        new BackgroundImage(
+                                new Image(Objects.requireNonNull(getClass().getResourceAsStream("mainMenuBackground.png"))),
+                                BackgroundRepeat.NO_REPEAT,
+                                BackgroundRepeat.NO_REPEAT,
+                                BackgroundPosition.CENTER,
+                                new BackgroundSize(1, 1, true, true, false, false)
+                        )
+                )
+        );
     }
 
     /**
