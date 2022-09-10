@@ -95,6 +95,7 @@ public class EnemiesControllerImpl implements EnemiesController {
         this.enemiesControllers.forEach(c -> {
             if (c.getModel().getHealth() == 0) {
                 killedEnemies.add(c);
+                this.factory.getEntityManager().removeEntity(c);
             }
         });
         enemiesControllers.removeAll(killedEnemies);
