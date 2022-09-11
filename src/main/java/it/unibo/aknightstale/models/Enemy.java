@@ -4,6 +4,7 @@ import it.unibo.aknightstale.models.entity.BaseCharacter;
 import it.unibo.aknightstale.models.entity.Direction;
 import it.unibo.aknightstale.models.entity.EntityType;
 import it.unibo.aknightstale.utils.BordersImpl;
+import it.unibo.aknightstale.utils.Point;
 import it.unibo.aknightstale.utils.Point2D;
 import it.unibo.aknightstale.views.entity.Status;
 
@@ -28,7 +29,7 @@ public class Enemy extends BaseCharacter {
 
     private boolean checkAxisX = new Random().nextInt() % 2 == 0;
 
-    public Enemy(final Point2D position) {
+    public Enemy(final Point position) {
         super(new BordersImpl(position.getX(), position.getY(), WIDTH_BOUNDS, HEIGHT_BOUNDS), EntityType.ENEMY, true,
                 Direction.RIGHT, DAMAGE, MAX_HEALTH, SPEED, DEFENSE);
     }
