@@ -19,11 +19,18 @@ public interface Entity {
     void setPosition(Point2D p);
 
     /**
-     * Gets the entity bounds.
+     * Gets the entity borders.
      * 
-     * @return the entity bounds.
+     * @return the entity borders.
      */
     Borders getBorders();
+    
+    /**
+     * Sets the entity borders
+     * 
+     * @param b The new borders of entity
+     */
+    void setBorders(Borders b);
 
     /**
      * Gets the entity type.

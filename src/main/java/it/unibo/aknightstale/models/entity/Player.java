@@ -1,7 +1,7 @@
 package it.unibo.aknightstale.models.entity;
 
 import it.unibo.aknightstale.utils.BordersImpl;
-import it.unibo.aknightstale.utils.Point2D;
+import it.unibo.aknightstale.utils.Point;
 
 public class Player extends BaseCharacter {
 
@@ -14,7 +14,7 @@ public class Player extends BaseCharacter {
 
     private static final double ATTACK_RANGE = 5.0;
 
-    public Player(final Point2D position) {
+    public Player(final Point position) {
         super(new BordersImpl(position.getX(), position.getY(), WIDTH_BOUNDS, HEIGHT_BOUNDS), EntityType.PLAYER, true,
                 Direction.RIGHT, DAMAGE, MAX_HEALTH, SPEED, DEFENSE);
     }

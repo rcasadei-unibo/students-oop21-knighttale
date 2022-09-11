@@ -9,14 +9,13 @@ import it.unibo.aknightstale.models.entity.Character;
 import it.unibo.aknightstale.models.entity.Player;
 import it.unibo.aknightstale.utils.EntityManager;
 import it.unibo.aknightstale.utils.EntityManagerImpl;
+import it.unibo.aknightstale.utils.Point;
 import it.unibo.aknightstale.utils.Point2D;
 import it.unibo.aknightstale.views.entity.AnimatedEntityView;
 import it.unibo.aknightstale.views.entity.EnemyView;
 import it.unibo.aknightstale.views.entity.PlayerView;
 
 public class EntityFactoryImpl implements EntityFactory {
-
-    static final Point2D SPAWN_PLAYER = new Point2D(100, 100);
 
     private final EntityManager manager;
 
@@ -38,8 +37,8 @@ public class EntityFactoryImpl implements EntityFactory {
      * {@inheritDoc}
      */
     @Override
-    public CharacterController<Character, AnimatedEntityView> getPlayer() {
-        final var player = new PlayerController<Character, AnimatedEntityView>(new Player(SPAWN_PLAYER),
+    public CharacterController<Character, AnimatedEntityView> getPlayer(final Point p) {
+        final var player = new PlayerController<Character, AnimatedEntityView>(new Player(p),
                 new PlayerView(), getEntityManager());
         this.manager.addEntity(player);
         return player;

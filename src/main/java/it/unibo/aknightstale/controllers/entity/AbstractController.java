@@ -3,6 +3,7 @@ package it.unibo.aknightstale.controllers.entity;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.aknightstale.models.entity.Character;
 import it.unibo.aknightstale.models.entity.Direction;
+import it.unibo.aknightstale.utils.Borders;
 import it.unibo.aknightstale.utils.BordersImpl;
 import it.unibo.aknightstale.utils.EntityManager;
 import it.unibo.aknightstale.utils.Point2D;
@@ -39,9 +40,9 @@ public abstract class AbstractController<M extends Character, V extends Animated
      */
     @Override
     public void moveRight() {
+        move(Direction.RIGHT);
         if (canMove(Direction.RIGHT)) {
             super.getModel().goRight();
-            move(Direction.RIGHT);
         }
     }
 
@@ -50,9 +51,9 @@ public abstract class AbstractController<M extends Character, V extends Animated
      */
     @Override
     public void moveLeft() {
+        move(Direction.LEFT);
         if (canMove(Direction.LEFT)) {
             super.getModel().goLeft();
-            move(Direction.LEFT);
         }
     }
 
@@ -61,9 +62,9 @@ public abstract class AbstractController<M extends Character, V extends Animated
      */
     @Override
     public void moveUp() {
+        move(Direction.UP);
         if (canMove(Direction.UP)) {
             super.getModel().goUp();
-            move(Direction.UP);
         }
     }
 
@@ -72,10 +73,38 @@ public abstract class AbstractController<M extends Character, V extends Animated
      */
     @Override
     public void moveDown() {
+        move(Direction.DOWN);
         if (canMove(Direction.DOWN)) {
             super.getModel().goDown();
-            move(Direction.DOWN);
         }
+    }
+    
+    private Borders createBorders() {
+        final double attackRange = super.getModel().getAttackRange();
+        final Borders borders;
+        switch (super.getModel().getDirection()) {
+        case RIGHT:
+            borders = new BordersImpl(super.getModel().getPosition().getX(), super.getModel().getPosition().getY(),
+                    super.getModel().getBorders().getWidth() + attackRange, super.getModel().getBorders().getHeight());
+            break;
+        case LEFT:
+            borders = new BordersImpl(super.getModel().getPosition().getX() - attackRange,
+                    super.getModel().getPosition().getY(), attackRange, super.getModel().getBorders().getHeight());
+            break;
+        case DOWN:
+            borders = new BordersImpl(super.getModel().getPosition().getX(), super.getModel().getPosition().getY(),
+                    super.getModel().getBorders().getWidth(), super.getModel().getBorders().getHeight() + attackRange);
+            break;
+        case UP:
+            borders = new BordersImpl(super.getModel().getPosition().getX(),
+                    super.getModel().getPosition().getY() - attackRange, super.getModel().getBorders().getWidth(),
+                    attackRange);
+            break;
+        default:
+            borders = super.getModel().getBorders();
+            break;
+        }
+        return borders;
     }
 
     /**
@@ -83,15 +112,10 @@ public abstract class AbstractController<M extends Character, V extends Animated
      */
     @Override
     public void attack() {
-        final var entityModel = super.getModel();
-        final double attackRange = entityModel.getAttackRange();
-        final var entityBounds = new BordersImpl(entityModel.getPosition().getX() - attackRange,
-                entityModel.getPosition().getY() - attackRange, entityModel.getBorders().getWidth() + attackRange,
-                entityModel.getBorders().getHeight() + attackRange);
-
+        final var borders = this.createBorders();
         this.getManager().getEntities().stream()
-                .filter(ec -> entityBounds.intersects(ec.getModel().getBorders()))
-                .filter(ec -> ec.getModel() instanceof Character)
+                .filter(ec -> borders.intersects(ec.getModel().getBorders())
+                              && ec.getModel() instanceof Character)
                 .forEach(ec -> {
                     if (!ec.getModel().getType().equals(super.getModel().getType())) {
                         final var model = (Character) ec.getModel();
