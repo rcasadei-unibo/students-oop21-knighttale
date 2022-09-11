@@ -13,7 +13,7 @@ class EntityManagerTest {
     @Test
     @DisplayName("Create entity")
     void create() {
-        final var player = this.factory.getPlayer();
+        final var player = this.factory.getPlayer(new Point2D(50, 50));
         final var manager = this.factory.getEntityManager();
         Assertions.assertThat(manager.getEntities().stream().count()).isEqualTo(1);
         manager.removeEntity(player);

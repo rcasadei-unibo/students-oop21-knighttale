@@ -14,14 +14,14 @@ class PlayerTest {
     @Test
     @DisplayName("Check type")
     void checkType() {
-        final var player = this.factory.getPlayer().getModel();
+        final var player = this.factory.getPlayer(new Point2D(50, 50)).getModel();
         Assertions.assertThat(player.getType()).isEqualTo(EntityType.PLAYER);
     }
 
     @Test
     @DisplayName("Move player")
     void checkMovement() {
-        final var player = this.factory.getPlayer().getModel();
+        final var player = this.factory.getPlayer(new Point2D(50, 50)).getModel();
         var position = player.getPosition();
         player.goRight();
         position = new Point2D(position.getX() + player.getSpeed(), position.getY());
@@ -31,7 +31,7 @@ class PlayerTest {
     @Test
     @DisplayName("Player attacks entity")
     void attack() {
-        final var player = this.factory.getPlayer().getModel();
+        final var player = this.factory.getPlayer(new Point2D(50, 50)).getModel();
         final LifeEntity entity = this.factory.getEnemy(new Point2D(player.getPosition().getX(), player.getPosition().getY()))
                 .getModel();
         for (int i = 0; i < ATTACK_TIMES; i++) {
@@ -43,7 +43,7 @@ class PlayerTest {
     @Test
     @DisplayName("Check life of entity")
     void checklife() {
-        final var player = this.factory.getPlayer().getModel();
+        final var player = this.factory.getPlayer(new Point2D(50, 50)).getModel();
         final LifeEntity entity = this.factory.getEnemy(new Point2D(player.getPosition().getX(), player.getPosition().getY()))
                 .getModel();
         final var life = entity.getHealth();
@@ -54,7 +54,7 @@ class PlayerTest {
     @Test
     @DisplayName("Check maximum health of entity")
     void checkMaximumHealth() {
-        final var player = this.factory.getPlayer().getModel();
+        final var player = this.factory.getPlayer(new Point2D(50, 50)).getModel();
         final LifeEntity entity = this.factory.getEnemy(new Point2D(player.getPosition().getX(), player.getPosition().getY()))
                 .getModel();
         final var initialHealth = entity.getHealth();
