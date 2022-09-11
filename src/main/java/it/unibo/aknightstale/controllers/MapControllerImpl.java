@@ -69,7 +69,7 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
         this.mapTileNum = treeSpawner.getMap();
 
         //create player
-        player = factory.getPlayer(/*this.getSpawnPosition()*/);
+        player = factory.getPlayer(this.getSpawnPosition());
 
         //create enemies
         this.enemiesController = new EnemiesControllerImpl(totalEnemies, getView(), factory, this);
