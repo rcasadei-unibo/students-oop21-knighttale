@@ -4,6 +4,7 @@ import it.unibo.aknightstale.controllers.entity.CharacterController;
 import it.unibo.aknightstale.models.Enemy;
 import it.unibo.aknightstale.models.entity.Character;
 import it.unibo.aknightstale.utils.EntityManager;
+import it.unibo.aknightstale.utils.Point;
 import it.unibo.aknightstale.views.entity.AnimatedEntityView;
 
 public interface EntityFactory {
@@ -17,8 +18,9 @@ public interface EntityFactory {
     /**
      * Creates the player.
      * 
-     * @return the player.
+     * @param p The position of player.
+     * @return The player.
      */
-    CharacterController<Character, AnimatedEntityView> getPlayer();
+    CharacterController<Character, AnimatedEntityView> getPlayer(Point p);
     CharacterController<Character, AnimatedEntityView> getEnemy(double x, double y);
 }
