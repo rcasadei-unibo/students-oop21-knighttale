@@ -36,7 +36,8 @@ public class CollisionManagerImpl implements CollisionManager {
                 ec.getModel().getBorders().getHeight() + 1.0);
 
         return this.entities.stream()
-                .filter(e -> e.getModel().isCollidable() 
+                .filter(e -> !e.equals(ec)
+                        && e.getModel().isCollidable() 
                         && entity.intersects(e.getModel().getBorders()))
                 .collect(Collectors.toList());
     }
