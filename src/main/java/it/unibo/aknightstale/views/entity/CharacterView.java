@@ -12,6 +12,8 @@ public abstract class CharacterView extends EntityViewImpl implements AnimatedEn
      */
     protected static final int HEALTH_BAR_MAX_WIDTH = 25;
 
+    private static final int HEALTH_BAR_HEIGHT = 5;
+
     protected static final String SEPARATOR = System.getProperty("file.separator");
 
     private final String nameEntity;
@@ -68,7 +70,7 @@ public abstract class CharacterView extends EntityViewImpl implements AnimatedEn
             final double maxHealth) {
         if (health < maxHealth) {
             gc.setFill(LIGHTGREEN);
-            gc.fillRect(x, y, (health / maxHealth) * HEALTH_BAR_MAX_WIDTH, 5);
+            gc.fillRect(x, y, (health / maxHealth) * HEALTH_BAR_MAX_WIDTH, HEALTH_BAR_HEIGHT);
         }
     }
 
