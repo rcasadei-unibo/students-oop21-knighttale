@@ -26,15 +26,15 @@ public abstract class CharacterView extends EntityViewImpl implements AnimatedEn
      */
     private static final int MAX_NUM_FRAME = 12;
 
-    protected String idle_right;
-    protected String idle_left;
-    protected String idle_up;
-    protected String idle_down;
+    protected String idleRight;
+    protected String idleLeft;
+    protected String idleUp;
+    protected String idleDown;
 
-    protected String walk_right;
-    protected String walk_left;
-    protected String walk_up;
-    protected String walk_down;
+    protected String walkRight;
+    protected String walkLeft;
+    protected String walkUp;
+    protected String walkDown;
 
     private Status status;
 
@@ -85,20 +85,20 @@ public abstract class CharacterView extends EntityViewImpl implements AnimatedEn
         if (this.getStatus() == Status.WALK) {
             switch (dir) {
             case RIGHT:
-                setImage(new Image(getClass().getResourceAsStream(idle_right), widthImage, heightImage, true, false),
-                        new Image(getClass().getResourceAsStream(walk_right), widthImage, heightImage, true, false));
+                setImage(new Image(getClass().getResourceAsStream(idleRight), widthImage, heightImage, true, false),
+                        new Image(getClass().getResourceAsStream(walkRight), widthImage, heightImage, true, false));
                 break;
             case LEFT:
-                setImage(new Image(getClass().getResourceAsStream(idle_left), widthImage, heightImage, true, false),
-                        new Image(getClass().getResourceAsStream(walk_left), widthImage, heightImage, true, false));
+                setImage(new Image(getClass().getResourceAsStream(idleLeft), widthImage, heightImage, true, false),
+                        new Image(getClass().getResourceAsStream(walkLeft), widthImage, heightImage, true, false));
                 break;
             case DOWN:
-                setImage(new Image(getClass().getResourceAsStream(idle_down), widthImage, heightImage, true, false),
-                        new Image(getClass().getResourceAsStream(walk_down), widthImage, heightImage, true, false));
+                setImage(new Image(getClass().getResourceAsStream(idleDown), widthImage, heightImage, true, false),
+                        new Image(getClass().getResourceAsStream(walkDown), widthImage, heightImage, true, false));
                 break;
             case UP:
-                setImage(new Image(getClass().getResourceAsStream(idle_up), widthImage, heightImage, true, false),
-                        new Image(getClass().getResourceAsStream(walk_up), widthImage, heightImage, true, false));
+                setImage(new Image(getClass().getResourceAsStream(idleUp), widthImage, heightImage, true, false),
+                        new Image(getClass().getResourceAsStream(walkUp), widthImage, heightImage, true, false));
                 break;
             default:
             }

@@ -4,18 +4,20 @@ public class PlayerView extends CharacterView {
 
     private static final double WIDTH = 24;
     private static final double HEIGHT = 32;
+    
+    private static final String NAME = "player";
 
     public PlayerView() {
-        super(Status.IDLE, "player" + SEPARATOR + "player_idle_right.png", WIDTH, HEIGHT, "player" + SEPARATOR + "player");
+        super(Status.IDLE, NAME + SEPARATOR + "player_idle_right.png", WIDTH, HEIGHT, NAME + SEPARATOR + NAME);
         
-        idle_right = "player" + SEPARATOR + "player_idle_right.png";
-        idle_left = "player" + SEPARATOR + "player_idle_left.png";
-        idle_up = "player" + SEPARATOR + "player_idle_up.png";
-        idle_down = "player" + SEPARATOR + "player_idle_down.png";
-        walk_right = "player" + SEPARATOR + "player_walk_right.png";
-        walk_left = "player" + SEPARATOR + "player_walk_left.png";
-        walk_up = "player" + SEPARATOR + "player_walk_up.png";
-        walk_down = "player" + SEPARATOR + "player_walk_down.png";
+        idleRight = NAME + SEPARATOR + "player_idle_right.png";
+        idleLeft = NAME + SEPARATOR + "player_idle_left.png";
+        idleUp = NAME + SEPARATOR + "player_idle_up.png";
+        idleDown = NAME + SEPARATOR + "player_idle_down.png";
+        walkRight = NAME + SEPARATOR + "player_walk_right.png";
+        walkLeft = NAME + SEPARATOR + "player_walk_left.png";
+        walkUp = NAME + SEPARATOR + "player_walk_up.png";
+        walkDown = NAME + SEPARATOR + "player_walk_down.png";
     }
 
 }

@@ -9,16 +9,13 @@ public class EnemyView extends CharacterView {
     public EnemyView() {
         super(Status.WALK, "enemy" + SEPARATOR + "enemy_idle_right.png", WIDTH, HEIGHT, "enemy" + SEPARATOR + "enemy");
 
-        idle_right = NAME + SEPARATOR + "enemy_idle_right.png";
-        idle_left = NAME + SEPARATOR + "enemy_idle_left.png";
-        idle_up = NAME + SEPARATOR + "enemy_idle_up.png";
-        idle_down = NAME + SEPARATOR + "enemy_idle_down.png";
-        walk_right = NAME + SEPARATOR + "enemy_walk_right.png";
-        walk_left = NAME + SEPARATOR + "enemy_walk_left.png";
-        walk_up = NAME + SEPARATOR + "enemy_walk_up.png";
-        walk_down = NAME + SEPARATOR + "enemy_walk_down.png";
+        idleRight = NAME + SEPARATOR + "enemy_idle_right.png";
+        idleLeft = NAME + SEPARATOR + "enemy_idle_left.png";
+        idleUp = NAME + SEPARATOR + "enemy_idle_up.png";
+        idleDown = NAME + SEPARATOR + "enemy_idle_down.png";
+        walkRight = NAME + SEPARATOR + "enemy_walk_right.png";
+        walkLeft = NAME + SEPARATOR + "enemy_walk_left.png";
+        walkUp = NAME + SEPARATOR + "enemy_walk_up.png";
+        walkDown = NAME + SEPARATOR + "enemy_walk_down.png";
     }
-
-
-
 }

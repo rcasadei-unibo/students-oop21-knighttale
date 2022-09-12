@@ -2,9 +2,9 @@ package it.unibo.aknightstale.utils;
 
 public class BordersImpl implements Borders {
 
-    private Point point;
-    private double width;
-    private double height;
+    private final Point point;
+    private final double width;
+    private final double height;
 
     public BordersImpl(final double x, final double y, final double width, final double height) {
         super();
@@ -57,7 +57,7 @@ public class BordersImpl implements Borders {
         if (w < 0 || h < 0) {
             return false;
         }
-        return (x + w >= getX() && y + h >= getY() && x <= getX() + getWidth() && y <= getY() + getHeight());
+        return x + w >= getX() && y + h >= getY() && x <= getX() + getWidth() && y <= getY() + getHeight();
     }
 
 }

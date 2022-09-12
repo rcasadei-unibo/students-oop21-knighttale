@@ -6,6 +6,7 @@ import it.unibo.aknightstale.views.interfaces.View;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -130,6 +131,16 @@ public class Window {
      */
     public static Scene getScene(final String viewName) {
         return SceneOne.getScene(viewName);
+    }
+
+    /**
+     * Get the JavaFX stage associated with this window.
+     *
+     * @param viewName The name of the view to get the stage of.
+     * @return The JavaFX stage associated with this window.
+     */
+    public static Stage getStage(final String viewName) {
+        return SceneOne.getStage(viewName);
     }
 
     /**
