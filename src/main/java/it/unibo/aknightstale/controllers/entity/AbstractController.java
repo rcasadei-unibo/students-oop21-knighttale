@@ -6,7 +6,6 @@ import it.unibo.aknightstale.models.entity.Direction;
 import it.unibo.aknightstale.utils.Borders;
 import it.unibo.aknightstale.utils.BordersImpl;
 import it.unibo.aknightstale.utils.EntityManager;
-import it.unibo.aknightstale.utils.Point2D;
 import it.unibo.aknightstale.views.entity.AnimatedEntityView;
 import it.unibo.aknightstale.views.entity.Status;
 
