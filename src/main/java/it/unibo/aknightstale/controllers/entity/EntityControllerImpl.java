@@ -40,6 +40,9 @@ public class EntityControllerImpl<M extends Entity, V extends EntityView> implem
         return this.view;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void adaptPositionToScreenSize(final double traslX, final double traslY) {
         final double newX = getModel().getPosition().getX() * traslX;

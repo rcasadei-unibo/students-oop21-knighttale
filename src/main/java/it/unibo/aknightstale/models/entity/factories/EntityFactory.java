@@ -1,7 +1,6 @@
 package it.unibo.aknightstale.models.entity.factories;
 
 import it.unibo.aknightstale.controllers.entity.CharacterController;
-import it.unibo.aknightstale.models.Enemy;
 import it.unibo.aknightstale.models.entity.Character;
 import it.unibo.aknightstale.utils.EntityManager;
 import it.unibo.aknightstale.utils.Point;

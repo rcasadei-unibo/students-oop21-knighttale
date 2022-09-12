@@ -6,7 +6,6 @@ import it.unibo.aknightstale.models.entity.Direction;
 import it.unibo.aknightstale.utils.Borders;
 import it.unibo.aknightstale.utils.BordersImpl;
 import it.unibo.aknightstale.utils.EntityManager;
-import it.unibo.aknightstale.utils.Point2D;
 import it.unibo.aknightstale.views.entity.AnimatedEntityView;
 import it.unibo.aknightstale.views.entity.Status;
 
@@ -78,7 +77,6 @@ public abstract class AbstractController<M extends Character, V extends Animated
             super.getModel().goDown();
         }
     }
-    
     private Borders createBorders() {
         final double attackRange = super.getModel().getAttackRange();
         final Borders borders;

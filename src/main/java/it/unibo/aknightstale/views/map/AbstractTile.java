@@ -23,47 +23,73 @@ public abstract class AbstractTile implements Tile {
         this.entityType = entityType;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public EntityType getEntityType() {
         return entityType;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getIndex() {
         return this.index;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Image getImage() {
         return img;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setWidth(final double width) {
         this.img = new Image(getClass().getResourceAsStream(this.url), width, this.img.getHeight(), false, false);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setHeight(final double height) {
         this.img = new Image(getClass().getResourceAsStream(this.url), this.img.getWidth(), height, false, false);
     }
 
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public double getWidth() {
         return this.img.getWidth();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public double getHeight() {
         return this.img.getHeight();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setCollidable(final boolean collidable) {
         this.collidable = collidable;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isCollidable() {
         return this.collidable;

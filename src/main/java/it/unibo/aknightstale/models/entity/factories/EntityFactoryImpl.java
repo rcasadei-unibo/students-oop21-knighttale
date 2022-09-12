@@ -10,7 +10,6 @@ import it.unibo.aknightstale.models.entity.Player;
 import it.unibo.aknightstale.utils.EntityManager;
 import it.unibo.aknightstale.utils.EntityManagerImpl;
 import it.unibo.aknightstale.utils.Point;
-import it.unibo.aknightstale.utils.Point2D;
 import it.unibo.aknightstale.views.entity.AnimatedEntityView;
 import it.unibo.aknightstale.views.entity.EnemyView;
 import it.unibo.aknightstale.views.entity.PlayerView;
@@ -44,12 +43,15 @@ public class EntityFactoryImpl implements EntityFactory {
         return player;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public CharacterController<Character, AnimatedEntityView> getEnemy(final Point spawnPosition) {
 
-        Enemy enemyModel = new Enemy(spawnPosition);
-        EnemyView enemyView = new EnemyView();
-        var enemy = new EnemyController<Character, AnimatedEntityView>(enemyModel, enemyView, getEntityManager());
+        final Enemy enemyModel = new Enemy(spawnPosition);
+        final EnemyView enemyView = new EnemyView();
+        final var enemy = new EnemyController<Character, AnimatedEntityView>(enemyModel, enemyView, getEntityManager());
 
         this.manager.addEntity(enemy);
         return enemy;

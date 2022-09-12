@@ -59,7 +59,7 @@ public class Enemy extends BaseCharacter {
         final double distanceX = this.getPosition().getX() - playerPosition.getX();
         final double distanceY = this.getPosition().getY() - playerPosition.getY();
 
-        if(playerPosition.equals(this.getPosition())) {
+        if (playerPosition.equals(this.getPosition())) {
             this.status = Status.IDLE;
         } else {
             if (Math.abs(distanceX) < CHASING_RANGE && Math.abs(distanceY) < CHASING_RANGE) {
@@ -87,12 +87,10 @@ public class Enemy extends BaseCharacter {
 
             setDirection(dir);
         }
-
-
     }
 
     private Direction getRandomDirection() {
-        int randomDirection = new Random().nextInt(4);
+        final int randomDirection = new Random().nextInt(4);
 
         switch (randomDirection) {
             case 1:

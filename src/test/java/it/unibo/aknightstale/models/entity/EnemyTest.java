@@ -21,7 +21,7 @@ class EnemyTest {
     @Test
     @DisplayName("Move player Axis X")
     void checkMovementAxisX() {
-        final var enemy = this.factory.getEnemy(new Point2D(SAMPLE_COORDINATE,SAMPLE_COORDINATE)).getModel();
+        final var enemy = this.factory.getEnemy(new Point2D(SAMPLE_COORDINATE, SAMPLE_COORDINATE)).getModel();
         var position = enemy.getPosition();
         enemy.goLeft();
         position = new Point2D(position.getX() - enemy.getSpeed(), position.getY());
@@ -31,7 +31,7 @@ class EnemyTest {
     @Test
     @DisplayName("Move player Axis Y")
     void checkMovementAxisY() {
-        final var enemy = this.factory.getEnemy(new Point2D(SAMPLE_COORDINATE,SAMPLE_COORDINATE)).getModel();
+        final var enemy = this.factory.getEnemy(new Point2D(SAMPLE_COORDINATE, SAMPLE_COORDINATE)).getModel();
         var position = enemy.getPosition();
         enemy.goUp();
         position = new Point2D(position.getX(), position.getY() - enemy.getSpeed());

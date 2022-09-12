@@ -2,7 +2,6 @@ package it.unibo.aknightstale.views.map;
 
 import it.unibo.aknightstale.models.entity.EntityType;
 import it.unibo.aknightstale.views.entity.AnimatedEntityView;
-import javafx.scene.image.Image;
 
 /**
  * An interface that represents a tile,
@@ -11,14 +10,9 @@ import javafx.scene.image.Image;
 public interface Tile extends AnimatedEntityView {
 
     /**
-     * Get the tile's image.
-     * @return the tile's image*/
-    Image getImage();
-
-    /**
      * Get the index of the tile.
      * Each tile is assigned a unique index to identify the different tiles.
-     * @return the tile's index*/
+     * @return the tile's index.*/
     int getIndex();
 
     /**

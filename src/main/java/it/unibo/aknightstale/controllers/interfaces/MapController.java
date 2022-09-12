@@ -18,11 +18,11 @@ public interface MapController extends Controller<MapView> {
     /**
      * The constant NUM_COL.
      */
-    static final int NUM_COL = 48;
+    int NUM_COL = 48;
     /**
      * The constant NUM_ROW.
      */
-    static final int NUM_ROW = 27;
+    int NUM_ROW = 27;
 
     /**
      * Draw map.

@@ -40,7 +40,7 @@ public class EntityImpl implements Entity {
     public Borders getBorders() {
         return this.borders;
     }
-    
+
     /**
      * {@inheritDoc}
      */
