@@ -85,6 +85,7 @@ public class MapViewImpl extends BaseView<MapController> implements MapView  {
             getController().drawMap();
         });
 
+
         final var player = getController().getPlayer();
 
         this.gameLoop = new AnimationTimer() {
