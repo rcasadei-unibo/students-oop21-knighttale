@@ -134,6 +134,15 @@ public class Window {
     }
 
     /**
+     * Get the JavaFX stage associated with the current view of this window.
+     *
+     * @return The JavaFX stage associated with the current view of this window.
+     */
+    public Scene getCurrentScene() {
+        return getScene(this.getCurrentViewName());
+    }
+
+    /**
      * Get the JavaFX stage associated with this window.
      *
      * @param viewName The name of the view to get the stage of.
@@ -141,6 +150,15 @@ public class Window {
      */
     public static Stage getStage(final String viewName) {
         return SceneOne.getStage(viewName);
+    }
+
+    /**
+     * Get the JavaFX stage associated with the current view of this window.
+     *
+     * @return The JavaFX stage associated with the current view of this window.
+     */
+    public Stage getCurrentStage() {
+        return getStage(this.getCurrentViewName());
     }
 
     /**
@@ -167,14 +185,5 @@ public class Window {
         }
 
         return window;
-    }
-
-    /**
-     * Get the JavaFX stage associated with the current view of this window.
-     *
-     * @return The JavaFX stage associated with the current view of this window.
-     */
-    public Scene getCurrentScene() {
-        return getScene(this.getCurrentViewName());
     }
 }
