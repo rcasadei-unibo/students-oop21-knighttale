@@ -77,7 +77,6 @@ public abstract class AbstractController<M extends Character, V extends Animated
             super.getModel().goDown();
         }
     }
-    
     private Borders createBorders() {
         final double attackRange = super.getModel().getAttackRange();
         final Borders borders;

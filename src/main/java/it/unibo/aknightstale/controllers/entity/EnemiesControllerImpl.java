@@ -1,27 +1,25 @@
 package it.unibo.aknightstale.controllers.entity;
 
-import it.unibo.aknightstale.controllers.MapControllerImpl;
 import it.unibo.aknightstale.controllers.interfaces.EnemiesController;
 import it.unibo.aknightstale.controllers.interfaces.MapController;
 import it.unibo.aknightstale.models.Enemy;
 import it.unibo.aknightstale.models.entity.Character;
 import it.unibo.aknightstale.models.entity.factories.EntityFactory;
+import it.unibo.aknightstale.utils.CollisionManager;
 import it.unibo.aknightstale.utils.Point2D;
 import it.unibo.aknightstale.views.entity.AnimatedEntityView;
 import it.unibo.aknightstale.views.interfaces.MapView;
-
-
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
+
 
 /**
  * The type Enemies controller.
  */
 public class EnemiesControllerImpl implements EnemiesController {
 
-    private int numEnemies = 0;
+    private int numEnemies;
     private final EntityFactory factory;
 
     private final List<CharacterController<Character, AnimatedEntityView>> enemiesControllers;
@@ -44,6 +42,11 @@ public class EnemiesControllerImpl implements EnemiesController {
         createEnemies(numEnemies);
     }
 
+    /**
+     * Gets a list that contains the controllers of all enemies.
+     *
+     * @return the enemies controllers list.
+     */
     public List<CharacterController<Character, AnimatedEntityView>> getEnemiesControllers() {
         return enemiesControllers;
     }
@@ -51,11 +54,14 @@ public class EnemiesControllerImpl implements EnemiesController {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void createEnemies(final int numEnemies) {
         this.numEnemies += numEnemies;
 
         for (int i = 0; i < this.numEnemies; i++) {
-            enemiesControllers.add(this.factory.getEnemy(this.mapController.getSpawnPosition()));
+            var enemy = this.factory.getEnemy(new Point2D(0,0));
+            this.mapController.setSpawnPosition(enemy);
+            enemiesControllers.add(enemy);
         }
     }
 
@@ -63,8 +69,14 @@ public class EnemiesControllerImpl implements EnemiesController {
      * {@inheritDoc}
      */
     @Override
-    public void drawEnemies() {
+    public void drawEnemies(final CollisionManager collision, final CharacterController player) {
+
         this.enemiesControllers.forEach((c) -> {
+
+            if (collision.checkCollision(c).contains(player)) {
+                c.attack();
+            }
+
             switch (c.getModel().getDirection()) {
                 case LEFT:
                     c.moveLeft();
@@ -81,10 +93,9 @@ public class EnemiesControllerImpl implements EnemiesController {
                 default:
                     break;
             }
-            //c.getView().update(c.getModel().getDirection());
+
 
             mapView.draw(c.getView(), c.getModel().getPosition().getX(), c.getModel().getPosition().getY());
-            //gc.drawImage(c.getView().getImage(), c.getModel().getPosition().getX(), c.getModel().getPosition().getY());
         });
     }
 
@@ -93,7 +104,7 @@ public class EnemiesControllerImpl implements EnemiesController {
      */
     @Override
     public void removeDeadEnemies() {
-        List<CharacterController<Character, AnimatedEntityView>> killedEnemies = new ArrayList<>();
+        final List<CharacterController<Character, AnimatedEntityView>> killedEnemies = new ArrayList<>();
         this.enemiesControllers.forEach(c -> {
             if (c.getModel().getHealth() == 0) {
                 killedEnemies.add(c);

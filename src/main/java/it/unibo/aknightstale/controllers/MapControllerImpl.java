@@ -2,6 +2,7 @@ package it.unibo.aknightstale.controllers;
 
 import it.unibo.aknightstale.controllers.entity.CharacterController;
 import it.unibo.aknightstale.controllers.entity.EnemiesControllerImpl;
+import it.unibo.aknightstale.controllers.entity.EntityController;
 import it.unibo.aknightstale.controllers.entity.ObstacleController;
 import it.unibo.aknightstale.controllers.interfaces.Controller;
 import it.unibo.aknightstale.controllers.interfaces.GameFinishedController;
@@ -22,13 +23,16 @@ import it.unibo.aknightstale.views.entity.Status;
 import it.unibo.aknightstale.views.interfaces.GameFinishedView;
 import it.unibo.aknightstale.views.interfaces.MapView;
 import javafx.util.Pair;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.*;
-
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 /**
  * The type Map controller.
@@ -41,17 +45,21 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
 
     private double screenWidth;
     private double screenHeight;
+    private final Random random = new Random();
 
     private EnemiesControllerImpl enemiesController;
 
 
     private int killedEnemies = 0;
-    private final int totalEnemies = 20;
+    private static final int TOTAL_ENEMIES = 20;
     private final EntityFactory factory = new EntityFactoryImpl();
 
-    private CharacterController<? extends Character, ? extends AnimatedEntityView> player;
+    private CharacterController<? super Character, ? super AnimatedEntityView> player;
     private CollisionManagerImpl collision;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void showView() {
         this.collision = new CollisionManagerImpl(factory.getEntityManager().getEntities(), this.screenWidth,
@@ -65,17 +73,19 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
         readTextMap();
 
         //adding trees to map
-        Spawner treeSpawner = new SpawnerImpl(getView().getTree(), 30, this.mapTileNum);
+        final Spawner treeSpawner = new SpawnerImpl(getView().getTree(), 30, this.mapTileNum);
         this.mapTileNum = treeSpawner.getMap();
-
-        //create player
-        player = factory.getPlayer(this.getSpawnPosition());
-
-        //create enemies
-        this.enemiesController = new EnemiesControllerImpl(totalEnemies, getView(), factory, this);
 
         //binding tiles to entities
         this.bindToEntities();
+
+        //create player
+        player = factory.getPlayer(new Point2D(0, 0));
+        this.setSpawnPosition(player);
+
+        //create enemies
+        this.enemiesController = new EnemiesControllerImpl(TOTAL_ENEMIES, getView(), factory, this);
+
 
         super.showView();
         getView().init();
@@ -87,29 +97,36 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
             // If I have to draw a tile that represent an obstacle, then I'll create an obstacle entity
             if (getView().getTiles().get(num).getEntityType() == EntityType.OBSTACLE) {
                 // create obstacle entity and adds it to list
-                double x = position.getValue() * getView().getTileWidth();
-                double y = position.getKey() * getView().getTileHeight();
-                double width = getView().getTileWidth();
-                double height = getView().getTileHeight();
-                var borders = new BordersImpl(x, y, width, height);
-                var obstacleModel = new ObstacleEntity(borders);
-                var obstacleView = getView().getTiles().get(num);
-                var obstacle = new ObstacleController<Character, AnimatedEntityView>(obstacleModel, obstacleView);
+                final double x = position.getValue() * getView().getTileWidth();
+                final double y = position.getKey() * getView().getTileHeight();
+                final double width = getView().getTileWidth();
+                final double height = getView().getTileHeight();
+                final var borders = new BordersImpl(x, y, width, height);
+                final var obstacleModel = new ObstacleEntity(borders);
+                final var obstacleView = getView().getTiles().get(num);
+                final var obstacle = new ObstacleController<Character, AnimatedEntityView>(obstacleModel, obstacleView);
                 this.obstacleControllers.add(obstacle);
                 this.factory.getEntityManager().addEntity(obstacle);
             }
         });
     }
 
-    public EnemiesControllerImpl getEnemiesController() {
-        return enemiesController;
-    }
 
+    /*public EnemiesControllerImpl getEnemiesController() {
+        return enemiesController;
+    }*/
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public CharacterController<? extends Character, ? extends AnimatedEntityView> getPlayer() {
         return player;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setIdlePlayer() {
         this.player.getView().setStatus(Status.IDLE);
@@ -117,7 +134,7 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
     }
 
     private void openGameFinishedScreen() {
-        var controllerView =  Controller.of(GameFinishedController.class, GameFinishedView.class).get();
+        final var controllerView =  Controller.of(GameFinishedController.class, GameFinishedView.class).get();
         controllerView.setScore(killedEnemies);
         controllerView.showView();
     }
@@ -140,6 +157,10 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
         return NUM_ROW;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void drawMap() {
 
         int row = 0;
@@ -163,19 +184,19 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
     }
 
     private void readTextMap() {
-        InputStream is = getView().getClass().getResourceAsStream("map.txt");
+        final InputStream is = getView().getClass().getResourceAsStream("map.txt");
         assert is != null;
-        BufferedReader br = new BufferedReader(new InputStreamReader(is));
+        final BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
         int col = 0;
         int row = 0;
         try {
             while (col < NUM_COL && row < NUM_ROW) {
 
-                String line = br.readLine();
+                final String line = br.readLine();
 
                 while (col < NUM_COL) {
-                    List<String> numLine = Arrays.asList(line.split(" "));
+                    final List<String> numLine = Arrays.asList(line.split(" "));
                     final int num = Integer.parseInt(numLine.get(col));
                     mapTileNum.put(new Pair<>(row, col), num);
                     col++;
@@ -187,11 +208,15 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
                 }
             }
             br.close();
+            is.close();
         } catch (IOException e) {
             System.err.println(e);
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void updateScreenSize() {
         this.screenWidth = getView().getScreenWidth();
@@ -207,9 +232,13 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
         //this.repositionObstacle();
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void repositionEntities() {
-        double traslX = getView().getScreenWidth() / this.screenWidth;
-        double traslY = getView().getScreenHeight() / this.screenHeight;
+        final double traslX = getView().getScreenWidth() / this.screenWidth;
+        final double traslY = getView().getScreenHeight() / this.screenHeight;
         enemiesController.adaptPositionToScreenSize(traslX, traslY);
         this.player.adaptPositionToScreenSize(traslX, traslY);
         this.obstacleControllers.forEach(c -> {
@@ -217,27 +246,39 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
         });
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void drawPlayer() {
-        var position = player.getModel().getPosition();
+        final var position = player.getModel().getPosition();
         getView().draw(player.getView(), position.getX(), position.getY());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void update() {
         enemiesController.removeDeadEnemies();
-        this.killedEnemies = totalEnemies - enemiesController.getNumEnemy();
-        if (killedEnemies == totalEnemies || this.player.getModel().getHealth() == 0) {
+        this.killedEnemies = TOTAL_ENEMIES - enemiesController.getNumEnemy();
+        if (killedEnemies == TOTAL_ENEMIES || this.player.getModel().getHealth() == 0) {
             this.openGameFinishedScreen();
             getView().stopGame();
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void drawEnemies() {
-        enemiesController.drawEnemies();
+        enemiesController.drawEnemies(this.collision, this.player);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void updatePlayer(final Direction direction) {
         switch (direction) {
@@ -258,11 +299,17 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void playerAttack() {
         this.player.attack();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void moveEnemies() {
         this.enemiesController.updateDirection(player.getModel().getPosition());
@@ -276,19 +323,32 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
         return this.enemiesController.getEnemiesControllers();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public Point2D getSpawnPosition() {
-        final Random random = new Random();
+    public void setSpawnPosition(final CharacterController<? super Character, ? super AnimatedEntityView> entity) {
 
-        var randomRow = random.nextInt(this.NUM_ROW);
+        var x = random.nextDouble() * this.screenWidth;
+        var y = random.nextDouble() * this.screenHeight;
+        entity.getModel().setPosition(new Point2D(x, y));
+        while (!this.collision.checkCollision(entity).isEmpty()) {
+            x = random.nextDouble() * this.screenWidth;
+            y = random.nextDouble() * this.screenHeight;
+            entity.getModel().setPosition(new Point2D(x, y));
+        }
+
+
+        // usare checkCollision per capire se sto sbattendo
+        //return new Point2D(x, y);
+
+        /*var randomRow = random.nextInt(this.NUM_ROW);
         var randomCol = random.nextInt(this.NUM_COL);
         while (this.mapTileNum.get(new Pair<>(randomRow, randomCol)) != getView().getFloor().getIndex()) {
             randomRow = random.nextInt(this.NUM_ROW);
             randomCol = random.nextInt(this.NUM_COL);
         }
-
-        return new Point2D(randomCol * getView().getTileWidth(), randomRow * getView().getTileHeight());
+        // usare checkCollision per capire se sto sbattendo
+        return new Point2D(randomCol * getView().getTileWidth() + 5, randomRow * getView().getTileHeight() + 5);*/
     }
-
-
 }

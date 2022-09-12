@@ -13,7 +13,7 @@ public class SolidTile extends AbstractTile {
      * @param index the unique index of the tile
      * @param entityType the tile's type
      * */
-    public SolidTile(final String url, int index, final EntityType entityType) {
+    public SolidTile(final String url, final int index, final EntityType entityType) {
         super(url, index, entityType);
         super.setCollidable(true);
     }

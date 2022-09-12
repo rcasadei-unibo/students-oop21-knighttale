@@ -21,13 +21,15 @@ public class Enemy extends BaseCharacter {
     static final double DEFENSE = 10.0;
     static final double ATTACK_RANGE = 5.0;
 
+    private static final int MIN_DISTANCE = 20;
     static final double CHASING_RANGE = 100;
 
     //private final List<Direction> listDirection = new ArrayList<>();
 
     private Status status = Status.WALK;
 
-    private boolean checkAxisX = new Random().nextInt() % 2 == 0;
+    private final Random random = new Random();
+    private boolean checkAxisX = random.nextInt() % 2 == 0;
 
     public Enemy(final Point position) {
         super(new BordersImpl(position.getX(), position.getY(), WIDTH_BOUNDS, HEIGHT_BOUNDS), EntityType.ENEMY, true,
@@ -59,7 +61,7 @@ public class Enemy extends BaseCharacter {
         final double distanceX = this.getPosition().getX() - playerPosition.getX();
         final double distanceY = this.getPosition().getY() - playerPosition.getY();
 
-        if(playerPosition.equals(this.getPosition())) {
+        if (playerPosition.equals(this.getPosition())) {
             this.status = Status.IDLE;
         } else {
             if (Math.abs(distanceX) < CHASING_RANGE && Math.abs(distanceY) < CHASING_RANGE) {
@@ -67,16 +69,16 @@ public class Enemy extends BaseCharacter {
 
                 if (this.checkAxisX) {
                     this.checkAxisX = false;
-                    if (distanceX <= CHASING_RANGE && distanceX >= 20) {
+                    if (distanceX <= CHASING_RANGE && distanceX >= MIN_DISTANCE) {
                         dir = Direction.LEFT;
-                    } else if (distanceX >= -CHASING_RANGE && distanceX <= 20) {
+                    } else if (distanceX >= -CHASING_RANGE && distanceX <= MIN_DISTANCE) {
                         dir = Direction.RIGHT;
                     }
                 } else {
                     this.checkAxisX = true;
-                    if (distanceY <= CHASING_RANGE && distanceY >= 20) {
+                    if (distanceY <= CHASING_RANGE && distanceY >= MIN_DISTANCE) {
                         dir = Direction.UP;
-                    } else if (distanceY >= -CHASING_RANGE && distanceY <= 20) {
+                    } else if (distanceY >= -CHASING_RANGE && distanceY <= MIN_DISTANCE) {
                         dir = Direction.DOWN;
                     }
                 }
@@ -87,12 +89,10 @@ public class Enemy extends BaseCharacter {
 
             setDirection(dir);
         }
-
-
     }
 
     private Direction getRandomDirection() {
-        int randomDirection = new Random().nextInt(4);
+        final int randomDirection = random.nextInt(4);
 
         switch (randomDirection) {
             case 1:

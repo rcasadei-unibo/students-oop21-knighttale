@@ -1,6 +1,6 @@
 package it.unibo.aknightstale.models.entity;
 
-public interface AttackEntity extends Entity{
+public interface AttackEntity extends Entity {
     /**
      * Gets the entity damage.
      * 

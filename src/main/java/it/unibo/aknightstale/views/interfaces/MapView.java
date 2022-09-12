@@ -16,14 +16,14 @@ public interface MapView extends View<MapController> {
      *
      * @return the tile width
      */
-    public double getTileWidth();
+    double getTileWidth();
 
     /**
      * Gets tile height.
      *
      * @return the tile height
      */
-    public double getTileHeight();
+    double getTileHeight();
 
     /**
      * Gets screen width.
@@ -71,7 +71,7 @@ public interface MapView extends View<MapController> {
      * @param x the x
      * @param y the y
      */
-    void draw(final EntityView tile, final double x, final double y);
+    void draw(EntityView tile, double x, double y);
 
     /**
      * Resize the size of all tiles of the game world.

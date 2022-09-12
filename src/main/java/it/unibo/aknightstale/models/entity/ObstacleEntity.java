@@ -14,6 +14,9 @@ public class ObstacleEntity extends BaseCharacter {
         //this.position = position;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public double getAttackRange() {
         return 0;

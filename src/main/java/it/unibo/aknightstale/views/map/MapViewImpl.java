@@ -18,9 +18,9 @@ import java.util.List;
 public class MapViewImpl extends BaseView<MapController> implements MapView  {
 
     @FXML
-    Canvas canvas;
+    private Canvas canvas;
     @FXML
-    AnchorPane pane;
+    private AnchorPane pane;
 
     private GraphicsContext gc;
 
@@ -33,6 +33,7 @@ public class MapViewImpl extends BaseView<MapController> implements MapView  {
 
     private AnimationTimer gameLoop;
     private boolean gameFinished = false;
+    private static final int NUM_TILES = 11;
 
     public MapViewImpl() {
         super("Game");
@@ -40,17 +41,17 @@ public class MapViewImpl extends BaseView<MapController> implements MapView  {
         tiles.add(new CrossableTile("grass01.png", 0, EntityType.TILE));
         tiles.add(new SolidTile("tree.png", 1, EntityType.OBSTACLE));
         tiles.add(new SolidTile("wall.png", 2, EntityType.OBSTACLE));
-        tiles.add(new SolidTile("water03.png", 3, EntityType.OBSTACLE));
-        tiles.add(new SolidTile("water04.png", 4, EntityType.OBSTACLE));
-        tiles.add(new SolidTile("water05.png", 5, EntityType.OBSTACLE));
-        tiles.add(new SolidTile("water06.png", 6, EntityType.OBSTACLE));
-        tiles.add(new SolidTile("water07.png", 7, EntityType.OBSTACLE));
-        tiles.add(new SolidTile("water08.png", 8, EntityType.OBSTACLE));
-        tiles.add(new SolidTile("water09.png", 9, EntityType.OBSTACLE));
-        tiles.add(new SolidTile("water10.png", 10, EntityType.OBSTACLE));
-        tiles.add(new SolidTile("water11.png", 11, EntityType.OBSTACLE));
+        for (int i = 3; i <= NUM_TILES; i++) {
+            var name = new StringBuilder("water");
+            name.append((i < 10) ? "0" + i : i);
+
+            tiles.add(new SolidTile(name + ".png", i, EntityType.OBSTACLE));
+        }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void init() {
 
@@ -84,7 +85,8 @@ public class MapViewImpl extends BaseView<MapController> implements MapView  {
             getController().drawMap();
         });
 
-        var player = getController().getPlayer();
+
+        final var player = getController().getPlayer();
 
         this.gameLoop = new AnimationTimer() {
 
@@ -95,16 +97,9 @@ public class MapViewImpl extends BaseView<MapController> implements MapView  {
                 getController().update();
                 getController().drawEnemies();
                 getController().drawPlayer();
-                //enemiesController.update();
-
-                //context.drawImage()	//entities
-                //gc.restore();
-
-                //controller.clear();
 
                 gc.save();
 
-                //input.update();
                 handleInput();
 
                 player.getView().drawHealthBar(
@@ -129,7 +124,7 @@ public class MapViewImpl extends BaseView<MapController> implements MapView  {
         };
         gameLoop.start();
 
-        Runnable myThread = () -> {
+        final Runnable myThread = () -> {
             while (!gameFinished) {
                 try {
                     getController().moveEnemies();
@@ -140,61 +135,94 @@ public class MapViewImpl extends BaseView<MapController> implements MapView  {
             }
         };
 
-        Thread run = new Thread(myThread);
+        final Thread run = new Thread(myThread);
 
         run.start();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void stopGame() {
         this.gameLoop.stop();
         this.gameFinished = true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Tile getFloor() {
         return this.tiles.get(0);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Tile getTree() {
         return this.tiles.get(1);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public double getTileWidth() {
         return tileWidth;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public double getTileHeight() {
         return tileHeight;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Tile> getTiles() {
         return tiles;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public double getScreenWidth() {
         return canvas.getWidth();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public double getScreenHeight() {
         return canvas.getHeight();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void clearMap() {
         this.gc.clearRect(0, 0, this.gc.getCanvas().getWidth(), this.gc.getCanvas().getHeight());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void draw(final EntityView tile, final double x, final double y) {
         gc.drawImage(tile.getImage(), x, y);
     }
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void resizeTiles(final double tileWidth, final double tileHeight) {
         this.tileWidth = tileWidth;
