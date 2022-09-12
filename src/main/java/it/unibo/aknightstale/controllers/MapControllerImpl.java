@@ -2,6 +2,7 @@ package it.unibo.aknightstale.controllers;
 
 import it.unibo.aknightstale.controllers.entity.CharacterController;
 import it.unibo.aknightstale.controllers.entity.EnemiesControllerImpl;
+import it.unibo.aknightstale.controllers.entity.EntityController;
 import it.unibo.aknightstale.controllers.entity.ObstacleController;
 import it.unibo.aknightstale.controllers.interfaces.Controller;
 import it.unibo.aknightstale.controllers.interfaces.GameFinishedController;
@@ -26,8 +27,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.*;
-
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 /**
  * The type Map controller.
@@ -40,15 +45,16 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
 
     private double screenWidth;
     private double screenHeight;
+    private final Random random = new Random();
 
     private EnemiesControllerImpl enemiesController;
 
 
     private int killedEnemies = 0;
-    private final static int TOTAL_ENEMIES = 20;
+    private static final int TOTAL_ENEMIES = 20;
     private final EntityFactory factory = new EntityFactoryImpl();
 
-    private CharacterController<? extends Character, ? extends AnimatedEntityView> player;
+    private CharacterController<? super Character, ? super AnimatedEntityView> player;
     private CollisionManagerImpl collision;
 
     /**
@@ -70,14 +76,16 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
         final Spawner treeSpawner = new SpawnerImpl(getView().getTree(), 30, this.mapTileNum);
         this.mapTileNum = treeSpawner.getMap();
 
+        //binding tiles to entities
+        this.bindToEntities();
+
         //create player
-        player = factory.getPlayer(this.getSpawnPosition());
+        player = factory.getPlayer(new Point2D(0, 0));
+        this.setSpawnPosition(player);
 
         //create enemies
         this.enemiesController = new EnemiesControllerImpl(TOTAL_ENEMIES, getView(), factory, this);
 
-        //binding tiles to entities
-        this.bindToEntities();
 
         super.showView();
         getView().init();
@@ -319,15 +327,28 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
      * {@inheritDoc}
      */
     @Override
-    public Point2D getSpawnPosition() {
-        final Random random = new Random();
+    public void setSpawnPosition(final CharacterController<? super Character, ? super AnimatedEntityView> entity) {
 
-        var randomRow = random.nextInt(this.NUM_ROW);
+        var x = random.nextDouble() * this.screenWidth;
+        var y = random.nextDouble() * this.screenHeight;
+        entity.getModel().setPosition(new Point2D(x, y));
+        while (!this.collision.checkCollision(entity).isEmpty()) {
+            x = random.nextDouble() * this.screenWidth;
+            y = random.nextDouble() * this.screenHeight;
+            entity.getModel().setPosition(new Point2D(x, y));
+        }
+
+
+        // usare checkCollision per capire se sto sbattendo
+        //return new Point2D(x, y);
+
+        /*var randomRow = random.nextInt(this.NUM_ROW);
         var randomCol = random.nextInt(this.NUM_COL);
         while (this.mapTileNum.get(new Pair<>(randomRow, randomCol)) != getView().getFloor().getIndex()) {
             randomRow = random.nextInt(this.NUM_ROW);
             randomCol = random.nextInt(this.NUM_COL);
         }
-        return new Point2D(randomCol * getView().getTileWidth(), randomRow * getView().getTileHeight());
+        // usare checkCollision per capire se sto sbattendo
+        return new Point2D(randomCol * getView().getTileWidth() + 5, randomRow * getView().getTileHeight() + 5);*/
     }
 }

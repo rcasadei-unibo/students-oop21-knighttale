@@ -36,7 +36,7 @@ public class EntityFactoryImpl implements EntityFactory {
      * {@inheritDoc}
      */
     @Override
-    public CharacterController<Character, AnimatedEntityView> getPlayer(final Point p) {
+    public  CharacterController<? super Character, ? super AnimatedEntityView> getPlayer(final Point p) {
         final var player = new PlayerController<Character, AnimatedEntityView>(new Player(p),
                 new PlayerView(), getEntityManager());
         this.manager.addEntity(player);
@@ -47,7 +47,7 @@ public class EntityFactoryImpl implements EntityFactory {
      * {@inheritDoc}
      */
     @Override
-    public CharacterController<Character, AnimatedEntityView> getEnemy(final Point spawnPosition) {
+    public  CharacterController<? super Character, ? super  AnimatedEntityView> getEnemy(final Point spawnPosition) {
 
         final Enemy enemyModel = new Enemy(spawnPosition);
         final EnemyView enemyView = new EnemyView();

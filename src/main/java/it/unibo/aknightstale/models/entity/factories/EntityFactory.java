@@ -20,12 +20,12 @@ public interface EntityFactory {
      * @param p The position of player.
      * @return The player.
      */
-    CharacterController<Character, AnimatedEntityView> getPlayer(Point p);
+    CharacterController<? super Character, ? super  AnimatedEntityView> getPlayer(Point p);
 
     /**
      * Creates the enemy.
      * @param spawnPosition the enemy's spawn position
      * @return the enemy.
      */
-    CharacterController<Character, AnimatedEntityView> getEnemy(Point spawnPosition);
+    CharacterController<? super Character, ? super  AnimatedEntityView> getEnemy(Point spawnPosition);
 }
