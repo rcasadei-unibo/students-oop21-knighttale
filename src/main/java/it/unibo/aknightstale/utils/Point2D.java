@@ -51,14 +51,17 @@ public class Point2D implements Point {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
+    public boolean equals(final Object obj) {
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
-        Point2D other = (Point2D) obj;
+        }
+        final Point2D other = (Point2D) obj;
         return Double.doubleToLongBits(x) == Double.doubleToLongBits(other.x)
                 && Double.doubleToLongBits(y) == Double.doubleToLongBits(other.y);
     }
