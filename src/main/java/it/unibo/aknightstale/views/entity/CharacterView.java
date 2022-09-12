@@ -12,13 +12,18 @@ public abstract class CharacterView extends EntityViewImpl implements AnimatedEn
      */
     protected static final int HEALTH_BAR_MAX_WIDTH = 25;
 
+    /**
+     * The constant SEPARATOR.
+     */
     protected static final String SEPARATOR = System.getProperty("file.separator");
 
     private final String nameEntity;
     private final double widthImage;
     private final double heightImage;
 
-
+    /**
+     * The constant MAX_NUM_FRAME.
+     */
     private static final int MAX_NUM_FRAME = 12;
 
     protected String idle_right;

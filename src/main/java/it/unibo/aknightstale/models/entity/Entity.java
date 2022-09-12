@@ -24,10 +24,9 @@ public interface Entity {
      * @return the entity borders.
      */
     Borders getBorders();
-    
+
     /**
-     * Sets the entity borders
-     * 
+     * Sets the entity borders.
      * @param b The new borders of entity
      */
     void setBorders(Borders b);

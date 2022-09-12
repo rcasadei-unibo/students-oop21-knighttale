@@ -1,5 +1,7 @@
 package it.unibo.aknightstale.controllers.interfaces;
 
+import it.unibo.aknightstale.controllers.entity.CharacterController;
+import it.unibo.aknightstale.utils.CollisionManager;
 import it.unibo.aknightstale.utils.Point2D;
 
 public interface EnemiesController {
@@ -7,7 +9,7 @@ public interface EnemiesController {
     /**
      * Draw enemies in the game world.
      */
-    void drawEnemies();
+    void drawEnemies(CollisionManager collision, CharacterController player);
 
     /**
      * Remove dead enemies from game world.
@@ -37,9 +39,9 @@ public interface EnemiesController {
     int getNumEnemy();
 
     /**
-     * create some enemies
+     * create some enemies.
      * @param numEnemies the number of enemies to create
      */
-    void createEnemies(final int numEnemies);
+    void createEnemies(int numEnemies);
 
 }
