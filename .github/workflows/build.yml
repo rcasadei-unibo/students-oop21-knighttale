@@ -35,5 +35,5 @@ jobs:
       - name: Upload JAR
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ format('AKnightsTale-nightly-{0}', steps.time.outputs.time) }}
+          name: ${{ format('AKnightsTale-nightly-{0}.jar', steps.time.outputs.time) }}
           path: build/libs/AKnightsTale-all.jar
