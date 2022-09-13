@@ -11,21 +11,15 @@ import it.unibo.aknightstale.views.entity.Status;
 import java.util.Random;
 
 public class Enemy extends BaseCharacter {
-
-
-    static final double WIDTH_BOUNDS = 20.0;
-    static final double HEIGHT_BOUNDS = 24.0;
-    static final double DAMAGE = 50.0;
-    static final double MAX_HEALTH = 100.0;
-    static final double SPEED = 0.7;
-    static final double DEFENSE = 10.0;
-    static final double ATTACK_RANGE = 5.0;
-
+    private static final double WIDTH_BOUNDS = 20.0;
+    private static final double HEIGHT_BOUNDS = 24.0;
+    private static final double DAMAGE = 50.0;
+    private static final double MAX_HEALTH = 100.0;
+    private static final double SPEED = 0.7;
+    private static final double DEFENSE = 10.0;
+    private static final double ATTACK_RANGE = 5.0;
     private static final int MIN_DISTANCE = 20;
     static final double CHASING_RANGE = 100;
-
-    //private final List<Direction> listDirection = new ArrayList<>();
-
     private Status status = Status.WALK;
 
     private static final Random RANDOM = new Random();
