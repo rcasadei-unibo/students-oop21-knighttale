@@ -1,5 +1,6 @@
 package it.unibo.aknightstale.views.map;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.aknightstale.models.entity.Direction;
 import it.unibo.aknightstale.models.entity.EntityType;
 import it.unibo.aknightstale.views.entity.Status;
@@ -43,6 +44,7 @@ public abstract class AbstractTile implements Tile {
      * {@inheritDoc}
      */
     @Override
+    @SuppressFBWarnings("EI_EXPOSE_REP")       //must return a reference because it will be modified
     public Image getImage() {
         return img;
     }
