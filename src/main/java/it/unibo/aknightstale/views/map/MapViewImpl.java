@@ -19,6 +19,8 @@ import java.util.List;
 @SuppressFBWarnings("CD_CIRCULAR_DEPENDENCY")
 public class MapViewImpl extends BaseView<MapController> implements MapView  {
 
+    private static final double MIN_SCREEN_WIDTH = 1300;
+    private static final double MIN_SCREEN_HEIGHT = 780;
     @FXML
     private Canvas canvas;
     @FXML
@@ -142,6 +144,9 @@ public class MapViewImpl extends BaseView<MapController> implements MapView  {
         final Thread run = new Thread(myThread);
 
         run.start();
+        getWindow().getCurrentStage().setMaximized(true);
+        getWindow().getCurrentStage().setMinWidth(MIN_SCREEN_WIDTH);
+        getWindow().getCurrentStage().setMinHeight(MIN_SCREEN_HEIGHT);
     }
 
     /**
