@@ -1,5 +1,6 @@
 package it.unibo.aknightstale.models.map;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.aknightstale.controllers.MapControllerImpl;
 import it.unibo.aknightstale.views.map.Tile;
 import javafx.util.Pair;
@@ -7,13 +8,17 @@ import javafx.util.Pair;
 import java.util.Map;
 import java.util.Random;
 
+
+@SuppressFBWarnings("CD_CIRCULAR_DEPENDENCY")
 public class SpawnerImpl implements Spawner {
 
+    private final Random random = new Random();
 
     private final Tile tile;
     private final int num;
     private final Map<Pair<Integer, Integer>, Integer> tileMap;
 
+    @SuppressFBWarnings("EI_EXPOSE_REP2")
     public SpawnerImpl(final Tile tile, final int num, final Map<Pair<Integer, Integer>, Integer> tileMap) {
         this.tile = tile;
         this.num = num;
@@ -23,9 +28,9 @@ public class SpawnerImpl implements Spawner {
     /**
      * {@inheritDoc}
      */
+    @SuppressFBWarnings("EI_EXPOSE_REP")
     @Override
     public Map<Pair<Integer, Integer>, Integer> getMap() {
-        final Random random = new Random();
         int i = 0;
         while (i < this.num) {
             final int row = random.nextInt(MapControllerImpl.getNumRow());

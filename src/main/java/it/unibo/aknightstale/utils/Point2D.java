@@ -2,11 +2,20 @@ package it.unibo.aknightstale.utils;
 
 import java.util.Objects;
 
+/**
+ * The type Point 2 d.
+ */
 public class Point2D implements Point {
 
     private double x;
     private double y;
 
+    /**
+     * Instantiates a new Point 2 d.
+     *
+     * @param x the x
+     * @param y the y
+     */
     public Point2D(final double x, final double y) {
         super();
         this.x = x;
@@ -45,11 +54,17 @@ public class Point2D implements Point {
         this.y = y;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         return Objects.hash(x, y);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {

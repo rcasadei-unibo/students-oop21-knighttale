@@ -18,7 +18,7 @@ public abstract class AbstractTile implements Tile {
 
     public AbstractTile(final String url, final int index, final EntityType entityType) {
         this.url = url;
-        this.img = new Image(Objects.requireNonNull(getClass().getResourceAsStream(url)));
+        this.img = new Image(Objects.requireNonNull(AbstractTile.class.getResourceAsStream(url)));
         this.index = index;
         this.entityType = entityType;
     }
@@ -52,7 +52,7 @@ public abstract class AbstractTile implements Tile {
      */
     @Override
     public void setWidth(final double width) {
-        this.img = new Image(getClass().getResourceAsStream(this.url), width, this.img.getHeight(), false, false);
+        this.img = new Image(Objects.requireNonNull(AbstractTile.class.getResourceAsStream(this.url)), width, this.img.getHeight(), false, false);
     }
 
     /**
@@ -60,7 +60,7 @@ public abstract class AbstractTile implements Tile {
      */
     @Override
     public void setHeight(final double height) {
-        this.img = new Image(getClass().getResourceAsStream(this.url), this.img.getWidth(), height, false, false);
+        this.img = new Image(Objects.requireNonNull(AbstractTile.class.getResourceAsStream(this.url)), this.img.getWidth(), height, false, false);
     }
 
     /**
@@ -79,9 +79,7 @@ public abstract class AbstractTile implements Tile {
         return this.img.getHeight();
     }
 
-    /**
-     * {@inheritDoc}
-     */
+
     @Override
     public void setCollidable(final boolean collidable) {
         this.collidable = collidable;

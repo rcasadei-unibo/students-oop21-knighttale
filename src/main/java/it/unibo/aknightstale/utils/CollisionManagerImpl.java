@@ -41,7 +41,7 @@ public class CollisionManagerImpl implements CollisionManager {
                         && entity.intersects(e.getModel().getBorders()))
                 .collect(Collectors.toList());
     }
-    
+
     private boolean intersectsBorders(final Character en, final double x, final double y, final double width, final double height) {
         final var borders = new BordersImpl(x, y, width, height);
         return this.entities.stream()
@@ -50,7 +50,7 @@ public class CollisionManagerImpl implements CollisionManager {
                                     && borders.intersects(e.getModel().getBorders()))
                             .count() == 0;
     }
-    
+
     private void collisionsMovement(final Character e, final List<Direction> list) {
         final var borders = e.getBorders();
         if (borders.getX() + borders.getWidth() < this.widthScreen

@@ -1,5 +1,6 @@
 package it.unibo.aknightstale.controllers.entity;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.aknightstale.controllers.interfaces.EnemiesController;
 import it.unibo.aknightstale.controllers.interfaces.MapController;
 import it.unibo.aknightstale.models.Enemy;
@@ -34,6 +35,7 @@ public class EnemiesControllerImpl implements EnemiesController {
      * @param mapView    the map view
      * @param factory    the factory
      */
+    @SuppressFBWarnings("EI_EXPOSE_REP2")
     public EnemiesControllerImpl(final int numEnemies, final MapView mapView, final EntityFactory factory, final MapController mapController) {
         enemiesControllers = new LinkedList<>();
         this.factory = factory;
@@ -47,6 +49,7 @@ public class EnemiesControllerImpl implements EnemiesController {
      *
      * @return the enemies controllers list.
      */
+    @SuppressFBWarnings("EI_EXPOSE_REP")
     public List<CharacterController<Character, AnimatedEntityView>> getEnemiesControllers() {
         return enemiesControllers;
     }
@@ -59,7 +62,7 @@ public class EnemiesControllerImpl implements EnemiesController {
         this.numEnemies += numEnemies;
 
         for (int i = 0; i < this.numEnemies; i++) {
-            var enemy = this.factory.getEnemy(new Point2D(0,0));
+            final var enemy = this.factory.getEnemy(new Point2D(0, 0));
             this.mapController.setSpawnPosition(enemy);
             enemiesControllers.add(enemy);
         }

@@ -17,7 +17,7 @@ public class Enemy extends BaseCharacter {
     static final double HEIGHT_BOUNDS = 24.0;
     static final double DAMAGE = 25.0;
     static final double MAX_HEALTH = 100.0;
-    static final double SPEED = 0.8;
+    static final double SPEED = 0.7;
     static final double DEFENSE = 10.0;
     static final double ATTACK_RANGE = 5.0;
 
@@ -28,8 +28,8 @@ public class Enemy extends BaseCharacter {
 
     private Status status = Status.WALK;
 
-    private final Random random = new Random();
-    private boolean checkAxisX = random.nextInt() % 2 == 0;
+    private static final Random RANDOM = new Random();
+    private boolean checkAxisX = RANDOM.nextInt() % 2 == 0;
 
     public Enemy(final Point position) {
         super(new BordersImpl(position.getX(), position.getY(), WIDTH_BOUNDS, HEIGHT_BOUNDS), EntityType.ENEMY, true,
@@ -92,7 +92,7 @@ public class Enemy extends BaseCharacter {
     }
 
     private Direction getRandomDirection() {
-        final int randomDirection = random.nextInt(4);
+        final int randomDirection = RANDOM.nextInt(4);
 
         switch (randomDirection) {
             case 1:

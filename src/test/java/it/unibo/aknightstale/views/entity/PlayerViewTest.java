@@ -1,9 +1,11 @@
 package it.unibo.aknightstale.views.entity;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.aknightstale.controllers.interfaces.MapController;
 import it.unibo.aknightstale.models.entity.factories.EntityFactory;
 import it.unibo.aknightstale.models.entity.factories.EntityFactoryImpl;
 import it.unibo.aknightstale.utils.CollisionManagerImpl;
+import it.unibo.aknightstale.utils.Point;
 import it.unibo.aknightstale.utils.Point2D;
 import it.unibo.aknightstale.views.BaseViewTest;
 import it.unibo.aknightstale.views.interfaces.MapView;
@@ -25,6 +27,7 @@ class PlayerViewTest extends BaseViewTest<MapController, MapView> {
     static final double HEIGHT_WINDOW = 600.0;
     static final double WIDTH_PLAYER = 24.0;
     static final double HEIGHT_PLAYER = 32.0;
+    private Point spawnPosition;
 
     PlayerViewTest() {
         super(MapView.class, MapController.class);
@@ -36,10 +39,11 @@ class PlayerViewTest extends BaseViewTest<MapController, MapView> {
         super.start(stage);
     }
 
+    @SuppressFBWarnings("UWF_UNWRITTEN_FIELD")  // using method getImage()
     @Test
     @DisplayName("Check player image")
     void checkImage() {
-        final var player = this.factory.getPlayer(new Point2D(50, 50)).getView();
+        final var player = this.factory.getPlayer(this.spawnPosition).getView();
         final var path = "it" + SEPARATOR + "unibo" + SEPARATOR + "aknightstale" + SEPARATOR + "views" + SEPARATOR
                 + "entity" + SEPARATOR + "player" + SEPARATOR + "player_idle_right.png";
         Assertions.assertThat(
