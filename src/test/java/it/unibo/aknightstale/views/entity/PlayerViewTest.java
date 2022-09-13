@@ -1,14 +1,14 @@
 package it.unibo.aknightstale.views.entity;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import it.unibo.aknightstale.controllers.interfaces.MapController;
+import it.unibo.aknightstale.controllers.interfaces.MainMenuController;
 import it.unibo.aknightstale.models.entity.factories.EntityFactory;
 import it.unibo.aknightstale.models.entity.factories.EntityFactoryImpl;
 import it.unibo.aknightstale.utils.CollisionManagerImpl;
 import it.unibo.aknightstale.utils.Point;
 import it.unibo.aknightstale.utils.Point2D;
 import it.unibo.aknightstale.views.BaseViewTest;
-import it.unibo.aknightstale.views.interfaces.MapView;
+import it.unibo.aknightstale.views.interfaces.MainMenuView;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.assertj.core.api.Assertions;
@@ -19,7 +19,7 @@ import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 
 @ExtendWith(ApplicationExtension.class)
-class PlayerViewTest extends BaseViewTest<MapController, MapView> {
+class PlayerViewTest extends BaseViewTest<MainMenuController, MainMenuView> {
 
     private final EntityFactory factory = new EntityFactoryImpl();
     static final String SEPARATOR = System.getProperty("file.separator");
@@ -27,10 +27,11 @@ class PlayerViewTest extends BaseViewTest<MapController, MapView> {
     static final double HEIGHT_WINDOW = 600.0;
     static final double WIDTH_PLAYER = 24.0;
     static final double HEIGHT_PLAYER = 32.0;
-    private Point spawnPosition;
+    static final double SAMPLE_COORDINATE = 50.0;
+    private final Point spawnPosition = new Point2D(SAMPLE_COORDINATE, SAMPLE_COORDINATE);
 
     PlayerViewTest() {
-        super(MapView.class, MapController.class);
+        super(MainMenuView.class, MainMenuController.class);
     }
 
     @Start
