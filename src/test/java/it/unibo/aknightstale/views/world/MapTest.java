@@ -14,9 +14,9 @@ import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 
 @ExtendWith(ApplicationExtension.class)
-class WorldTest extends BaseViewTest<MapController, MapView> {
+class MapTest extends BaseViewTest<MapController, MapView> {
 
-    protected WorldTest() {
+    protected MapTest() {
         super(MapView.class, MapController.class);
     }
 
@@ -41,19 +41,6 @@ class WorldTest extends BaseViewTest<MapController, MapView> {
         Assertions.assertThat(mapView.getTiles().size() > 0);
     }
 
-
-
-    /*Non Posso fare questo test perchè il canvas gli viene passato dal file FXML*/
-    /*@Test
-    @DisplayName("Check Tiles Type")
-    void chackMapResize() {
-        final var mapView = new MapViewImpl();
-        mapView.getScreenHeight();
-        mapView.getScreenHeight();
-        mapView.resize(20, 20);
-        Assertions.assertThat(mapView.getFloor().getClass()).isEqualTo(CrossableTile.class);
-        Assertions.assertThat(mapView.getTree().getClass()).isEqualTo(SolidTile.class);
-    }*/
 
 
 }
