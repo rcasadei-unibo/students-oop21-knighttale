@@ -79,7 +79,9 @@ public abstract class AbstractTile implements Tile {
         return this.img.getHeight();
     }
 
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setCollidable(final boolean collidable) {
         this.collidable = collidable;
@@ -93,26 +95,41 @@ public abstract class AbstractTile implements Tile {
         return this.collidable;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void resize() {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void reposition() {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setStatus(final Status s) {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void drawHealthBar(final GraphicsContext gc, final double x, final double y, final double health, final double maxHealth) {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void update(final Direction d) {
 

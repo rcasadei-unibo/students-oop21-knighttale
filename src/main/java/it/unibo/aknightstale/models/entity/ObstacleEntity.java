@@ -6,7 +6,7 @@ import it.unibo.aknightstale.utils.Borders;
 public class ObstacleEntity extends BaseCharacter {
 
 
-    public ObstacleEntity(/final Borders borders) {
+    public ObstacleEntity(final Borders borders) {
         super(borders, EntityType.OBSTACLE, true, Direction.RIGHT, 0, 0, 0, 0);
     }
 

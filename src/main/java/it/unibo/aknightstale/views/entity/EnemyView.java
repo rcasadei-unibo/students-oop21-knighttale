@@ -7,7 +7,7 @@ public class EnemyView extends CharacterView {
     private static final String NAME = "enemy";
 
     public EnemyView() {
-        super(Status.WALK, "enemy" + SEPARATOR + "enemy_idle_right.png", WIDTH, HEIGHT, "enemy" + SEPARATOR + "enemy");
+        super(Status.WALK, NAME + SEPARATOR + "enemy_idle_right.png", WIDTH, HEIGHT, NAME + SEPARATOR + NAME);
 
         setIdleRight(NAME + SEPARATOR + "enemy_idle_right.png");
         setIdleLeft(NAME + SEPARATOR + "enemy_idle_left.png");
