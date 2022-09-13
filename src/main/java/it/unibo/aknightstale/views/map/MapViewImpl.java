@@ -204,7 +204,7 @@ public class MapViewImpl extends BaseView<MapController> implements MapView  {
      */
     @Override
     public double getScreenWidth() {
-        return canvas.getWidth();
+        return getWindow().getCurrentStage().getWidth();
     }
 
     /**
