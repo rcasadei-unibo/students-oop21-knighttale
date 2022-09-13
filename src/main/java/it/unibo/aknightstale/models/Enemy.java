@@ -58,37 +58,44 @@ public class Enemy extends BaseCharacter {
     public void update(final Point2D playerPosition) {
         Direction dir = null;
 
-        final double distanceX = this.getPosition().getX() - playerPosition.getX();
         final double distanceY = this.getPosition().getY() - playerPosition.getY();
-
+        final double distanceX = this.getPosition().getX() - playerPosition.getX();
         if (playerPosition.equals(this.getPosition())) {
             this.status = Status.IDLE;
         } else {
+            this.status = Status.WALK;
             if (Math.abs(distanceX) < CHASING_RANGE && Math.abs(distanceY) < CHASING_RANGE) {
-                this.status = Status.WALK;
-
                 if (this.checkAxisX) {
                     this.checkAxisX = false;
-                    if (distanceX <= CHASING_RANGE && distanceX >= MIN_DISTANCE) {
-                        dir = Direction.LEFT;
-                    } else if (distanceX >= -CHASING_RANGE && distanceX <= MIN_DISTANCE) {
-                        dir = Direction.RIGHT;
-                    }
+                    dir = this.checkAxisX(distanceX);
                 } else {
                     this.checkAxisX = true;
-                    if (distanceY <= CHASING_RANGE && distanceY >= MIN_DISTANCE) {
-                        dir = Direction.UP;
-                    } else if (distanceY >= -CHASING_RANGE && distanceY <= MIN_DISTANCE) {
-                        dir = Direction.DOWN;
-                    }
+                    dir = this.checkAxisY(distanceY);
                 }
             }
             if (dir == null) {
                 dir = this.getRandomDirection();
             }
-
             setDirection(dir);
         }
+    }
+
+    private Direction checkAxisY(final double distanceY) {
+        if (distanceY <= CHASING_RANGE && distanceY >= MIN_DISTANCE) {
+            return Direction.UP;
+        } else if (distanceY >= -CHASING_RANGE && distanceY <= MIN_DISTANCE) {
+            return Direction.DOWN;
+        }
+        return null;
+    }
+
+    private Direction checkAxisX(final double distanceX) {
+        if (distanceX <= CHASING_RANGE && distanceX >= MIN_DISTANCE) {
+            return Direction.LEFT;
+        } else if (distanceX >= -CHASING_RANGE && distanceX <= MIN_DISTANCE) {
+            return Direction.RIGHT;
+        }
+        return null;
     }
 
     private Direction getRandomDirection() {

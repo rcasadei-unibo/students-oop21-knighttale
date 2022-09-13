@@ -2,7 +2,6 @@ package it.unibo.aknightstale.controllers;
 
 import it.unibo.aknightstale.controllers.entity.CharacterController;
 import it.unibo.aknightstale.controllers.entity.EnemiesControllerImpl;
-import it.unibo.aknightstale.controllers.entity.EntityController;
 import it.unibo.aknightstale.controllers.entity.ObstacleController;
 import it.unibo.aknightstale.controllers.interfaces.Controller;
 import it.unibo.aknightstale.controllers.interfaces.GameFinishedController;
@@ -25,14 +24,11 @@ import it.unibo.aknightstale.views.interfaces.MapView;
 import javafx.util.Pair;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.*;
 
 /**
  * The type Map controller.
@@ -50,13 +46,12 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
     private EnemiesControllerImpl enemiesController;
 
 
-    private int killedEnemies = 0;
+    private int killedEnemies;
     private static final int TOTAL_ENEMIES = 20;
     private final EntityFactory factory = new EntityFactoryImpl();
 
     private CharacterController<? super Character, ? super AnimatedEntityView> player;
     private CollisionManagerImpl collision;
-
     /**
      * {@inheritDoc}
      */
@@ -89,7 +84,11 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
 
         super.showView();
         getView().init();
+
+        // recall this method to get the new window size
+        updateScreenSize();
         this.drawMap();
+
     }
 
     private void bindToEntities() {
@@ -163,7 +162,7 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
     @Override
     public void drawMap() {
 
-        int row = 0;
+        /*int row = 0;
         int col = 0;
         int x = 0;
         int y = 0;
@@ -180,17 +179,40 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
                 col = 0;
                 row++;
             }
+        }*/
+
+        int row = 0;
+        int col = 0;
+        int x = 0;
+        int y = 0;
+
+        /*Disegno il prato*/
+        while (col < NUM_COL && row < NUM_ROW) {
+            getView().draw(getView().getFloor(), x, y);
+            col++;
+            x += this.getView().getTileWidth();
+            if (col == NUM_COL) {
+                x = 0;
+                y += this.getView().getTileHeight();
+                col = 0;
+                row++;
+            }
         }
+        /*Aggiungo gli ostacoli*/
+        this.obstacleControllers.forEach(c -> {
+            getView().draw(c.getView(), c.getModel().getPosition().getX(), c.getModel().getPosition().getY());
+        });
+
+
+
     }
 
     private void readTextMap() {
-        final InputStream is = getView().getClass().getResourceAsStream("map.txt");
-        assert is != null;
-        final BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
         int col = 0;
         int row = 0;
-        try {
+
+            try (BufferedReader br = Files.newBufferedReader(Paths.get(Objects.requireNonNull(getView().getClass().getResource("map.txt").toURI())), StandardCharsets.UTF_8)) {
             while (col < NUM_COL && row < NUM_ROW) {
 
                 final String line = br.readLine();
@@ -207,10 +229,8 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
                     row++;
                 }
             }
-            br.close();
-            is.close();
-        } catch (IOException e) {
-            System.err.println(e);
+        } catch (IOException | URISyntaxException e) {
+                System.err.println(e);
         }
     }
 
@@ -222,14 +242,17 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
         this.screenWidth = getView().getScreenWidth();
         this.screenHeight = getView().getScreenHeight();
 
+        System.out.println("width: " + this.screenWidth);
+        System.out.println("eight: " + this.screenHeight);
+
         collision.setWidthScreen(this.screenWidth);
         collision.setHeightScreen(this.screenHeight);
 
-        final double tileWidth = Math.ceil(this.screenWidth / NUM_COL);
-        final double tileHeight = Math.ceil(this.screenHeight / NUM_ROW);
+        // calculate the new tile's size
+        final double tileWidth = Math.ceil(getView().getScreenWidth() / NUM_COL);
+        final double tileHeight = Math.ceil(getView().getScreenHeight() / NUM_ROW);
 
         getView().resizeTiles(tileWidth, tileHeight);
-        //this.repositionObstacle();
     }
 
     /**
@@ -239,10 +262,15 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
     public void repositionEntities() {
         final double traslX = getView().getScreenWidth() / this.screenWidth;
         final double traslY = getView().getScreenHeight() / this.screenHeight;
-        enemiesController.adaptPositionToScreenSize(traslX, traslY);
+
+        this.enemiesController.adaptPositionToScreenSize(traslX, traslY);
         this.player.adaptPositionToScreenSize(traslX, traslY);
+        // calculate the new tile's size
+        final double tileWidth = Math.ceil(getView().getScreenWidth() / NUM_COL);
+        final double tileHeight = Math.ceil(getView().getScreenHeight() / NUM_ROW);
+
         this.obstacleControllers.forEach(c -> {
-            c.adaptPositionToScreenSize(traslX, traslY, getView().getTileWidth(), getView().getTileHeight());
+            c.adaptPositionToScreenSize(traslX, traslY, tileWidth, tileHeight);
         });
     }
 
@@ -262,7 +290,7 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
     public void update() {
         enemiesController.removeDeadEnemies();
         this.killedEnemies = TOTAL_ENEMIES - enemiesController.getNumEnemy();
-        if (killedEnemies == TOTAL_ENEMIES || this.player.getModel().getHealth() == 0) {
+        if (killedEnemies == TOTAL_ENEMIES || this.player.getModel().getHealth() <= 0) {
             this.openGameFinishedScreen();
             getView().stopGame();
         }
@@ -319,7 +347,7 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
      * {@inheritDoc}
      */
     @Override
-    public List<CharacterController<Character, AnimatedEntityView>> getEnemies() {
+    public List<CharacterController<? super Character, ? super  AnimatedEntityView>> getEnemies() {
         return this.enemiesController.getEnemiesControllers();
     }
 
@@ -337,18 +365,5 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
             y = random.nextDouble() * this.screenHeight;
             entity.getModel().setPosition(new Point2D(x, y));
         }
-
-
-        // usare checkCollision per capire se sto sbattendo
-        //return new Point2D(x, y);
-
-        /*var randomRow = random.nextInt(this.NUM_ROW);
-        var randomCol = random.nextInt(this.NUM_COL);
-        while (this.mapTileNum.get(new Pair<>(randomRow, randomCol)) != getView().getFloor().getIndex()) {
-            randomRow = random.nextInt(this.NUM_ROW);
-            randomCol = random.nextInt(this.NUM_COL);
-        }
-        // usare checkCollision per capire se sto sbattendo
-        return new Point2D(randomCol * getView().getTileWidth() + 5, randomRow * getView().getTileHeight() + 5);*/
     }
 }

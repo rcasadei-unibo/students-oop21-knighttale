@@ -23,7 +23,7 @@ public class EnemiesControllerImpl implements EnemiesController {
     private int numEnemies;
     private final EntityFactory factory;
 
-    private final List<CharacterController<Character, AnimatedEntityView>> enemiesControllers;
+    private final List<CharacterController<? super Character, ? super  AnimatedEntityView>> enemiesControllers;
 
     private final MapView mapView;
     private final MapController mapController;
@@ -50,7 +50,7 @@ public class EnemiesControllerImpl implements EnemiesController {
      * @return the enemies controllers list.
      */
     @SuppressFBWarnings("EI_EXPOSE_REP")
-    public List<CharacterController<Character, AnimatedEntityView>> getEnemiesControllers() {
+    public List<CharacterController<? super Character, ? super  AnimatedEntityView>> getEnemiesControllers() {
         return enemiesControllers;
     }
 
@@ -107,7 +107,7 @@ public class EnemiesControllerImpl implements EnemiesController {
      */
     @Override
     public void removeDeadEnemies() {
-        final List<CharacterController<Character, AnimatedEntityView>> killedEnemies = new ArrayList<>();
+        final List<CharacterController<? super Character, ? super  AnimatedEntityView>> killedEnemies = new ArrayList<>();
         this.enemiesControllers.forEach(c -> {
             if (c.getModel().getHealth() == 0) {
                 killedEnemies.add(c);

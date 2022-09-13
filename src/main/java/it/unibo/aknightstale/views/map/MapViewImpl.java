@@ -1,5 +1,6 @@
 package it.unibo.aknightstale.views.map;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.aknightstale.models.entity.Direction;
 import it.unibo.aknightstale.models.entity.EntityType;
 import it.unibo.aknightstale.views.BaseView;
@@ -15,6 +16,7 @@ import javafx.scene.layout.AnchorPane;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressFBWarnings("CD_CIRCULAR_DEPENDENCY")
 public class MapViewImpl extends BaseView<MapController> implements MapView  {
 
     @FXML
@@ -32,7 +34,7 @@ public class MapViewImpl extends BaseView<MapController> implements MapView  {
     private double tileHeight;
 
     private AnimationTimer gameLoop;
-    private boolean gameFinished = false;
+    private boolean gameFinished;
     private static final int NUM_TILES = 11;
 
     public MapViewImpl() {
@@ -42,10 +44,12 @@ public class MapViewImpl extends BaseView<MapController> implements MapView  {
         tiles.add(new SolidTile("tree.png", 1, EntityType.OBSTACLE));
         tiles.add(new SolidTile("wall.png", 2, EntityType.OBSTACLE));
         for (int i = 3; i <= NUM_TILES; i++) {
-            var name = new StringBuilder("water");
-            name.append((i < 10) ? "0" + i : i);
-
-            tiles.add(new SolidTile(name + ".png", i, EntityType.OBSTACLE));
+            final var name = new StringBuilder("water");
+            if (i < 10) {
+                name.append(Character.toString('0'));
+            }
+            name.append(i).append(".png");
+            tiles.add(new SolidTile(name.toString(), i, EntityType.OBSTACLE));
         }
     }
 
@@ -184,6 +188,7 @@ public class MapViewImpl extends BaseView<MapController> implements MapView  {
     /**
      * {@inheritDoc}
      */
+    @SuppressFBWarnings("EI_EXPOSE_REP")
     @Override
     public List<Tile> getTiles() {
         return tiles;

@@ -85,7 +85,7 @@ public interface MapController extends Controller<MapView> {
     /**
      * Get the enemies in the map.
      */
-    List<CharacterController<Character, AnimatedEntityView>> getEnemies();
+    List<CharacterController<? super Character, ? super  AnimatedEntityView>> getEnemies();
 
     /**
      * set a spawn position to entity.*/
