@@ -39,8 +39,8 @@ public abstract class AbstractController<M extends Character, V extends Animated
      */
     @Override
     public void moveRight() {
-        move(Direction.RIGHT);
         if (canMove(Direction.RIGHT)) {
+            move(Direction.RIGHT);
             super.getModel().goRight();
         }
     }
@@ -50,8 +50,8 @@ public abstract class AbstractController<M extends Character, V extends Animated
      */
     @Override
     public void moveLeft() {
-        move(Direction.LEFT);
         if (canMove(Direction.LEFT)) {
+            move(Direction.LEFT);
             super.getModel().goLeft();
         }
     }
@@ -61,8 +61,8 @@ public abstract class AbstractController<M extends Character, V extends Animated
      */
     @Override
     public void moveUp() {
-        move(Direction.UP);
         if (canMove(Direction.UP)) {
+            move(Direction.UP);
             super.getModel().goUp();
         }
     }
@@ -72,8 +72,8 @@ public abstract class AbstractController<M extends Character, V extends Animated
      */
     @Override
     public void moveDown() {
-        move(Direction.DOWN);
         if (canMove(Direction.DOWN)) {
+            move(Direction.DOWN);
             super.getModel().goDown();
         }
     }
