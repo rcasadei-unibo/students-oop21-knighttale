@@ -27,7 +27,8 @@ class PlayerViewTest extends BaseViewTest<MapController, MapView> {
     static final double HEIGHT_WINDOW = 600.0;
     static final double WIDTH_PLAYER = 24.0;
     static final double HEIGHT_PLAYER = 32.0;
-    private Point spawnPosition;
+    static final double SAMPLE_COORDINATE = 50.0;
+    private final Point spawnPosition = new Point2D(SAMPLE_COORDINATE, SAMPLE_COORDINATE);
 
     PlayerViewTest() {
         super(MapView.class, MapController.class);
