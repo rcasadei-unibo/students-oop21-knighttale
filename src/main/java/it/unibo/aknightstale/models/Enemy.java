@@ -15,7 +15,7 @@ public class Enemy extends BaseCharacter {
 
     static final double WIDTH_BOUNDS = 20.0;
     static final double HEIGHT_BOUNDS = 24.0;
-    static final double DAMAGE = 25.0;
+    static final double DAMAGE = 50.0;
     static final double MAX_HEALTH = 100.0;
     static final double SPEED = 0.7;
     static final double DEFENSE = 10.0;

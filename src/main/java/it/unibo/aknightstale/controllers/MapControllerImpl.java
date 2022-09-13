@@ -116,11 +116,6 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
         });
     }
 
-
-    /*public EnemiesControllerImpl getEnemiesController() {
-        return enemiesController;
-    }*/
-
     /**
      * {@inheritDoc}
      */
@@ -167,32 +162,12 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
      */
     @Override
     public void drawMap() {
-
-        /*int row = 0;
-        int col = 0;
-        int x = 0;
-        int y = 0;
-
-        int num;
-        while (col < NUM_COL && row < NUM_ROW) {
-            num = mapTileNum.get(new Pair<>(row, col));
-            getView().draw(getView().getTiles().get(num), x, y);
-            col++;
-            x += this.getView().getTileWidth();
-            if (col == NUM_COL) {
-                x = 0;
-                y += this.getView().getTileHeight();
-                col = 0;
-                row++;
-            }
-        }*/
-
         int row = 0;
         int col = 0;
         int x = 0;
         int y = 0;
 
-        /*Disegno il prato*/
+        /*Draw lawn*/
         while (col < NUM_COL && row < NUM_ROW) {
             getView().draw(getView().getFloor(), x, y);
             col++;
@@ -204,13 +179,10 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
                 row++;
             }
         }
-        /*Aggiungo gli ostacoli*/
+        /*Add obstacles to map*/
         this.obstacleControllers.forEach(c -> {
             getView().draw(c.getView(), c.getModel().getPosition().getX(), c.getModel().getPosition().getY());
         });
-
-
-
     }
 
     private void readTextMap() {
@@ -247,9 +219,6 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
     public void updateScreenSize() {
         this.screenWidth = getView().getScreenWidth();
         this.screenHeight = getView().getScreenHeight();
-
-        System.out.println("width: " + this.screenWidth);
-        System.out.println("eight: " + this.screenHeight);
 
         collision.setWidthScreen(this.screenWidth);
         collision.setHeightScreen(this.screenHeight);
