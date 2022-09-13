@@ -29,16 +29,6 @@ public class EnemyController<M extends Character, V extends AnimatedEntityView> 
      * {@inheritDoc}
      */
     @Override
-    protected void move(final Direction dir) {
-        super.getModel().setDirection(dir);
-        super.getView().setStatus(Status.WALK);
-        super.getView().update(super.getModel().getDirection());
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void attack() {
         if (this.canAttack) {
             super.attack();

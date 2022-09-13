@@ -12,14 +12,4 @@ public class PlayerController<M extends Character, V extends AnimatedEntityView>
         super(model, view, manager);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void move(final Direction dir) {
-        super.getModel().setDirection(dir);
-        super.getView().setStatus(Status.WALK);
-        super.getView().update(super.getModel().getDirection());
-    }
-
 }

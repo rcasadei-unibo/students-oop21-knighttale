@@ -28,7 +28,11 @@ public abstract class AbstractController<M extends Character, V extends Animated
      * 
      * @param dir the entity direction.
      */
-    protected abstract void move(Direction dir);
+    protected void move(final Direction dir) {
+        super.getModel().setDirection(dir);
+        super.getView().setStatus(Status.WALK);
+        super.getView().update(super.getModel().getDirection());
+    }
 
     private boolean canMove(final Direction d) {
         return this.manager.getCollisionManager().checkDirections(this).contains(d);
