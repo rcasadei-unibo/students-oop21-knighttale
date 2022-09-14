@@ -93,8 +93,21 @@ public class ScoreboardImpl implements Scoreboard {
      */
     @Override
     public void save() {
-        try (FileWriter file = new FileWriter(AppPaths.getFilePath(SCOREBOARD_FILE_NAME).toFile(), StandardCharsets.UTF_8)) {
-            json.toJson(this.scores, file);
+        final var file = AppPaths.getFilePath(SCOREBOARD_FILE_NAME).toFile();
+        if (!file.exists()) {
+            try {
+                final var created = file.getParentFile().mkdirs();
+                if (!created) {
+                    throw new IOException("Error creating scoreboard file directory");
+                }
+                com.google.common.io.Files.touch(file);
+            } catch (IOException e) {
+                Alert.showAlert(AlertType.ERROR, "Error creating scoreboard file: " + e.getMessage());
+                e.printStackTrace();
+            }
+        }
+        try (FileWriter writer = new FileWriter(file, StandardCharsets.UTF_8)) {
+            json.toJson(this.scores, writer);
         } catch (IOException e) {
             Alert.showAlert(AlertType.ERROR, "Error saving scoreboard file: " + e.getMessage());
             e.printStackTrace();
