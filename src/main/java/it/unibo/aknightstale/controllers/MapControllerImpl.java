@@ -22,12 +22,11 @@ import it.unibo.aknightstale.views.entity.Status;
 import it.unibo.aknightstale.views.interfaces.GameFinishedView;
 import it.unibo.aknightstale.views.interfaces.MapView;
 import javafx.util.Pair;
+
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.net.URISyntaxException;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -58,6 +57,7 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
 
     private CharacterController<? super Character, ? super AnimatedEntityView> player;
     private CollisionManagerImpl collision;
+
     /**
      * {@inheritDoc}
      */
@@ -134,7 +134,7 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
     }
 
     private void openGameFinishedScreen() {
-        final var controllerView =  Controller.of(GameFinishedController.class, GameFinishedView.class).get();
+        final var controllerView = Controller.of(GameFinishedController.class, GameFinishedView.class).get();
         controllerView.setScore(killedEnemies);
         controllerView.showView();
     }
@@ -190,7 +190,11 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
         int col = 0;
         int row = 0;
 
-            try (BufferedReader br = Files.newBufferedReader(Paths.get(Objects.requireNonNull(getView().getClass().getResource("map.txt").toURI())), StandardCharsets.UTF_8)) {
+
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(
+                Objects.requireNonNull(getView().getClass().getResourceAsStream("map.txt")),
+                StandardCharsets.UTF_8
+        ))) {
             while (col < NUM_COL && row < NUM_ROW) {
 
                 final String line = br.readLine();
@@ -207,8 +211,8 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
                     row++;
                 }
             }
-        } catch (IOException | URISyntaxException e) {
-                System.err.println(e);
+        } catch (IOException e) {
+            System.err.println(e);
         }
     }
 
@@ -322,7 +326,7 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
      * {@inheritDoc}
      */
     @Override
-    public List<CharacterController<? super Character, ? super  AnimatedEntityView>> getEnemies() {
+    public List<CharacterController<? super Character, ? super AnimatedEntityView>> getEnemies() {
         return this.enemiesController.getEnemiesControllers();
     }
 

@@ -7,15 +7,15 @@ public class EnemyView extends CharacterView {
     private static final String NAME = "enemy";
 
     public EnemyView() {
-        super(Status.WALK, NAME + SEPARATOR + "enemy_idle_right.png", WIDTH, HEIGHT, NAME + SEPARATOR + NAME);
+        super(Status.WALK, NAME + "/enemy_idle_right.png", WIDTH, HEIGHT, NAME + '/' + NAME);
 
-        setIdleRight(NAME + SEPARATOR + "enemy_idle_right.png");
-        setIdleLeft(NAME + SEPARATOR + "enemy_idle_left.png");
-        setIdleUp(NAME + SEPARATOR + "enemy_idle_up.png");
-        setIdleDown(NAME + SEPARATOR + "enemy_idle_down.png");
-        setWalkRight(NAME + SEPARATOR + "enemy_walk_right.png");
-        setWalkLeft(NAME + SEPARATOR + "enemy_walk_left.png");
-        setWalkUp(NAME + SEPARATOR + "enemy_walk_up.png");
-        setWalkDown(NAME + SEPARATOR + "enemy_walk_down.png");
+        setIdleRight(NAME + "/enemy_idle_right.png");
+        setIdleLeft(NAME + "/enemy_idle_left.png");
+        setIdleUp(NAME + "/enemy_idle_up.png");
+        setIdleDown(NAME + "/enemy_idle_down.png");
+        setWalkRight(NAME + "/enemy_walk_right.png");
+        setWalkLeft(NAME + "/enemy_walk_left.png");
+        setWalkUp(NAME + "/enemy_walk_up.png");
+        setWalkDown(NAME + "/enemy_walk_down.png");
     }
 }

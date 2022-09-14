@@ -19,11 +19,6 @@ public abstract class CharacterView extends EntityViewImpl implements AnimatedEn
 
     private static final int HEALTH_BAR_HEIGHT = 5;
 
-    /**
-     * The constant SEPARATOR.
-     */
-    protected static final String SEPARATOR = System.getProperty("file.separator");
-
     private final String nameEntity;
     private final double widthImage;
     private final double heightImage;
