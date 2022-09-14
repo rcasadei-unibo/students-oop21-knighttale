@@ -262,6 +262,9 @@ public class MapViewImpl extends BaseView<MapController> implements MapView  {
             if (keyPressed.contains("SPACE")) {
                 getController().playerAttack();
             }
+            if (keyPressed.contains("ESCAPE")) {
+                getController().returnToMainMenu();
+            }
         }
     }
 }

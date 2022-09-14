@@ -5,6 +5,7 @@ import it.unibo.aknightstale.controllers.entity.EnemiesControllerImpl;
 import it.unibo.aknightstale.controllers.entity.ObstacleController;
 import it.unibo.aknightstale.controllers.interfaces.Controller;
 import it.unibo.aknightstale.controllers.interfaces.GameFinishedController;
+import it.unibo.aknightstale.controllers.interfaces.MainMenuController;
 import it.unibo.aknightstale.controllers.interfaces.MapController;
 import it.unibo.aknightstale.models.entity.Character;
 import it.unibo.aknightstale.models.entity.Direction;
@@ -344,5 +345,14 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
             y = random.nextDouble() * this.screenHeight;
             entity.getModel().setPosition(new Point2D(x, y));
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void returnToMainMenu() {
+        getView().stopGame();
+        Controller.of(MainMenuController.class).get().showView();
     }
 }
