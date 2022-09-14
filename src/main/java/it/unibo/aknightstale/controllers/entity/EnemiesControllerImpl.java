@@ -124,9 +124,6 @@ public class EnemiesControllerImpl implements EnemiesController {
     public void updateDirection(final Point2D playerPosition) {
         this.enemiesControllers.forEach(c -> {
             ((Enemy) c.getModel()).update(playerPosition);
-
-            //(EnemyController<Enemy>)c.move(c.getModel().getDirection());
-
         });
     }
 
