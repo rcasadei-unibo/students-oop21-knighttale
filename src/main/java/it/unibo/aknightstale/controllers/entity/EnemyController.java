@@ -7,17 +7,7 @@ import it.unibo.aknightstale.views.entity.AnimatedEntityView;
 
 public class EnemyController<M extends Character, V extends AnimatedEntityView> extends AbstractController<M, V> {
 
-    private boolean canAttack = true;
-
-    private final Runnable waitForAttack = () -> {
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            System.out.println(e);
-        }
-        canAttack = true;
-    };
-    private final Thread wait = new Thread(waitForAttack);
+    private long lastAttack = System.currentTimeMillis();
 
     public EnemyController(final M model, final V view, final EntityManager manager) {
         super(model, view, manager);
@@ -28,13 +18,10 @@ public class EnemyController<M extends Character, V extends AnimatedEntityView> 
      */
     @Override
     public void attack() {
-        if (this.canAttack) {
+        final var attackIdle = System.currentTimeMillis() - this.lastAttack;
+        if (attackIdle >= 1000) {
             super.attack();
-            this.canAttack = false;
-            try {
-                wait.start();
-            } catch (final IllegalThreadStateException ignored) {
-            }
+            this.lastAttack = System.currentTimeMillis();
         }
     }
 }
