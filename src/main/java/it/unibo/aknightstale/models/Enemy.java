@@ -10,6 +10,9 @@ import it.unibo.aknightstale.views.entity.Status;
 
 import java.util.Random;
 
+/**
+ * The class that represent enemy.
+ */
 public class Enemy extends BaseCharacter {
     private static final double WIDTH_BOUNDS = 20.0;
     private static final double HEIGHT_BOUNDS = 24.0;
@@ -19,12 +22,20 @@ public class Enemy extends BaseCharacter {
     private static final double DEFENSE = 10.0;
     private static final double ATTACK_RANGE = 5.0;
     private static final int MIN_DISTANCE = 20;
+    /**
+     * The Chasing range.
+     */
     static final double CHASING_RANGE = 100;
     private Status status = Status.WALK;
 
     private static final Random RANDOM = new Random();
     private boolean checkAxisX = RANDOM.nextInt() % 2 == 0;
 
+    /**
+     * Instantiates a new Enemy.
+     *
+     * @param position the position
+     */
     public Enemy(final Point position) {
         super(new BordersImpl(position.getX(), position.getY(), WIDTH_BOUNDS, HEIGHT_BOUNDS), EntityType.ENEMY, true,
                 Direction.RIGHT, DAMAGE, MAX_HEALTH, SPEED, DEFENSE);
@@ -32,6 +43,8 @@ public class Enemy extends BaseCharacter {
 
     /**
      * {@inheritDoc}
+     *
+     * @return the status
      */
     public Status getStatus() {
         return status;
@@ -48,7 +61,9 @@ public class Enemy extends BaseCharacter {
 
     /**
      * This method set the new enemy's direction.
-     * @param playerPosition is the player's position in the game world. */
+     *
+     * @param playerPosition is the player's position in the game world.
+     */
     public void update(final Point2D playerPosition) {
         Direction dir = null;
 
