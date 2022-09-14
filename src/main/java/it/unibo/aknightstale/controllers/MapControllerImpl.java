@@ -42,7 +42,7 @@ public class MapControllerImpl extends BaseController<MapView> implements MapCon
 
 
     private Map<Pair<Integer, Integer>, Integer> mapTileNum = new HashMap<>();
-    private final List<ObstacleController> obstacleControllers = new LinkedList<>();
+    private final List<ObstacleController<Character, AnimatedEntityView>> obstacleControllers = new LinkedList<>();
 
     private double screenWidth;
     private double screenHeight;
