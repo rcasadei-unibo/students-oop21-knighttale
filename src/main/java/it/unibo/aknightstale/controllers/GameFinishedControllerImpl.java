@@ -70,6 +70,6 @@ public class GameFinishedControllerImpl extends BaseController<GameFinishedView>
      */
     @Override
     public void startNewGame() {
-        Controller.of(MapController.class, MapView.class).get().showView();
+        Controller.of(MapController.class, MapView.class).forceCreation().get().showView();
     }
 }

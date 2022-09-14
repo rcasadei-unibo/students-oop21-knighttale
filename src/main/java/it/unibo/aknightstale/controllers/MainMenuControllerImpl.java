@@ -23,7 +23,7 @@ public class MainMenuControllerImpl extends BaseController<MainMenuView> impleme
      */
     @Override
     public void showMapView() {
-        final var mapController = Controller.of(MapController.class, MapView.class).get();
+        final var mapController = Controller.of(MapController.class, MapView.class).forceCreation().get();
         mapController.showView();
     }
 }
