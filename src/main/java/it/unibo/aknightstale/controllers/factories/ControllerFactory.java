@@ -62,7 +62,11 @@ public class ControllerFactory<C extends Controller<V>, V extends View<C>> {
      * @return An instance of the view factory class.
      */
     public ViewFactory<V> getViewFactory() {
-        return this.viewFactory.fromInterface(this.viewInterface);
+        var viewFactory = this.viewFactory.fromInterface(this.viewInterface);
+        if (this.forceCreation) {
+            viewFactory = viewFactory.forceCreation();
+        }
+        return viewFactory;
     }
 
     /**
